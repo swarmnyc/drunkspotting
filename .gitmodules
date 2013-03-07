@@ -1,0 +1,6 @@
+[submodule "client/ios/AFNetworking"]
+	path = client/ios/AFNetworking
+	url = https://github.com/AFNetworking/AFNetworking.git
+[submodule "client/ios/ACEDrawingView"]
+	path = client/ios/ACEDrawingView
+	url = https://github.com/acerbetti/ACEDrawingView.git
