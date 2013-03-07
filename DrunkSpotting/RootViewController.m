@@ -51,4 +51,24 @@
     
 }
 
+#pragma mark - UIImagePickerControllerDelegate
+
+-(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
+{
+}
+
+//Tells the delegate that the user cancelled the pick operation.
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
+{
+}
+
+//Tells the delegate that the user picked an image. (Deprecated in iOS 3.0. Use imagePickerController:didFinishPickingMediaWithInfo: instead.)
+- (void)imagePickerController:(UIImagePickerController *)picker
+        didFinishPickingImage:(UIImage *)image
+                  editingInfo:(NSDictionary *)editingInfo
+{
+    
+}
+
+
 @end

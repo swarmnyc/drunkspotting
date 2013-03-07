@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		D65C90C816E9523E00AF1002 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6D7876E16E93CFE00E1F86B /* CoreGraphics.framework */; };
+		D65C90D116E9581500AF1002 /* DrawingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D65C90CF16E9581500AF1002 /* DrawingViewController.m */; };
+		D65C90D216E9581500AF1002 /* DrawingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D65C90D016E9581500AF1002 /* DrawingViewController.xib */; };
 		D6D7876B16E93CFE00E1F86B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6D7876A16E93CFE00E1F86B /* UIKit.framework */; };
 		D6D7876D16E93CFE00E1F86B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6D7876C16E93CFE00E1F86B /* Foundation.framework */; };
 		D6D7877516E93CFE00E1F86B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = D6D7877316E93CFE00E1F86B /* InfoPlist.strings */; };
@@ -24,6 +26,9 @@
 
 /* Begin PBXFileReference section */
 		D65C90C316E951B300AF1002 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		D65C90CE16E9581500AF1002 /* DrawingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DrawingViewController.h; sourceTree = "<group>"; };
+		D65C90CF16E9581500AF1002 /* DrawingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DrawingViewController.m; sourceTree = "<group>"; };
+		D65C90D016E9581500AF1002 /* DrawingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DrawingViewController.xib; sourceTree = "<group>"; };
 		D6D7876616E93CFE00E1F86B /* DrunkSpotting.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DrunkSpotting.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D6D7876A16E93CFE00E1F86B /* UIKit.framework */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		D6D7876C16E93CFE00E1F86B /* Foundation.framework */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -99,6 +104,9 @@
 				D6D787C216E946AF00E1F86B /* RootViewController.h */,
 				D6D787C316E946AF00E1F86B /* RootViewController.m */,
 				D6D787C516E946FC00E1F86B /* RootViewController.xib */,
+				D65C90CE16E9581500AF1002 /* DrawingViewController.h */,
+				D65C90CF16E9581500AF1002 /* DrawingViewController.m */,
+				D65C90D016E9581500AF1002 /* DrawingViewController.xib */,
 			);
 			path = DrunkSpotting;
 			sourceTree = "<group>";
@@ -191,6 +199,7 @@
 				D6D7877F16E93CFE00E1F86B /* Default@2x.png in Resources */,
 				D6D7878116E93CFE00E1F86B /* Default-568h@2x.png in Resources */,
 				D6D787C616E946FC00E1F86B /* RootViewController.xib in Resources */,
+				D65C90D216E9581500AF1002 /* DrawingViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -206,6 +215,7 @@
 				D6D787C416E946AF00E1F86B /* RootViewController.m in Sources */,
 				D6D787CC16E9485900E1F86B /* ACEDrawingTools.m in Sources */,
 				D6D787CD16E9485900E1F86B /* ACEDrawingView.m in Sources */,
+				D65C90D116E9581500AF1002 /* DrawingViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
