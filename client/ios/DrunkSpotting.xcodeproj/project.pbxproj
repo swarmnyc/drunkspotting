@@ -10,6 +10,17 @@
 		D65C90C816E9523E00AF1002 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6D7876E16E93CFE00E1F86B /* CoreGraphics.framework */; };
 		D65C90D116E9581500AF1002 /* DrawingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D65C90CF16E9581500AF1002 /* DrawingViewController.m */; };
 		D65C90D216E9581500AF1002 /* DrawingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D65C90D016E9581500AF1002 /* DrawingViewController.xib */; };
+		D65C90EC16E95C7800AF1002 /* AFHTTPClient.m in Sources */ = {isa = PBXBuildFile; fileRef = D65C90DA16E95C7800AF1002 /* AFHTTPClient.m */; };
+		D65C90ED16E95C7800AF1002 /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = D65C90DC16E95C7800AF1002 /* AFHTTPRequestOperation.m */; };
+		D65C90EE16E95C7800AF1002 /* AFImageRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = D65C90DE16E95C7800AF1002 /* AFImageRequestOperation.m */; };
+		D65C90EF16E95C7800AF1002 /* AFJSONRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = D65C90E016E95C7800AF1002 /* AFJSONRequestOperation.m */; };
+		D65C90F016E95C7800AF1002 /* AFNetworkActivityIndicatorManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D65C90E216E95C7800AF1002 /* AFNetworkActivityIndicatorManager.m */; };
+		D65C90F116E95C7800AF1002 /* AFPropertyListRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = D65C90E516E95C7800AF1002 /* AFPropertyListRequestOperation.m */; };
+		D65C90F216E95C7800AF1002 /* AFURLConnectionOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = D65C90E716E95C7800AF1002 /* AFURLConnectionOperation.m */; };
+		D65C90F316E95C7800AF1002 /* AFXMLRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = D65C90E916E95C7800AF1002 /* AFXMLRequestOperation.m */; };
+		D65C90F416E95C7800AF1002 /* UIImageView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = D65C90EB16E95C7800AF1002 /* UIImageView+AFNetworking.m */; };
+		D65C90FA16E95C8E00AF1002 /* ACEDrawingTools.m in Sources */ = {isa = PBXBuildFile; fileRef = D65C90F716E95C8E00AF1002 /* ACEDrawingTools.m */; };
+		D65C90FB16E95C8E00AF1002 /* ACEDrawingView.m in Sources */ = {isa = PBXBuildFile; fileRef = D65C90F916E95C8E00AF1002 /* ACEDrawingView.m */; };
 		D6D7876B16E93CFE00E1F86B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6D7876A16E93CFE00E1F86B /* UIKit.framework */; };
 		D6D7876D16E93CFE00E1F86B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6D7876C16E93CFE00E1F86B /* Foundation.framework */; };
 		D6D7877516E93CFE00E1F86B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = D6D7877316E93CFE00E1F86B /* InfoPlist.strings */; };
@@ -20,8 +31,6 @@
 		D6D7878116E93CFE00E1F86B /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D6D7878016E93CFE00E1F86B /* Default-568h@2x.png */; };
 		D6D787C416E946AF00E1F86B /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D6D787C316E946AF00E1F86B /* RootViewController.m */; };
 		D6D787C616E946FC00E1F86B /* RootViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D6D787C516E946FC00E1F86B /* RootViewController.xib */; };
-		D6D787CC16E9485900E1F86B /* ACEDrawingTools.m in Sources */ = {isa = PBXBuildFile; fileRef = D6D787C916E9485900E1F86B /* ACEDrawingTools.m */; };
-		D6D787CD16E9485900E1F86B /* ACEDrawingView.m in Sources */ = {isa = PBXBuildFile; fileRef = D6D787CB16E9485900E1F86B /* ACEDrawingView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,6 +38,29 @@
 		D65C90CE16E9581500AF1002 /* DrawingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DrawingViewController.h; sourceTree = "<group>"; };
 		D65C90CF16E9581500AF1002 /* DrawingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DrawingViewController.m; sourceTree = "<group>"; };
 		D65C90D016E9581500AF1002 /* DrawingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DrawingViewController.xib; sourceTree = "<group>"; };
+		D65C90D916E95C7800AF1002 /* AFHTTPClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPClient.h; sourceTree = "<group>"; };
+		D65C90DA16E95C7800AF1002 /* AFHTTPClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFHTTPClient.m; sourceTree = "<group>"; };
+		D65C90DB16E95C7800AF1002 /* AFHTTPRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPRequestOperation.h; sourceTree = "<group>"; };
+		D65C90DC16E95C7800AF1002 /* AFHTTPRequestOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFHTTPRequestOperation.m; sourceTree = "<group>"; };
+		D65C90DD16E95C7800AF1002 /* AFImageRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFImageRequestOperation.h; sourceTree = "<group>"; };
+		D65C90DE16E95C7800AF1002 /* AFImageRequestOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFImageRequestOperation.m; sourceTree = "<group>"; };
+		D65C90DF16E95C7800AF1002 /* AFJSONRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFJSONRequestOperation.h; sourceTree = "<group>"; };
+		D65C90E016E95C7800AF1002 /* AFJSONRequestOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFJSONRequestOperation.m; sourceTree = "<group>"; };
+		D65C90E116E95C7800AF1002 /* AFNetworkActivityIndicatorManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFNetworkActivityIndicatorManager.h; sourceTree = "<group>"; };
+		D65C90E216E95C7800AF1002 /* AFNetworkActivityIndicatorManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFNetworkActivityIndicatorManager.m; sourceTree = "<group>"; };
+		D65C90E316E95C7800AF1002 /* AFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFNetworking.h; sourceTree = "<group>"; };
+		D65C90E416E95C7800AF1002 /* AFPropertyListRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFPropertyListRequestOperation.h; sourceTree = "<group>"; };
+		D65C90E516E95C7800AF1002 /* AFPropertyListRequestOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFPropertyListRequestOperation.m; sourceTree = "<group>"; };
+		D65C90E616E95C7800AF1002 /* AFURLConnectionOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFURLConnectionOperation.h; sourceTree = "<group>"; };
+		D65C90E716E95C7800AF1002 /* AFURLConnectionOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFURLConnectionOperation.m; sourceTree = "<group>"; };
+		D65C90E816E95C7800AF1002 /* AFXMLRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFXMLRequestOperation.h; sourceTree = "<group>"; };
+		D65C90E916E95C7800AF1002 /* AFXMLRequestOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFXMLRequestOperation.m; sourceTree = "<group>"; };
+		D65C90EA16E95C7800AF1002 /* UIImageView+AFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+AFNetworking.h"; sourceTree = "<group>"; };
+		D65C90EB16E95C7800AF1002 /* UIImageView+AFNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+AFNetworking.m"; sourceTree = "<group>"; };
+		D65C90F616E95C8E00AF1002 /* ACEDrawingTools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACEDrawingTools.h; sourceTree = "<group>"; };
+		D65C90F716E95C8E00AF1002 /* ACEDrawingTools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACEDrawingTools.m; sourceTree = "<group>"; };
+		D65C90F816E95C8E00AF1002 /* ACEDrawingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACEDrawingView.h; sourceTree = "<group>"; };
+		D65C90F916E95C8E00AF1002 /* ACEDrawingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACEDrawingView.m; sourceTree = "<group>"; };
 		D6D7876616E93CFE00E1F86B /* DrunkSpotting.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DrunkSpotting.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D6D7876A16E93CFE00E1F86B /* UIKit.framework */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		D6D7876C16E93CFE00E1F86B /* Foundation.framework */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -45,10 +77,6 @@
 		D6D787C216E946AF00E1F86B /* RootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootViewController.h; sourceTree = "<group>"; };
 		D6D787C316E946AF00E1F86B /* RootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootViewController.m; sourceTree = "<group>"; };
 		D6D787C516E946FC00E1F86B /* RootViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RootViewController.xib; sourceTree = "<group>"; };
-		D6D787C816E9485900E1F86B /* ACEDrawingTools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACEDrawingTools.h; sourceTree = "<group>"; };
-		D6D787C916E9485900E1F86B /* ACEDrawingTools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACEDrawingTools.m; sourceTree = "<group>"; };
-		D6D787CA16E9485900E1F86B /* ACEDrawingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACEDrawingView.h; sourceTree = "<group>"; };
-		D6D787CB16E9485900E1F86B /* ACEDrawingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACEDrawingView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -65,6 +93,45 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		D65C90D816E95C7800AF1002 /* AFNetworking */ = {
+			isa = PBXGroup;
+			children = (
+				D65C90D916E95C7800AF1002 /* AFHTTPClient.h */,
+				D65C90DA16E95C7800AF1002 /* AFHTTPClient.m */,
+				D65C90DB16E95C7800AF1002 /* AFHTTPRequestOperation.h */,
+				D65C90DC16E95C7800AF1002 /* AFHTTPRequestOperation.m */,
+				D65C90DD16E95C7800AF1002 /* AFImageRequestOperation.h */,
+				D65C90DE16E95C7800AF1002 /* AFImageRequestOperation.m */,
+				D65C90DF16E95C7800AF1002 /* AFJSONRequestOperation.h */,
+				D65C90E016E95C7800AF1002 /* AFJSONRequestOperation.m */,
+				D65C90E116E95C7800AF1002 /* AFNetworkActivityIndicatorManager.h */,
+				D65C90E216E95C7800AF1002 /* AFNetworkActivityIndicatorManager.m */,
+				D65C90E316E95C7800AF1002 /* AFNetworking.h */,
+				D65C90E416E95C7800AF1002 /* AFPropertyListRequestOperation.h */,
+				D65C90E516E95C7800AF1002 /* AFPropertyListRequestOperation.m */,
+				D65C90E616E95C7800AF1002 /* AFURLConnectionOperation.h */,
+				D65C90E716E95C7800AF1002 /* AFURLConnectionOperation.m */,
+				D65C90E816E95C7800AF1002 /* AFXMLRequestOperation.h */,
+				D65C90E916E95C7800AF1002 /* AFXMLRequestOperation.m */,
+				D65C90EA16E95C7800AF1002 /* UIImageView+AFNetworking.h */,
+				D65C90EB16E95C7800AF1002 /* UIImageView+AFNetworking.m */,
+			);
+			name = AFNetworking;
+			path = AFNetworking/AFNetworking;
+			sourceTree = "<group>";
+		};
+		D65C90F516E95C8E00AF1002 /* ACEDrawingView */ = {
+			isa = PBXGroup;
+			children = (
+				D65C90F616E95C8E00AF1002 /* ACEDrawingTools.h */,
+				D65C90F716E95C8E00AF1002 /* ACEDrawingTools.m */,
+				D65C90F816E95C8E00AF1002 /* ACEDrawingView.h */,
+				D65C90F916E95C8E00AF1002 /* ACEDrawingView.m */,
+			);
+			name = ACEDrawingView;
+			path = ACEDrawingView/ACEDrawingView;
+			sourceTree = "<group>";
+		};
 		D6D7875B16E93CFE00E1F86B = {
 			isa = PBXGroup;
 			children = (
@@ -86,8 +153,8 @@
 		D6D7876916E93CFE00E1F86B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				D6D787C716E9485900E1F86B /* ACEDrawingView */,
-				D6D7878D16E942D200E1F86B /* AFNetworking */,
+				D65C90F516E95C8E00AF1002 /* ACEDrawingView */,
+				D65C90D816E95C7800AF1002 /* AFNetworking */,
 				D6D7876A16E93CFE00E1F86B /* UIKit.framework */,
 				D6D7876C16E93CFE00E1F86B /* Foundation.framework */,
 				D6D7876E16E93CFE00E1F86B /* CoreGraphics.framework */,
@@ -123,25 +190,6 @@
 				D6D7878016E93CFE00E1F86B /* Default-568h@2x.png */,
 			);
 			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		D6D7878D16E942D200E1F86B /* AFNetworking */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = AFNetworking;
-			sourceTree = "<group>";
-		};
-		D6D787C716E9485900E1F86B /* ACEDrawingView */ = {
-			isa = PBXGroup;
-			children = (
-				D6D787C816E9485900E1F86B /* ACEDrawingTools.h */,
-				D6D787C916E9485900E1F86B /* ACEDrawingTools.m */,
-				D6D787CA16E9485900E1F86B /* ACEDrawingView.h */,
-				D6D787CB16E9485900E1F86B /* ACEDrawingView.m */,
-			);
-			name = ACEDrawingView;
-			path = ACEDrawingView/ACEDrawingView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -213,9 +261,18 @@
 				D6D7877716E93CFE00E1F86B /* main.m in Sources */,
 				D6D7877B16E93CFE00E1F86B /* AppDelegate.m in Sources */,
 				D6D787C416E946AF00E1F86B /* RootViewController.m in Sources */,
-				D6D787CC16E9485900E1F86B /* ACEDrawingTools.m in Sources */,
-				D6D787CD16E9485900E1F86B /* ACEDrawingView.m in Sources */,
 				D65C90D116E9581500AF1002 /* DrawingViewController.m in Sources */,
+				D65C90EC16E95C7800AF1002 /* AFHTTPClient.m in Sources */,
+				D65C90ED16E95C7800AF1002 /* AFHTTPRequestOperation.m in Sources */,
+				D65C90EE16E95C7800AF1002 /* AFImageRequestOperation.m in Sources */,
+				D65C90EF16E95C7800AF1002 /* AFJSONRequestOperation.m in Sources */,
+				D65C90F016E95C7800AF1002 /* AFNetworkActivityIndicatorManager.m in Sources */,
+				D65C90F116E95C7800AF1002 /* AFPropertyListRequestOperation.m in Sources */,
+				D65C90F216E95C7800AF1002 /* AFURLConnectionOperation.m in Sources */,
+				D65C90F316E95C7800AF1002 /* AFXMLRequestOperation.m in Sources */,
+				D65C90F416E95C7800AF1002 /* UIImageView+AFNetworking.m in Sources */,
+				D65C90FA16E95C8E00AF1002 /* ACEDrawingTools.m in Sources */,
+				D65C90FB16E95C8E00AF1002 /* ACEDrawingView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -239,6 +296,7 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -266,6 +324,7 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
