@@ -43,7 +43,22 @@ class Server:
         pass
 
     def get_templates(self):
-        return '{}'
+        sql = 'select id, title, latitude, longitude, description, rating, ' \
+              'rating_count, url, time_posted from templates order by ' \
+              'time_posted desc'
+
+        rows = database.execute_all_rows(self._conn, sql)
+
+        templates = []
+        for row in rows:
+            templates.append({
+                'id': row[0], 'title': row[1],
+                'latitude': row[2], 'longitude': row[3],
+                'description': row[4], 'rating': row[5],
+                'rating_count': row[6], 'url': row[7],
+                'time_posted': row[8].isoformat()})
+
+        return cjson.encode(templates)
 
     def get_pictures(self):
         pass

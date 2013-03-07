@@ -37,7 +37,7 @@ def execute_one_row(conn, sql, data):
     return row
 
 
-def execute_all_rows(conn, sql, data):
+def execute_all_rows(conn, sql, data=None):
     cur = conn.cursor()
     try:
         cur.execute(sql, data)
