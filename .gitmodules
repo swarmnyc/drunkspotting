@@ -1,0 +1,6 @@
+[submodule "ACEDrawingView"]
+	path = ACEDrawingView
+	url = https://github.com/acerbetti/ACEDrawingView.git
+[submodule "AFNetworking"]
+	path = AFNetworking
+	url = https://github.com/AFNetworking/AFNetworking.git
