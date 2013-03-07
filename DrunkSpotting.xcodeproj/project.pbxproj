@@ -1,0 +1,320 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		D65C90C816E9523E00AF1002 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6D7876E16E93CFE00E1F86B /* CoreGraphics.framework */; };
+		D6D7876B16E93CFE00E1F86B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6D7876A16E93CFE00E1F86B /* UIKit.framework */; };
+		D6D7876D16E93CFE00E1F86B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6D7876C16E93CFE00E1F86B /* Foundation.framework */; };
+		D6D7877516E93CFE00E1F86B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = D6D7877316E93CFE00E1F86B /* InfoPlist.strings */; };
+		D6D7877716E93CFE00E1F86B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D6D7877616E93CFE00E1F86B /* main.m */; };
+		D6D7877B16E93CFE00E1F86B /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D6D7877A16E93CFE00E1F86B /* AppDelegate.m */; };
+		D6D7877D16E93CFE00E1F86B /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = D6D7877C16E93CFE00E1F86B /* Default.png */; };
+		D6D7877F16E93CFE00E1F86B /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D6D7877E16E93CFE00E1F86B /* Default@2x.png */; };
+		D6D7878116E93CFE00E1F86B /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D6D7878016E93CFE00E1F86B /* Default-568h@2x.png */; };
+		D6D787C416E946AF00E1F86B /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D6D787C316E946AF00E1F86B /* RootViewController.m */; };
+		D6D787C616E946FC00E1F86B /* RootViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D6D787C516E946FC00E1F86B /* RootViewController.xib */; };
+		D6D787CC16E9485900E1F86B /* ACEDrawingTools.m in Sources */ = {isa = PBXBuildFile; fileRef = D6D787C916E9485900E1F86B /* ACEDrawingTools.m */; };
+		D6D787CD16E9485900E1F86B /* ACEDrawingView.m in Sources */ = {isa = PBXBuildFile; fileRef = D6D787CB16E9485900E1F86B /* ACEDrawingView.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		D65C90C316E951B300AF1002 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		D6D7876616E93CFE00E1F86B /* DrunkSpotting.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DrunkSpotting.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		D6D7876A16E93CFE00E1F86B /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		D6D7876C16E93CFE00E1F86B /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		D6D7876E16E93CFE00E1F86B /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		D6D7877216E93CFE00E1F86B /* DrunkSpotting-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "DrunkSpotting-Info.plist"; sourceTree = "<group>"; };
+		D6D7877416E93CFE00E1F86B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		D6D7877616E93CFE00E1F86B /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		D6D7877816E93CFE00E1F86B /* DrunkSpotting-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "DrunkSpotting-Prefix.pch"; sourceTree = "<group>"; };
+		D6D7877916E93CFE00E1F86B /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		D6D7877A16E93CFE00E1F86B /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		D6D7877C16E93CFE00E1F86B /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
+		D6D7877E16E93CFE00E1F86B /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
+		D6D7878016E93CFE00E1F86B /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		D6D787C216E946AF00E1F86B /* RootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootViewController.h; sourceTree = "<group>"; };
+		D6D787C316E946AF00E1F86B /* RootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootViewController.m; sourceTree = "<group>"; };
+		D6D787C516E946FC00E1F86B /* RootViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RootViewController.xib; sourceTree = "<group>"; };
+		D6D787C816E9485900E1F86B /* ACEDrawingTools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACEDrawingTools.h; sourceTree = "<group>"; };
+		D6D787C916E9485900E1F86B /* ACEDrawingTools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACEDrawingTools.m; sourceTree = "<group>"; };
+		D6D787CA16E9485900E1F86B /* ACEDrawingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACEDrawingView.h; sourceTree = "<group>"; };
+		D6D787CB16E9485900E1F86B /* ACEDrawingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACEDrawingView.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		D6D7876316E93CFE00E1F86B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D65C90C816E9523E00AF1002 /* CoreGraphics.framework in Frameworks */,
+				D6D7876B16E93CFE00E1F86B /* UIKit.framework in Frameworks */,
+				D6D7876D16E93CFE00E1F86B /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		D6D7875B16E93CFE00E1F86B = {
+			isa = PBXGroup;
+			children = (
+				D65C90C316E951B300AF1002 /* QuartzCore.framework */,
+				D6D7877016E93CFE00E1F86B /* DrunkSpotting */,
+				D6D7876916E93CFE00E1F86B /* Frameworks */,
+				D6D7876716E93CFE00E1F86B /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		D6D7876716E93CFE00E1F86B /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				D6D7876616E93CFE00E1F86B /* DrunkSpotting.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		D6D7876916E93CFE00E1F86B /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				D6D787C716E9485900E1F86B /* ACEDrawingView */,
+				D6D7878D16E942D200E1F86B /* AFNetworking */,
+				D6D7876A16E93CFE00E1F86B /* UIKit.framework */,
+				D6D7876C16E93CFE00E1F86B /* Foundation.framework */,
+				D6D7876E16E93CFE00E1F86B /* CoreGraphics.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		D6D7877016E93CFE00E1F86B /* DrunkSpotting */ = {
+			isa = PBXGroup;
+			children = (
+				D6D7877916E93CFE00E1F86B /* AppDelegate.h */,
+				D6D7877A16E93CFE00E1F86B /* AppDelegate.m */,
+				D6D7877116E93CFE00E1F86B /* Supporting Files */,
+				D6D787C216E946AF00E1F86B /* RootViewController.h */,
+				D6D787C316E946AF00E1F86B /* RootViewController.m */,
+				D6D787C516E946FC00E1F86B /* RootViewController.xib */,
+			);
+			path = DrunkSpotting;
+			sourceTree = "<group>";
+		};
+		D6D7877116E93CFE00E1F86B /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				D6D7877216E93CFE00E1F86B /* DrunkSpotting-Info.plist */,
+				D6D7877316E93CFE00E1F86B /* InfoPlist.strings */,
+				D6D7877616E93CFE00E1F86B /* main.m */,
+				D6D7877816E93CFE00E1F86B /* DrunkSpotting-Prefix.pch */,
+				D6D7877C16E93CFE00E1F86B /* Default.png */,
+				D6D7877E16E93CFE00E1F86B /* Default@2x.png */,
+				D6D7878016E93CFE00E1F86B /* Default-568h@2x.png */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		D6D7878D16E942D200E1F86B /* AFNetworking */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = AFNetworking;
+			sourceTree = "<group>";
+		};
+		D6D787C716E9485900E1F86B /* ACEDrawingView */ = {
+			isa = PBXGroup;
+			children = (
+				D6D787C816E9485900E1F86B /* ACEDrawingTools.h */,
+				D6D787C916E9485900E1F86B /* ACEDrawingTools.m */,
+				D6D787CA16E9485900E1F86B /* ACEDrawingView.h */,
+				D6D787CB16E9485900E1F86B /* ACEDrawingView.m */,
+			);
+			name = ACEDrawingView;
+			path = ACEDrawingView/ACEDrawingView;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		D6D7876516E93CFE00E1F86B /* DrunkSpotting */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D6D7878416E93CFE00E1F86B /* Build configuration list for PBXNativeTarget "DrunkSpotting" */;
+			buildPhases = (
+				D6D7876216E93CFE00E1F86B /* Sources */,
+				D6D7876316E93CFE00E1F86B /* Frameworks */,
+				D6D7876416E93CFE00E1F86B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = DrunkSpotting;
+			productName = DrunkSpotting;
+			productReference = D6D7876616E93CFE00E1F86B /* DrunkSpotting.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		D6D7875D16E93CFE00E1F86B /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0450;
+			};
+			buildConfigurationList = D6D7876016E93CFE00E1F86B /* Build configuration list for PBXProject "DrunkSpotting" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = D6D7875B16E93CFE00E1F86B;
+			productRefGroup = D6D7876716E93CFE00E1F86B /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				D6D7876516E93CFE00E1F86B /* DrunkSpotting */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		D6D7876416E93CFE00E1F86B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D6D7877516E93CFE00E1F86B /* InfoPlist.strings in Resources */,
+				D6D7877D16E93CFE00E1F86B /* Default.png in Resources */,
+				D6D7877F16E93CFE00E1F86B /* Default@2x.png in Resources */,
+				D6D7878116E93CFE00E1F86B /* Default-568h@2x.png in Resources */,
+				D6D787C616E946FC00E1F86B /* RootViewController.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		D6D7876216E93CFE00E1F86B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D6D7877716E93CFE00E1F86B /* main.m in Sources */,
+				D6D7877B16E93CFE00E1F86B /* AppDelegate.m in Sources */,
+				D6D787C416E946AF00E1F86B /* RootViewController.m in Sources */,
+				D6D787CC16E9485900E1F86B /* ACEDrawingTools.m in Sources */,
+				D6D787CD16E9485900E1F86B /* ACEDrawingView.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		D6D7877316E93CFE00E1F86B /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D6D7877416E93CFE00E1F86B /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		D6D7878216E93CFE00E1F86B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		D6D7878316E93CFE00E1F86B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		D6D7878516E93CFE00E1F86B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "DrunkSpotting/DrunkSpotting-Prefix.pch";
+				INFOPLIST_FILE = "DrunkSpotting/DrunkSpotting-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		D6D7878616E93CFE00E1F86B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "DrunkSpotting/DrunkSpotting-Prefix.pch";
+				INFOPLIST_FILE = "DrunkSpotting/DrunkSpotting-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		D6D7876016E93CFE00E1F86B /* Build configuration list for PBXProject "DrunkSpotting" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D6D7878216E93CFE00E1F86B /* Debug */,
+				D6D7878316E93CFE00E1F86B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D6D7878416E93CFE00E1F86B /* Build configuration list for PBXNativeTarget "DrunkSpotting" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D6D7878516E93CFE00E1F86B /* Debug */,
+				D6D7878616E93CFE00E1F86B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = D6D7875D16E93CFE00E1F86B /* Project object */;
+}
