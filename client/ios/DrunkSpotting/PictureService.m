@@ -26,10 +26,10 @@
 	return self;
 }
 
-+ (void)postTemplate:(Template *)metadata
++ (void)postMetadata:(id)metadata type:(NSString*)type
 {
 	NSURL *url =
-		[NSURL URLWithString:[NSString stringWithFormat:@"http://api.drunkspotting.com/templates"]];
+		[NSURL URLWithString:[NSString stringWithFormat:@"http://api.drunkspotting.com/%@s",type]];
 	NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:url];
 	NSData *requestData = [[metadata dictionary] JSONFromDictionary];
 
@@ -47,12 +47,9 @@
 			id result = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions
 				error:&serializationError];
 
-			if ( !serializationError )
-			{
+			if ( !serializationError ) {
 				NSLog( @"result = %@", result );
-			}
-			else
-			{NSLog( @"Error serializing JSON" );}
+			} else { NSLog( @"Error serializing JSON" );}
 
 			//NSError* serializationError = nil;
 			//id result = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&serializationError];
@@ -62,7 +59,7 @@
 }
 
 
-+ (void)postTemplateImage:(UIImage *)image metadata:(Template *)metadata
++ (void)postImage:(UIImage *)image metadata:(id)metadata type:(NSString*)type
 {
 	NSURL *url =
 		[NSURL URLWithString:[NSString stringWithFormat:@"http://api.drunkspotting.com/"]];
@@ -72,10 +69,8 @@
 //	NSData *imageData = UIImageJPEGRepresentation([UIImage imageNamed:@"MainMedia"], 0.5);
 	NSData *imageData = UIImageJPEGRepresentation( image, 0.5 );
 
-
-
-	NSMutableURLRequest *request = [httpClient multipartFormRequestWithMethod:@"POST" path:@"upload_template" parameters:nil constructingBodyWithBlock: ^(id <AFMultipartFormData>formData) {
-	    [formData appendPartWithFormData:imageData name:@"test.jpg"];
+	NSMutableURLRequest *request = [httpClient multipartFormRequestWithMethod:@"POST" path:[NSString stringWithFormat:@"upload_%@",type] parameters:nil constructingBodyWithBlock: ^(id <AFMultipartFormData>formData) {
+	    [formData appendPartWithFormData:imageData name:[NSString stringWithFormat:@"%@.jpg",type]];
 	}];
 
 	AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];

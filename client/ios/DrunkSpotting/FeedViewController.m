@@ -177,7 +177,7 @@ NSString *const kPhotoCellIdentifier = @"photo";
 	return 10.f;
 }
 
-#pragma mark - UIImage  PickerControllerDelegate
+#pragma mark - <UIImagePickerControllerDelegate>
 
 - (void)imagePickerController:(UIImagePickerController *)picker
 	didFinishPickingMediaWithInfo:(NSDictionary *)info
@@ -195,7 +195,7 @@ NSString *const kPhotoCellIdentifier = @"photo";
             testTemplate.description = @"Yo yo yo day 2";
             testTemplate.title = @"Hello World! day 2";
 
-			[PictureService postTemplateImage:pickedImage metadata:testTemplate];
+			[PictureService postImage:pickedImage metadata:testTemplate type:@"template"];
             
 			//DrawingViewController *dvc = [[DrawingViewController alloc] initWithImage:pickedImage];
 			//[self.navigationController pushViewController:dvc animated:YES];
@@ -206,6 +206,7 @@ NSString *const kPhotoCellIdentifier = @"photo";
 //Tells the delegate that the user cancelled the pick operation.
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
 {
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 
