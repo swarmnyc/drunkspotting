@@ -202,12 +202,12 @@
 				D6D7877116E93CFE00E1F86B /* Supporting Files */,
 				D65C90CE16E9581500AF1002 /* DrawingViewController.h */,
 				D65C90CF16E9581500AF1002 /* DrawingViewController.m */,
+				D65C90D016E9581500AF1002 /* DrawingViewController.xib */,
 				7E06597516E96EB200FE6432 /* FeedViewController.h */,
 				7E06597616E96EB200FE6432 /* FeedViewController.m */,
 				7E06597716E96EB200FE6432 /* FeedViewController.xib */,
 				7E06597A16E972A000FE6432 /* PhotoCollectionViewCell.h */,
 				7E06597B16E972A000FE6432 /* PhotoCollectionViewCell.m */,
-				D65C90D016E9581500AF1002 /* DrawingViewController.xib */,
 			);
 			path = DrunkSpotting;
 			sourceTree = "<group>";

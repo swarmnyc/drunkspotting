@@ -104,5 +104,15 @@
     return img;
 }
 
+- (IBAction) changeColor:(UIButton *)sender {
+    
+    self.drawingLayer.lineColor = sender.backgroundColor;
+}
+
+- (IBAction) changeLineWidth:(UISlider *)sender {
+    
+    self.drawingLayer.lineWidth = sender.value;
+}
+
 
 @end
