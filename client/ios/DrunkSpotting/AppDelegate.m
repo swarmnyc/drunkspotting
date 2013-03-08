@@ -7,14 +7,16 @@
 //
 
 #import "AppDelegate.h"
-
 #import "FeedViewController.h"
+#import "PhotoCollectionViewCell.h"
 
 @implementation AppDelegate
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    [self skin];
+    
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] ;
     
     FeedViewController *feedViewController = [[FeedViewController alloc] init];
@@ -53,6 +55,21 @@
 - (void)applicationWillTerminate:(UIApplication *)application
 {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+}
+
+- (void) skin {
+    
+    UIColor *teal = UIColorFromRGB(0x00b2c9);
+    UIColor *magenta = UIColorFromRGB(0xd35be5);
+    
+    UINavigationBar *navbarSkin = [UINavigationBar appearance];
+    navbarSkin.tintColor = teal;
+    
+    UIButton *navButtonSkin = [UIButton appearanceWhenContainedIn:[UINavigationBar class], nil];
+    navButtonSkin.tintColor = magenta;
+    
+    UIView *cellSkin = [UIView appearanceWhenContainedIn:[PhotoCollectionViewCell class], nil];
+    cellSkin.backgroundColor = teal;
 }
 
 @end

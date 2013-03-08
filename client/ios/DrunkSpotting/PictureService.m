@@ -100,8 +100,11 @@
 			} failure:^( NSURLRequest *urlRequest, NSHTTPURLResponse *response, NSError *error,
 			id JSON )
 		{
+			failure(error);
+			NSLog(@"%@", error);
+
 			failure( error );
-			NSLog( error );
+			NSLog(@"%@", error);
 		}];
 
 	[operation start];
@@ -130,8 +133,8 @@
 			} failure:^( NSURLRequest *urlRequest, NSHTTPURLResponse *response, NSError *error,
 			id JSON )
 		{
-			failure( error );
-			NSLog( error );
+			failure( error);
+			NSLog(@"%@", error);
 		}];
 
 	[operation start];

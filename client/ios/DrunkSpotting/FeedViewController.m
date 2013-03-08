@@ -29,6 +29,7 @@ NSString *const kPhotoCellIdentifier = @"photo";
 
 - (void)viewDidLoad
 {
+    self.navigationItem.titleView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"titleTreatment"]];
 
 	PictureService *pictureService = [[PictureService alloc] init];
 	[pictureService getPictures:10 success:^( NSArray *array )
@@ -39,7 +40,7 @@ NSString *const kPhotoCellIdentifier = @"photo";
 
 	} failure:^( NSError *error )
 	{
-		NSLog( error );
+		NSLog(@"%@", error );
 	}];
 }
 
@@ -61,11 +62,6 @@ NSString *const kPhotoCellIdentifier = @"photo";
 
 	self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]
 		initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(testApp)];
-
-	BOOL cameraAvailable =
-		[UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera];
-
-	self.navigationItem.rightBarButtonItem.enabled = cameraAvailable;
 }
 
 - (void) viewDidAppear:(BOOL)animated
@@ -79,10 +75,10 @@ NSString *const kPhotoCellIdentifier = @"photo";
 
 	[pictureService getPicture:6 success:^( Picture *t )
 	{
-		NSLog( t.description );
+		NSLog(@"%@", t.description );
 	} failure:^( NSError *error )
 	{
-		NSLog( error );
+		NSLog(@"%@", error );
 	}];
 }
 
@@ -110,7 +106,7 @@ NSString *const kPhotoCellIdentifier = @"photo";
     UIImagePickerController *imgpic = [[UIImagePickerController alloc] init];
 	imgpic.delegate = self;
 	imgpic.allowsEditing = YES;
-    
+
     if ([[actionSheet buttonTitleAtIndex:buttonIndex] isEqualToString:@"Camera"]) {
         imgpic.sourceType = UIImagePickerControllerSourceTypeCamera;
     } else if ([[actionSheet buttonTitleAtIndex:buttonIndex] isEqualToString:@"Photo Library"]) {
@@ -147,12 +143,7 @@ NSString *const kPhotoCellIdentifier = @"photo";
 - (void)collectionView:(UICollectionView *)collectionView
 	didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-	PhotoCollectionViewCell
-		*cell = (PhotoCollectionViewCell *) [self.feedView cellForItemAtIndexPath:indexPath];
-	DrawingViewController *dvc = [[DrawingViewController alloc] initWithImage:[cell image]];
-	[self.navigationController pushViewController:dvc animated:YES];
-
-	return;
+    return;
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView

@@ -56,7 +56,7 @@
 								<int key="IBUIContentVerticalAlignment">0</int>
 								<float key="IBUIValue">1</float>
 								<float key="IBUIMinValue">1</float>
-								<float key="IBUIMaxValue">10</float>
+								<float key="IBUIMaxValue">20</float>
 							</object>
 							<object class="IBUIButton" id="176494380">
 								<reference key="NSNextResponder" ref="214620168"/>
@@ -202,6 +202,7 @@
 								<string key="NSFrame">{{259, 62}, {55, 30}}</string>
 								<reference key="NSSuperview" ref="214620168"/>
 								<reference key="NSWindow"/>
+								<reference key="NSNextKeyView"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<object class="NSColor" key="IBUIBackgroundColor">
 									<int key="NSColorSpace">1</int>
@@ -228,10 +229,7 @@
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="980469285"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
-								<object class="NSColor" key="IBUIBackgroundColor">
-									<int key="NSColorSpace">3</int>
-									<bytes key="NSWhite">MC42MTM1Mzc4NjUAA</bytes>
-								</object>
+								<reference key="IBUIBackgroundColor" ref="940883953"/>
 								<bool key="IBUIOpaque">NO</bool>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 								<int key="IBUIContentHorizontalAlignment">0</int>
@@ -324,7 +322,7 @@
 						<string key="NSFrame">{{0, 472}, {320, 92}}</string>
 						<reference key="NSSuperview" ref="108759089"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView"/>
+						<reference key="NSNextKeyView" ref="882282207"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<object class="NSColor" key="IBUIBackgroundColor" id="116830299">
 							<int key="NSColorSpace">3</int>
@@ -446,7 +444,7 @@
 				<string key="NSReuseIdentifierKey">_NS:9</string>
 				<object class="NSColor" key="IBUIBackgroundColor">
 					<int key="NSColorSpace">3</int>
-					<bytes key="NSWhite">MCAwLjcxAA</bytes>
+					<bytes key="NSWhite">MAA</bytes>
 				</object>
 				<object class="IBUIScreenMetrics" key="IBUISimulatedDestinationMetrics">
 					<string key="IBUISimulatedSizeMetricsClass">IBUIScreenMetrics</string>
@@ -511,6 +509,14 @@
 					<int key="connectionID">79</int>
 				</object>
 				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">slider</string>
+						<reference key="source" ref="372490531"/>
+						<reference key="destination" ref="882282207"/>
+					</object>
+					<int key="connectionID">125</int>
+				</object>
+				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
 						<string key="label">changeLineWidth:</string>
 						<reference key="source" ref="882282207"/>
@@ -572,6 +578,15 @@
 						<int key="IBEventType">7</int>
 					</object>
 					<int key="connectionID">124</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchEventConnection" key="connection">
+						<string key="label">setWhiteColor:</string>
+						<reference key="source" ref="942297413"/>
+						<reference key="destination" ref="372490531"/>
+						<int key="IBEventType">7</int>
+					</object>
+					<int key="connectionID">126</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
@@ -775,7 +790,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">124</int>
+			<int key="maxID">126</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -796,11 +811,11 @@
 						<string key="setBlueColor:">id</string>
 						<string key="setCyanColor:">id</string>
 						<string key="setGreenColor:">id</string>
-						<string key="setGreyColor:">id</string>
 						<string key="setMagentaColor:">id</string>
 						<string key="setOrangeColor:">id</string>
 						<string key="setPurpleColor:">id</string>
 						<string key="setRedColor:">id</string>
+						<string key="setWhiteColor:">id</string>
 						<string key="setYellowColor:">id</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="actionInfosByName">
@@ -824,10 +839,6 @@
 							<string key="name">setGreenColor:</string>
 							<string key="candidateClassName">id</string>
 						</object>
-						<object class="IBActionInfo" key="setGreyColor:">
-							<string key="name">setGreyColor:</string>
-							<string key="candidateClassName">id</string>
-						</object>
 						<object class="IBActionInfo" key="setMagentaColor:">
 							<string key="name">setMagentaColor:</string>
 							<string key="candidateClassName">id</string>
@@ -844,6 +855,10 @@
 							<string key="name">setRedColor:</string>
 							<string key="candidateClassName">id</string>
 						</object>
+						<object class="IBActionInfo" key="setWhiteColor:">
+							<string key="name">setWhiteColor:</string>
+							<string key="candidateClassName">id</string>
+						</object>
 						<object class="IBActionInfo" key="setYellowColor:">
 							<string key="name">setYellowColor:</string>
 							<string key="candidateClassName">id</string>
@@ -854,6 +869,7 @@
 						<string key="compositView">UIView</string>
 						<string key="drawingLayer">ACEDrawingView</string>
 						<string key="photoLayer">UIImageView</string>
+						<string key="slider">UISlider</string>
 						<string key="uploadingOverlay">UIView</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
@@ -872,6 +888,10 @@
 						<object class="IBToOneOutletInfo" key="photoLayer">
 							<string key="name">photoLayer</string>
 							<string key="candidateClassName">UIImageView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="slider">
+							<string key="name">slider</string>
+							<string key="candidateClassName">UISlider</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="uploadingOverlay">
 							<string key="name">uploadingOverlay</string>
