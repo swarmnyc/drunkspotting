@@ -66,7 +66,7 @@ class TestSimpleNetworked(unittest.TestCase):
 
         # Add another template
         req = {
-            "title": "template r2",
+            "title": "template 2",
             "ip": "1.2.3.4",
             "latitude": 32.34,
             "longitude": 33.34,
@@ -91,6 +91,14 @@ class TestSimpleNetworked(unittest.TestCase):
         self.assertEqual((status, reason), (200, 'OK'))
         data = cjson.decode(data)
         self.assertEqual(len(data), 1)
+
+        # Get one of the templates
+        (status, reason, data) = httpcall.call(
+            "GET", self.url + '/templates/%d' % (template2_id, ),
+            cjson.encode(req))
+        self.assertEqual((status, reason), (200, 'OK'))
+        data = cjson.decode(data)
+        self.assertEqual(data['title'], 'template 2')
 
         # Add two pictures for the first template
         req = {
@@ -140,8 +148,16 @@ class TestSimpleNetworked(unittest.TestCase):
         data = cjson.decode(data)
         self.assertEqual(len(data), 3)
 
+        # Get one of the pictures
+        (status, reason, data) = httpcall.call(
+            "GET", self.url + '/pictures/%d' % (picture2_id, ),
+            cjson.encode(req))
+        self.assertEqual((status, reason), (200, 'OK'))
+        data = cjson.decode(data)
+        self.assertEqual(data['title'], 'picture 1.2')
+        self.assertEqual(data['latitude'], 12.34)
+        self.assertEqual(data['longitude'], 23.34)
 
-        return
 
 
 if __name__ == '__main__':

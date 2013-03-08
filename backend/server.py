@@ -34,10 +34,48 @@ class Server:
         return 'pong'
 
     def get_template(self, template):
-        pass
+        template = int(template)
+
+        # TODO: Merge with get_latest_templates
+        sql = 'select title, latitude, longitude, description, rating, ' \
+              'rating_count, url, time_posted from templates ' \
+              'where id = %s'
+
+        rows = database.execute_all_rows(self._conn, sql, (template, ))
+        if not rows:
+            raise drunkspotting_exceptions.NotFoundException('')
+
+        row = rows[0]
+        return cjson.encode({
+            'title': row[0],
+            'latitude': row[1], 'longitude': row[2],
+            'description': row[3], 'rating': row[4],
+            'rating_count': row[5], 'url': row[6],
+            'time_posted': row[7].isoformat()})
+
 
     def get_picture(self, picture):
-        pass
+        picture = int(picture)
+
+        sql = 'select template_id, latitude, longitude, ' \
+              'pictures.title, pictures.description,' \
+              'pictures.rating, pictures.rating_count,' \
+              'pictures.url, pictures.time_posted from pictures, templates ' \
+              'where template_id = templates.id ' \
+              'and pictures.id = %s'
+
+        rows = database.execute_all_rows(self._conn, sql, (picture, ))
+        if not rows:
+            raise drunkspotting_exceptions.NotFoundException('')
+        row = rows[0]
+
+        return cjson.encode({
+            'template_id': row[0],
+            'latitude': row[1], 'longitude': row[2],
+            'title': row[3],
+            'description': row[4], 'rating': row[5],
+            'rating_count': row[6], 'url': row[7],
+            'time_posted': row[8].isoformat()})
 
     def get_comments(self):
         pass
