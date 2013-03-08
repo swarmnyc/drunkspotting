@@ -1,3 +1,4 @@
+
 .widget {
 	border-color:#cecece;
 	-webkit-border-radius: 0;
@@ -27,11 +28,17 @@
 	background:none;
 	border-bottom-color:transparent;
 }
+.item h3 {
+  font-family: Quicksand;
+  font-weight: bold;
+}
 .widget .widget-header .title {
 	font-size:18px;
 	margin:0;
 	padding:0;
 	float:left;
+  font-family: Quicksand;
+  font-weight: bold;
 }
 .widget .widget-header .widget-nav {float:right;}
 .widget-nav a {
@@ -263,9 +270,9 @@ p.map-info-content .avatar {margin:5px 5px 5px 0;}
 	font-style:italic;
 }
 .well .meta.uppercase {text-transform:uppercase;}
-.well .meta.large {font-size:18px;line-height:30px;height:26px;}
+.well .meta.large {font-size:13px;line-height:30px;height:26px;}
 .well .meta.large [class^="icon-"], .well .meta.large [class^="micon-"] {line-height:30px;}
-.well img.img-featured {margin-bottom:0px;}
+.well img.img-featured {margin-bottom:0px; height: 300px;}
 .well .carousel {margin-bottom:19px;}
 
 /* media object */

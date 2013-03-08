@@ -1,4 +1,6 @@
-
+.item {
+  text-align: right;
+}
 
 #main_content.container-fluid {
 	position:relative;
