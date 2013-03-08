@@ -37,6 +37,12 @@ class Server:
     def ping(self):
         return 'pong'
 
+    def upload_raw_template(self, data):
+        return self.upload_template(data)
+
+    def upload_raw_picture(self, data):
+        return self.upload_picture(data)
+
     def upload_template(self, data):
         with open('test.jpg', 'wb') as f:
             f.write(data)

@@ -16,7 +16,7 @@
 
 NSString *const kPhotoCellIdentifier = @"photo";
 
-@interface FeedViewController () <UICollectionViewDataSource, UICollectionViewDelegate>
+@interface FeedViewController () <UICollectionViewDataSource, UICollectionViewDelegate, UIActionSheetDelegate>
 
 @property( strong, nonatomic ) UICollectionView *feedView;
 
@@ -57,7 +57,7 @@ NSString *const kPhotoCellIdentifier = @"photo";
 	[feedView reloadData];
 
 	self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]
-		initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addItem)];
+                                              initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addItem:)];
 
 	self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]
 		initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(testApp)];
@@ -70,8 +70,9 @@ NSString *const kPhotoCellIdentifier = @"photo";
 
 - (void) viewDidAppear:(BOOL)animated
 {
-    [self testPostImage];
+    //[self testPostImage];
 }
+
 - (void)testApp
 {
 	PictureService *pictureService = [[PictureService alloc] init];
@@ -87,34 +88,36 @@ NSString *const kPhotoCellIdentifier = @"photo";
 
 - (void) testPostImage
 {
+    [self addItem:self.navigationItem.rightBarButtonItem];
+}
+
+- (void)addItem:(id)sender
+{
+    UIActionSheet *addItemAction = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Camera", @"Photo Library", nil];
+
+    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+        [addItemAction showFromBarButtonItem:sender animated:YES];
+	} else {
+        // Go straight to the Photo Library
+        [self actionSheet:addItemAction clickedButtonAtIndex:1];
+    }
+}
+
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if ([[actionSheet buttonTitleAtIndex:buttonIndex] isEqualToString:@"Cancel"]) return;
+
     UIImagePickerController *imgpic = [[UIImagePickerController alloc] init];
 	imgpic.delegate = self;
 	imgpic.allowsEditing = YES;
     
-	if ( [UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera] ) {
-		imgpic.sourceType = UIImagePickerControllerSourceTypeCamera;
-	} else {
-        //REVIEW: Camera not available
+    if ([[actionSheet buttonTitleAtIndex:buttonIndex] isEqualToString:@"Camera"]) {
+        imgpic.sourceType = UIImagePickerControllerSourceTypeCamera;
+    } else if ([[actionSheet buttonTitleAtIndex:buttonIndex] isEqualToString:@"Photo Library"]) {
         imgpic.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-	}
+    }
     
-	[self presentViewController:imgpic animated:YES completion:nil];
-}
-
-- (void)addItem
-{
-	UIImagePickerController *imgpic = [[UIImagePickerController alloc] init];
-	imgpic.delegate = self;
-	imgpic.allowsEditing = YES;
-
-	if ( [UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera] ) {
-		imgpic.sourceType = UIImagePickerControllerSourceTypeCamera;
-	} else {
-        //REVIEW: Camera not available
-        imgpic.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-	}
-
-	[self presentViewController:imgpic animated:YES completion:nil];
+    [self presentViewController:imgpic animated:YES completion:nil];
 }
 
 #pragma mark - <UICollectionViewDatasource>
