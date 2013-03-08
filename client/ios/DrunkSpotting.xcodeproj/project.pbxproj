@@ -16,6 +16,8 @@
 		7E06598116E9765300FE6432 /* drunk3.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7E06597E16E9765300FE6432 /* drunk3.jpg */; };
 		7E06598216E9765300FE6432 /* drunk2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7E06597F16E9765300FE6432 /* drunk2.jpg */; };
 		7E06598316E9765300FE6432 /* drunk1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7E06598016E9765300FE6432 /* drunk1.jpg */; };
+		7E08C7AA16E9D24B00C86238 /* NSDictionary+JSONCategories.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E08C7A916E9D24B00C86238 /* NSDictionary+JSONCategories.m */; };
+		7E08C7AB16E9D24B00C86238 /* NSDictionary+JSONCategories.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E08C7A916E9D24B00C86238 /* NSDictionary+JSONCategories.m */; };
 		D65C90C816E9523E00AF1002 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6D7876E16E93CFE00E1F86B /* CoreGraphics.framework */; };
 		D65C90D116E9581500AF1002 /* DrawingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D65C90CF16E9581500AF1002 /* DrawingViewController.m */; };
 		D65C90D216E9581500AF1002 /* DrawingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D65C90D016E9581500AF1002 /* DrawingViewController.xib */; };
@@ -86,6 +88,8 @@
 		7E06597E16E9765300FE6432 /* drunk3.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = drunk3.jpg; sourceTree = "<group>"; };
 		7E06597F16E9765300FE6432 /* drunk2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = drunk2.jpg; sourceTree = "<group>"; };
 		7E06598016E9765300FE6432 /* drunk1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = drunk1.jpg; sourceTree = "<group>"; };
+		7E08C7A816E9D24B00C86238 /* NSDictionary+JSONCategories.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+JSONCategories.h"; sourceTree = "<group>"; };
+		7E08C7A916E9D24B00C86238 /* NSDictionary+JSONCategories.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+JSONCategories.m"; sourceTree = "<group>"; };
 		D65C90C316E951B300AF1002 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		D65C90CE16E9581500AF1002 /* DrawingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DrawingViewController.h; sourceTree = "<group>"; };
 		D65C90CF16E9581500AF1002 /* DrawingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DrawingViewController.m; sourceTree = "<group>"; };
@@ -290,6 +294,8 @@
 				688AC7D520B33C416CA9226E /* TemplateService.h */,
 				688AC64BC78CDB24B6C2C333 /* PictureService.h */,
 				688AC152442A47121572B01D /* PictureService.m */,
+				7E08C7A816E9D24B00C86238 /* NSDictionary+JSONCategories.h */,
+				7E08C7A916E9D24B00C86238 /* NSDictionary+JSONCategories.m */,
 			);
 			path = DrunkSpotting;
 			sourceTree = "<group>";
@@ -446,6 +452,7 @@
 				EF5F895316E9C1FD0070FAA4 /* AFXMLRequestOperation.m in Sources */,
 				EF5F895416E9C1FD0070FAA4 /* UIImageView+AFNetworking.m in Sources */,
 				688ACB926F845DF8629A8FBD /* PictureService.m in Sources */,
+				7E08C7AB16E9D24B00C86238 /* NSDictionary+JSONCategories.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -473,6 +480,7 @@
 				EF5F894A16E9C1D70070FAA4 /* FeedViewController.m in Sources */,
 				EF5F895516E9C2130070FAA4 /* main.m in Sources */,
 				688ACE4D8004D35F42CA9016 /* PictureService.m in Sources */,
+				7E08C7AA16E9D24B00C86238 /* NSDictionary+JSONCategories.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

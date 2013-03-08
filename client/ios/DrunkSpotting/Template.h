@@ -28,5 +28,6 @@
 @property( nonatomic, copy ) NSString *title;
 @property( nonatomic, copy ) NSString *url;
 
+- (NSDictionary*)dictionary;
 
 @end

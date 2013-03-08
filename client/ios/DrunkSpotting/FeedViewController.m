@@ -12,6 +12,8 @@
 #import "TemplateService.h"
 #import "PictureService.h"
 
+#import "Template.h"
+
 NSString *const kPhotoCellIdentifier = @"photo";
 
 @interface FeedViewController () <UICollectionViewDataSource, UICollectionViewDelegate>
@@ -57,10 +59,13 @@ NSString *const kPhotoCellIdentifier = @"photo";
 	self.navigationItem.rightBarButtonItem.enabled = cameraAvailable;
 }
 
+- (void) viewDidAppear:(BOOL)animated
+{
+    [self testPostImage];
+}
+
 - (void)testApp
 {
-
-
 	PictureService *pictureService = [[PictureService alloc] init];
 
 	[pictureService getPicture:6 success:^( Template *t )
@@ -70,6 +75,22 @@ NSString *const kPhotoCellIdentifier = @"photo";
 	{
 		NSLog( error );
 	}];
+}
+
+- (void) testPostImage
+{
+    UIImagePickerController *imgpic = [[UIImagePickerController alloc] init];
+	imgpic.delegate = self;
+	imgpic.allowsEditing = YES;
+    
+	if ( [UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera] ) {
+		imgpic.sourceType = UIImagePickerControllerSourceTypeCamera;
+	} else {
+        //REVIEW: Camera not available
+        imgpic.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+	}
+    
+	[self presentViewController:imgpic animated:YES completion:nil];
 }
 
 - (void)setupTestImages
@@ -85,13 +106,11 @@ NSString *const kPhotoCellIdentifier = @"photo";
 	imgpic.delegate = self;
 	imgpic.allowsEditing = YES;
 
-	if ( [UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera] )
-	{
+	if ( [UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera] ) {
 		imgpic.sourceType = UIImagePickerControllerSourceTypeCamera;
-	}
-	else
-	{
-		//REVIEW: Camerad not available
+	} else {
+        //REVIEW: Camera not available
+        imgpic.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
 	}
 
 	[self presentViewController:imgpic animated:YES completion:nil];
@@ -161,12 +180,19 @@ NSString *const kPhotoCellIdentifier = @"photo";
 {
 	[self dismissViewControllerAnimated:YES completion:^
 	{
-
 		UIImage *pickedImage = [info objectForKey:UIImagePickerControllerEditedImage];
 
 		if ( pickedImage )
 		{
-
+            // TEST CODE ONLY
+            Template *testTemplate = [[Template alloc] init];
+            testTemplate.longitude = 40.732766;
+            testTemplate.latitude = -73.988252;
+            testTemplate.description = @"Yo yo yo";
+            testTemplate.title = @"Hello World!";
+            
+            [PictureService postTemplateImage:pickedImage metadata:testTemplate];
+            
 			DrawingViewController *dvc = [[DrawingViewController alloc] initWithImage:pickedImage];
 			[self.navigationController pushViewController:dvc animated:YES];
 		}

@@ -13,10 +13,9 @@
 }
 @property( nonatomic, copy ) NSString *baseUrl;
 
-- (void)postTemplate:(Template *)template;
-
-- (void)getPicture:(int)pictureId success:(void (^)(Template *))success
-	failure:(void (^)(NSError *))failure;
++ (void)postTemplate:(Template*)metadata;
++ (void)postTemplateImage:(UIImage *)image metadata:(Template*)metadata;
+- (void)getPicture:(int)pictureId success:(void (^)(Template *))success failure:(void (^)(NSError *))failure;
 
 
 @end
