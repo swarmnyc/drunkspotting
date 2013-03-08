@@ -9,10 +9,7 @@ import psycopg2
 import os
 import datetime
 import cgi
-import cStringIO
 import azure.storage
-
-import multipart
 
 import database
 import drunkspotting_exceptions
