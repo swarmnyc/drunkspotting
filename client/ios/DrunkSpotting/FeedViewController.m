@@ -195,7 +195,13 @@ NSString *const kPhotoCellIdentifier = @"photo";
             testTemplate.description = @"Yo yo yo day 2";
             testTemplate.title = @"Hello World! day 2";
 
-			[PictureService postImage:pickedImage metadata:testTemplate type:@"template"];
+			[PictureService postImage:pickedImage type:@"template" success:^(NSString *urlString) {
+                testTemplate.url = urlString;
+                [PictureService postMetadata:testTemplate type:@"template"];
+            } failure:^(NSError *error) {
+                // ERROR HANDLING
+                NSLog(@"Error = %@",error.description);
+            }];
             
 			//DrawingViewController *dvc = [[DrawingViewController alloc] initWithImage:pickedImage];
 			//[self.navigationController pushViewController:dvc animated:YES];

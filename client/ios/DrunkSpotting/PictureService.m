@@ -28,8 +28,7 @@
 
 + (void)postMetadata:(id)metadata type:(NSString*)type
 {
-	NSURL *url =
-		[NSURL URLWithString:[NSString stringWithFormat:@"http://api.drunkspotting.com/%@s",type]];
+	NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"http://api.drunkspotting.com/%@s",type]];
 	NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:url];
 	NSData *requestData = [[metadata dictionary] JSONFromDictionary];
 
@@ -50,23 +49,17 @@
 			if ( !serializationError ) {
 				NSLog( @"result = %@", result );
 			} else { NSLog( @"Error serializing JSON" );}
-
-			//NSError* serializationError = nil;
-			//id result = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&serializationError];
-
-			// TODO: Implement error handling in callback
 		}];
 }
 
 
-+ (void)postImage:(UIImage *)image metadata:(id)metadata type:(NSString*)type
++ (void)postImage:(UIImage *)image type:(NSString*)type success:(void (^)(NSString*))success failure:(void (^)(NSError *))failure
 {
 	NSURL *url =
 		[NSURL URLWithString:[NSString stringWithFormat:@"http://api.drunkspotting.com/"]];
 
 	AFHTTPClient *httpClient = [[AFHTTPClient alloc] initWithBaseURL:url];
 
-//	NSData *imageData = UIImageJPEGRepresentation([UIImage imageNamed:@"MainMedia"], 0.5);
 	NSData *imageData = UIImageJPEGRepresentation( image, 0.5 );
 
 	NSMutableURLRequest *request = [httpClient multipartFormRequestWithMethod:@"POST" path:[NSString stringWithFormat:@"upload_%@",type] parameters:nil constructingBodyWithBlock: ^(id <AFMultipartFormData>formData) {
@@ -77,7 +70,15 @@
 	[operation setUploadProgressBlock:^(NSUInteger bytesWritten, long long totalBytesWritten, long long totalBytesExpectedToWrite) {
 	    NSLog(@"Sent %lld of %lld bytes", totalBytesWritten, totalBytesExpectedToWrite);
 	}];
-	[operation start];
+    [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSError *error = nil;
+        NSDictionary *result = [NSJSONSerialization JSONObjectWithData:responseObject options:kNilOptions error:&error];
+        
+        success([result objectForKey:@"url"]);
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        failure(error);
+    }];
+    [operation start];
 }
 
 - (void)getPicture:(int)pictureId success:(void (^)(Picture *))success
