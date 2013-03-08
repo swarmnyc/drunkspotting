@@ -4,7 +4,7 @@
 
 -- Dumped from database version 9.0.7
 -- Dumped by pg_dump version 9.0.7
--- Started on 2013-03-07 20:09:06 EST
+-- Started on 2013-03-07 20:21:05 EST
 
 SET statement_timeout = 0;
 SET client_encoding = 'UTF8';
@@ -49,7 +49,7 @@ SET default_tablespace = '';
 SET default_with_oids = false;
 
 --
--- TOC entry 148 (class 1259 OID 25909)
+-- TOC entry 148 (class 1259 OID 26020)
 -- Dependencies: 5
 -- Name: comments; Type: TABLE; Schema: public; Owner: drunkspotting; Tablespace: 
 --
@@ -62,6 +62,8 @@ CREATE TABLE comments (
     nick character varying(255) NOT NULL,
     title character varying(255) NOT NULL,
     description character varying NOT NULL,
+    up_votes integer NOT NULL,
+    down_votes integer NOT NULL,
     time_posted timestamp with time zone NOT NULL
 );
 
@@ -69,7 +71,7 @@ CREATE TABLE comments (
 ALTER TABLE public.comments OWNER TO drunkspotting;
 
 --
--- TOC entry 147 (class 1259 OID 25907)
+-- TOC entry 147 (class 1259 OID 26018)
 -- Dependencies: 148 5
 -- Name: comments_id_seq; Type: SEQUENCE; Schema: public; Owner: drunkspotting
 --
@@ -202,7 +204,7 @@ ALTER SEQUENCE template_id_seq OWNED BY templates.id;
 
 
 --
--- TOC entry 1801 (class 2604 OID 25912)
+-- TOC entry 1801 (class 2604 OID 26023)
 -- Dependencies: 147 148 148
 -- Name: id; Type: DEFAULT; Schema: public; Owner: drunkspotting
 --
@@ -229,7 +231,7 @@ ALTER TABLE ONLY templates ALTER COLUMN id SET DEFAULT nextval('template_id_seq'
 
 
 --
--- TOC entry 1809 (class 2606 OID 25917)
+-- TOC entry 1809 (class 2606 OID 26028)
 -- Dependencies: 148 148
 -- Name: comments_pkey; Type: CONSTRAINT; Schema: public; Owner: drunkspotting; Tablespace: 
 --
@@ -280,7 +282,7 @@ GRANT ALL ON SCHEMA public TO postgres;
 GRANT ALL ON SCHEMA public TO PUBLIC;
 
 
--- Completed on 2013-03-07 20:09:06 EST
+-- Completed on 2013-03-07 20:21:05 EST
 
 --
 -- PostgreSQL database dump complete
