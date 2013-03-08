@@ -202,12 +202,17 @@ class TestSimpleNetworked(unittest.TestCase):
         self.assertEqual(data[0]['description'],
                          'picture 3 comment description')
 
-        # Upload a picture
+        # Upload a template
         logo = open('data/logo.jpg', 'r').read()
         (status, reason, data) = httpcall.call(
             "POST", self.url + '/upload_template', logo)
         self.assertEqual((status, reason), (200, 'OK'))
 
+        # Upload a picture
+        logo = open('data/logo.jpg', 'r').read()
+        (status, reason, data) = httpcall.call(
+            "POST", self.url + '/upload_picture', logo)
+        self.assertEqual((status, reason), (200, 'OK'))
 
 if __name__ == '__main__':
     logging.basicConfig(format='%(asctime)s %(message)s', level=logging.DEBUG)

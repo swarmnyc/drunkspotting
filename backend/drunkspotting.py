@@ -39,6 +39,7 @@ class Gateway:
 
         self._posts = [
             [re.compile("/upload_template/*$"), self._server.upload_template],
+            [re.compile("/upload_picture/*$"), self._server.upload_picture],
             [re.compile("/templates/*$"), self._server.post_template],
             [re.compile("/tags/(\w+)/*$"), self._server.post_tag],
             [re.compile("/templates/(\w+)/comments/*$"), self._server.post_template_comment],
@@ -119,12 +120,12 @@ class Gateway:
             start_response('404 Item not found', [("Content-Type", self._CONTENT_TYPE),
                 ('Access-Control-Allow-Origin', '*'),
                 ('Access-Control-Allow-Methods' ,'GET, POST')])
-            return[""]
+            return["Not found"]
         except drunkspotting_exceptions.AcccessDeniedException:
             start_response('403 Access denied', [("Content-Type", self._CONTENT_TYPE),
                 ('Access-Control-Allow-Origin', '*'),
                 ('Access-Control-Allow-Methods' ,'GET, POST')])
-            return[""]
+            return["Not found"]
         except Exception:
             response = str(sys.exc_info())
             logging.exception("Error handling request.")

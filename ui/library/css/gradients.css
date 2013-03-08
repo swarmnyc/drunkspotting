@@ -34,7 +34,7 @@ li.important a,
 .btn-rounded.pushStart a,
 .btn-boxed.pushStart a , li.pushStart a {
 	background-image: none;
-	background-color: orangered;
+	background-color: #96ee9a;
 }
 /**** info *****/
 .btn-circle.info a,
