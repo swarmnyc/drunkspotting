@@ -52,7 +52,6 @@ class TestSimpleNetworked(unittest.TestCase):
         # Add a template
         req = {
             "title": "template 1",
-            "ip": "1.2.3.4",
             "latitude": 12.34,
             "longitude": 23.34,
             "description": "template 1 desc",
@@ -67,7 +66,6 @@ class TestSimpleNetworked(unittest.TestCase):
         # Add another template
         req = {
             "title": "template 2",
-            "ip": "1.2.3.4",
             "latitude": 32.34,
             "longitude": 33.34,
             "description": "template 2 desc",
@@ -104,7 +102,6 @@ class TestSimpleNetworked(unittest.TestCase):
         req = {
             "template_id": template1_id,
             "title": "picture 1.1",
-            "ip": "3.2.3.4",
             "description": "pic 1 desc",
             "url": "http://www.google.com"
             }
@@ -117,7 +114,6 @@ class TestSimpleNetworked(unittest.TestCase):
         req = {
             "template_id": template1_id,
             "title": "picture 1.2",
-            "ip": "3.2.3.4",
             "description": "pic 2 desc",
             "url": "http://www.google.com"
             }
@@ -131,7 +127,6 @@ class TestSimpleNetworked(unittest.TestCase):
         req = {
             "template_id": template2_id,
             "title": "picture 2.2",
-            "ip": "3.2.3.4",
             "description": "pic 3 desc",
             "url": "http://www.amazon.com"
             }
