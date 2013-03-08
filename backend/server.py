@@ -58,7 +58,10 @@ class Server:
             account_key=config.config['azure_key'])
         blob_service.create_container('templates')
         blob_service.put_blob('templates', img,
-                              data, x_ms_blob_type='BlockBlob')
+                              data, x_ms_blob_type='BlockBlob',
+                              x_ms_blob_content_type='image/jpeg')
+
+        print 'content type set'
 
         url = config.config['upload_url'] + 'templates/' + img
         print url
