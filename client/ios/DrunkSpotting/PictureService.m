@@ -10,6 +10,7 @@
 #import "PictureService.h"
 #import "Picture.h"
 #import "NSDictionary+JSONCategories.h"
+#import "AFHTTPClient.h"
 
 @implementation PictureService
 @synthesize baseUrl = m_baseUrl;
@@ -25,58 +26,63 @@
 	return self;
 }
 
-+ (void)postTemplate:(Template*)metadata
++ (void)postTemplate:(Template *)metadata
 {
-    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"http://api.drunkspotting.com/templates"]];
-    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:url];
-    NSData *requestData = [[metadata dictionary] JSONFromDictionary];
-    
-    [request setHTTPMethod:@"POST"];
-    [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
-    [request setValue:[NSString stringWithFormat:@"%d", [requestData length]] forHTTPHeaderField:@"Content-Length"];
-    [request setHTTPBody:requestData];
-    
-    [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
-        NSLog(@"Error.description = %@",error.description);
-        NSError* serializationError = nil;
-        id result = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&serializationError];
-        
-        if (!serializationError) {
-            NSLog(@"result = %@",result);
-        } else NSLog(@"Error serializing JSON");
-        
-        //NSError* serializationError = nil;
-        //id result = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&serializationError];
-        
-        // TODO: Implement error handling in callback
-    }];
+	NSURL *url =
+		[NSURL URLWithString:[NSString stringWithFormat:@"http://api.drunkspotting.com/templates"]];
+	NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:url];
+	NSData *requestData = [[metadata dictionary] JSONFromDictionary];
+
+	[request setHTTPMethod:@"POST"];
+	[request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+	[request setValue:[NSString stringWithFormat:@"%d", [requestData length]]
+		forHTTPHeaderField:@"Content-Length"];
+	[request setHTTPBody:requestData];
+
+	[NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue]
+		completionHandler:^( NSURLResponse *response, NSData *data, NSError *error )
+		{
+			NSLog( @"Error.description = %@", error.description );
+			NSError *serializationError = nil;
+			id result = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions
+				error:&serializationError];
+
+			if ( !serializationError )
+			{
+				NSLog( @"result = %@", result );
+			}
+			else
+			{NSLog( @"Error serializing JSON" );}
+
+			//NSError* serializationError = nil;
+			//id result = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&serializationError];
+
+			// TODO: Implement error handling in callback
+		}];
 }
 
-+ (void)postTemplateImage:(UIImage *)image metadata:(Template*)metadata
+
++ (void)postTemplateImage:(UIImage *)image metadata:(Template *)metadata
 {
-    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"http://api.drunkspotting.com/upload_template"]];
-    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:url];
-    NSData *requestData = UIImageJPEGRepresentation(image, 1.0);
-    
-    [request setHTTPMethod:@"POST"];
-    //[request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
-    //[request setValue:[NSString stringWithFormat:@"%d", [requestData length]] forHTTPHeaderField:@"Content-Length"];
-    [request setHTTPBody:requestData];
-    
-    NSLog(@"length = %d", [requestData length]);
-    
-    [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
-        // TODO: Implement error handling in callback
-        
-        NSError* serializationError = nil;
-        id result = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&serializationError];
-        
-        if (!serializationError) {
-            metadata.url = [result objectForKey:@"url"];
-            NSLog(@"result url = %@",metadata.url);
-            [PictureService postTemplate:metadata];
-        } else NSLog(@"Error serializing JSON");
-    }];
+	NSURL *url =
+		[NSURL URLWithString:[NSString stringWithFormat:@"http://api.drunkspotting.com/"]];
+
+	AFHTTPClient *httpClient = [[AFHTTPClient alloc] initWithBaseURL:url];
+
+//	NSData *imageData = UIImageJPEGRepresentation([UIImage imageNamed:@"MainMedia"], 0.5);
+	NSData *imageData = UIImageJPEGRepresentation( image, 0.5 );
+
+
+
+	NSMutableURLRequest *request = [httpClient multipartFormRequestWithMethod:@"POST" path:@"upload_template" parameters:nil constructingBodyWithBlock: ^(id <AFMultipartFormData>formData) {
+	    [formData appendPartWithFormData:imageData name:@"test.jpg"];
+	}];
+
+	AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
+	[operation setUploadProgressBlock:^(NSUInteger bytesWritten, long long totalBytesWritten, long long totalBytesExpectedToWrite) {
+	    NSLog(@"Sent %lld of %lld bytes", totalBytesWritten, totalBytesExpectedToWrite);
+	}];
+	[operation start];
 }
 
 - (void)getPicture:(int)pictureId success:(void (^)(Picture *))success
@@ -111,21 +117,20 @@
 	NSString *path = [self.baseUrl stringByAppendingFormat:@"/templates/latest/%d", size];
 	NSURL *url = [NSURL URLWithString:path];
 	NSURLRequest *request = [NSURLRequest requestWithURL:url];
-
 	AFJSONRequestOperation *operation =
 		[AFJSONRequestOperation JSONRequestOperationWithRequest:request
 			success:^( NSURLRequest *urlRequest, NSHTTPURLResponse *response, id JSON )
 			{
-				NSMutableArray * pictures = [[NSMutableArray alloc] init];
+				NSMutableArray *pictures = [[NSMutableArray alloc] init];
 
-				for( NSDictionary * dictionary in JSON)
+				for ( NSDictionary *dictionary in JSON )
 				{
 					Picture *picture = [[Picture alloc] init];
 					[self populatePicture:picture JSON:dictionary];
 					[pictures addObject:picture];
 				}
 
-				success( pictures);
+				success( pictures );
 			} failure:^( NSURLRequest *urlRequest, NSHTTPURLResponse *response, NSError *error,
 			id JSON )
 		{
@@ -139,7 +144,7 @@
 - (void)populatePicture:(Picture *)picture JSON:(id)JSON
 {
 	id value = [JSON valueForKeyPath:@"id"];
-	if (value )
+	if ( value )
 	{
 		picture.id = [value integerValue];
 	}

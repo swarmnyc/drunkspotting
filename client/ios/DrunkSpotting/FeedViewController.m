@@ -191,8 +191,8 @@ NSString *const kPhotoCellIdentifier = @"photo";
             testTemplate.latitude = -73.988252;
             testTemplate.description = @"Yo yo yo day 2";
             testTemplate.title = @"Hello World! day 2";
-            
-            [PictureService postTemplateImage:pickedImage metadata:testTemplate];
+
+			[PictureService postTemplateImage:pickedImage metadata:testTemplate];
             
 			//DrawingViewController *dvc = [[DrawingViewController alloc] initWithImage:pickedImage];
 			//[self.navigationController pushViewController:dvc animated:YES];
