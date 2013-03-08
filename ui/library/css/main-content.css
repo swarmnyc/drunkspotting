@@ -1,5 +1,6 @@
-.item {
-  text-align: right;
+.span4.item {
+  text-align: left;
+  width: 400px;
 }
 
 #main_content.container-fluid {
