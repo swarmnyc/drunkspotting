@@ -27,3 +27,21 @@
 
 @import url(addon-styles.css);
 @import url(kuta-responsive.css);
+
+.page-heading h2 {
+  font-family: Quicksand;
+  font-weight: bold;
+}
+
+.widget-header.load-more {
+  margin-top: 20px;
+  text-align: center;
+  margin-bottom: -1px;
+}
+
+h3 a{
+  color: #FFF;
+}
+h3 a:hover {
+  color: #acf5d7;
+}
