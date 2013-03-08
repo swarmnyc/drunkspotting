@@ -205,16 +205,13 @@ class TestSimpleNetworked(unittest.TestCase):
         self.assertEqual(len(data), 1)
         self.assertEqual(data[0]['nick'], 'drunkspotting')
         self.assertEqual(data[0]['description'],
-            'picture 3 comment description')
+                         'picture 3 comment description')
 
         # Upload a picture
         logo = open('data/logo.jpg', 'r').read()
         (status, reason, data) = httpcall.call(
             "POST", self.url + '/upload_template', logo)
         self.assertEqual((status, reason), (200, 'OK'))
-
-        print data
-        self.assertEqual(1, 0)
 
 
 if __name__ == '__main__':
