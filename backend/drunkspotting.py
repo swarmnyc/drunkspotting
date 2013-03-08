@@ -31,8 +31,8 @@ class Gateway:
             [re.compile("/nuke_it_all/*$"), self._server.nuke_it_all],
 
             [re.compile("/ping/*$"), self._server.ping],
-            [re.compile("/templates/*$"), self._server.get_templates],
-            [re.compile("/pictures/*$"), self._server.get_pictures],
+            [re.compile("/templates/latest/(\w+)$"), self._server.get_latest_templates],
+            [re.compile("/pictures/latest/(\w+)$"), self._server.get_latest_pictures],
             [re.compile("/tags/*$"), self._server.get_tags],
             [re.compile("/find_by_tags/*$"), self._server.find_by_tags]]
 
