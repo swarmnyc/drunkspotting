@@ -39,6 +39,8 @@ NSString *const kPhotoCellIdentifier = @"photo";
     [feedView setDataSource:self];
     [self.view addSubview:feedView];
     [feedView reloadData];
+    
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addItem)];
 }
 
 - (void) setupTestImages
@@ -46,6 +48,11 @@ NSString *const kPhotoCellIdentifier = @"photo";
     [feedDataArray addObject:[UIImage imageNamed:@"drunk1.jpg"]];
     [feedDataArray addObject:[UIImage imageNamed:@"drunk2.jpg"]];
     [feedDataArray addObject:[UIImage imageNamed:@"drunk3.jpg"]];
+}
+
+- (void) addItem
+{
+    
 }
 
 #pragma mark - <UICollectionViewDatasource>
