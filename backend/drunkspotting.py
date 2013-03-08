@@ -9,7 +9,7 @@ import argparse
 import daemon
 #import lockfile
 
-
+import config
 import drunkspotting_exceptions
 import server
 
@@ -38,6 +38,7 @@ class Gateway:
             [re.compile("/find_by_tags/*$"), self._server.find_by_tags]]
 
         self._posts = [
+            [re.compile("/upload_template/*$"), self._server.upload_template],
             [re.compile("/templates/*$"), self._server.post_template],
             [re.compile("/tags/(\w+)/*$"), self._server.post_tag],
             [re.compile("/templates/(\w+)/comments/*$"), self._server.post_template_comment],
@@ -64,7 +65,8 @@ class Gateway:
         and if the path matches, the corresponding function will be called,
         with any match groups as additional parameters"""
 
-        print 'PUT/POST ' + path + ' data: ' + data
+        if not path.startswith('/upload'):
+            print 'PUT/POST ' + path + ' data: ' + data
         for call in calls:
             match = call[0].match(path)
             if match:
@@ -144,16 +146,16 @@ def run(log):
     else:
         logging.basicConfig(format='%(asctime)s %(message)s', level=logging.DEBUG)
 
-    deliverish_server = server.Server()
-    deliverish_gateway = Gateway(deliverish_server)
+    drunkspotting_server = server.Server()
+    drunkspotting_gateway = Gateway(drunkspotting_server)
 
-    httpd = gevent.wsgi.WSGIServer(('', 8200), deliverish_gateway.handler,
-                                   log=None)
+    httpd = gevent.wsgi.WSGIServer(('', config.config['server_port']),
+            drunkspotting_gateway.handler, log=None)
     httpd.serve_forever()
 
 
 if __name__ == '__main__':
-    parser = argparse.ArgumentParser(description="deliverish")
+    parser = argparse.ArgumentParser(description="drunkspotting")
     parser.add_argument('--daemon', dest="daemon", action='store_true', default=False,
         help="Run as daemon.")
     parser.add_argument('--log', action="store", dest="log", default="",
