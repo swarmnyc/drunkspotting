@@ -32,7 +32,7 @@ NSString *const kPhotoCellIdentifier = @"photo";
     self.navigationItem.titleView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"titleTreatment"]];
 
 	PictureService *pictureService = [[PictureService alloc] init];
-	[pictureService getPictures:10 success:^( NSArray *array )
+	[pictureService getPictures:20 success:^( NSArray *array )
 	{
 		self.pictures = array;
 
@@ -60,8 +60,7 @@ NSString *const kPhotoCellIdentifier = @"photo";
 	self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]
                                               initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addItem:)];
 
-	self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]
-		initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(testApp)];
+
 }
 
 - (void) viewDidAppear:(BOOL)animated
