@@ -29,6 +29,11 @@
 		D65C90FB16E95C8E00AF1002 /* ACEDrawingView.m in Sources */ = {isa = PBXBuildFile; fileRef = D65C90F916E95C8E00AF1002 /* ACEDrawingView.m */; };
 		D65C90FD16E95EA000AF1002 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D65C90FC16E95EA000AF1002 /* SystemConfiguration.framework */; };
 		D65C90FF16E95EA600AF1002 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D65C90FE16E95EA600AF1002 /* MobileCoreServices.framework */; };
+		D65C911D16E9B98400AF1002 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D65C911C16E9B98400AF1002 /* SenTestingKit.framework */; };
+		D65C911E16E9B98400AF1002 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6D7876A16E93CFE00E1F86B /* UIKit.framework */; };
+		D65C911F16E9B98400AF1002 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6D7876C16E93CFE00E1F86B /* Foundation.framework */; };
+		D65C912516E9B98400AF1002 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = D65C912316E9B98400AF1002 /* InfoPlist.strings */; };
+		D65C912816E9B98400AF1002 /* DrunkSpottingTest.m in Sources */ = {isa = PBXBuildFile; fileRef = D65C912716E9B98400AF1002 /* DrunkSpottingTest.m */; };
 		D6D7876B16E93CFE00E1F86B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6D7876A16E93CFE00E1F86B /* UIKit.framework */; };
 		D6D7876D16E93CFE00E1F86B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6D7876C16E93CFE00E1F86B /* Foundation.framework */; };
 		D6D7877516E93CFE00E1F86B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = D6D7877316E93CFE00E1F86B /* InfoPlist.strings */; };
@@ -78,6 +83,13 @@
 		D65C90F916E95C8E00AF1002 /* ACEDrawingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACEDrawingView.m; sourceTree = "<group>"; };
 		D65C90FC16E95EA000AF1002 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		D65C90FE16E95EA600AF1002 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		D65C911B16E9B98400AF1002 /* DrunkSpottingTest.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DrunkSpottingTest.octest; sourceTree = BUILT_PRODUCTS_DIR; };
+		D65C911C16E9B98400AF1002 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
+		D65C912216E9B98400AF1002 /* DrunkSpottingTest-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "DrunkSpottingTest-Info.plist"; sourceTree = "<group>"; };
+		D65C912416E9B98400AF1002 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		D65C912616E9B98400AF1002 /* DrunkSpottingTest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DrunkSpottingTest.h; sourceTree = "<group>"; };
+		D65C912716E9B98400AF1002 /* DrunkSpottingTest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DrunkSpottingTest.m; sourceTree = "<group>"; };
+		D65C912916E9B98400AF1002 /* DrunkSpottingTest-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "DrunkSpottingTest-Prefix.pch"; sourceTree = "<group>"; };
 		D6D7876616E93CFE00E1F86B /* DrunkSpotting.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DrunkSpotting.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D6D7876A16E93CFE00E1F86B /* UIKit.framework */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		D6D7876C16E93CFE00E1F86B /* Foundation.framework */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -96,6 +108,16 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		D65C911716E9B98400AF1002 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D65C911D16E9B98400AF1002 /* SenTestingKit.framework in Frameworks */,
+				D65C911E16E9B98400AF1002 /* UIKit.framework in Frameworks */,
+				D65C911F16E9B98400AF1002 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		D6D7876316E93CFE00E1F86B /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -160,6 +182,26 @@
 			path = ACEDrawingView/ACEDrawingView;
 			sourceTree = "<group>";
 		};
+		D65C912016E9B98400AF1002 /* DrunkSpottingTest */ = {
+			isa = PBXGroup;
+			children = (
+				D65C912616E9B98400AF1002 /* DrunkSpottingTest.h */,
+				D65C912716E9B98400AF1002 /* DrunkSpottingTest.m */,
+				D65C912116E9B98400AF1002 /* Supporting Files */,
+			);
+			path = DrunkSpottingTest;
+			sourceTree = "<group>";
+		};
+		D65C912116E9B98400AF1002 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				D65C912216E9B98400AF1002 /* DrunkSpottingTest-Info.plist */,
+				D65C912316E9B98400AF1002 /* InfoPlist.strings */,
+				D65C912916E9B98400AF1002 /* DrunkSpottingTest-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
 		D6D7875B16E93CFE00E1F86B = {
 			isa = PBXGroup;
 			children = (
@@ -168,6 +210,7 @@
 				D65C90C316E951B300AF1002 /* QuartzCore.framework */,
 				D6D7877016E93CFE00E1F86B /* DrunkSpotting */,
 				7E06597D16E9764800FE6432 /* test images */,
+				D65C912016E9B98400AF1002 /* DrunkSpottingTest */,
 				D6D7876916E93CFE00E1F86B /* Frameworks */,
 				D6D7876716E93CFE00E1F86B /* Products */,
 			);
@@ -177,6 +220,7 @@
 			isa = PBXGroup;
 			children = (
 				D6D7876616E93CFE00E1F86B /* DrunkSpotting.app */,
+				D65C911B16E9B98400AF1002 /* DrunkSpottingTest.octest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -189,6 +233,7 @@
 				D6D7876A16E93CFE00E1F86B /* UIKit.framework */,
 				D6D7876C16E93CFE00E1F86B /* Foundation.framework */,
 				D6D7876E16E93CFE00E1F86B /* CoreGraphics.framework */,
+				D65C911C16E9B98400AF1002 /* SenTestingKit.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -238,6 +283,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		D65C911A16E9B98400AF1002 /* DrunkSpottingTest */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D65C912A16E9B98400AF1002 /* Build configuration list for PBXNativeTarget "DrunkSpottingTest" */;
+			buildPhases = (
+				D65C911616E9B98400AF1002 /* Sources */,
+				D65C911716E9B98400AF1002 /* Frameworks */,
+				D65C911816E9B98400AF1002 /* Resources */,
+				D65C911916E9B98400AF1002 /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = DrunkSpottingTest;
+			productName = DrunkSpottingTest;
+			productReference = D65C911B16E9B98400AF1002 /* DrunkSpottingTest.octest */;
+			productType = "com.apple.product-type.bundle";
+		};
 		D6D7876516E93CFE00E1F86B /* DrunkSpotting */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = D6D7878416E93CFE00E1F86B /* Build configuration list for PBXNativeTarget "DrunkSpotting" */;
@@ -276,11 +339,20 @@
 			projectRoot = "";
 			targets = (
 				D6D7876516E93CFE00E1F86B /* DrunkSpotting */,
+				D65C911A16E9B98400AF1002 /* DrunkSpottingTest */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		D65C911816E9B98400AF1002 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D65C912516E9B98400AF1002 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		D6D7876416E93CFE00E1F86B /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -299,7 +371,31 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		D65C911916E9B98400AF1002 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
+		D65C911616E9B98400AF1002 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D65C912816E9B98400AF1002 /* DrunkSpottingTest.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		D6D7876216E93CFE00E1F86B /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -327,6 +423,14 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
+		D65C912316E9B98400AF1002 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D65C912416E9B98400AF1002 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
 		D6D7877316E93CFE00E1F86B /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -338,6 +442,36 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		D65C912B16E9B98400AF1002 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
+					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "DrunkSpottingTest/DrunkSpottingTest-Prefix.pch";
+				INFOPLIST_FILE = "DrunkSpottingTest/DrunkSpottingTest-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Debug;
+		};
+		D65C912C16E9B98400AF1002 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
+					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "DrunkSpottingTest/DrunkSpottingTest-Prefix.pch";
+				INFOPLIST_FILE = "DrunkSpottingTest/DrunkSpottingTest-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Release;
+		};
 		D6D7878216E93CFE00E1F86B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -415,6 +549,14 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		D65C912A16E9B98400AF1002 /* Build configuration list for PBXNativeTarget "DrunkSpottingTest" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D65C912B16E9B98400AF1002 /* Debug */,
+				D65C912C16E9B98400AF1002 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
 		D6D7876016E93CFE00E1F86B /* Build configuration list for PBXProject "DrunkSpotting" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
