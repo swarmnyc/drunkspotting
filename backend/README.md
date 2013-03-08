@@ -125,6 +125,13 @@ POST /upload_template
 =====================
 
 Upload a new template image. Post the image data.
+Form example is (view raw in github to see):
+
+    <form method="POST" enctype="multipart/form-data" action="http://api.drunkspotting.com/upload_template">
+     <input id="data" type="file" name="data" />
+     <input type="submit"/>
+    </form>
+
 
 A dictionary is returned:
 
@@ -136,6 +143,12 @@ POST /upload_pictures
 =====================
 
 Upload a new picture image. Post the image data.
+Form example is (view raw in github to see):
+
+    <form method="POST" enctype="multipart/form-data" action="http://api.drunkspotting.com/upload_picture">
+     <input id="data" type="file" name="data" />
+     <input type="submit"/>
+    </form>
 
 A dictionary is returned:
 
@@ -143,6 +156,17 @@ dictionary {
     'url': 'xxx'
 }
 
+POST /upload_raw_template
+=========================
+
+Upload a new template image, but with raw binary data only.
+Otherwise same as /upload_raw_template
+
+POST /upload_raw_pictures
+=========================
+
+Upload a new template image, but with raw binary data only.
+Otherwise same as /upload_raw_template
 
 POST /templates/
 ================

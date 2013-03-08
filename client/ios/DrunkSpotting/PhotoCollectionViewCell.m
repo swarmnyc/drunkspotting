@@ -7,6 +7,7 @@
 //
 
 #import "PhotoCollectionViewCell.h"
+#import "UIImageView+AFNetworking.h"
 
 @interface PhotoCollectionViewCell ()
 
@@ -30,14 +31,16 @@
     return self;
 }
 
-- (void) setPhoto:(UIImage*)photo
+- (void) setPicture:(Picture*)picture
 {
-    [photoView setImage:photo];
+	[photoView setImageWithURL:[NSURL URLWithString:picture.url]];
 }
 
-- (UIImage *) photo {
 
-    return photoView.image;
+
+-(UIImage *) image
+{
+	return self.photoView.image;
 }
 
 @end

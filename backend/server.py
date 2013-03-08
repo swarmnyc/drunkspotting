@@ -37,9 +37,15 @@ class Server:
     def ping(self):
         return 'pong'
 
+    def upload_raw_template(self, data):
+        return self.upload_template(data)
+
+    def upload_raw_picture(self, data):
+        return self.upload_picture(data)
+
     def upload_template(self, data):
-        # with open('test.jpg', 'wb') as f:
-        #     f.write(data)
+        with open('test.jpg', 'wb') as f:
+            f.write(data)
 
         salt = binascii.b2a_hex(os.urandom(20))
         sha1 = hashlib.sha1()
@@ -55,6 +61,7 @@ class Server:
                               data, x_ms_blob_type='BlockBlob')
 
         url = config.config['upload_url'] + 'templates/' + img
+        print url
         return cjson.encode({'url': url})
 
     def upload_picture(self, data):

@@ -39,6 +39,8 @@ class Gateway:
             [re.compile("/find_by_tags/*$"), self._server.find_by_tags]]
 
         self._posts = [
+            [re.compile("/upload_raw_template/*$"), self._server.upload_raw_template],
+            [re.compile("/upload_raw_picture/*$"), self._server.upload_raw_picture],
             [re.compile("/upload_template/*$"), self._server.upload_template],
             [re.compile("/upload_picture/*$"), self._server.upload_picture],
             [re.compile("/templates/*$"), self._server.post_template],
@@ -105,8 +107,9 @@ class Gateway:
 
                     try:
                         form = cgi.FieldStorage(fp=env['wsgi.input'], environ=env)
-                        data = form['data'].value
+                        data = form[form.keys()[0]].value
                     except:
+                        # TODO: Raw binary upload not working
                         data = env['wsgi.input'].read(content_length)
                 else:
                     data = env['wsgi.input'].read(content_length)

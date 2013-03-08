@@ -16,24 +16,32 @@
 
 NSString *const kPhotoCellIdentifier = @"photo";
 
-@interface FeedViewController () <UICollectionViewDataSource, UICollectionViewDelegate>
+@interface FeedViewController () <UICollectionViewDataSource, UICollectionViewDelegate, UIActionSheetDelegate>
 
 @property( strong, nonatomic ) UICollectionView *feedView;
-@property( strong, nonatomic ) NSMutableArray *feedDataArray;
 
 @end
 
 @implementation FeedViewController
 
 @synthesize feedView;
-@synthesize feedDataArray;
+@synthesize pictures = m_pictures;
 
 - (void)viewDidLoad
 {
     self.navigationItem.titleView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"titleTreatment"]];
 
-	feedDataArray = [[NSMutableArray alloc] init];
-	[self setupTestImages];
+	PictureService *pictureService = [[PictureService alloc] init];
+	[pictureService getPictures:10 success:^( NSArray *array )
+	{
+		self.pictures = array;
+
+		[self.feedView reloadData];
+
+	} failure:^( NSError *error )
+	{
+		NSLog(@"%@", error );
+	}];
 }
 
 - (void)viewDidLayoutSubviews
@@ -50,15 +58,10 @@ NSString *const kPhotoCellIdentifier = @"photo";
 	[feedView reloadData];
 
 	self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]
-		initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addItem)];
+                                              initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addItem:)];
 
 	self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]
 		initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(testApp)];
-
-	BOOL cameraAvailable =
-		[UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera];
-
-	self.navigationItem.rightBarButtonItem.enabled = cameraAvailable;
 }
 
 - (void) viewDidAppear:(BOOL)animated
@@ -70,7 +73,7 @@ NSString *const kPhotoCellIdentifier = @"photo";
 {
 	PictureService *pictureService = [[PictureService alloc] init];
 
-	[pictureService getPicture:6 success:^( Template *t )
+	[pictureService getPicture:6 success:^( Picture *t )
 	{
 		NSLog(@"%@", t.description );
 	} failure:^( NSError *error )
@@ -81,48 +84,43 @@ NSString *const kPhotoCellIdentifier = @"photo";
 
 - (void) testPostImage
 {
+    [self addItem:self.navigationItem.rightBarButtonItem];
+}
+
+- (void)addItem:(id)sender
+{
+    UIActionSheet *addItemAction = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Camera", @"Photo Library", nil];
+
+    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+        [addItemAction showFromBarButtonItem:sender animated:YES];
+	} else {
+        // Go straight to the Photo Library
+        [self actionSheet:addItemAction clickedButtonAtIndex:1];
+    }
+}
+
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if ([[actionSheet buttonTitleAtIndex:buttonIndex] isEqualToString:@"Cancel"]) return;
+
     UIImagePickerController *imgpic = [[UIImagePickerController alloc] init];
 	imgpic.delegate = self;
 	imgpic.allowsEditing = YES;
-    
-	if ( [UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera] ) {
-		imgpic.sourceType = UIImagePickerControllerSourceTypeCamera;
-	} else {
-        //REVIEW: Camera not available
+
+    if ([[actionSheet buttonTitleAtIndex:buttonIndex] isEqualToString:@"Camera"]) {
+        imgpic.sourceType = UIImagePickerControllerSourceTypeCamera;
+    } else if ([[actionSheet buttonTitleAtIndex:buttonIndex] isEqualToString:@"Photo Library"]) {
         imgpic.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-	}
+    }
     
-	[self presentViewController:imgpic animated:YES completion:nil];
-}
-
-- (void)setupTestImages
-{
-	[feedDataArray addObject:[UIImage imageNamed:@"drunk1.jpg"]];
-	[feedDataArray addObject:[UIImage imageNamed:@"drunk2.jpg"]];
-	[feedDataArray addObject:[UIImage imageNamed:@"drunk3.jpg"]];
-}
-
-- (void)addItem
-{
-	UIImagePickerController *imgpic = [[UIImagePickerController alloc] init];
-	imgpic.delegate = self;
-	imgpic.allowsEditing = YES;
-    
-	if ( [UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera] ) {
-		imgpic.sourceType = UIImagePickerControllerSourceTypeCamera;
-	} else {
-        //REVIEW: Camera not available
-        imgpic.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-	}
-
-	[self presentViewController:imgpic animated:YES completion:nil];
+    [self presentViewController:imgpic animated:YES completion:nil];
 }
 
 #pragma mark - <UICollectionViewDatasource>
 
 - (NSInteger)collectionView:(UICollectionView *)view numberOfItemsInSection:(NSInteger)section;
 {
-	return [feedDataArray count];
+	return [self.pictures count];
 }
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
@@ -135,7 +133,7 @@ NSString *const kPhotoCellIdentifier = @"photo";
 {
 	PhotoCollectionViewCell *cell =
 		[cv dequeueReusableCellWithReuseIdentifier:kPhotoCellIdentifier forIndexPath:indexPath];
-	[cell setPhoto:[feedDataArray objectAtIndex:indexPath.row]];
+	[cell setPicture:[self.pictures objectAtIndex:indexPath.row]];
 
 	return cell;
 }
@@ -170,7 +168,7 @@ NSString *const kPhotoCellIdentifier = @"photo";
 	return 10.f;
 }
 
-#pragma mark - UIImage  PickerControllerDelegate
+#pragma mark - <UIImagePickerControllerDelegate>
 
 - (void)imagePickerController:(UIImagePickerController *)picker
 	didFinishPickingMediaWithInfo:(NSDictionary *)info
@@ -181,19 +179,23 @@ NSString *const kPhotoCellIdentifier = @"photo";
 
 		if ( pickedImage )
 		{
-            /**
             // TEST CODE ONLY
             Template *testTemplate = [[Template alloc] init];
             testTemplate.longitude = 40.732766;
             testTemplate.latitude = -73.988252;
-            testTemplate.description = @"Yo yo yo";
-            testTemplate.title = @"Hello World!";
+            testTemplate.description = @"Yo yo yo day 2";
+            testTemplate.title = @"Hello World! day 2";
+
+			[PictureService postImage:pickedImage type:@"template" success:^(NSString *urlString) {
+                testTemplate.url = urlString;
+                [PictureService postMetadata:testTemplate type:@"template"];
+            } failure:^(NSError *error) {
+                // ERROR HANDLING
+                NSLog(@"Error = %@",error.description);
+            }];
             
-            [PictureService postTemplateImage:pickedImage metadata:testTemplate];
-             **/
-            
-			DrawingViewController *dvc = [[DrawingViewController alloc] initWithImage:pickedImage];
-			[self.navigationController pushViewController:dvc animated:YES];
+			//DrawingViewController *dvc = [[DrawingViewController alloc] initWithImage:pickedImage];
+			//[self.navigationController pushViewController:dvc animated:YES];
 		}
 	}];
 }
@@ -201,6 +203,7 @@ NSString *const kPhotoCellIdentifier = @"photo";
 //Tells the delegate that the user cancelled the pick operation.
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
 {
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 

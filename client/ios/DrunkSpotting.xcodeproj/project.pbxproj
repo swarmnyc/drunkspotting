@@ -7,9 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		688AC08CDA638FF2632D8EF1 /* UIImage+Alpha.m in Sources */ = {isa = PBXBuildFile; fileRef = 688AC78FCC941A6904FBACCC /* UIImage+Alpha.m */; };
+		688AC27C2C72F84E0EAD9A8C /* UIImage+Alpha.m in Sources */ = {isa = PBXBuildFile; fileRef = 688AC78FCC941A6904FBACCC /* UIImage+Alpha.m */; };
 		688AC347398B054DAA125B77 /* TemplateService.m in Sources */ = {isa = PBXBuildFile; fileRef = 688AC210A40AFE08B286C0E0 /* TemplateService.m */; };
+		688AC68B861133E9584AD4EA /* UIImage+Resize.m in Sources */ = {isa = PBXBuildFile; fileRef = 688AC5D6D499EB4A312555B7 /* UIImage+Resize.m */; };
 		688AC996AE871D14D9B9F9DB /* Template.m in Sources */ = {isa = PBXBuildFile; fileRef = 688ACF8500AD951B6E314761 /* Template.m */; };
+		688AC9D52C8720320095DA44 /* UIImage+RoundedCorner.m in Sources */ = {isa = PBXBuildFile; fileRef = 688AC25A41524D69F2660951 /* UIImage+RoundedCorner.m */; };
 		688ACB926F845DF8629A8FBD /* PictureService.m in Sources */ = {isa = PBXBuildFile; fileRef = 688AC152442A47121572B01D /* PictureService.m */; };
+		688ACC871890FDDB6777E5F4 /* UIImage+Resize.m in Sources */ = {isa = PBXBuildFile; fileRef = 688AC5D6D499EB4A312555B7 /* UIImage+Resize.m */; };
+		688ACE489AB6AD3C82F6F576 /* UIImage+RoundedCorner.m in Sources */ = {isa = PBXBuildFile; fileRef = 688AC25A41524D69F2660951 /* UIImage+RoundedCorner.m */; };
 		688ACE4D8004D35F42CA9016 /* PictureService.m in Sources */ = {isa = PBXBuildFile; fileRef = 688AC152442A47121572B01D /* PictureService.m */; };
 		7E06597916E96EB200FE6432 /* FeedViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7E06597716E96EB200FE6432 /* FeedViewController.xib */; };
 		7E06597C16E972A000FE6432 /* PhotoCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E06597B16E972A000FE6432 /* PhotoCollectionViewCell.m */; };
@@ -82,9 +88,15 @@
 /* Begin PBXFileReference section */
 		688AC152442A47121572B01D /* PictureService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PictureService.m; sourceTree = "<group>"; };
 		688AC210A40AFE08B286C0E0 /* TemplateService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TemplateService.m; sourceTree = "<group>"; };
+		688AC25A41524D69F2660951 /* UIImage+RoundedCorner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+RoundedCorner.m"; sourceTree = "<group>"; };
+		688AC5D6D499EB4A312555B7 /* UIImage+Resize.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Resize.m"; sourceTree = "<group>"; };
 		688AC64BC78CDB24B6C2C333 /* PictureService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PictureService.h; sourceTree = "<group>"; };
+		688AC6EDD37AAAFAA436C0EF /* UIImage+Resize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Resize.h"; sourceTree = "<group>"; };
+		688AC78FCC941A6904FBACCC /* UIImage+Alpha.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Alpha.m"; sourceTree = "<group>"; };
 		688AC7D520B33C416CA9226E /* TemplateService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TemplateService.h; sourceTree = "<group>"; };
+		688ACB8216906B090E53FD66 /* UIImage+RoundedCorner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+RoundedCorner.h"; sourceTree = "<group>"; };
 		688ACCDE72D16D6D5E0CAE3E /* Template.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Template.h; sourceTree = "<group>"; };
+		688ACE31B0C9DCA320E11CC3 /* UIImage+Alpha.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Alpha.h"; sourceTree = "<group>"; };
 		688ACF8500AD951B6E314761 /* Template.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Template.m; sourceTree = "<group>"; };
 		7E06597516E96EB200FE6432 /* FeedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedViewController.h; sourceTree = "<group>"; };
 		7E06597616E96EB200FE6432 /* FeedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedViewController.m; sourceTree = "<group>"; };
@@ -314,6 +326,12 @@
 				688AC152442A47121572B01D /* PictureService.m */,
 				7E08C7A816E9D24B00C86238 /* NSDictionary+JSONCategories.h */,
 				7E08C7A916E9D24B00C86238 /* NSDictionary+JSONCategories.m */,
+				688AC6EDD37AAAFAA436C0EF /* UIImage+Resize.h */,
+				688AC5D6D499EB4A312555B7 /* UIImage+Resize.m */,
+				688ACE31B0C9DCA320E11CC3 /* UIImage+Alpha.h */,
+				688AC78FCC941A6904FBACCC /* UIImage+Alpha.m */,
+				688ACB8216906B090E53FD66 /* UIImage+RoundedCorner.h */,
+				688AC25A41524D69F2660951 /* UIImage+RoundedCorner.m */,
 			);
 			path = DrunkSpotting;
 			sourceTree = "<group>";
@@ -477,6 +495,9 @@
 				EF5F895416E9C1FD0070FAA4 /* UIImageView+AFNetworking.m in Sources */,
 				688ACB926F845DF8629A8FBD /* PictureService.m in Sources */,
 				7E08C7AB16E9D24B00C86238 /* NSDictionary+JSONCategories.m in Sources */,
+				688AC68B861133E9584AD4EA /* UIImage+Resize.m in Sources */,
+				688AC08CDA638FF2632D8EF1 /* UIImage+Alpha.m in Sources */,
+				688AC9D52C8720320095DA44 /* UIImage+RoundedCorner.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -505,6 +526,9 @@
 				EF5F895516E9C2130070FAA4 /* main.m in Sources */,
 				688ACE4D8004D35F42CA9016 /* PictureService.m in Sources */,
 				7E08C7AA16E9D24B00C86238 /* NSDictionary+JSONCategories.m in Sources */,
+				688ACC871890FDDB6777E5F4 /* UIImage+Resize.m in Sources */,
+				688AC27C2C72F84E0EAD9A8C /* UIImage+Alpha.m in Sources */,
+				688ACE489AB6AD3C82F6F576 /* UIImage+RoundedCorner.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
