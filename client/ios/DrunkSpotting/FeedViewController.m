@@ -32,7 +32,7 @@ NSString *const kPhotoCellIdentifier = @"photo";
     self.navigationItem.titleView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"titleTreatment"]];
 
 	PictureService *pictureService = [[PictureService alloc] init];
-	[pictureService getPictures:10 success:^( NSArray *array )
+	[pictureService getPictures:20 success:^( NSArray *array )
 	{
 		self.pictures = array;
 		[self.feedView reloadData];

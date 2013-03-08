@@ -21,29 +21,63 @@
 		
 		<script>
 		$(document).ready(function(){
-			$('#submit').click(function(){
-				/*$.ajax({
-			  		type: "POST",
-			  		url: "http://api.drunkspotting.com/upload_template",
-			  		data: $('#file').val(),
-				}).done(function(msg) {
-			  		console.log(msg);
-				});*/
-			});
 
 			$("#upload").click(function(){
 				getFile();
 			});
+			
+			document.getElementById('file').addEventListener('change', handleFileSelect, false);
 		});
+		function handleFileSelect(evt) {
+			var files = evt.target.files; // FileList object
+			for (var i = 0, f; f = files[i]; i++) {
+		 		if (!f.type.match('image.*')) {
+			        	return;
+			     }
+			var reader = new FileReader();
+			
+			reader.onload = (function(theFile) {
+			        return function(e) {
+			          // Render thumbnail.
+			          var imageHTML = ['<img class="thumb" src="', e.target.result,
+			                            '" title="', escape(theFile.name), '"/>'].join('');
+			          document.getElementById('tester').innerHTML = imageHTML;
+				};
+			})(f);
+			
+			reader.onloadend = function(evt) {
+				console.log("IM IN onloadend");
+				if (evt.target.readyState == FileReader.DONE) { // DONE == 2
+					console.log(evt);
+					// $.ajax({
+					// 				  		type: "POST",
+					// 				  		url: "http://api.drunkspotting.com/upload_template",
+					// 				  		data: {data: evt},
+					// 						processData: false,
+					// 					}).done(function(msg) {
+					// 				  		console.log(msg);
+					// 					});
+				}
+			};
+			
+			reader.readAsDataURL(f);
+		 }
+		}
 
 		function getFile(){
-		        document.getElementById("file").click();
+			// Check for the various File API support.
+			if (window.File && window.FileReader && window.FileList && window.Blob) {
+				 document.getElementById("file").click();
+			  // Great success! All the File APIs are supported.
+			} else {
+			  alert('The File APIs are not fully supported in this browser.');
+			}
 		    }
 		</script>
 	</head>
 	<body>
 		
-
+<div id="tester"></div>
 		
 		<div id="left_layout">
 			<!-- main content -->
