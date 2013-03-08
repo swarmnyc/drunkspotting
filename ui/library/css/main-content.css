@@ -2,11 +2,13 @@
 
 #main_content.container-fluid {
 	position:relative;
-	background-color:bisque;
+	background-color:#fff;
 	min-height:600px;
 	padding:15px;
 	border-top:1px solid #fefefe;
 }
+
+#00b2c9
 #left_layout #main_content.container-fluid {
 	margin:0 10px 10px 0px;
 	border-right:1px solid #fefefe;
@@ -15,7 +17,7 @@
 	height:120px;
 	margin:-15px -15px 15px -15px;
 	padding:15px;
-	background-color: #99057f;
+	background-color: #00b2c9;
 	border-bottom:1px solid #c1c1c1;
 }
 .page-heading .page-title {
@@ -67,5 +69,13 @@
 	line-height:1.1;
 }
 .text-info{
+	color: #fff;
+}
+
+.widget-header{
+	background: #00b2c9 !important;
+}
+
+a:visited{
 	color: #fff;
 }
