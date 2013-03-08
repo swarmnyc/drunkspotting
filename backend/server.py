@@ -37,54 +37,37 @@ class Server:
     def ping(self):
         return 'pong'
 
+    def _upload(self, data, folder):
+        salt = binascii.b2a_hex(os.urandom(20))
+        sha1 = hashlib.sha1()
+        sha1.update(salt)
+        sha1.update(str(datetime.datetime.now()))
+        img = sha1.hexdigest() + ".jpg"
+
+        blob_service = azure.storage.BlobService(
+            account_name=config.config['azure_account'],
+            account_key=config.config['azure_key'])
+        blob_service.create_container(folder,
+                                      x_ms_blob_public_access='blob')
+        blob_service.put_blob(folder, img,
+                              data, x_ms_blob_type='BlockBlob',
+                              x_ms_blob_content_type='image/jpeg')
+
+        url = config.config['upload_url'] + folder + '/' + img
+        print url
+        return json.dumps({'url': url})
+
     def upload_raw_template(self, data):
-        return self.upload_template(data)
+        return self._upload(data, 'templates')
 
     def upload_raw_picture(self, data):
-        return self.upload_picture(data)
+        return self._upload(data, 'pictures')
 
     def upload_template(self, data):
-        with open('test.jpg', 'wb') as f:
-            f.write(data)
-
-        salt = binascii.b2a_hex(os.urandom(20))
-        sha1 = hashlib.sha1()
-        sha1.update(salt)
-        sha1.update(str(datetime.datetime.now()))
-        img = sha1.hexdigest() + ".jpg"
-
-        blob_service = azure.storage.BlobService(
-            account_name=config.config['azure_account'],
-            account_key=config.config['azure_key'])
-        blob_service.create_container('templates',
-                                      x_ms_blob_public_access='blob')
-        blob_service.put_blob('templates', img,
-                              data, x_ms_blob_type='BlockBlob',
-                              x_ms_blob_content_type='image/jpeg')
-
-        url = config.config['upload_url'] + 'templates/' + img
-        print url
-        return json.dumps({'url': url})
+        return self._upload(data, 'templates')
 
     def upload_picture(self, data):
-        salt = binascii.b2a_hex(os.urandom(20))
-        sha1 = hashlib.sha1()
-        sha1.update(salt)
-        sha1.update(str(datetime.datetime.now()))
-        img = sha1.hexdigest() + ".jpg"
-
-        blob_service = azure.storage.BlobService(
-            account_name=config.config['azure_account'],
-            account_key=config.config['azure_key'])
-        blob_service.create_container('pictures',
-                                      x_ms_blob_public_access='blob')
-        blob_service.put_blob('pictures', img,
-                              data, x_ms_blob_type='BlockBlob',
-                              x_ms_blob_content_type='image/jpeg')
-
-        url = config.config['upload_url'] + 'pictures/' + img
-        print url
-        return json.dumps({'url': url})
+        return self._upload(data, 'pictures')
 
     def get_template(self, template):
         template = int(template)
