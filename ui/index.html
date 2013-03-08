@@ -17,6 +17,29 @@
 		<!--[if lt IE 9]>
 		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
 		<![endif]-->
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+		
+		<script>
+		$(document).ready(function(){
+			$('#submit').click(function(){
+				/*$.ajax({
+			  		type: "POST",
+			  		url: "http://api.drunkspotting.com/upload_template",
+			  		data: $('#file').val(),
+				}).done(function(msg) {
+			  		console.log(msg);
+				});*/
+			});
+
+			$("#upload").click(function(){
+				getFile();
+			});
+		});
+
+		function getFile(){
+		        document.getElementById("file").click();
+		    }
+		</script>
 	</head>
 	<body>
 		
@@ -56,7 +79,9 @@
 						<div class="btn-circle-panel large">
 							<ul class="btn-circle">
 								<li class="pushStart">
-									<a href="#" class="bottom_tooltip" title="Upload your drunk">
+									<div style='height: 0px;width: 0px; overflow:hidden;'><input type="file" name="file" id="file"></div>
+									
+									<a href="#" id="upload" class="bottom_tooltip" title="Upload your drunk">
 										<i class="icon-upload-alt text-info" style="text-shadow:none;"></i>
 									</a>
 								</li>
