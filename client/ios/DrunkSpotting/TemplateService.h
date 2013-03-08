@@ -15,7 +15,7 @@
 
 - (void)postTemplate:(Template *)template;
 
-- (void)getTemplate:(NSString *)templateId success:(void (^)(Template *))success
+- (void)getTemplate:(int)templateId success:(void (^)(Template *))success
 	failure:(void (^)(NSError *))failure;
 
 

@@ -8,7 +8,7 @@
 
 @interface Template : NSObject
 {
-	NSString *m_id;
+	int m_id;
 	NSString *m_title;
 	double m_latitude;
 	double m_longitude;
@@ -19,7 +19,7 @@
 	NSDate *m_time_posted;
 }
 @property( nonatomic, copy ) NSString *description;
-@property( nonatomic, copy ) NSString *id;
+@property( nonatomic ) int id;
 @property( nonatomic ) double latitude;
 @property( nonatomic ) double longitude;
 @property( nonatomic ) int rating;
