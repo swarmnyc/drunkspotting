@@ -214,6 +214,7 @@ class TestSimpleNetworked(unittest.TestCase):
             "POST", self.url + '/upload_picture', logo)
         self.assertEqual((status, reason), (200, 'OK'))
 
+
 if __name__ == '__main__':
     logging.basicConfig(format='%(asctime)s %(message)s', level=logging.DEBUG)
     unittest.main(verbosity=2)
