@@ -39,6 +39,7 @@ class Gateway:
 
         self._posts = [
             [re.compile("/upload_template/*$"), self._server.upload_template],
+            [re.compile("/upload_picture/*$"), self._server.upload_picture],
             [re.compile("/templates/*$"), self._server.post_template],
             [re.compile("/tags/(\w+)/*$"), self._server.post_tag],
             [re.compile("/templates/(\w+)/comments/*$"), self._server.post_template_comment],

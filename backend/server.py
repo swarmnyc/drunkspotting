@@ -51,6 +51,23 @@ class Server:
         url = config.config['upload_url'] + 'templates/' + img
         return cjson.encode({'url': url})
 
+    def upload_picture(self, data):
+        salt = binascii.b2a_hex(os.urandom(20))
+        sha1 = hashlib.sha1()
+        sha1.update(salt)
+        sha1.update(str(datetime.datetime.now()))
+        img = sha1.hexdigest() + ".jpg"
+
+        blob_service = azure.storage.BlobService(
+            account_name=config.config['azure_account'],
+            account_key=config.config['azure_key'])
+        blob_service.create_container('pictures')
+        blob_service.put_blob('pictures', img,
+                              data, x_ms_blob_type='BlockBlob')
+
+        url = config.config['upload_url'] + 'pictures/' + img
+        return cjson.encode({'url': url})
+
     def get_template(self, template):
         template = int(template)
 
@@ -258,8 +275,16 @@ class Server:
         return '{"id": %d}' % (id, )
 
     def nuke_it_all(self):
-        database.execute_non_query(self._conn, 'truncate table comments')
-        database.execute_non_query(self._conn, 'truncate table pictures')
-        database.execute_non_query(self._conn, 'truncate table tags')
-        database.execute_non_query(self._conn, 'truncate table templates')
-        return '{}'
+        if 'allow-nuking-database' in config.config:
+            if config.config['allow-nuking-database'] == 'yes-be-careful':
+                database.execute_non_query(
+                    self._conn, 'truncate table comments')
+                database.execute_non_query(
+                    self._conn, 'truncate table pictures')
+                database.execute_non_query(
+                    self._conn, 'truncate table tags')
+                database.execute_non_query(
+                    self._conn, 'truncate table templates')
+                return '{}'
+
+        raise drunkspotting_exceptions.NotFoundException('Not found')
