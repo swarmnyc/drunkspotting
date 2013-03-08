@@ -104,10 +104,56 @@
     return img;
 }
 
-- (IBAction) changeColor:(UIButton *)sender {
+- (IBAction)setGreyColor:(id)sender {
     
-    self.drawingLayer.lineColor = sender.backgroundColor;
+    self.drawingLayer.lineColor = [UIColor grayColor];
 }
+
+- (IBAction)setBlueColor:(id)sender {
+    
+    self.drawingLayer.lineColor = [UIColor blueColor];
+}
+
+- (IBAction)setCyanColor:(id)sender {
+    
+    self.drawingLayer.lineColor = [UIColor cyanColor];
+}
+
+- (IBAction)setMagentaColor:(id)sender {
+    
+    self.drawingLayer.lineColor = [UIColor magentaColor];
+}
+
+- (IBAction)setOrangeColor:(id)sender {
+    
+    self.drawingLayer.lineColor = [UIColor orangeColor];
+}
+
+- (IBAction)setPurpleColor:(id)sender {
+    
+    self.drawingLayer.lineColor = [UIColor purpleColor];
+}
+
+- (IBAction)setRedColor:(id)sender {
+    
+    self.drawingLayer.lineColor = [UIColor redColor];
+}
+
+- (IBAction)setYellowColor:(id)sender {
+    
+    self.drawingLayer.lineColor = [UIColor yellowColor];
+}
+
+- (IBAction)setGreenColor:(id)sender {
+    
+    self.drawingLayer.lineColor = [UIColor greenColor];
+}
+
+- (IBAction)setBlackColor:(id)sender {
+    
+    self.drawingLayer.lineColor = [UIColor blackColor];
+}
+
 
 - (IBAction) changeLineWidth:(UISlider *)sender {
     
