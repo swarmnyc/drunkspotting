@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		688AC347398B054DAA125B77 /* TemplateService.m in Sources */ = {isa = PBXBuildFile; fileRef = 688AC210A40AFE08B286C0E0 /* TemplateService.m */; };
+		688AC996AE871D14D9B9F9DB /* Template.m in Sources */ = {isa = PBXBuildFile; fileRef = 688ACF8500AD951B6E314761 /* Template.m */; };
 		7E06597816E96EB200FE6432 /* FeedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E06597616E96EB200FE6432 /* FeedViewController.m */; };
 		7E06597916E96EB200FE6432 /* FeedViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7E06597716E96EB200FE6432 /* FeedViewController.xib */; };
 		7E06597C16E972A000FE6432 /* PhotoCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E06597B16E972A000FE6432 /* PhotoCollectionViewCell.m */; };
@@ -43,6 +45,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		688AC210A40AFE08B286C0E0 /* TemplateService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TemplateService.m; sourceTree = "<group>"; };
+		688AC7D520B33C416CA9226E /* TemplateService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TemplateService.h; sourceTree = "<group>"; };
+		688ACCDE72D16D6D5E0CAE3E /* Template.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Template.h; sourceTree = "<group>"; };
+		688ACF8500AD951B6E314761 /* Template.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Template.m; sourceTree = "<group>"; };
 		7E06597516E96EB200FE6432 /* FeedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedViewController.h; sourceTree = "<group>"; };
 		7E06597616E96EB200FE6432 /* FeedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedViewController.m; sourceTree = "<group>"; };
 		7E06597716E96EB200FE6432 /* FeedViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FeedViewController.xib; sourceTree = "<group>"; };
@@ -216,6 +222,8 @@
 				7E06597A16E972A000FE6432 /* PhotoCollectionViewCell.h */,
 				7E06597B16E972A000FE6432 /* PhotoCollectionViewCell.m */,
 				D65C90D016E9581500AF1002 /* DrawingViewController.xib */,
+				688AC210A40AFE08B286C0E0 /* TemplateService.m */,
+				688AC7D520B33C416CA9226E /* TemplateService.h */,
 			);
 			path = DrunkSpotting;
 			sourceTree = "<group>";
@@ -239,6 +247,8 @@
 			children = (
 				EF2A83A616E980C9003E17ED /* Picture.h */,
 				EF2A83A716E980C9003E17ED /* Picture.m */,
+				688ACF8500AD951B6E314761 /* Template.m */,
+				688ACCDE72D16D6D5E0CAE3E /* Template.h */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -331,6 +341,8 @@
 				7E06597816E96EB200FE6432 /* FeedViewController.m in Sources */,
 				7E06597C16E972A000FE6432 /* PhotoCollectionViewCell.m in Sources */,
 				EF2A83A816E980C9003E17ED /* Picture.m in Sources */,
+				688AC996AE871D14D9B9F9DB /* Template.m in Sources */,
+				688AC347398B054DAA125B77 /* TemplateService.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
