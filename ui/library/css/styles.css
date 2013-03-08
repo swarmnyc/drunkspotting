@@ -45,3 +45,6 @@ h3 a{
 h3 a:hover {
   color: #acf5d7;
 }
+a:visited {
+color: #0088cc;
+}
