@@ -52,28 +52,4 @@
     
 }
 
-
-#pragma mark - UIImagePickerControllerDelegate
-
--(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
-{
-    [self dismissViewControllerAnimated:YES completion:^{
-        
-        UIImage *pickedImage = [info objectForKey:UIImagePickerControllerEditedImage];
-        
-        if(pickedImage) {
-            
-            DrawingViewController *dvc = [[DrawingViewController alloc] initWithImage:pickedImage];
-            [self.navigationController pushViewController:dvc animated:YES];
-        }
-    }];
-}
-
-//Tells the delegate that the user cancelled the pick operation.
-- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
-{
-}
-
-
-
 @end

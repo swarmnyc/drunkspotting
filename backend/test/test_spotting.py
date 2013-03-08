@@ -158,6 +158,55 @@ class TestSimpleNetworked(unittest.TestCase):
         self.assertEqual(data['latitude'], 12.34)
         self.assertEqual(data['longitude'], 23.34)
 
+        # Add a comment to one of the template
+        req = {
+            "nick": "gandalf",
+            "title": "template 1 comment title",
+            "description": "template 1 comment description"
+            }
+
+        (status, reason, data) = httpcall.call(
+            "POST", self.url + '/templates/%d/comments' % (template1_id, ),
+            cjson.encode(req))
+        comment1_id = cjson.decode(data)['id']
+        self.assertEqual((status, reason), (200, 'OK'))
+
+        # And to one of the pictures
+        req = {
+            "nick": "drunkspotting",
+            "title": "picture 3 comment title",
+            "description": "picture 3 comment description"
+            }
+
+        (status, reason, data) = httpcall.call(
+            "POST", self.url + '/pictures/%d/comments' % (picture3_id, ),
+            cjson.encode(req))
+        comment1_id = cjson.decode(data)['id']
+        self.assertEqual((status, reason), (200, 'OK'))
+
+        # Read back the template comments
+        (status, reason, data) = httpcall.call(
+            "GET", self.url + '/templates/%d/comments/latest/10' %
+            (template1_id, ),
+            cjson.encode(req))
+        self.assertEqual((status, reason), (200, 'OK'))
+        data = cjson.decode(data)
+        self.assertEqual(len(data), 1)
+        self.assertEqual(data[0]['nick'], 'gandalf')
+        self.assertEqual(data[0]['title'], 'template 1 comment title')
+
+        # Read back the picture comments
+        (status, reason, data) = httpcall.call(
+            "GET", self.url + '/pictures/%d/comments/latest/10' %
+            (picture3_id, ),
+            cjson.encode(req))
+        self.assertEqual((status, reason), (200, 'OK'))
+        data = cjson.decode(data)
+        self.assertEqual(len(data), 1)
+        self.assertEqual(data[0]['nick'], 'drunkspotting')
+        self.assertEqual(data[0]['description'],
+            'picture 3 comment description')
+
 
 
 if __name__ == '__main__':

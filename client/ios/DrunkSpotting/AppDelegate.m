@@ -8,6 +8,8 @@
 
 #import "AppDelegate.h"
 
+#import "FeedViewController.h"
+
 @implementation AppDelegate
 
 - (void)dealloc
@@ -18,13 +20,11 @@
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] ;
     
-    RootViewController *rvc = [[RootViewController alloc] init];
+    FeedViewController *feedViewController = [[FeedViewController alloc] init];
+    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:feedViewController];
     
-    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:rvc];
-    
-    self.window.rootViewController = nav;
+    self.window.rootViewController = navigationController;
 
-    
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
     
