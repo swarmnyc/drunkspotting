@@ -20,7 +20,7 @@ Templates are pictures that hae not been drawn on.
 Pictures have been drawn on. Other than that
 they are pretty much the same from an API standpoint.
 
-GET /templates/<id>
+GET /templates/[id]
 ===================
 
 Get a specific template.
@@ -36,7 +36,7 @@ dictionary {
     'time_posted': 'xxx'
 }
 
-GET /templates/latest/<n>
+GET /templates/latest/[n]
 =========================
 
 Get the last n templates. An array of dictionaries.
@@ -53,7 +53,7 @@ dictionary {
     'time_posted': 'xxx'
 }
 
-GET /pictures/<id>
+GET /pictures/[id]
 ==================
 
 Get a specific picture.
@@ -72,7 +72,7 @@ dictionary {
 
 Get a specific picture.
 
-GET /templates/latest/<n>
+GET /templates/latest/[n]
 =========================
 
 Get the last n pictures. An array of dictionaries.
@@ -90,7 +90,7 @@ dictionary {
     'time_posted': 'xxx'
 }
 
-GET /templates/<id>/comments/latest/<n>
+GET /templates/[id]/comments/latest/[n]
 =======================================
 
 Get the last n comments for a template. An array of dictionaries.
@@ -106,7 +106,7 @@ dictionary {
     'time_posted': 'xxx'
 }
 
-GET /pictures/<id>/comments/latest/<n>
+GET /pictures/[id]/comments/latest/[n]
 ======================================
 
 Get the last n comments for a picture. An array of dictionaries.
@@ -181,7 +181,7 @@ dictionary {
     "token": "yyy"
 }
 
-POST /templates/<id>/comments
+POST /templates/[id]/comments
 =============================
 
 Post a comment to a given template.
@@ -200,7 +200,7 @@ dictionary {
     "id": xxx
 }
 
-POST /pictures/<id>/comments
+POST /pictures/[id]/comments
 ============================
 
 Post a comment to a given picture.
@@ -218,6 +218,3 @@ Returned data:
 dictionary {
     "id": xxx
 }
-
-
-
