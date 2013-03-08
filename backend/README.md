@@ -72,7 +72,7 @@ dictionary {
 
 Get a specific picture.
 
-GET /templates/latest/<n>
+GET /pictures/latest/<n>
 =========================
 
 Get the last n pictures. An array of dictionaries.
@@ -125,12 +125,25 @@ dictionary {
 POST /upload_template
 =====================
 
-Upload a new template image.
+Upload a new template image. Post the image data.
+
+A dictionary is returned:
+
+dictionary {
+    'url': 'xxx'
+}
 
 POST /upload_pictures
 =====================
 
-Upload a new picture.
+Upload a new picture image. Post the image data.
+
+A dictionary is returned:
+
+dictionary {
+    'url': 'xxx'
+}
+
 
 POST /templates/
 ================
