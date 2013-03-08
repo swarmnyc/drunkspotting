@@ -61,7 +61,7 @@ NSString *const kPhotoCellIdentifier = @"photo";
 
 - (void) viewDidAppear:(BOOL)animated
 {
-    [self testPostImage];
+    //[self testPostImage];
 }
 
 - (void)testApp
@@ -184,6 +184,7 @@ NSString *const kPhotoCellIdentifier = @"photo";
 
 		if ( pickedImage )
 		{
+            /**
             // TEST CODE ONLY
             Template *testTemplate = [[Template alloc] init];
             testTemplate.longitude = 40.732766;
@@ -192,6 +193,7 @@ NSString *const kPhotoCellIdentifier = @"photo";
             testTemplate.title = @"Hello World!";
             
             [PictureService postTemplateImage:pickedImage metadata:testTemplate];
+             **/
             
 			DrawingViewController *dvc = [[DrawingViewController alloc] initWithImage:pickedImage];
 			[self.navigationController pushViewController:dvc animated:YES];
