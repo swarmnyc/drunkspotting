@@ -35,7 +35,7 @@
 - (void)getPicture:(int)pictureId success:(void (^)(Picture *))success
 	failure:(void (^)(NSError *))failure;
 {
-	NSString *path = [self.baseUrl stringByAppendingFormat:@"/templates/%d", pictureId];
+	NSString *path = [self.baseUrl stringByAppendingFormat:@"/pictures/%d", pictureId];
 	NSURL *url = [NSURL URLWithString:path];
 	NSURLRequest *request = [NSURLRequest requestWithURL:url];
 	AFJSONRequestOperation *operation =
