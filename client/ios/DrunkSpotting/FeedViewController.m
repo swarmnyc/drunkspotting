@@ -91,12 +91,18 @@ NSString *const kPhotoCellIdentifier = @"photo";
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
+    PhotoCollectionViewCell *cell = (PhotoCollectionViewCell *)[self.feedView cellForItemAtIndexPath:indexPath];
+    
+    DrawingViewController *dvc = [[DrawingViewController alloc] initWithImage:cell.photo];
+    [self.navigationController pushViewController:dvc animated:YES];
+    
     return;
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    CGFloat squareSideSize = [[UIScreen mainScreen] bounds].size.width - [self collectionView:nil layout:nil insetForSectionAtIndex:nil].left - [self collectionView:nil layout:nil insetForSectionAtIndex:nil].right;
+    UIEdgeInsets insets = [self collectionView:nil layout:nil insetForSectionAtIndex:0];
+    CGFloat squareSideSize = [[UIScreen mainScreen] bounds].size.width - insets.left - insets.right;
     return CGSizeMake(squareSideSize, squareSideSize);
 }
 

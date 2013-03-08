@@ -35,4 +35,9 @@
     [photoView setImage:photo];
 }
 
+- (UIImage *) photo {
+
+    return photoView.image;
+}
+
 @end

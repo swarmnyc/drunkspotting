@@ -10,6 +10,6 @@
 
 @interface PhotoCollectionViewCell : UICollectionViewCell
 
-- (void) setPhoto:(UIImage*)photo;
+@property (nonatomic, strong) UIImage *photo;
 
 @end

@@ -42,18 +42,22 @@
     
     self.uploadingOverlay.hidden = YES;
     
-    UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"done", @"done")
+    UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Save", @"Save")
                                                                    style:UIBarButtonItemStyleDone
                                                                   target:self
                                                                   action:@selector(done:)];
-    self.navigationItem.rightBarButtonItem = doneButton;
+    UIBarButtonItem *clearButton = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Clear", @"Clear")
+                                                                   style:UIBarButtonItemStyleDone
+                                                                  target:self
+                                                                  action:@selector(clear:)];
+    self.navigationItem.rightBarButtonItems = @[doneButton, clearButton];
     
     UIImageView *iv = [[UIImageView alloc] initWithImage:self.originalImage];
-    iv.frame = CGRectMake(0,
-                          0,
-                          CGRectGetWidth(self.view.bounds),
-                          CGRectGetWidth(self.view.bounds));
-    iv.contentMode = UIViewContentModeScaleAspectFit;
+    
+    CGFloat smallestEdge = MIN(CGRectGetWidth(self.view.bounds), MIN(self.originalImage.size.width, self.originalImage.size.height));
+
+    iv.frame = CGRectMake(0, 0, smallestEdge, smallestEdge);
+    iv.contentMode = UIViewContentModeScaleAspectFill;
     iv.backgroundColor = [UIColor redColor];
     [self.compositView insertSubview:iv belowSubview:self.drawingLayer];
     
@@ -84,6 +88,11 @@
         
         [self.navigationController popToRootViewControllerAnimated:YES];
     });
+}
+
+- (void) clear:(id)sender {
+    
+    [self.drawingLayer clear];
 }
 
 - (UIImage *) renderImage {
