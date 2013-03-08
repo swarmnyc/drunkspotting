@@ -102,7 +102,7 @@ class Gateway:
 
                 content_length = int(env.get('CONTENT_LENGTH', 0))
                 if env['PATH_INFO'] in ('/upload_template', 'upload_template/',
-                        '/upload_image', '/upload_image/'):
+                        '/upload_picture', '/upload_picture/'):
                     print 'POST FILE'
 
                     try:
