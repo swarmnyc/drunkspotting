@@ -8,6 +8,7 @@
 
 #import "FeedViewController.h"
 #import "PhotoCollectionViewCell.h"
+#import "DrawingViewController.h"
 
 NSString *const kPhotoCellIdentifier = @"photo";
 
@@ -52,7 +53,8 @@ NSString *const kPhotoCellIdentifier = @"photo";
 
 - (void) addItem
 {
-    
+    [self.navigationController pushViewController:[[DrawingViewController alloc] init]
+	    animated:YES];
 }
 
 #pragma mark - <UICollectionViewDatasource>
