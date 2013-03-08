@@ -17,19 +17,28 @@ NSString *const kPhotoCellIdentifier = @"photo";
 @interface FeedViewController () <UICollectionViewDataSource, UICollectionViewDelegate>
 
 @property( strong, nonatomic ) UICollectionView *feedView;
-@property( strong, nonatomic ) NSMutableArray *feedDataArray;
 
 @end
 
 @implementation FeedViewController
 
 @synthesize feedView;
-@synthesize feedDataArray;
+@synthesize pictures = m_pictures;
 
 - (void)viewDidLoad
 {
-	feedDataArray = [[NSMutableArray alloc] init];
-	[self setupTestImages];
+
+	PictureService *pictureService = [[PictureService alloc] init];
+	[pictureService getPictures:10 success:^( NSArray *array )
+	{
+		self.pictures = array;
+
+		[self.feedView reloadData];
+
+	} failure:^( NSError *error )
+	{
+		NSLog( error );
+	}];
 }
 
 - (void)viewDidLayoutSubviews
@@ -60,10 +69,9 @@ NSString *const kPhotoCellIdentifier = @"photo";
 - (void)testApp
 {
 
-
 	PictureService *pictureService = [[PictureService alloc] init];
 
-	[pictureService getPicture:6 success:^( Template *t )
+	[pictureService getPicture:6 success:^( Picture *t )
 	{
 		NSLog( t.description );
 	} failure:^( NSError *error )
@@ -71,13 +79,13 @@ NSString *const kPhotoCellIdentifier = @"photo";
 		NSLog( error );
 	}];
 }
-
-- (void)setupTestImages
-{
-	[feedDataArray addObject:[UIImage imageNamed:@"drunk1.jpg"]];
-	[feedDataArray addObject:[UIImage imageNamed:@"drunk2.jpg"]];
-	[feedDataArray addObject:[UIImage imageNamed:@"drunk3.jpg"]];
-}
+//
+//- (void)setupTestImages
+//{
+//	[feedDataArray addObject:[UIImage imageNamed:@"drunk1.jpg"]];
+//	[feedDataArray addObject:[UIImage imageNamed:@"drunk2.jpg"]];
+//	[feedDataArray addObject:[UIImage imageNamed:@"drunk3.jpg"]];
+//}
 
 - (void)addItem
 {
@@ -101,7 +109,7 @@ NSString *const kPhotoCellIdentifier = @"photo";
 
 - (NSInteger)collectionView:(UICollectionView *)view numberOfItemsInSection:(NSInteger)section;
 {
-	return [feedDataArray count];
+	return [self.pictures count];
 }
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
@@ -114,7 +122,7 @@ NSString *const kPhotoCellIdentifier = @"photo";
 {
 	PhotoCollectionViewCell *cell =
 		[cv dequeueReusableCellWithReuseIdentifier:kPhotoCellIdentifier forIndexPath:indexPath];
-	[cell setPhoto:[feedDataArray objectAtIndex:indexPath.row]];
+	[cell setPicture:[self.pictures objectAtIndex:indexPath.row]];
 
 	return cell;
 }
@@ -126,7 +134,7 @@ NSString *const kPhotoCellIdentifier = @"photo";
 {
 	PhotoCollectionViewCell
 		*cell = (PhotoCollectionViewCell *) [self.feedView cellForItemAtIndexPath:indexPath];
-	DrawingViewController *dvc = [[DrawingViewController alloc] initWithImage:cell.photo];
+	DrawingViewController *dvc = [[DrawingViewController alloc] initWithImage:[cell image]];
 	[self.navigationController pushViewController:dvc animated:YES];
 
 	return;

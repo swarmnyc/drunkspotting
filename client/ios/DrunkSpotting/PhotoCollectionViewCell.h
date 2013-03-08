@@ -7,9 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Picture.h"
 
 @interface PhotoCollectionViewCell : UICollectionViewCell
 
-@property (nonatomic, strong) UIImage *photo;
+@property (nonatomic, strong) Picture *picture;
+
+- (UIImage *)image;
+
 
 @end

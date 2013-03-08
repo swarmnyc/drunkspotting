@@ -6,6 +6,7 @@
 
 #import <Foundation/Foundation.h>
 #import "Template.h"
+#import "Picture.h"
 
 @interface PictureService : NSObject
 {
@@ -15,8 +16,10 @@
 
 - (void)postTemplate:(Template *)template;
 
-- (void)getPicture:(int)pictureId success:(void (^)(Template *))success
+- (void)getPicture:(int)pictureId success:(void (^)(Picture *))success
 	failure:(void (^)(NSError *))failure;
 
+- (void)getPictures:(int)size success:(void (^)(NSArray *))success
+	failure:(void (^)(NSError *))failure;
 
 @end

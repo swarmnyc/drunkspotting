@@ -9,5 +9,10 @@
 #import <UIKit/UIKit.h>
 
 @interface FeedViewController : UIViewController <UINavigationControllerDelegate, UIImagePickerControllerDelegate>
+{
+	NSArray * m_pictures;
+}
+@property( nonatomic, strong ) NSArray *pictures;
+
 
 @end
