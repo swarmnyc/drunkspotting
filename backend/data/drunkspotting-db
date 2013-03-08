@@ -4,7 +4,7 @@
 
 -- Dumped from database version 9.0.7
 -- Dumped by pg_dump version 9.0.7
--- Started on 2013-03-07 19:41:56 EST
+-- Started on 2013-03-07 19:58:32 EST
 
 SET statement_timeout = 0;
 SET client_encoding = 'UTF8';
@@ -49,14 +49,15 @@ SET default_tablespace = '';
 SET default_with_oids = false;
 
 --
--- TOC entry 147 (class 1259 OID 25041)
+-- TOC entry 148 (class 1259 OID 25897)
 -- Dependencies: 5
 -- Name: comments; Type: TABLE; Schema: public; Owner: drunkspotting; Tablespace: 
 --
 
 CREATE TABLE comments (
     id integer NOT NULL,
-    picture_id bigint NOT NULL,
+    template_id bigint,
+    picture_id bigint,
     ip character varying(32) NOT NULL,
     nick character varying(255) NOT NULL,
     title character varying(255) NOT NULL,
@@ -67,8 +68,8 @@ CREATE TABLE comments (
 ALTER TABLE public.comments OWNER TO drunkspotting;
 
 --
--- TOC entry 146 (class 1259 OID 25039)
--- Dependencies: 147 5
+-- TOC entry 147 (class 1259 OID 25895)
+-- Dependencies: 148 5
 -- Name: comments_id_seq; Type: SEQUENCE; Schema: public; Owner: drunkspotting
 --
 
@@ -84,7 +85,7 @@ ALTER TABLE public.comments_id_seq OWNER TO drunkspotting;
 
 --
 -- TOC entry 1815 (class 0 OID 0)
--- Dependencies: 146
+-- Dependencies: 147
 -- Name: comments_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: drunkspotting
 --
 
@@ -138,7 +139,7 @@ ALTER SEQUENCE picture_id_seq OWNED BY pictures.id;
 
 
 --
--- TOC entry 148 (class 1259 OID 25050)
+-- TOC entry 146 (class 1259 OID 25050)
 -- Dependencies: 5
 -- Name: tags; Type: TABLE; Schema: public; Owner: drunkspotting; Tablespace: 
 --
@@ -176,7 +177,7 @@ ALTER TABLE public.templates OWNER TO drunkspotting;
 
 --
 -- TOC entry 142 (class 1259 OID 25008)
--- Dependencies: 143 5
+-- Dependencies: 5 143
 -- Name: template_id_seq; Type: SEQUENCE; Schema: public; Owner: drunkspotting
 --
 
@@ -200,8 +201,8 @@ ALTER SEQUENCE template_id_seq OWNED BY templates.id;
 
 
 --
--- TOC entry 1801 (class 2604 OID 25044)
--- Dependencies: 146 147 147
+-- TOC entry 1801 (class 2604 OID 25900)
+-- Dependencies: 147 148 148
 -- Name: id; Type: DEFAULT; Schema: public; Owner: drunkspotting
 --
 
@@ -210,7 +211,7 @@ ALTER TABLE ONLY comments ALTER COLUMN id SET DEFAULT nextval('comments_id_seq':
 
 --
 -- TOC entry 1800 (class 2604 OID 25033)
--- Dependencies: 145 144 145
+-- Dependencies: 144 145 145
 -- Name: id; Type: DEFAULT; Schema: public; Owner: drunkspotting
 --
 
@@ -227,8 +228,8 @@ ALTER TABLE ONLY templates ALTER COLUMN id SET DEFAULT nextval('template_id_seq'
 
 
 --
--- TOC entry 1807 (class 2606 OID 25049)
--- Dependencies: 147 147
+-- TOC entry 1809 (class 2606 OID 25905)
+-- Dependencies: 148 148
 -- Name: comments_pkey; Type: CONSTRAINT; Schema: public; Owner: drunkspotting; Tablespace: 
 --
 
@@ -247,8 +248,8 @@ ALTER TABLE ONLY pictures
 
 
 --
--- TOC entry 1809 (class 2606 OID 25054)
--- Dependencies: 148 148
+-- TOC entry 1807 (class 2606 OID 25054)
+-- Dependencies: 146 146
 -- Name: tags_pkey; Type: CONSTRAINT; Schema: public; Owner: drunkspotting; Tablespace: 
 --
 
@@ -278,7 +279,7 @@ GRANT ALL ON SCHEMA public TO postgres;
 GRANT ALL ON SCHEMA public TO PUBLIC;
 
 
--- Completed on 2013-03-07 19:41:56 EST
+-- Completed on 2013-03-07 19:58:33 EST
 
 --
 -- PostgreSQL database dump complete
