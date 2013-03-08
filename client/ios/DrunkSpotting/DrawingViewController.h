@@ -15,6 +15,7 @@
 @property (nonatomic, strong) IBOutlet ACEDrawingView *drawingLayer;
 @property (nonatomic, strong) IBOutlet UIView *compositView;
 @property (nonatomic, strong) IBOutlet UIView *uploadingOverlay;
+@property (nonatomic, strong) IBOutlet UIActivityIndicatorView *activityIndicator;
 
 - (id) initWithImage:(UIImage *)image;
 

@@ -70,6 +70,7 @@
 - (void) done:(id)send {
     
     self.uploadingOverlay.hidden = NO;
+    [self.activityIndicator startAnimating];
     
     UIImage *renderedImage = [self renderImage];
     NSData *jpegData = UIImageJPEGRepresentation(renderedImage, 1);
@@ -79,6 +80,7 @@
     dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
         
         self.uploadingOverlay.hidden = YES;
+        [self.activityIndicator stopAnimating];
         
         [self.navigationController popToRootViewControllerAnimated:YES];
     });
