@@ -10,15 +10,27 @@
 
 @interface Picture : NSObject
 {
-	int template_id;
-	int latitude;
-	int longitude;
-	NSString *title;
-	NSString *description;
-	int rating;
-	int rating_count;
-	NSString *url;
-	NSDate *time_posted;
+	int m_id;
+	int m_template_id;
+	double m_latitude;
+	double m_longitude;
+	NSString *m_title;
+	NSString *m_description;
+	int m_rating;
+	int m_rating_count;
+	NSString *m_url;
+	NSDate *m_time_posted;
 }
+@property( nonatomic, copy ) NSString *description;
+@property( nonatomic ) int id;
+@property( nonatomic ) double latitude;
+@property( nonatomic ) double longitude;
+@property( nonatomic ) int rating;
+@property( nonatomic ) int rating_count;
+@property( nonatomic ) int template_id;
+@property( nonatomic, strong ) NSDate *time_posted;
+@property( nonatomic, copy ) NSString *title;
+@property( nonatomic, copy ) NSString *url;
+
 
 @end

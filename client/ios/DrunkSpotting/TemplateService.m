@@ -56,7 +56,9 @@
 			} failure:^( NSURLRequest *urlRequest, NSHTTPURLResponse *response, NSError *error,
 			id JSON )
 		{
+
 			NSLog( error );
+			failure(error);
 		}];
 
 	[operation start];

@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		688AC347398B054DAA125B77 /* TemplateService.m in Sources */ = {isa = PBXBuildFile; fileRef = 688AC210A40AFE08B286C0E0 /* TemplateService.m */; };
 		688AC996AE871D14D9B9F9DB /* Template.m in Sources */ = {isa = PBXBuildFile; fileRef = 688ACF8500AD951B6E314761 /* Template.m */; };
+		688ACB926F845DF8629A8FBD /* PictureService.m in Sources */ = {isa = PBXBuildFile; fileRef = 688AC152442A47121572B01D /* PictureService.m */; };
+		688ACE4D8004D35F42CA9016 /* PictureService.m in Sources */ = {isa = PBXBuildFile; fileRef = 688AC152442A47121572B01D /* PictureService.m */; };
 		7E06597916E96EB200FE6432 /* FeedViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7E06597716E96EB200FE6432 /* FeedViewController.xib */; };
 		7E06597C16E972A000FE6432 /* PhotoCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E06597B16E972A000FE6432 /* PhotoCollectionViewCell.m */; };
 		7E06598116E9765300FE6432 /* drunk3.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7E06597E16E9765300FE6432 /* drunk3.jpg */; };
@@ -70,7 +72,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		688AC152442A47121572B01D /* PictureService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PictureService.m; sourceTree = "<group>"; };
 		688AC210A40AFE08B286C0E0 /* TemplateService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TemplateService.m; sourceTree = "<group>"; };
+		688AC64BC78CDB24B6C2C333 /* PictureService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PictureService.h; sourceTree = "<group>"; };
 		688AC7D520B33C416CA9226E /* TemplateService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TemplateService.h; sourceTree = "<group>"; };
 		688ACCDE72D16D6D5E0CAE3E /* Template.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Template.h; sourceTree = "<group>"; };
 		688ACF8500AD951B6E314761 /* Template.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Template.m; sourceTree = "<group>"; };
@@ -213,7 +217,6 @@
 		D65C912016E9B98400AF1002 /* DrunkSpottingTest */ = {
 			isa = PBXGroup;
 			children = (
-				D65C912616E9B98400AF1002 /* TemplateServiceTest.h */,
 				D65C912716E9B98400AF1002 /* TemplateServiceTest.m */,
 				D65C912116E9B98400AF1002 /* Supporting Files */,
 			);
@@ -226,6 +229,7 @@
 				D65C912216E9B98400AF1002 /* DrunkSpottingTest-Info.plist */,
 				D65C912316E9B98400AF1002 /* InfoPlist.strings */,
 				D65C912916E9B98400AF1002 /* DrunkSpottingTest-Prefix.pch */,
+				D65C912616E9B98400AF1002 /* TemplateServiceTest.h */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -284,6 +288,8 @@
 				D65C90D016E9581500AF1002 /* DrawingViewController.xib */,
 				688AC210A40AFE08B286C0E0 /* TemplateService.m */,
 				688AC7D520B33C416CA9226E /* TemplateService.h */,
+				688AC64BC78CDB24B6C2C333 /* PictureService.h */,
+				688AC152442A47121572B01D /* PictureService.m */,
 			);
 			path = DrunkSpotting;
 			sourceTree = "<group>";
@@ -439,6 +445,7 @@
 				EF5F895216E9C1FD0070FAA4 /* AFURLConnectionOperation.m in Sources */,
 				EF5F895316E9C1FD0070FAA4 /* AFXMLRequestOperation.m in Sources */,
 				EF5F895416E9C1FD0070FAA4 /* UIImageView+AFNetworking.m in Sources */,
+				688ACB926F845DF8629A8FBD /* PictureService.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -465,6 +472,7 @@
 				688AC347398B054DAA125B77 /* TemplateService.m in Sources */,
 				EF5F894A16E9C1D70070FAA4 /* FeedViewController.m in Sources */,
 				EF5F895516E9C2130070FAA4 /* main.m in Sources */,
+				688ACE4D8004D35F42CA9016 /* PictureService.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

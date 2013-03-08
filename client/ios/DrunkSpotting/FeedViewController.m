@@ -10,6 +10,7 @@
 #import "PhotoCollectionViewCell.h"
 #import "DrawingViewController.h"
 #import "TemplateService.h"
+#import "PictureService.h"
 
 NSString *const kPhotoCellIdentifier = @"photo";
 
@@ -58,9 +59,11 @@ NSString *const kPhotoCellIdentifier = @"photo";
 
 - (void)testApp
 {
-	TemplateService *templateService = [[TemplateService alloc] init];
 
-	[templateService getTemplate:4 success:^( Template * t)
+
+	PictureService *pictureService = [[PictureService alloc] init];
+
+	[pictureService getPicture:6 success:^( Template *t )
 	{
 		NSLog( t.description );
 	} failure:^( NSError *error )
