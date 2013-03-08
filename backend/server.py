@@ -77,8 +77,46 @@ class Server:
             'rating_count': row[6], 'url': row[7],
             'time_posted': row[8].isoformat()})
 
-    def get_comments(self):
-        pass
+    def get_latest_template_comments(self, template, count):
+        template = int(template)
+        count = int(count)
+
+        sql = 'select id, nick, title, description, up_votes, down_votes, ' \
+              'time_posted from comments where template_id = %s order by ' \
+              'time_posted desc limit %s'
+
+        rows = database.execute_all_rows(self._conn, sql, (template, count, ))
+
+        comments = []
+        for row in rows:
+            comments.append({
+                'id': row[0], 'nick': row[1],
+                'title': row[2], 'description': row[3],
+                'up_votes': row[4], 'down_votes': row[5],
+                'time_posted': row[6].isoformat()})
+
+        return cjson.encode(comments)
+
+    def get_latest_picture_comments(self, picture, count):
+        # TODO: Ugh, near copy of get_latest_template_comments
+        picture = int(picture)
+        count = int(count)
+
+        sql = 'select id, nick, title, description, up_votes, down_votes, ' \
+              'time_posted from comments where picture_id = %s order by ' \
+              'time_posted desc limit %s'
+
+        rows = database.execute_all_rows(self._conn, sql, (picture, count, ))
+
+        comments = []
+        for row in rows:
+            comments.append({
+                'id': row[0], 'nick': row[1],
+                'title': row[2], 'description': row[3],
+                'up_votes': row[4], 'down_votes': row[5],
+                'time_posted': row[6].isoformat()})
+
+        return cjson.encode(comments)
 
     def get_latest_templates(self, count):
         count = int(count)
@@ -146,8 +184,41 @@ class Server:
 
         return '{"id": %d}' % (id, )
 
-    def post_comment(self, data):
-        pass
+    def post_template_comment(self, template, data):
+        # TODO: Verify template id
+        template = int(template)
+        data = cjson.decode(data)
+        sql = 'insert into comments(template_id, ip, nick,' \
+              'title, description, up_votes, down_votes, time_posted) ' \
+              'values(%s, %s, %s, %s, %s, 0, 0, now()) ' \
+              'returning id'
+
+        params = (template, '1.2.3.4',
+                data['nick'], data['title'],
+                data['description'])
+
+        id = database.execute_non_query_returning_id(
+            self._conn, sql, params)
+
+        return '{"id": %d}' % (id, )
+
+    def post_picture_comment(self, picture, data):
+        # TODO: Ugh, almost exact copy of post_template_comment - refactor
+        picture = int(picture)
+        data = cjson.decode(data)
+        sql = 'insert into comments(picture_id, ip, nick,' \
+              'title, description, up_votes, down_votes, time_posted) ' \
+              'values(%s, %s, %s, %s, %s, 0, 0, now()) ' \
+              'returning id'
+
+        params = (picture, '1.2.3.4',
+                data['nick'], data['title'],
+                data['description'])
+
+        id = database.execute_non_query_returning_id(
+            self._conn, sql, params)
+
+        return '{"id": %d}' % (id, )
 
     def post_tag(self, data):
         pass
