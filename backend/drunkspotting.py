@@ -105,8 +105,9 @@ class Gateway:
 
                     try:
                         form = cgi.FieldStorage(fp=env['wsgi.input'], environ=env)
-                        data = form['data'].value
+                        data = form[form.keys()[0]].value
                     except:
+                        # TODO: Raw binary upload not working
                         data = env['wsgi.input'].read(content_length)
                 else:
                     data = env['wsgi.input'].read(content_length)
