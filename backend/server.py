@@ -275,8 +275,16 @@ class Server:
         return '{"id": %d}' % (id, )
 
     def nuke_it_all(self):
-        database.execute_non_query(self._conn, 'truncate table comments')
-        database.execute_non_query(self._conn, 'truncate table pictures')
-        database.execute_non_query(self._conn, 'truncate table tags')
-        database.execute_non_query(self._conn, 'truncate table templates')
-        return '{}'
+        if 'allow-nuking-database' in config.config:
+            if config.config['allow-nuking-database'] == 'yes-be-careful':
+                database.execute_non_query(
+                    self._conn, 'truncate table comments')
+                database.execute_non_query(
+                    self._conn, 'truncate table pictures')
+                database.execute_non_query(
+                    self._conn, 'truncate table tags')
+                database.execute_non_query(
+                    self._conn, 'truncate table templates')
+                return '{}'
+
+        raise drunkspotting_exceptions.NotFoundException('Not found')
