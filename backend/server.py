@@ -3,16 +3,16 @@
 
 import logging
 import cjson
-import psycopg2
 import hashlib
 import binascii
+import psycopg2
 import os
-import math
-import sendgrid
+import datetime
+import azure.storage
 
 import database
 import drunkspotting_exceptions
-
+import config
 
 class Server:
     def __init__(self):
@@ -24,14 +24,49 @@ class Server:
         import gevent.monkey
         gevent.monkey.patch_all()
 
-        self._conn = psycopg2.connect(database='drunkspotting',
-                                      user='drunkspotting',
-                                      password='drunkspotting1234')
+        self._conn = psycopg2.connect(
+            database=config.config['database'],
+            user=config.config['database_user'],
+            password=config.config['database_password'])
 
         logging.info("Server initialized.")
 
     def ping(self):
         return 'pong'
+
+    def upload_template(self, data):
+        salt = binascii.b2a_hex(os.urandom(20))
+        sha1 = hashlib.sha1()
+        sha1.update(salt)
+        sha1.update(str(datetime.datetime.now()))
+        img = sha1.hexdigest() + ".jpg"
+
+        blob_service = azure.storage.BlobService(
+            account_name=config.config['azure_account'],
+            account_key=config.config['azure_key'])
+        blob_service.create_container('templates')
+        blob_service.put_blob('templates', img,
+                              data, x_ms_blob_type='BlockBlob')
+
+        url = config.config['upload_url'] + 'templates/' + img
+        return cjson.encode({'url': url})
+
+    def upload_picture(self, data):
+        salt = binascii.b2a_hex(os.urandom(20))
+        sha1 = hashlib.sha1()
+        sha1.update(salt)
+        sha1.update(str(datetime.datetime.now()))
+        img = sha1.hexdigest() + ".jpg"
+
+        blob_service = azure.storage.BlobService(
+            account_name=config.config['azure_account'],
+            account_key=config.config['azure_key'])
+        blob_service.create_container('pictures')
+        blob_service.put_blob('pictures', img,
+                              data, x_ms_blob_type='BlockBlob')
+
+        url = config.config['upload_url'] + 'pictures/' + img
+        return cjson.encode({'url': url})
 
     def get_template(self, template):
         template = int(template)
