@@ -56,12 +56,11 @@ class Server:
         blob_service = azure.storage.BlobService(
             account_name=config.config['azure_account'],
             account_key=config.config['azure_key'])
-        blob_service.create_container('templates')
+        blob_service.create_container('templates',
+                                      x_ms_blob_public_access='blob')
         blob_service.put_blob('templates', img,
                               data, x_ms_blob_type='BlockBlob',
                               x_ms_blob_content_type='image/jpeg')
-
-        print 'content type set'
 
         url = config.config['upload_url'] + 'templates/' + img
         print url
@@ -77,11 +76,14 @@ class Server:
         blob_service = azure.storage.BlobService(
             account_name=config.config['azure_account'],
             account_key=config.config['azure_key'])
-        blob_service.create_container('pictures')
+        blob_service.create_container('pictures',
+                                      x_ms_blob_public_access='blob')
         blob_service.put_blob('pictures', img,
-                              data, x_ms_blob_type='BlockBlob')
+                              data, x_ms_blob_type='BlockBlob',
+                              x_ms_blob_content_type='image/jpeg')
 
         url = config.config['upload_url'] + 'pictures/' + img
+        print url
         return json.dumps({'url': url})
 
     def get_template(self, template):
