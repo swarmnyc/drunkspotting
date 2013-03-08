@@ -59,9 +59,11 @@
     NSData *requestData = UIImageJPEGRepresentation(image, 1.0);
     
     [request setHTTPMethod:@"POST"];
-    [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
-    [request setValue:[NSString stringWithFormat:@"%d", [requestData length]] forHTTPHeaderField:@"Content-Length"];
+    //[request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    //[request setValue:[NSString stringWithFormat:@"%d", [requestData length]] forHTTPHeaderField:@"Content-Length"];
     [request setHTTPBody:requestData];
+    
+    NSLog(@"length = %d", [requestData length]);
     
     [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
         // TODO: Implement error handling in callback
@@ -71,6 +73,7 @@
         
         if (!serializationError) {
             metadata.url = [result objectForKey:@"url"];
+            NSLog(@"result url = %@",metadata.url);
             [PictureService postTemplate:metadata];
         } else NSLog(@"Error serializing JSON");
     }];
