@@ -8,6 +8,7 @@ import sys
 import argparse
 import daemon
 #import lockfile
+import cgi
 
 import config
 import drunkspotting_exceptions
@@ -98,7 +99,19 @@ class Gateway:
             elif env["REQUEST_METHOD"] in ("PUT", "POST"):
 
                 content_length = int(env.get('CONTENT_LENGTH', 0))
-                data = env['wsgi.input'].read(content_length)
+                if env['PATH_INFO'] in ('/upload_template', 'upload_template/',
+                        '/upload_image', '/upload_image/'):
+                    print 'POST FILE'
+
+                    try:
+                        form = cgi.FieldStorage(fp=env['wsgi.input'], environ=env)
+                        data = form[form.keys()[0]].value
+                    except:
+                        # TODO: Raw binary upload not working
+                        data = env['wsgi.input'].read(content_length)
+                else:
+                    data = env['wsgi.input'].read(content_length)
+
 
                 if env["REQUEST_METHOD"] == "PUT":
                     response = self.process_with_data(env["PATH_INFO"], self._puts, data)

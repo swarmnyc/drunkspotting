@@ -9,6 +9,7 @@
 #import "AFJSONRequestOperation.h"
 #import "PictureService.h"
 #import "Picture.h"
+#import "NSDictionary+JSONCategories.h"
 
 @implementation PictureService
 @synthesize baseUrl = m_baseUrl;
@@ -24,12 +25,55 @@
 	return self;
 }
 
-- (void)postTemplate:(Template *)template
++ (void)postTemplate:(Template*)metadata
 {
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"http://api.drunkspotting.com/templates"]];
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:url];
+    NSData *requestData = [[metadata dictionary] JSONFromDictionary];
+    
+    [request setHTTPMethod:@"POST"];
+    [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    [request setValue:[NSString stringWithFormat:@"%d", [requestData length]] forHTTPHeaderField:@"Content-Length"];
+    [request setHTTPBody:requestData];
+    
+    [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
+        NSLog(@"Error.description = %@",error.description);
+        NSError* serializationError = nil;
+        id result = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&serializationError];
+        
+        if (!serializationError) {
+            NSLog(@"result = %@",result);
+        } else NSLog(@"Error serializing JSON");
+        
+        //NSError* serializationError = nil;
+        //id result = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&serializationError];
+        
+        // TODO: Implement error handling in callback
+    }];
 }
 
-- (void)postTemplateIamge:(UIImage *)aTemplateImage
++ (void)postTemplateImage:(UIImage *)image metadata:(Template*)metadata
 {
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"http://api.drunkspotting.com/upload_template"]];
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:url];
+    NSData *requestData = UIImageJPEGRepresentation(image, 1.0);
+    
+    [request setHTTPMethod:@"POST"];
+    [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    [request setValue:[NSString stringWithFormat:@"%d", [requestData length]] forHTTPHeaderField:@"Content-Length"];
+    [request setHTTPBody:requestData];
+    
+    [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
+        // TODO: Implement error handling in callback
+        
+        NSError* serializationError = nil;
+        id result = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&serializationError];
+        
+        if (!serializationError) {
+            metadata.url = [result objectForKey:@"url"];
+            [PictureService postTemplate:metadata];
+        } else NSLog(@"Error serializing JSON");
+    }];
 }
 
 - (void)getPicture:(int)pictureId success:(void (^)(Picture *))success

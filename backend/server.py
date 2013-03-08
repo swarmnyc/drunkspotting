@@ -8,6 +8,7 @@ import binascii
 import psycopg2
 import os
 import datetime
+import cgi
 import azure.storage
 
 import database
@@ -29,12 +30,17 @@ class Server:
             user=config.config['database_user'],
             password=config.config['database_password'])
 
+        self._tokens = {}
+
         logging.info("Server initialized.")
 
     def ping(self):
         return 'pong'
 
     def upload_template(self, data):
+        with open('test.jpg', 'wb') as f:
+            f.write(data)
+
         salt = binascii.b2a_hex(os.urandom(20))
         sha1 = hashlib.sha1()
         sha1.update(salt)
@@ -49,6 +55,7 @@ class Server:
                               data, x_ms_blob_type='BlockBlob')
 
         url = config.config['upload_url'] + 'templates/' + img
+        print url
         return cjson.encode({'url': url})
 
     def upload_picture(self, data):
@@ -271,7 +278,12 @@ class Server:
         id = database.execute_non_query_returning_id(
             self._conn, sql, params)
 
-        return '{"id": %d}' % (id, )
+        salt = binascii.b2a_hex(os.urandom(20))
+        sha1 = hashlib.sha1()
+        sha1.update(salt)
+        token = sha1.hexdigest()
+
+        return cjson.encode({'id': id, 'token': token})
 
     def nuke_it_all(self):
         if 'allow-nuking-database' in config.config:
