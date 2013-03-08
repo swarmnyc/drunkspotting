@@ -26,7 +26,8 @@ class Gateway:
         self._gets = [
             [re.compile("/templates/(\w+)/*$"), self._server.get_template],
             [re.compile("/pictures/(\w+)/*$"), self._server.get_picture],
-            [re.compile("/comments/(\w+)/*$"), self._server.get_comments],
+            [re.compile("/templates/(\w+)/comments/latest/(\w+)/*$"), self._server.get_latest_template_comments],
+            [re.compile("/pictures/(\w+)/comments/latest/(\w+)/*$"), self._server.get_latest_picture_comments],
 
             [re.compile("/nuke_it_all/*$"), self._server.nuke_it_all],
 
@@ -38,8 +39,9 @@ class Gateway:
 
         self._posts = [
             [re.compile("/templates/*$"), self._server.post_template],
-            [re.compile("/comments/(\w+)/*$"), self._server.post_comment],
             [re.compile("/tags/(\w+)/*$"), self._server.post_tag],
+            [re.compile("/templates/(\w+)/comments/*$"), self._server.post_template_comment],
+            [re.compile("/pictures/(\w+)/comments/*$"), self._server.post_picture_comment],
             [re.compile("/pictures/*$"), self._server.post_picture]]
 
     def process_without_data(self, path, calls):
