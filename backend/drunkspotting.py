@@ -120,12 +120,12 @@ class Gateway:
             start_response('404 Item not found', [("Content-Type", self._CONTENT_TYPE),
                 ('Access-Control-Allow-Origin', '*'),
                 ('Access-Control-Allow-Methods' ,'GET, POST')])
-            return[""]
+            return["Not found"]
         except drunkspotting_exceptions.AcccessDeniedException:
             start_response('403 Access denied', [("Content-Type", self._CONTENT_TYPE),
                 ('Access-Control-Allow-Origin', '*'),
                 ('Access-Control-Allow-Methods' ,'GET, POST')])
-            return[""]
+            return["Not found"]
         except Exception:
             response = str(sys.exc_info())
             logging.exception("Error handling request.")

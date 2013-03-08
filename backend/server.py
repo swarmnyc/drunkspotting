@@ -78,7 +78,7 @@ class Server:
 
         rows = database.execute_all_rows(self._conn, sql, (template, ))
         if not rows:
-            raise drunkspotting_exceptions.NotFoundException('')
+            raise drunkspotting_exceptions.NotFoundException('Not found')
 
         row = rows[0]
         return cjson.encode({
@@ -87,7 +87,6 @@ class Server:
             'description': row[3], 'rating': row[4],
             'rating_count': row[5], 'url': row[6],
             'time_posted': row[7].isoformat()})
-
 
     def get_picture(self, picture):
         picture = int(picture)
@@ -101,7 +100,7 @@ class Server:
 
         rows = database.execute_all_rows(self._conn, sql, (picture, ))
         if not rows:
-            raise drunkspotting_exceptions.NotFoundException('')
+            raise drunkspotting_exceptions.NotFoundException('Not found')
         row = rows[0]
 
         return cjson.encode({
