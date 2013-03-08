@@ -55,7 +55,7 @@
                           CGRectGetWidth(self.view.bounds));
     iv.contentMode = UIViewContentModeScaleAspectFit;
     iv.backgroundColor = [UIColor redColor];
-    [self.view insertSubview:iv belowSubview:self.drawingLayer];
+    [self.compositView insertSubview:iv belowSubview:self.drawingLayer];
     
     self.photoLayer = iv;
 }
@@ -71,8 +71,9 @@
     
     self.uploadingOverlay.hidden = NO;
     
-    [self.view addSubview:self.uploadingOverlay];
-
+    UIImage *renderedImage = [self renderImage];
+    NSData *jpegData = UIImageJPEGRepresentation(renderedImage, 1);
+    
     int64_t delayInSeconds = 2.0;
     dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
     dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
@@ -81,7 +82,16 @@
         
         [self.navigationController popToRootViewControllerAnimated:YES];
     });
-   
 }
+
+- (UIImage *) renderImage {
+    
+    UIGraphicsBeginImageContextWithOptions(self.compositView.bounds.size, self.compositView.opaque, [[UIScreen mainScreen] scale]);
+    [self.compositView.layer renderInContext:UIGraphicsGetCurrentContext()];
+    UIImage * img = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return img;
+}
+
 
 @end
