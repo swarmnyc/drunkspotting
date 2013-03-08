@@ -37,8 +37,6 @@
 		D6D7877D16E93CFE00E1F86B /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = D6D7877C16E93CFE00E1F86B /* Default.png */; };
 		D6D7877F16E93CFE00E1F86B /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D6D7877E16E93CFE00E1F86B /* Default@2x.png */; };
 		D6D7878116E93CFE00E1F86B /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D6D7878016E93CFE00E1F86B /* Default-568h@2x.png */; };
-		D6D787C416E946AF00E1F86B /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D6D787C316E946AF00E1F86B /* RootViewController.m */; };
-		D6D787C616E946FC00E1F86B /* RootViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D6D787C516E946FC00E1F86B /* RootViewController.xib */; };
 		EF2A83A816E980C9003E17ED /* Picture.m in Sources */ = {isa = PBXBuildFile; fileRef = EF2A83A716E980C9003E17ED /* Picture.m */; };
 /* End PBXBuildFile section */
 
@@ -93,9 +91,6 @@
 		D6D7877C16E93CFE00E1F86B /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		D6D7877E16E93CFE00E1F86B /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		D6D7878016E93CFE00E1F86B /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
-		D6D787C216E946AF00E1F86B /* RootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootViewController.h; sourceTree = "<group>"; };
-		D6D787C316E946AF00E1F86B /* RootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootViewController.m; sourceTree = "<group>"; };
-		D6D787C516E946FC00E1F86B /* RootViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RootViewController.xib; sourceTree = "<group>"; };
 		EF2A83A616E980C9003E17ED /* Picture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Picture.h; path = Model/Picture.h; sourceTree = "<group>"; };
 		EF2A83A716E980C9003E17ED /* Picture.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Picture.m; path = Model/Picture.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -205,9 +200,6 @@
 				D6D7877916E93CFE00E1F86B /* AppDelegate.h */,
 				D6D7877A16E93CFE00E1F86B /* AppDelegate.m */,
 				D6D7877116E93CFE00E1F86B /* Supporting Files */,
-				D6D787C216E946AF00E1F86B /* RootViewController.h */,
-				D6D787C316E946AF00E1F86B /* RootViewController.m */,
-				D6D787C516E946FC00E1F86B /* RootViewController.xib */,
 				D65C90CE16E9581500AF1002 /* DrawingViewController.h */,
 				D65C90CF16E9581500AF1002 /* DrawingViewController.m */,
 				7E06597516E96EB200FE6432 /* FeedViewController.h */,
@@ -297,7 +289,6 @@
 				D6D7877D16E93CFE00E1F86B /* Default.png in Resources */,
 				D6D7877F16E93CFE00E1F86B /* Default@2x.png in Resources */,
 				D6D7878116E93CFE00E1F86B /* Default-568h@2x.png in Resources */,
-				D6D787C616E946FC00E1F86B /* RootViewController.xib in Resources */,
 				D65C90D216E9581500AF1002 /* DrawingViewController.xib in Resources */,
 				7E06597916E96EB200FE6432 /* FeedViewController.xib in Resources */,
 				7E06598116E9765300FE6432 /* drunk3.jpg in Resources */,
@@ -315,7 +306,6 @@
 			files = (
 				D6D7877716E93CFE00E1F86B /* main.m in Sources */,
 				D6D7877B16E93CFE00E1F86B /* AppDelegate.m in Sources */,
-				D6D787C416E946AF00E1F86B /* RootViewController.m in Sources */,
 				D65C90D116E9581500AF1002 /* DrawingViewController.m in Sources */,
 				D65C90EC16E95C7800AF1002 /* AFHTTPClient.m in Sources */,
 				D65C90ED16E95C7800AF1002 /* AFHTTPRequestOperation.m in Sources */,

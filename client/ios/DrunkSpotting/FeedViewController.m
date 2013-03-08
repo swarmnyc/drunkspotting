@@ -41,7 +41,13 @@ NSString *const kPhotoCellIdentifier = @"photo";
     [self.view addSubview:feedView];
     [feedView reloadData];
     
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addItem)];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd
+                                                                                           target:self
+                                                                                           action:@selector(addItem)];
+
+    BOOL cameraAvailable = [UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera];
+    
+    self.navigationItem.rightBarButtonItem.enabled = cameraAvailable;
 }
 
 - (void) setupTestImages
