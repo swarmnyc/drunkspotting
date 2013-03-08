@@ -81,10 +81,65 @@ class TestSimpleNetworked(unittest.TestCase):
 
         # Get a list of the templates
         (status, reason, data) = httpcall.call(
-            "GET", self.url + '/templates/', cjson.encode(req))
+            "GET", self.url + '/templates/latest/10', cjson.encode(req))
         self.assertEqual((status, reason), (200, 'OK'))
         data = cjson.decode(data)
         self.assertEqual(len(data), 2)
+
+        (status, reason, data) = httpcall.call(
+            "GET", self.url + '/templates/latest/1', cjson.encode(req))
+        self.assertEqual((status, reason), (200, 'OK'))
+        data = cjson.decode(data)
+        self.assertEqual(len(data), 1)
+
+        # Add two pictures for the first template
+        req = {
+            "template_id": template1_id,
+            "title": "picture 1.1",
+            "ip": "3.2.3.4",
+            "description": "pic 1 desc",
+            "url": "http://www.google.com"
+            }
+
+        (status, reason, data) = httpcall.call(
+            "POST", self.url + '/pictures/', cjson.encode(req))
+        picture1_id = cjson.decode(data)['id']
+        self.assertEqual((status, reason), (200, 'OK'))
+
+        req = {
+            "template_id": template1_id,
+            "title": "picture 1.2",
+            "ip": "3.2.3.4",
+            "description": "pic 2 desc",
+            "url": "http://www.google.com"
+            }
+
+        (status, reason, data) = httpcall.call(
+            "POST", self.url + '/pictures/', cjson.encode(req))
+        picture2_id = cjson.decode(data)['id']
+        self.assertEqual((status, reason), (200, 'OK'))
+
+        # And one picture for the second template
+        req = {
+            "template_id": template2_id,
+            "title": "picture 2.2",
+            "ip": "3.2.3.4",
+            "description": "pic 3 desc",
+            "url": "http://www.amazon.com"
+            }
+
+        (status, reason, data) = httpcall.call(
+            "POST", self.url + '/pictures/', cjson.encode(req))
+        picture3_id = cjson.decode(data)['id']
+        self.assertEqual((status, reason), (200, 'OK'))
+
+        # Get a list of the pictures
+        (status, reason, data) = httpcall.call(
+            "GET", self.url + '/pictures/latest/10', cjson.encode(req))
+        self.assertEqual((status, reason), (200, 'OK'))
+        data = cjson.decode(data)
+        self.assertEqual(len(data), 3)
+
 
         return
 
