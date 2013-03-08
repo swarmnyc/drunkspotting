@@ -40,6 +40,10 @@
 {
     [super viewDidLoad];
     
+    self.navigationItem.titleView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"titleTreatment"]];
+    
+    self.title = @"Drunk Spotting";
+    
     self.uploadingOverlay.hidden = YES;
     
     UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Save", @"Save")

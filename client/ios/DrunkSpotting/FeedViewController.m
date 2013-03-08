@@ -27,6 +27,8 @@ NSString *const kPhotoCellIdentifier = @"photo";
 
 - (void) viewDidLoad
 {
+    self.navigationItem.titleView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"titleTreatment"]];
+    
     feedDataArray = [[NSMutableArray alloc] init];
     [self setupTestImages];
 }
@@ -97,11 +99,6 @@ NSString *const kPhotoCellIdentifier = @"photo";
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    PhotoCollectionViewCell *cell = (PhotoCollectionViewCell *)[self.feedView cellForItemAtIndexPath:indexPath];
-    
-    DrawingViewController *dvc = [[DrawingViewController alloc] initWithImage:cell.photo];
-    [self.navigationController pushViewController:dvc animated:YES];
-    
     return;
 }
 
