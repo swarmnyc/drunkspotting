@@ -110,10 +110,9 @@
 	[operation start];
 }
 
-- (void)getPictures:(int)size success:(void (^)(NSArray *pictues))success
-	failure:(void (^)(NSError *))failure
+- (void)getPictures:(int)size success:(void (^)(NSArray *pictures))success failure:(void (^)(NSError *))failure
 {
-	NSString *path = [self.baseUrl stringByAppendingFormat:@"/templates/latest/%d", size];
+	NSString *path = [self.baseUrl stringByAppendingFormat:@"/pictures/latest/%d", size];
 	NSURL *url = [NSURL URLWithString:path];
 	NSURLRequest *request = [NSURLRequest requestWithURL:url];
 	AFJSONRequestOperation *operation =

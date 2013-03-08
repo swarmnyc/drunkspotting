@@ -35,9 +35,7 @@ NSString *const kPhotoCellIdentifier = @"photo";
 	[pictureService getPictures:10 success:^( NSArray *array )
 	{
 		self.pictures = array;
-
 		[self.feedView reloadData];
-
 	} failure:^( NSError *error )
 	{
 		NSLog(@"%@", error );
@@ -59,9 +57,6 @@ NSString *const kPhotoCellIdentifier = @"photo";
 
 	self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]
                                               initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addItem:)];
-
-	self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]
-		initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(testApp)];
 }
 
 - (void) viewDidAppear:(BOOL)animated
