@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7E06597816E96EB200FE6432 /* FeedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E06597616E96EB200FE6432 /* FeedViewController.m */; };
+		7E06597916E96EB200FE6432 /* FeedViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7E06597716E96EB200FE6432 /* FeedViewController.xib */; };
+		7E06597C16E972A000FE6432 /* PhotoCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E06597B16E972A000FE6432 /* PhotoCollectionViewCell.m */; };
+		7E06598116E9765300FE6432 /* drunk3.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7E06597E16E9765300FE6432 /* drunk3.jpg */; };
+		7E06598216E9765300FE6432 /* drunk2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7E06597F16E9765300FE6432 /* drunk2.jpg */; };
+		7E06598316E9765300FE6432 /* drunk1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7E06598016E9765300FE6432 /* drunk1.jpg */; };
 		D65C90C816E9523E00AF1002 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6D7876E16E93CFE00E1F86B /* CoreGraphics.framework */; };
 		D65C90D116E9581500AF1002 /* DrawingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D65C90CF16E9581500AF1002 /* DrawingViewController.m */; };
 		D65C90D216E9581500AF1002 /* DrawingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D65C90D016E9581500AF1002 /* DrawingViewController.xib */; };
@@ -34,6 +40,14 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		7E06597516E96EB200FE6432 /* FeedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedViewController.h; sourceTree = "<group>"; };
+		7E06597616E96EB200FE6432 /* FeedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedViewController.m; sourceTree = "<group>"; };
+		7E06597716E96EB200FE6432 /* FeedViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FeedViewController.xib; sourceTree = "<group>"; };
+		7E06597A16E972A000FE6432 /* PhotoCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoCollectionViewCell.h; sourceTree = "<group>"; };
+		7E06597B16E972A000FE6432 /* PhotoCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoCollectionViewCell.m; sourceTree = "<group>"; };
+		7E06597E16E9765300FE6432 /* drunk3.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = drunk3.jpg; sourceTree = "<group>"; };
+		7E06597F16E9765300FE6432 /* drunk2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = drunk2.jpg; sourceTree = "<group>"; };
+		7E06598016E9765300FE6432 /* drunk1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = drunk1.jpg; sourceTree = "<group>"; };
 		D65C90C316E951B300AF1002 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		D65C90CE16E9581500AF1002 /* DrawingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DrawingViewController.h; sourceTree = "<group>"; };
 		D65C90CF16E9581500AF1002 /* DrawingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DrawingViewController.m; sourceTree = "<group>"; };
@@ -93,6 +107,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7E06597D16E9764800FE6432 /* test images */ = {
+			isa = PBXGroup;
+			children = (
+				7E06597E16E9765300FE6432 /* drunk3.jpg */,
+				7E06597F16E9765300FE6432 /* drunk2.jpg */,
+				7E06598016E9765300FE6432 /* drunk1.jpg */,
+			);
+			name = "test images";
+			sourceTree = "<group>";
+		};
 		D65C90D816E95C7800AF1002 /* AFNetworking */ = {
 			isa = PBXGroup;
 			children = (
@@ -137,6 +161,7 @@
 			children = (
 				D65C90C316E951B300AF1002 /* QuartzCore.framework */,
 				D6D7877016E93CFE00E1F86B /* DrunkSpotting */,
+				7E06597D16E9764800FE6432 /* test images */,
 				D6D7876916E93CFE00E1F86B /* Frameworks */,
 				D6D7876716E93CFE00E1F86B /* Products */,
 			);
@@ -173,6 +198,11 @@
 				D6D787C516E946FC00E1F86B /* RootViewController.xib */,
 				D65C90CE16E9581500AF1002 /* DrawingViewController.h */,
 				D65C90CF16E9581500AF1002 /* DrawingViewController.m */,
+				7E06597516E96EB200FE6432 /* FeedViewController.h */,
+				7E06597616E96EB200FE6432 /* FeedViewController.m */,
+				7E06597716E96EB200FE6432 /* FeedViewController.xib */,
+				7E06597A16E972A000FE6432 /* PhotoCollectionViewCell.h */,
+				7E06597B16E972A000FE6432 /* PhotoCollectionViewCell.m */,
 				D65C90D016E9581500AF1002 /* DrawingViewController.xib */,
 			);
 			path = DrunkSpotting;
@@ -248,6 +278,10 @@
 				D6D7878116E93CFE00E1F86B /* Default-568h@2x.png in Resources */,
 				D6D787C616E946FC00E1F86B /* RootViewController.xib in Resources */,
 				D65C90D216E9581500AF1002 /* DrawingViewController.xib in Resources */,
+				7E06597916E96EB200FE6432 /* FeedViewController.xib in Resources */,
+				7E06598116E9765300FE6432 /* drunk3.jpg in Resources */,
+				7E06598216E9765300FE6432 /* drunk2.jpg in Resources */,
+				7E06598316E9765300FE6432 /* drunk1.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -273,6 +307,8 @@
 				D65C90F416E95C7800AF1002 /* UIImageView+AFNetworking.m in Sources */,
 				D65C90FA16E95C8E00AF1002 /* ACEDrawingTools.m in Sources */,
 				D65C90FB16E95C8E00AF1002 /* ACEDrawingView.m in Sources */,
+				7E06597816E96EB200FE6432 /* FeedViewController.m in Sources */,
+				7E06597C16E972A000FE6432 /* PhotoCollectionViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
