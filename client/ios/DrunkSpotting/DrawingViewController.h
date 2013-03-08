@@ -16,6 +16,7 @@
 @property (nonatomic, strong) IBOutlet UIView *compositView;
 @property (nonatomic, strong) IBOutlet UIView *uploadingOverlay;
 @property (nonatomic, strong) IBOutlet UIActivityIndicatorView *activityIndicator;
+@property (nonatomic, strong) IBOutlet UISlider *slider;
 
 - (id) initWithImage:(UIImage *)image;
 

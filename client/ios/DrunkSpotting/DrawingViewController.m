@@ -62,6 +62,8 @@
     [self.compositView insertSubview:iv belowSubview:self.drawingLayer];
     
     self.photoLayer = iv;
+    
+    self.slider.value = self.drawingLayer.lineWidth;
 }
 
 - (void)didReceiveMemoryWarning
@@ -104,9 +106,9 @@
     return img;
 }
 
-- (IBAction)setGreyColor:(id)sender {
+- (IBAction)setWhiteColor:(id)sender {
     
-    self.drawingLayer.lineColor = [UIColor grayColor];
+    self.drawingLayer.lineColor = [UIColor whiteColor];
 }
 
 - (IBAction)setBlueColor:(id)sender {
