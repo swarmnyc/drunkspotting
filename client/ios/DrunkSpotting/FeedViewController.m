@@ -101,13 +101,6 @@ NSString *const kPhotoCellIdentifier = @"photo";
 	[self presentViewController:imgpic animated:YES completion:nil];
 }
 
-- (void)setupTestImages
-{
-	[feedDataArray addObject:[UIImage imageNamed:@"drunk1.jpg"]];
-	[feedDataArray addObject:[UIImage imageNamed:@"drunk2.jpg"]];
-	[feedDataArray addObject:[UIImage imageNamed:@"drunk3.jpg"]];
-}
-
 - (void)addItem
 {
 	UIImagePickerController *imgpic = [[UIImagePickerController alloc] init];
