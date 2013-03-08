@@ -19,7 +19,10 @@
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] ;
     
     RootViewController *rvc = [[RootViewController alloc] init];
-    self.window.rootViewController = rvc;
+    
+    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:rvc];
+    
+    self.window.rootViewController = nav;
 
     
     self.window.backgroundColor = [UIColor whiteColor];

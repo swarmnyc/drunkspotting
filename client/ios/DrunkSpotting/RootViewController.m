@@ -7,6 +7,7 @@
 //
 
 #import "RootViewController.h"
+#import "DrawingViewController.h"
 
 @interface RootViewController ()
 
@@ -26,7 +27,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view.
 }
 
 - (void)didReceiveMemoryWarning
@@ -38,6 +38,9 @@
 - (IBAction)takePhoto:(id)sender {
  
     UIImagePickerController *imgpic = [[UIImagePickerController alloc] init];
+    imgpic.delegate = self;
+    imgpic.allowsEditing = YES;
+    
     if([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
         imgpic.sourceType = UIImagePickerControllerSourceTypeCamera;
     }
@@ -45,16 +48,25 @@
         //REVIEW: Camerad not available
     }
     
-    [self presentViewController:imgpic animated:YES completion:^{
-        
-    }];
+    [self presentViewController:imgpic animated:YES completion:nil];
     
 }
+
 
 #pragma mark - UIImagePickerControllerDelegate
 
 -(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
+    [self dismissViewControllerAnimated:YES completion:^{
+        
+        UIImage *pickedImage = [info objectForKey:UIImagePickerControllerEditedImage];
+        
+        if(pickedImage) {
+            
+            DrawingViewController *dvc = [[DrawingViewController alloc] initWithImage:pickedImage];
+            [self.navigationController pushViewController:dvc animated:YES];
+        }
+    }];
 }
 
 //Tells the delegate that the user cancelled the pick operation.
@@ -62,13 +74,6 @@
 {
 }
 
-//Tells the delegate that the user picked an image. (Deprecated in iOS 3.0. Use imagePickerController:didFinishPickingMediaWithInfo: instead.)
-- (void)imagePickerController:(UIImagePickerController *)picker
-        didFinishPickingImage:(UIImage *)image
-                  editingInfo:(NSDictionary *)editingInfo
-{
-    
-}
 
 
 @end
