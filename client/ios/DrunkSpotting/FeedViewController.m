@@ -29,6 +29,7 @@ NSString *const kPhotoCellIdentifier = @"photo";
 
 - (void)viewDidLoad
 {
+    self.feedView.backgroundView.backgroundColor = [UIColor blueColor];
     self.navigationItem.titleView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"titleTreatment"]];
 
 	PictureService *pictureService = [[PictureService alloc] init];
@@ -60,8 +61,8 @@ NSString *const kPhotoCellIdentifier = @"photo";
 	self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]
                                               initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addItem:)];
 
-	self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]
-		initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(testApp)];
+//	self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]
+//		initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(testApp)];
 }
 
 - (void) viewDidAppear:(BOOL)animated
@@ -105,7 +106,7 @@ NSString *const kPhotoCellIdentifier = @"photo";
 
     UIImagePickerController *imgpic = [[UIImagePickerController alloc] init];
 	imgpic.delegate = self;
-	imgpic.allowsEditing = YES;
+//	imgpic.allowsEditing = YES;
 
     if ([[actionSheet buttonTitleAtIndex:buttonIndex] isEqualToString:@"Camera"]) {
         imgpic.sourceType = UIImagePickerControllerSourceTypeCamera;
@@ -175,27 +176,27 @@ NSString *const kPhotoCellIdentifier = @"photo";
 {
 	[self dismissViewControllerAnimated:YES completion:^
 	{
-		UIImage *pickedImage = [info objectForKey:UIImagePickerControllerEditedImage];
+		UIImage *pickedImage = [info objectForKey:UIImagePickerControllerOriginalImage];
 
 		if ( pickedImage )
 		{
             // TEST CODE ONLY
-            Template *testTemplate = [[Template alloc] init];
-            testTemplate.longitude = 40.732766;
-            testTemplate.latitude = -73.988252;
-            testTemplate.description = @"Yo yo yo day 2";
-            testTemplate.title = @"Hello World! day 2";
-
-			[PictureService postImage:pickedImage type:@"template" success:^(NSString *urlString) {
-                testTemplate.url = urlString;
-                [PictureService postMetadata:testTemplate type:@"template"];
-            } failure:^(NSError *error) {
-                // ERROR HANDLING
-                NSLog(@"Error = %@",error.description);
-            }];
+//            Template *testTemplate = [[Template alloc] init];
+//            testTemplate.longitude = 40.732766;
+//            testTemplate.latitude = -73.988252;
+//            testTemplate.description = @"Yo yo yo day 2";
+//            testTemplate.title = @"Hello World! day 2";
+//
+//			[PictureService postImage:pickedImage type:@"template" success:^(NSString *urlString) {
+//                testTemplate.url = urlString;
+//                [PictureService postMetadata:testTemplate type:@"template"];
+//            } failure:^(NSError *error) {
+//                // ERROR HANDLING
+//                NSLog(@"Error = %@",error.description);
+//            }];
             
-			//DrawingViewController *dvc = [[DrawingViewController alloc] initWithImage:pickedImage];
-			//[self.navigationController pushViewController:dvc animated:YES];
+			DrawingViewController *dvc = [[DrawingViewController alloc] initWithImage:pickedImage];
+			[self.navigationController pushViewController:dvc animated:YES];
 		}
 	}];
 }
@@ -203,6 +204,7 @@ NSString *const kPhotoCellIdentifier = @"photo";
 //Tells the delegate that the user cancelled the pick operation.
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
 {
+    [self.navigationController popToRootViewControllerAnimated:YES];
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
