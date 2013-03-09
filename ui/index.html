@@ -18,7 +18,34 @@
 		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
 		<![endif]-->
 		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-		<script>
+		<!-- Load Feather code -->
+		<script type="text/javascript" src="http://feather.aviary.com/js/feather.js"></script>
+
+		<!-- Instantiate Feather -->
+		<script type='text/javascript'>
+		   var featherEditor = new Aviary.Feather({
+		       apiKey: 'Q2BjNwHkvUaFctw_V-zEPQ',
+		       apiVersion: 2,
+		       tools: 'effects,stickers,draw',
+			   minimumStyling: true,
+			   PostUrl: 'http://www.drunkspotting.com/callback',
+		       appendTo: '',
+		       onSave: function(imageID, newURL) {
+		           var img = document.getElementById(imageID);
+		           img.src = newURL;
+		       },
+		       onError: function(errorObj) {
+		           alert(errorObj.message);
+		       }
+		   });
+		   function launchEditor(id, src) {
+		       featherEditor.launch({
+		           image: id,
+		           url: src
+		       });
+		      return false;
+		   }
+
       function uploadAjax() {
         var data = new FormData();
 
@@ -31,7 +58,10 @@
           processData: false,
           contentType: false,
           success: function (data) {
-            console.log(data);
+            $('#image1').attr('src', data.url);
+			$('#edit-button').attr('onclick', "return launchEditor('image1', '"+data.url+"');");
+			$('#upload-panel').hide();
+			$('#edit-panel').show();
           },
           error: function () {
             
@@ -60,6 +90,7 @@
 				<!-- ./ page heading -->
 
 				<!-- description -->
+				<div id="upload-panel">
 				<div style="text-align: center; padding: 10px 15px 5px 15px;">
 					<div style="margin-bottom:5px;">
 						<!-- Upload and draw images of inebriated friends, smashed strangers or crunked cats. -->
@@ -97,7 +128,16 @@
 				<div style="text-align:center; margin-bottom:30px;">
 					<a href="draw.html">Or draw on a random drunk</a>
 				</div>
+				</div>
+				<div id="edit-panel" style="display:none;">
+					<div id='injection_site'></div>
 
+					<center><img id='image1' src=''/>
+
+					<!-- Add an edit button, passing the HTML id of the image and the public URL of the image -->
+					<br>
+					<button id="edit-button" onclick="return launchEditor('image1', '');" >Draw On</button></center>
+				</div>
 				<!-- widget -->
 				<div class="well widget" style="background:#acf5d7;padding-bottom:0px">
 					<!-- widget header -->
