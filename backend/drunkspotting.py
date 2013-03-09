@@ -47,34 +47,38 @@ class Gateway:
             [re.compile("/pictures/(\w+)/comments/*$"), self._server.post_picture_comment],
             [re.compile("/pictures/*$"), self._server.post_picture]]
 
-    def process_without_data(self, path, calls):
+    def process_without_data(self, env, calls):
         """Process http requests that do not have data (GET/HEAD/DELETE)
 
         The incoming path is matched against the calls (for example self.heads)
         and if the path matches, the corresponding function will be called,
         with any match groups as additional parameters"""
+        path = env['PATH_INFO']
         print 'GET: ' + path
         for call in calls:
             match = call[0].match(path)
             if match:
-                return call[1](*match.groups())
+                params = list(match.groups())
+                params.append(env)
+                return call[1](*params)
         raise drunkspotting_exceptions.UnknownMethodException(path)
 
-    def process_with_data(self, path, calls, data):
+    def process_with_data(self, env, calls, data):
         """Process http requests that have data (PUT/POST)
 
         The incoming path is matched against the calls (for example self.heads)
         and if the path matches, the corresponding function will be called,
         with any match groups as additional parameters"""
-
+        path = env['PATH_INFO']
         if not path.startswith('/upload'):
             print 'PUT/POST ' + path + ' data: ' + data
         for call in calls:
             match = call[0].match(path)
             if match:
-                # A bit of a pain, but I want the key before the data in the calls
+                # A bit of a pain, but I want the key before the data and env
+                # in the calls
                 params = list(match.groups())
-                params.append(data)
+                params.extend([data, env])
                 return call[1](*params)
         raise drunkspotting_exceptions.UnknownMethodException(path)
 
@@ -91,11 +95,11 @@ class Gateway:
         Exceptions are caught and turned into http return codes"""
         try:
             if env["REQUEST_METHOD"] == "GET":
-                response = self.process_without_data(env["PATH_INFO"], self._gets)
+                response = self.process_without_data(env, self._gets)
             elif env["REQUEST_METHOD"] == "HEAD":
-                response = self.process_without_data(env["PATH_INFO"], self._heads)
+                response = self.process_without_data(env, self._heads)
             elif env["REQUEST_METHOD"] == "DELETE":
-                response = self.process_without_data(env["PATH_INFO"], self._deletes)
+                response = self.process_without_data(env, self._deletes)
             elif env["REQUEST_METHOD"] in ("PUT", "POST"):
                 if env.get('CONTENT_TYPE').find('multipart/form-data') != -1:
                     print 'POST is multipart'
@@ -107,9 +111,9 @@ class Gateway:
                     data = env['wsgi.input'].read(content_length)
 
                 if env["REQUEST_METHOD"] == "PUT":
-                    response = self.process_with_data(env["PATH_INFO"], self._puts, data)
+                    response = self.process_with_data(env, self._puts, data)
                 else:
-                    response = self.process_with_data(env["PATH_INFO"], self._posts, data)
+                    response = self.process_with_data(env, self._posts, data)
 
             else:
                 start_response('500 Unknown verb', [("Content-Type", self._CONTENT_TYPE),

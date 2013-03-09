@@ -32,15 +32,7 @@ NSString *const kPhotoCellIdentifier = @"photo";
     self.feedView.backgroundView.backgroundColor = [UIColor blueColor];
     self.navigationItem.titleView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"titleTextTreatment"]];
 
-	PictureService *pictureService = [[PictureService alloc] init];
-	[pictureService getPictures:20 success:^( NSArray *array )
-	{
-		self.pictures = array;
-		[self.feedView reloadData];
-	} failure:^( NSError *error )
-	{
-		NSLog(@"%@", error );
-	}];
+	[self refreshList:nil];
 }
 
 - (void)viewDidLayoutSubviews
@@ -59,9 +51,29 @@ NSString *const kPhotoCellIdentifier = @"photo";
 	self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]
                                               initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addItem:)];
 
-//	self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]
-//		initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(testApp)];
+	UIBarButtonItem *addButton = [[UIBarButtonItem alloc]
+		initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addItem:)];
 
+	UIBarButtonItem *refreshButton = [[UIBarButtonItem alloc]
+		initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(refreshList:)];
+
+	NSMutableArray * buttons = [[NSMutableArray alloc] init];
+	[buttons addObject:refreshButton];
+	[buttons addObject:addButton];
+	self.navigationItem.rightBarButtonItems = buttons;
+}
+
+- (void)refreshList:(id)refreshList
+{
+	PictureService *pictureService = [[PictureService alloc] init];
+		[pictureService getPictures:20 success:^( NSArray *array )
+		{
+			self.pictures = array;
+			[self.feedView reloadData];
+		} failure:^( NSError *error )
+		{
+			NSLog(@"%@", error );
+		}];
 }
 
 - (void) viewDidAppear:(BOOL)animated
@@ -179,21 +191,6 @@ NSString *const kPhotoCellIdentifier = @"photo";
 
 		if ( pickedImage )
 		{
-            // TEST CODE ONLY
-//            Template *testTemplate = [[Template alloc] init];
-//            testTemplate.longitude = 40.732766;
-//            testTemplate.latitude = -73.988252;
-//            testTemplate.description = @"Yo yo yo day 2";
-//            testTemplate.title = @"Hello World! day 2";
-//
-//			[PictureService postImage:pickedImage type:@"template" success:^(NSString *urlString) {
-//                testTemplate.url = urlString;
-//                [PictureService postMetadata:testTemplate type:@"template"];
-//            } failure:^(NSError *error) {
-//                // ERROR HANDLING
-//                NSLog(@"Error = %@",error.description);
-//            }];
-            
 			DrawingViewController *dvc = [[DrawingViewController alloc] initWithImage:pickedImage];
 			[self.navigationController pushViewController:dvc animated:YES];
 		}

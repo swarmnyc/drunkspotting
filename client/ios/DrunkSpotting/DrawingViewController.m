@@ -7,33 +7,36 @@
 //
 
 #import "DrawingViewController.h"
+#import "PictureService.h"
 
 @interface DrawingViewController ()
 
-@property (nonatomic, strong) UIImage *originalImage;
+@property( nonatomic, strong ) UIImage *originalImage;
 
 @end
 
 @implementation DrawingViewController
 
+- (id)initWithImage:(UIImage *)image
+{
 
-- (id) initWithImage:(UIImage *)image {
-    
-    self = [super init];
-    if (self) {
-        
-        self.originalImage = image;
-    }
-    return self;
+	self = [super init];
+	if ( self )
+	{
+
+		self.originalImage = image;
+	}
+	return self;
 }
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
+	self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+	if ( self )
+	{
+		// Custom initialization
+	}
+	return self;
 }
 
 - (void)viewDidLoad
@@ -72,10 +75,9 @@
 
 - (void)didReceiveMemoryWarning
 {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+	[super didReceiveMemoryWarning];
+	// Dispose of any resources that can be recreated.
 }
-
 
 - (void) done:(id)send {
     
@@ -86,18 +88,27 @@
     
     UIImage *renderedImage = [self renderImage];
     NSData *jpegData = UIImageJPEGRepresentation(renderedImage, 1);
+
+	Picture *picture = [[Picture alloc] init];
+    //	            picture.longitude = 40.732766;
+    //	            picture.latitude = -73.988252;
+	picture.description = @"";
+	picture.title = @"";
+	picture.template_id = 0;
     
-    int64_t delayInSeconds = 2.0;
-    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
-    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-        
-        self.navigationItem.leftBarButtonItem.enabled = YES;
-        
-        self.uploadingOverlay.hidden = YES;
-        [self.activityIndicator stopAnimating];
-        
-        [self.navigationController popToRootViewControllerAnimated:YES];
-    });
+	[PictureService postImage:renderedImage type:@"picture" success:^( NSString *urlString )
+     {
+         picture.url = urlString;
+         [PictureService postMetadata:picture type:@"picture"];
+         self.uploadingOverlay.hidden = YES;
+         [self.activityIndicator stopAnimating];
+         
+         [self.navigationController popToRootViewControllerAnimated:YES];
+     } failure:^( NSError *error )
+     {
+         // ERROR HANDLING
+         NSLog( @"Error = %@", error.description );
+     }];
 }
 
 - (void) cancel:(id)send {
@@ -126,16 +137,20 @@
     
     self.colorPicker.hidden = !self.colorPicker.hidden;
     self.burshSlider.hidden = YES;
+  
 }
 
-- (UIImage *) renderImage {
-    
-    UIGraphicsBeginImageContextWithOptions(self.compositView.bounds.size, self.compositView.opaque, [[UIScreen mainScreen] scale]);
-    [self.compositView.layer renderInContext:UIGraphicsGetCurrentContext()];
-    UIImage * img = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    return img;
+- (UIImage *)renderImage
+{
+
+	UIGraphicsBeginImageContextWithOptions( self.compositView.bounds.size, self.compositView.opaque,
+		[[UIScreen mainScreen] scale] );
+	[self.compositView.layer renderInContext:UIGraphicsGetCurrentContext()];
+	UIImage *img = UIGraphicsGetImageFromCurrentImageContext();
+	UIGraphicsEndImageContext();
+	return img;
 }
+
 
 - (IBAction)setWhiteColor:(id)sender {
     
@@ -202,10 +217,11 @@
     
     self.burshSlider.hidden = YES;
 }
-
-- (IBAction) changeLineWidth:(UISlider *)sender {
     
-    self.drawingLayer.lineWidth = sender.value;
+- (IBAction)changeLineWidth:(UISlider *)sender
+{
+
+	self.drawingLayer.lineWidth = sender.value;
 }
 
 - (IBAction) tap:(id)sender {

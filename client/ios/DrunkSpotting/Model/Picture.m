@@ -29,6 +29,7 @@
     if (self.longitude) [dictionary setObject:[NSNumber numberWithDouble:self.longitude] forKey:@"longitude"];
     if (self.description) [dictionary setObject:self.description forKey:@"description"];
     if (self.url) [dictionary setObject:self.url forKey:@"url"];
+	[dictionary setObject:@"0" forKey:@"template_id"];
     
     return dictionary;
 }
