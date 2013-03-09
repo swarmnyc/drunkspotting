@@ -30,8 +30,6 @@ class Server:
             user=config.config['database_user'],
             password=config.config['database_password'])
 
-        self._tokens = {}
-
         logging.info("Server initialized.")
 
     def ping(self, env):
@@ -269,9 +267,8 @@ class Server:
         salt = binascii.b2a_hex(os.urandom(20))
         sha1 = hashlib.sha1()
         sha1.update(salt)
-        token = sha1.hexdigest()
 
-        return json.dumps({'id': id, 'token': token})
+        return json.dumps({'id': id})
 
     def nuke_it_all(self, env):
         if 'allow-nuking-database' in config.config:
