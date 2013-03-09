@@ -145,8 +145,7 @@ Made with love by Buspreneurs at SXSW '13</span>
 
     <script>
       var ds = {};
-      $.get('http://api.drunkspotting.com/templates/latest/10', function (data) {
-          console.log(data);
+      $.get('http://api.drunkspotting.com/pictures/latest/10', function (data) {
         ds.template = $('#template-listing').html();
         ds.postsHtml = $('#posts');
 
