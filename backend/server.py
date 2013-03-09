@@ -204,7 +204,7 @@ class Server:
               'values(%s, %s, %s, %s, %s, %s, %s, %s, now()) ' \
               'returning id'
 
-        params = (data['title'], '1.2.3.4',
+        params = (data['title'], env['REMOTE_ADDR'],
                 data['latitude'], data['longitude'],
                 data['description'], 0, 0, data['url'])
 
@@ -222,7 +222,7 @@ class Server:
               'values(%s, %s, %s, %s, %s, 0, 0, now()) ' \
               'returning id'
 
-        params = (template, '1.2.3.4',
+        params = (template, env['REMOTE_ADDR'],
                 data['nick'], data['title'],
                 data['description'])
 
@@ -240,7 +240,7 @@ class Server:
               'values(%s, %s, %s, %s, %s, 0, 0, now()) ' \
               'returning id'
 
-        params = (picture, '1.2.3.4',
+        params = (picture, env['REMOTE_ADDR'],
                 data['nick'], data['title'],
                 data['description'])
 
@@ -260,7 +260,7 @@ class Server:
               'values(%s, %s, %s, %s, 0, 0, %s, now()) ' \
               'returning id'
 
-        params = (data['template_id'], data['title'], '1.2.3.4',
+        params = (data['template_id'], data['title'], env['REMOTE_ADDR'],
                   data['description'], data['url'])
 
         id = database.execute_non_query_returning_id(
