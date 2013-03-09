@@ -73,6 +73,11 @@
     self.slider.value = self.drawingLayer.lineWidth;
 }
 
+- (void) viewDidLayoutSubviews
+{
+    [self.compositView setFrame:CGRectMake(0, 0, [[UIScreen mainScreen] bounds].size.width, [[UIScreen mainScreen] bounds].size.width)];
+}
+
 - (void)didReceiveMemoryWarning
 {
 	[super didReceiveMemoryWarning];
@@ -142,7 +147,6 @@
 
 - (UIImage *)renderImage
 {
-
 	UIGraphicsBeginImageContextWithOptions( self.compositView.bounds.size, self.compositView.opaque,
 		[[UIScreen mainScreen] scale] );
 	[self.compositView.layer renderInContext:UIGraphicsGetCurrentContext()];
