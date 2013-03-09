@@ -8,6 +8,7 @@ drunkspotting.load_images = function(){
 	
 		ds.template = $('#template-listing').html();
 		ds.postsHtml = $('#posts');
+		ds.postsLoadingHtml = $('#posts_loading');
 		
 		// Clear list on refresh
 		$('#posts').html('');
@@ -23,9 +24,13 @@ drunkspotting.load_images = function(){
 			itemHtml = temp.replace('{{src_link}}', data[i].url);
 			itemHtml = itemHtml.replace('{{src}}', data[i].url);
 			
+			
+			//$('#posts').append(itemHtml);
+			
 			// wat
 			if(i % 3 == 0){
-				ds.postsHtml.append('<div id="row-' + i + '" class="row-fluid">' + itemHtml + '</div>');
+				// row row row new line
+				ds.postsHtml.append('<tr id="row-' + i + '" class="row-fluid">' + itemHtml + '</tr>');
 			}else{
 				var rowId = i - (i % 3);
 				$('#row-' + rowId).append(itemHtml);

@@ -121,7 +121,10 @@
 					</div>
 					
 					<!-- images container -->
-					<div id="posts"></div>
+					<table id="posts"></table>
+					
+					<!-- put new set of images here first so the screen doesnt flash -->
+					<div id="posts_loading"></div>
 					
 					<div class="widget-header load-more">
 						<h3 class="title" style="color:#ffffff;text-shadow:none; font-size:28px;margin-bottom:0px"><!-- <a href="#">LOAD MORE DRUNKS</a> --></h3>
@@ -161,9 +164,9 @@
 		<!-- Templates -->
 		<div style='display:none'>
 			<script type='text/template' id='template-listing'>
-				<div class='span4 item'>
-					<a href='{{src_link}}' target='_blank'><img class='img-featured' src='{{src}}'></a>
-				</div>
+				<td>
+					<a href='{{src_link}}' target='_blank'><img src='{{src}}'></a>
+				</td>
 			</script>
 		</div>
 		
