@@ -30,7 +30,7 @@ NSString *const kPhotoCellIdentifier = @"photo";
 - (void)viewDidLoad
 {
     self.feedView.backgroundView.backgroundColor = [UIColor blueColor];
-    self.navigationItem.titleView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"titleTreatment"]];
+    self.navigationItem.titleView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"titleTextTreatment"]];
 
 	PictureService *pictureService = [[PictureService alloc] init];
 	[pictureService getPictures:20 success:^( NSArray *array )
