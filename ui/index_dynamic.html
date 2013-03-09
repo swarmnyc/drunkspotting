@@ -17,6 +17,12 @@
 		<!--[if lt IE 9]>
 		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
 		<![endif]-->
+		<style type='text/css'>
+			#posts img {
+				height: default;
+				max-width: 80%;
+			}
+		</style>
 	</head>
 	<body>
   <div id="fb-root"></div>
@@ -144,28 +150,37 @@ Made with love by Buspreneurs at SXSW '13</span>
 		<script src="library/js/loader.js"></script>
 
     <script>
-      var ds = {};
-      $.get('http://api.drunkspotting.com/pictures/latest/10', function (data) {
-        ds.template = $('#template-listing').html();
-        ds.postsHtml = $('#posts');
+	 	var load_ds_images = function(){
 
-        var temp, itemHtml;
-        window.data = data;
-
-        for (var i = 0; i < data.length; i++) {
-          temp = ds.template;
-
-          itemHtml = temp.replace('{{title}}', data[i].description);
-          itemHtml = itemHtml.replace('{{src}}', ' src="' + data[i].url + '" ');
-
-          if (i % 3 == 0) {
-            ds.postsHtml.append('<div id="row-' + i + '" class="row-fluid">' + itemHtml + '</div>');
-          } else {
-            var rowId = i - (i % 3);
-            $('#row-' + rowId).append(itemHtml);
-          }
-        }
-      });
+      	var ds = {};
+      	$.get('http://api.drunkspotting.com/pictures/latest/10', function (data) {
+      	  ds.template = $('#template-listing').html();
+      	  ds.postsHtml = $('#posts');
+      	  
+			  // Clear list on refresh
+			  $('#posts').html('');
+	
+	        var temp, itemHtml;
+	        window.data = data;
+				
+				// For each ds image, append html
+	        for (var i = 0; i < data.length; i++) {
+	          temp = ds.template;
+	
+	          itemHtml = temp.replace('{{title}}', data[i].description);
+	          itemHtml = itemHtml.replace('{{src}}', ' src="' + data[i].url + '" ');
+	
+	          if (i % 3 == 0) {
+	            ds.postsHtml.append('<div id="row-' + i + '" class="row-fluid">' + itemHtml + '</div>');
+	          } else {
+	            var rowId = i - (i % 3);
+	            $('#row-' + rowId).append(itemHtml);
+	          }
+	        }
+	      });
+		}
+		load_ds_images();
+		window.ds_interval = setInterval(load_ds_images, 5000);
     </script>
 
 <div id="template-listing" style="display:none;">
