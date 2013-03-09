@@ -30,11 +30,9 @@ class Server:
             user=config.config['database_user'],
             password=config.config['database_password'])
 
-        self._tokens = {}
-
         logging.info("Server initialized.")
 
-    def ping(self):
+    def ping(self, env):
         return 'pong'
 
     def _upload(self, data, folder):
@@ -57,13 +55,13 @@ class Server:
         print url
         return json.dumps({'url': url})
 
-    def upload_template(self, data):
+    def upload_template(self, data, env):
         return self._upload(data, 'templates')
 
-    def upload_picture(self, data):
+    def upload_picture(self, data, env):
         return self._upload(data, 'pictures')
 
-    def get_template(self, template):
+    def get_template(self, template, env):
         template = int(template)
 
         # TODO: Merge with get_latest_templates
@@ -83,7 +81,7 @@ class Server:
             'rating_count': row[5], 'url': row[6],
             'time_posted': row[7].isoformat()})
 
-    def get_picture(self, picture):
+    def get_picture(self, picture, env):
         picture = int(picture)
 
         sql = 'select template_id, latitude, longitude, ' \
@@ -106,7 +104,7 @@ class Server:
             'rating_count': row[6], 'url': row[7],
             'time_posted': row[8].isoformat()})
 
-    def get_latest_template_comments(self, template, count):
+    def get_latest_template_comments(self, template, count, env):
         template = int(template)
         count = int(count)
 
@@ -126,7 +124,7 @@ class Server:
 
         return json.dumps(comments)
 
-    def get_latest_picture_comments(self, picture, count):
+    def get_latest_picture_comments(self, picture, count, env):
         # TODO: Ugh, near copy of get_latest_template_comments
         picture = int(picture)
         count = int(count)
@@ -147,7 +145,7 @@ class Server:
 
         return json.dumps(comments)
 
-    def get_latest_templates(self, count):
+    def get_latest_templates(self, count, env):
         count = int(count)
 
         sql = 'select id, title, latitude, longitude, description, rating, ' \
@@ -167,7 +165,7 @@ class Server:
 
         return json.dumps(templates)
 
-    def get_latest_pictures(self, count):
+    def get_latest_pictures(self, count, env):
         count = int(count)
 
         sql = 'select pictures.id, template_id, latitude, longitude, ' \
@@ -191,20 +189,20 @@ class Server:
 
         return json.dumps(templates)
 
-    def get_tags(self):
+    def get_tags(self, env):
         pass
 
-    def find_by_tags(self):
+    def find_by_tags(self, env):
         pass
 
-    def post_template(self, data):
+    def post_template(self, data, env):
         data = json.loads(data)
         sql = 'insert into templates(title, ip, latitude, longitude, ' \
               'description, rating, rating_count, url, time_posted) ' \
               'values(%s, %s, %s, %s, %s, %s, %s, %s, now()) ' \
               'returning id'
 
-        params = (data['title'], '1.2.3.4',
+        params = (data['title'], env['REMOTE_ADDR'],
                 data['latitude'], data['longitude'],
                 data['description'], 0, 0, data['url'])
 
@@ -213,7 +211,7 @@ class Server:
 
         return '{"id": %d}' % (id, )
 
-    def post_template_comment(self, template, data):
+    def post_template_comment(self, template, data, env):
         # TODO: Verify template id
         template = int(template)
         data = json.loads(data)
@@ -222,7 +220,7 @@ class Server:
               'values(%s, %s, %s, %s, %s, 0, 0, now()) ' \
               'returning id'
 
-        params = (template, '1.2.3.4',
+        params = (template, env['REMOTE_ADDR'],
                 data['nick'], data['title'],
                 data['description'])
 
@@ -231,7 +229,7 @@ class Server:
 
         return '{"id": %d}' % (id, )
 
-    def post_picture_comment(self, picture, data):
+    def post_picture_comment(self, picture, data, env):
         # TODO: Ugh, almost exact copy of post_template_comment - refactor
         picture = int(picture)
         data = json.loads(data)
@@ -240,7 +238,7 @@ class Server:
               'values(%s, %s, %s, %s, %s, 0, 0, now()) ' \
               'returning id'
 
-        params = (picture, '1.2.3.4',
+        params = (picture, env['REMOTE_ADDR'],
                 data['nick'], data['title'],
                 data['description'])
 
@@ -249,10 +247,10 @@ class Server:
 
         return '{"id": %d}' % (id, )
 
-    def post_tag(self, data):
+    def post_tag(self, data, env):
         pass
 
-    def post_picture(self, data):
+    def post_picture(self, data, env):
         # TODO: Verify that the template ID is ok
         data = json.loads(data)
         sql = 'insert into pictures(template_id, title, ip, ' \
@@ -260,7 +258,7 @@ class Server:
               'values(%s, %s, %s, %s, 0, 0, %s, now()) ' \
               'returning id'
 
-        params = (data['template_id'], data['title'], '1.2.3.4',
+        params = (data['template_id'], data['title'], env['REMOTE_ADDR'],
                   data['description'], data['url'])
 
         id = database.execute_non_query_returning_id(
@@ -269,11 +267,10 @@ class Server:
         salt = binascii.b2a_hex(os.urandom(20))
         sha1 = hashlib.sha1()
         sha1.update(salt)
-        token = sha1.hexdigest()
 
-        return json.dumps({'id': id, 'token': token})
+        return json.dumps({'id': id})
 
-    def nuke_it_all(self):
+    def nuke_it_all(self, env):
         if 'allow-nuking-database' in config.config:
             if config.config['allow-nuking-database'] == 'yes-be-careful':
                 database.execute_non_query(
