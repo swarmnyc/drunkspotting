@@ -205,13 +205,13 @@ class TestSimpleNetworked(unittest.TestCase):
         # Upload a template
         logo = open('data/logo.jpg', 'r').read()
         (status, reason, data) = httpcall.call(
-            "POST", self.url + '/upload_raw_template', logo)
+            "POST", self.url + '/upload_template', logo)
         self.assertEqual((status, reason), (200, 'OK'))
 
         # Upload a picture
         logo = open('data/logo.jpg', 'r').read()
         (status, reason, data) = httpcall.call(
-            "POST", self.url + '/upload_raw_picture', logo)
+            "POST", self.url + '/upload_picture', logo)
         self.assertEqual((status, reason), (200, 'OK'))
 
 

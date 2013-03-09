@@ -57,12 +57,6 @@ class Server:
         print url
         return json.dumps({'url': url})
 
-    def upload_raw_template(self, data):
-        return self._upload(data, 'templates')
-
-    def upload_raw_picture(self, data):
-        return self._upload(data, 'pictures')
-
     def upload_template(self, data):
         return self._upload(data, 'templates')
 
