@@ -31,15 +31,7 @@ NSString *const kPhotoCellIdentifier = @"photo";
 {
     self.navigationItem.titleView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"titleTreatment"]];
 
-	PictureService *pictureService = [[PictureService alloc] init];
-	[pictureService getPictures:20 success:^( NSArray *array )
-	{
-		self.pictures = array;
-		[self.feedView reloadData];
-	} failure:^( NSError *error )
-	{
-		NSLog(@"%@", error );
-	}];
+	[self refreshList:nil];
 }
 
 - (void)viewDidLayoutSubviews
@@ -55,8 +47,29 @@ NSString *const kPhotoCellIdentifier = @"photo";
 	[self.view addSubview:feedView];
 	[feedView reloadData];
 
-	self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]
-                                              initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addItem:)];
+	UIBarButtonItem *addButton = [[UIBarButtonItem alloc]
+		initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addItem:)];
+
+	UIBarButtonItem *refreshButton = [[UIBarButtonItem alloc]
+		initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(refreshList:)];
+
+	NSMutableArray * buttons = [[NSMutableArray alloc] init];
+	[buttons addObject:refreshButton];
+	[buttons addObject:addButton];
+	self.navigationItem.rightBarButtonItems = buttons;
+}
+
+- (void)refreshList:(id)refreshList
+{
+	PictureService *pictureService = [[PictureService alloc] init];
+		[pictureService getPictures:20 success:^( NSArray *array )
+		{
+			self.pictures = array;
+			[self.feedView reloadData];
+		} failure:^( NSError *error )
+		{
+			NSLog(@"%@", error );
+		}];
 }
 
 - (void) viewDidAppear:(BOOL)animated
