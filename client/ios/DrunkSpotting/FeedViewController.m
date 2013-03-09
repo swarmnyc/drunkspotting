@@ -187,24 +187,10 @@ NSString *const kPhotoCellIdentifier = @"photo";
 
 		if ( pickedImage )
 		{
-            // TEST CODE ONLY
-            Picture *picture = [[Picture alloc] init];
-            picture.longitude = 40.732766;
-            picture.latitude = -73.988252;
-            picture.description = @"";
-            picture.title = @"";
-            picture.template_id = 0;
 
-			[PictureService postImage:pickedImage type:@"picture" success:^(NSString *urlString) {
-                picture.url = urlString;
-				[PictureService postMetadata:picture type:@"picture"];
-            } failure:^(NSError *error) {
-                // ERROR HANDLING
-                NSLog(@"Error = %@",error.description);
-            }];
-            
-			//DrawingViewController *dvc = [[DrawingViewController alloc] initWithImage:pickedImage];
-			//[self.navigationController pushViewController:dvc animated:YES];
+
+			DrawingViewController *dvc = [[DrawingViewController alloc] initWithImage:pickedImage];
+			[self.navigationController pushViewController:dvc animated:YES];
 		}
 	}];
 }
