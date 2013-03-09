@@ -98,59 +98,10 @@
 						to pay for.
 					</div>
 					
-          <div id="posts">
-					<!-- <div class="row-fluid"> -->
-						<!-- <div class="span4 item"> -->
-							<!-- <h3 style="color:#0088cc; margin-top:10px;line-height:25px">The Adventure of Rujak Uleg</h3> -->
-            <!-- <a href="#"><img class="img-featured" src="http://itsnotevenawkwardanymore.files.wordpress.com/2012/02/drunk-dude.jpg"></a> -->
-							<!-- <p class="meta large" style="border:none;"> -->
-								<!-- [> <span class="date">17s ago</span> <] -->
-							<!-- </p> -->
-						<!-- </div> -->
-						<!-- <div class="span4 item"> -->
-							<!-- <h3 style="color:#0088cc; margin-top:10px;line-height:25px">The Adventure of Rujak Uleg</h3> -->
-            <!-- <a href="#"><img class="img-featured" src="http://itsnotevenawkwardanymore.files.wordpress.com/2012/02/drunk-dude.jpg"></a> -->
-							<!-- <p class="meta large" style="border:none;"> -->
-								<!-- [> <span class="date">17s ago</span> <] -->
-							<!-- </p> -->
-						<!-- </div> -->
-						<!-- <div class="span4 item"> -->
-							<!-- <h3 style="color:#0088cc; margin-top:10px;line-height:25px">The Adventure of Rujak Uleg</h3> -->
-              <!-- <a href="#"><img class="img-featured" src="http://itsnotevenawkwardanymore.files.wordpress.com/2012/02/drunk-dude.jpg"></a> -->
-							<!-- <p class="meta large" style="border:none;"> -->
-								<!-- [> <span class="date">17s ago</span> <] -->
-							<!-- </p> -->
-						<!-- </div> -->
-          <!-- </div> -->
-					<!-- <div class="row-fluid"> -->
-						<!-- <div class="span4 item"> -->
-							<!-- <h3 style="color:#0088cc; margin-top:10px;line-height:25px">The Adventure of Rujak Uleg</h3> -->
-            <!-- <a href="#"><img class="img-featured" src="http://itsnotevenawkwardanymore.files.wordpress.com/2012/02/drunk-dude.jpg"></a> -->
-							<!-- <p class="meta large" style="border:none;"> -->
-								<!-- [> <span class="date">17s ago</span> <] -->
-							<!-- </p> -->
-						<!-- </div> -->
-						<!-- <div class="span4 item"> -->
-							<!-- <h3 style="color:#0088cc; margin-top:10px;line-height:25px">The Adventure of Rujak Uleg</h3> -->
-            <!-- <a href="#"><img class="img-featured" src="http://itsnotevenawkwardanymore.files.wordpress.com/2012/02/drunk-dude.jpg"></a> -->
-							<!-- <p class="meta large" style="border:none;"> -->
-								<!-- [> <span class="date">17s ago</span> <] -->
-							<!-- </p> -->
-						<!-- </div> -->
-						<!-- <div class="span4 item"> -->
-							<!-- <h3 style="color:#0088cc; margin-top:10px;line-height:25px">The Adventure of Rujak Uleg</h3> -->
-            <!-- <a href="#"><img class="img-featured" src="http://itsnotevenawkwardanymore.files.wordpress.com/2012/02/drunk-dude.jpg"></a> -->
-							<!-- <p class="meta large" style="border:none;"> -->
-								<!-- [> <span class="date">17s ago</span> <] -->
-							<!-- </p> -->
-						<!-- </div> -->
-          </div>
-					</div>
-										<div class="widget-header load-more">
+          <div id="posts"></div>
+					<div class="widget-header load-more">
 						<h3 class="title" style="color:#ffffff;text-shadow:none; font-size:28px;margin-bottom:0px"><!-- <a href="#">LOAD MORE DRUNKS</a> --></h3>
-						<div class="widget-nav">
-							
-						</div>
+						<div class="widget-nav"></div>
 					</div>
 					
 				</div>
@@ -162,9 +113,6 @@
 
 Made with love by Buspreneurs at SXSW '13</span>							
 </div>
-				
-
-
 			</div>
 			<!-- end main content -->
 			
@@ -201,17 +149,21 @@ Made with love by Buspreneurs at SXSW '13</span>
           console.log(data);
         ds.template = $('#template-listing').html();
         ds.postsHtml = $('#posts');
-        for (var i = 0; i < data.length; i++) {
-          var temp = ds.template;
 
-          var itemHtml = temp.replace('{{title}}', data[i].description);
-          itemHtml.replace('{{src}}', ' src="' + data[i].url + '" ');
+        var temp, itemHtml;
+        window.data = data;
+
+        for (var i = 0; i < data.length; i++) {
+          temp = ds.template;
+
+          itemHtml = temp.replace('{{title}}', data[i].description);
+          itemHtml = itemHtml.replace('{{src}}', ' src="' + data[i].url + '" ');
 
           if (i % 3 == 0) {
             ds.postsHtml.append('<div id="row-' + i + '" class="row-fluid">' + itemHtml + '</div>');
           } else {
             var rowId = i - (i % 3);
-            $('row-' + rowId).append(itemHtml);
+            $('#row-' + rowId).append(itemHtml);
           }
         }
       });
