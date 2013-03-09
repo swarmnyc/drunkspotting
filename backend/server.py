@@ -182,11 +182,17 @@ class Server:
     def get_latest_pictures(self, count, env):
         count = int(count)
 
-        sql = 'select pictures.id, template_id, latitude, longitude, ' \
+        # sql = 'select pictures.id, template_id, latitude, longitude, ' \
+        #       'pictures.title, pictures.description,' \
+        #       'pictures.rating, pictures.rating_count,' \
+        #       'pictures.url, pictures.time_posted from pictures, templates ' \
+        #       'where template_id = templates.id ' \
+        #       'order by pictures.time_posted desc limit %s'
+
+        sql = 'select pictures.id, 0, 0, 0, ' \
               'pictures.title, pictures.description,' \
               'pictures.rating, pictures.rating_count,' \
-              'pictures.url, pictures.time_posted from pictures, templates ' \
-              'where template_id = templates.id ' \
+              'pictures.url, pictures.time_posted from pictures ' \
               'order by pictures.time_posted desc limit %s'
 
         rows = database.execute_all_rows(self._conn, sql, (count, ))
