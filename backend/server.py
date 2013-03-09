@@ -84,21 +84,35 @@ class Server:
     def get_picture(self, picture, env):
         picture = int(picture)
 
-        sql = 'select template_id, latitude, longitude, ' \
+        # sql = 'select template_id, latitude, longitude, ' \
+        #       'pictures.title, pictures.description,' \
+        #       'pictures.rating, pictures.rating_count,' \
+        #       'pictures.url, pictures.time_posted from pictures, templates ' \
+        #       'where template_id = templates.id ' \
+        #       'and pictures.id = %s'
+
+        sql = 'select template_id, 0, 0, ' \
               'pictures.title, pictures.description,' \
               'pictures.rating, pictures.rating_count,' \
-              'pictures.url, pictures.time_posted from pictures, templates ' \
-              'where template_id = templates.id ' \
-              'and pictures.id = %s'
+              'pictures.url, pictures.time_posted from pictures ' \
+              'where pictures.id = %s'
 
         rows = database.execute_all_rows(self._conn, sql, (picture, ))
         if not rows:
             raise drunkspotting_exceptions.NotFoundException('Not found')
         row = rows[0]
 
+        # return json.dumps({
+        #     'template_id': row[0],
+        #     'latitude': row[1], 'longitude': row[2],
+        #     'title': row[3],
+        #     'description': row[4], 'rating': row[5],
+        #     'rating_count': row[6], 'url': row[7],
+        #     'time_posted': row[8].isoformat()})
+
         return json.dumps({
             'template_id': row[0],
-            'latitude': row[1], 'longitude': row[2],
+            'latitude': 12.34, 'longitude': 23.34,
             'title': row[3],
             'description': row[4], 'rating': row[5],
             'rating_count': row[6], 'url': row[7],
@@ -168,11 +182,17 @@ class Server:
     def get_latest_pictures(self, count, env):
         count = int(count)
 
-        sql = 'select pictures.id, template_id, latitude, longitude, ' \
+        # sql = 'select pictures.id, template_id, latitude, longitude, ' \
+        #       'pictures.title, pictures.description,' \
+        #       'pictures.rating, pictures.rating_count,' \
+        #       'pictures.url, pictures.time_posted from pictures, templates ' \
+        #       'where template_id = templates.id ' \
+        #       'order by pictures.time_posted desc limit %s'
+
+        sql = 'select pictures.id, 0, 0, 0, ' \
               'pictures.title, pictures.description,' \
               'pictures.rating, pictures.rating_count,' \
-              'pictures.url, pictures.time_posted from pictures, templates ' \
-              'where template_id = templates.id ' \
+              'pictures.url, pictures.time_posted from pictures ' \
               'order by pictures.time_posted desc limit %s'
 
         rows = database.execute_all_rows(self._conn, sql, (count, ))
