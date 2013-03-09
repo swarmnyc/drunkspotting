@@ -7,7 +7,7 @@ gevent.monkey.patch_all()
 import unittest
 import subprocess
 import time
-import cjson
+import json
 
 from .. import httpcall
 
@@ -59,8 +59,8 @@ class TestSimpleNetworked(unittest.TestCase):
             }
 
         (status, reason, data) = httpcall.call(
-            "POST", self.url + '/templates/', cjson.encode(req))
-        template1_id = cjson.decode(data)['id']
+            "POST", self.url + '/templates/', json.dumps(req))
+        template1_id = json.loads(data)['id']
         self.assertEqual((status, reason), (200, 'OK'))
 
         # Add another template
@@ -73,29 +73,29 @@ class TestSimpleNetworked(unittest.TestCase):
             }
 
         (status, reason, data) = httpcall.call(
-            "POST", self.url + '/templates/', cjson.encode(req))
-        template2_id = cjson.decode(data)['id']
+            "POST", self.url + '/templates/', json.dumps(req))
+        template2_id = json.loads(data)['id']
         self.assertEqual((status, reason), (200, 'OK'))
 
         # Get a list of the templates
         (status, reason, data) = httpcall.call(
-            "GET", self.url + '/templates/latest/10', cjson.encode(req))
+            "GET", self.url + '/templates/latest/10', json.dumps(req))
         self.assertEqual((status, reason), (200, 'OK'))
-        data = cjson.decode(data)
+        data = json.loads(data)
         self.assertEqual(len(data), 2)
 
         (status, reason, data) = httpcall.call(
-            "GET", self.url + '/templates/latest/1', cjson.encode(req))
+            "GET", self.url + '/templates/latest/1', json.dumps(req))
         self.assertEqual((status, reason), (200, 'OK'))
-        data = cjson.decode(data)
+        data = json.loads(data)
         self.assertEqual(len(data), 1)
 
         # Get one of the templates
         (status, reason, data) = httpcall.call(
             "GET", self.url + '/templates/%d' % (template2_id, ),
-            cjson.encode(req))
+            json.dumps(req))
         self.assertEqual((status, reason), (200, 'OK'))
-        data = cjson.decode(data)
+        data = json.loads(data)
         self.assertEqual(data['title'], 'template 2')
 
         # Add two pictures for the first template
@@ -107,8 +107,8 @@ class TestSimpleNetworked(unittest.TestCase):
             }
 
         (status, reason, data) = httpcall.call(
-            "POST", self.url + '/pictures/', cjson.encode(req))
-        picture1_id = cjson.decode(data)['id']
+            "POST", self.url + '/pictures/', json.dumps(req))
+        picture1_id = json.loads(data)['id']
         self.assertEqual((status, reason), (200, 'OK'))
 
         req = {
@@ -119,8 +119,8 @@ class TestSimpleNetworked(unittest.TestCase):
             }
 
         (status, reason, data) = httpcall.call(
-            "POST", self.url + '/pictures/', cjson.encode(req))
-        picture2_id = cjson.decode(data)['id']
+            "POST", self.url + '/pictures/', json.dumps(req))
+        picture2_id = json.loads(data)['id']
         self.assertEqual((status, reason), (200, 'OK'))
 
         # And one picture for the second template
@@ -132,23 +132,23 @@ class TestSimpleNetworked(unittest.TestCase):
             }
 
         (status, reason, data) = httpcall.call(
-            "POST", self.url + '/pictures/', cjson.encode(req))
-        picture3_id = cjson.decode(data)['id']
+            "POST", self.url + '/pictures/', json.dumps(req))
+        picture3_id = json.loads(data)['id']
         self.assertEqual((status, reason), (200, 'OK'))
 
         # Get a list of the pictures
         (status, reason, data) = httpcall.call(
-            "GET", self.url + '/pictures/latest/10', cjson.encode(req))
+            "GET", self.url + '/pictures/latest/10', json.dumps(req))
         self.assertEqual((status, reason), (200, 'OK'))
-        data = cjson.decode(data)
+        data = json.loads(data)
         self.assertEqual(len(data), 3)
 
         # Get one of the pictures
         (status, reason, data) = httpcall.call(
             "GET", self.url + '/pictures/%d' % (picture2_id, ),
-            cjson.encode(req))
+            json.dumps(req))
         self.assertEqual((status, reason), (200, 'OK'))
-        data = cjson.decode(data)
+        data = json.loads(data)
         self.assertEqual(data['title'], 'picture 1.2')
         self.assertEqual(data['latitude'], 12.34)
         self.assertEqual(data['longitude'], 23.34)
@@ -162,8 +162,8 @@ class TestSimpleNetworked(unittest.TestCase):
 
         (status, reason, data) = httpcall.call(
             "POST", self.url + '/templates/%d/comments' % (template1_id, ),
-            cjson.encode(req))
-        comment1_id = cjson.decode(data)['id']
+            json.dumps(req))
+        comment1_id = json.loads(data)['id']
         self.assertEqual((status, reason), (200, 'OK'))
 
         # And to one of the pictures
@@ -175,17 +175,17 @@ class TestSimpleNetworked(unittest.TestCase):
 
         (status, reason, data) = httpcall.call(
             "POST", self.url + '/pictures/%d/comments' % (picture3_id, ),
-            cjson.encode(req))
-        comment1_id = cjson.decode(data)['id']
+            json.dumps(req))
+        comment1_id = json.loads(data)['id']
         self.assertEqual((status, reason), (200, 'OK'))
 
         # Read back the template comments
         (status, reason, data) = httpcall.call(
             "GET", self.url + '/templates/%d/comments/latest/10' %
             (template1_id, ),
-            cjson.encode(req))
+            json.dumps(req))
         self.assertEqual((status, reason), (200, 'OK'))
-        data = cjson.decode(data)
+        data = json.loads(data)
         self.assertEqual(len(data), 1)
         self.assertEqual(data[0]['nick'], 'gandalf')
         self.assertEqual(data[0]['title'], 'template 1 comment title')
@@ -194,9 +194,9 @@ class TestSimpleNetworked(unittest.TestCase):
         (status, reason, data) = httpcall.call(
             "GET", self.url + '/pictures/%d/comments/latest/10' %
             (picture3_id, ),
-            cjson.encode(req))
+            json.dumps(req))
         self.assertEqual((status, reason), (200, 'OK'))
-        data = cjson.decode(data)
+        data = json.loads(data)
         self.assertEqual(len(data), 1)
         self.assertEqual(data[0]['nick'], 'drunkspotting')
         self.assertEqual(data[0]['description'],
@@ -205,13 +205,13 @@ class TestSimpleNetworked(unittest.TestCase):
         # Upload a template
         logo = open('data/logo.jpg', 'r').read()
         (status, reason, data) = httpcall.call(
-            "POST", self.url + '/upload_raw_template', logo)
+            "POST", self.url + '/upload_template', logo)
         self.assertEqual((status, reason), (200, 'OK'))
 
         # Upload a picture
         logo = open('data/logo.jpg', 'r').read()
         (status, reason, data) = httpcall.call(
-            "POST", self.url + '/upload_raw_picture', logo)
+            "POST", self.url + '/upload_picture', logo)
         self.assertEqual((status, reason), (200, 'OK'))
 
 

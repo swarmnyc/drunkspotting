@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 import logging
-import cjson
+import json
 import hashlib
 import binascii
 import psycopg2
@@ -37,49 +37,31 @@ class Server:
     def ping(self):
         return 'pong'
 
-    def upload_raw_template(self, data):
-        return self.upload_template(data)
+    def _upload(self, data, folder):
+        salt = binascii.b2a_hex(os.urandom(20))
+        sha1 = hashlib.sha1()
+        sha1.update(salt)
+        sha1.update(str(datetime.datetime.now()))
+        img = sha1.hexdigest() + ".jpg"
 
-    def upload_raw_picture(self, data):
-        return self.upload_picture(data)
+        blob_service = azure.storage.BlobService(
+            account_name=config.config['azure_account'],
+            account_key=config.config['azure_key'])
+        blob_service.create_container(folder,
+                                      x_ms_blob_public_access='blob')
+        blob_service.put_blob(folder, img,
+                              data, x_ms_blob_type='BlockBlob',
+                              x_ms_blob_content_type='image/jpeg')
+
+        url = config.config['upload_url'] + folder + '/' + img
+        print url
+        return json.dumps({'url': url})
 
     def upload_template(self, data):
-        with open('test.jpg', 'wb') as f:
-            f.write(data)
-
-        salt = binascii.b2a_hex(os.urandom(20))
-        sha1 = hashlib.sha1()
-        sha1.update(salt)
-        sha1.update(str(datetime.datetime.now()))
-        img = sha1.hexdigest() + ".jpg"
-
-        blob_service = azure.storage.BlobService(
-            account_name=config.config['azure_account'],
-            account_key=config.config['azure_key'])
-        blob_service.create_container('templates')
-        blob_service.put_blob('templates', img,
-                              data, x_ms_blob_type='BlockBlob')
-
-        url = config.config['upload_url'] + 'templates/' + img
-        print url
-        return cjson.encode({'url': url})
+        return self._upload(data, 'templates')
 
     def upload_picture(self, data):
-        salt = binascii.b2a_hex(os.urandom(20))
-        sha1 = hashlib.sha1()
-        sha1.update(salt)
-        sha1.update(str(datetime.datetime.now()))
-        img = sha1.hexdigest() + ".jpg"
-
-        blob_service = azure.storage.BlobService(
-            account_name=config.config['azure_account'],
-            account_key=config.config['azure_key'])
-        blob_service.create_container('pictures')
-        blob_service.put_blob('pictures', img,
-                              data, x_ms_blob_type='BlockBlob')
-
-        url = config.config['upload_url'] + 'pictures/' + img
-        return cjson.encode({'url': url})
+        return self._upload(data, 'pictures')
 
     def get_template(self, template):
         template = int(template)
@@ -94,7 +76,7 @@ class Server:
             raise drunkspotting_exceptions.NotFoundException('Not found')
 
         row = rows[0]
-        return cjson.encode({
+        return json.dumps({
             'title': row[0],
             'latitude': row[1], 'longitude': row[2],
             'description': row[3], 'rating': row[4],
@@ -116,7 +98,7 @@ class Server:
             raise drunkspotting_exceptions.NotFoundException('Not found')
         row = rows[0]
 
-        return cjson.encode({
+        return json.dumps({
             'template_id': row[0],
             'latitude': row[1], 'longitude': row[2],
             'title': row[3],
@@ -142,7 +124,7 @@ class Server:
                 'up_votes': row[4], 'down_votes': row[5],
                 'time_posted': row[6].isoformat()})
 
-        return cjson.encode(comments)
+        return json.dumps(comments)
 
     def get_latest_picture_comments(self, picture, count):
         # TODO: Ugh, near copy of get_latest_template_comments
@@ -163,7 +145,7 @@ class Server:
                 'up_votes': row[4], 'down_votes': row[5],
                 'time_posted': row[6].isoformat()})
 
-        return cjson.encode(comments)
+        return json.dumps(comments)
 
     def get_latest_templates(self, count):
         count = int(count)
@@ -183,7 +165,7 @@ class Server:
                 'rating_count': row[6], 'url': row[7],
                 'time_posted': row[8].isoformat()})
 
-        return cjson.encode(templates)
+        return json.dumps(templates)
 
     def get_latest_pictures(self, count):
         count = int(count)
@@ -207,7 +189,7 @@ class Server:
                 'rating_count': row[7], 'url': row[8],
                 'time_posted': row[9].isoformat()})
 
-        return cjson.encode(templates)
+        return json.dumps(templates)
 
     def get_tags(self):
         pass
@@ -216,7 +198,7 @@ class Server:
         pass
 
     def post_template(self, data):
-        data = cjson.decode(data)
+        data = json.loads(data)
         sql = 'insert into templates(title, ip, latitude, longitude, ' \
               'description, rating, rating_count, url, time_posted) ' \
               'values(%s, %s, %s, %s, %s, %s, %s, %s, now()) ' \
@@ -234,7 +216,7 @@ class Server:
     def post_template_comment(self, template, data):
         # TODO: Verify template id
         template = int(template)
-        data = cjson.decode(data)
+        data = json.loads(data)
         sql = 'insert into comments(template_id, ip, nick,' \
               'title, description, up_votes, down_votes, time_posted) ' \
               'values(%s, %s, %s, %s, %s, 0, 0, now()) ' \
@@ -252,7 +234,7 @@ class Server:
     def post_picture_comment(self, picture, data):
         # TODO: Ugh, almost exact copy of post_template_comment - refactor
         picture = int(picture)
-        data = cjson.decode(data)
+        data = json.loads(data)
         sql = 'insert into comments(picture_id, ip, nick,' \
               'title, description, up_votes, down_votes, time_posted) ' \
               'values(%s, %s, %s, %s, %s, 0, 0, now()) ' \
@@ -272,7 +254,7 @@ class Server:
 
     def post_picture(self, data):
         # TODO: Verify that the template ID is ok
-        data = cjson.decode(data)
+        data = json.loads(data)
         sql = 'insert into pictures(template_id, title, ip, ' \
               'description, rating, rating_count, url, time_posted) ' \
               'values(%s, %s, %s, %s, 0, 0, %s, now()) ' \
@@ -289,7 +271,7 @@ class Server:
         sha1.update(salt)
         token = sha1.hexdigest()
 
-        return cjson.encode({'id': id, 'token': token})
+        return json.dumps({'id': id, 'token': token})
 
     def nuke_it_all(self):
         if 'allow-nuking-database' in config.config:

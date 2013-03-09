@@ -39,8 +39,6 @@ class Gateway:
             [re.compile("/find_by_tags/*$"), self._server.find_by_tags]]
 
         self._posts = [
-            [re.compile("/upload_raw_template/*$"), self._server.upload_raw_template],
-            [re.compile("/upload_raw_picture/*$"), self._server.upload_raw_picture],
             [re.compile("/upload_template/*$"), self._server.upload_template],
             [re.compile("/upload_picture/*$"), self._server.upload_picture],
             [re.compile("/templates/*$"), self._server.post_template],
@@ -99,21 +97,14 @@ class Gateway:
             elif env["REQUEST_METHOD"] == "DELETE":
                 response = self.process_without_data(env["PATH_INFO"], self._deletes)
             elif env["REQUEST_METHOD"] in ("PUT", "POST"):
-
-                content_length = int(env.get('CONTENT_LENGTH', 0))
-                if env['PATH_INFO'] in ('/upload_template', 'upload_template/',
-                        '/upload_image', '/upload_image/'):
-                    print 'POST FILE'
-
-                    try:
-                        form = cgi.FieldStorage(fp=env['wsgi.input'], environ=env)
-                        data = form[form.keys()[0]].value
-                    except:
-                        # TODO: Raw binary upload not working
-                        data = env['wsgi.input'].read(content_length)
+                if env.get('CONTENT_TYPE').find('multipart/form-data') != -1:
+                    print 'POST is multipart'
+                    form = cgi.FieldStorage(fp=env['wsgi.input'], environ=env)
+                    data = form[form.keys()[0]].value
                 else:
+                    print 'POST is pure data'
+                    content_length = int(env.get('CONTENT_LENGTH', 0))
                     data = env['wsgi.input'].read(content_length)
-
 
                 if env["REQUEST_METHOD"] == "PUT":
                     response = self.process_with_data(env["PATH_INFO"], self._puts, data)

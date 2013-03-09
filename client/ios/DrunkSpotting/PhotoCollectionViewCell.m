@@ -33,7 +33,13 @@
 
 - (void) setPicture:(Picture*)picture
 {
-	[photoView setImageWithURL:[NSURL URLWithString:picture.url]];
+
+
+	NSString *urlstring = [picture.url stringByReplacingOccurrencesOfString:@"\\" withString:@""];
+
+	NSLog( @"%@", urlstring );
+
+	[photoView setImageWithURL:[NSURL URLWithString:urlstring]];
 }
 
 

@@ -132,6 +132,7 @@ Form example is (view raw in github to see):
      <input type="submit"/>
     </form>
 
+Full raw binary data can also be sent, in addition to multipart/form-data.
 
 A dictionary is returned:
 
@@ -150,23 +151,13 @@ Form example is (view raw in github to see):
      <input type="submit"/>
     </form>
 
+Full raw binary data can also be sent, in addition to multipart/form-data.
+
 A dictionary is returned:
 
 dictionary {
     'url': 'xxx'
 }
-
-POST /upload_raw_template
-=========================
-
-Upload a new template image, but with raw binary data only.
-Otherwise same as /upload_raw_template
-
-POST /upload_raw_pictures
-=========================
-
-Upload a new template image, but with raw binary data only.
-Otherwise same as /upload_raw_template
 
 POST /templates/
 ================
