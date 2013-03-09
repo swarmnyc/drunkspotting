@@ -25,18 +25,20 @@ drunkspotting.load_images = function(){
 			itemHtml = itemHtml.replace('{{src}}', data[i].url);
 			
 			
-			//$('#posts').append(itemHtml);
+			$('#posts').append(itemHtml);
 			
-			// wat
+			// add row separator
 			if(i % 3 == 0){
 				// row row row new line
-				ds.postsHtml.append('<tr id="row-' + i + '" class="row-fluid">' + itemHtml + '</tr>');
+				//ds.postsHtml.append('<div id="row-' + i + '" class="row-fluid">' + itemHtml + '</div>');
 			}else{
-				var rowId = i - (i % 3);
-				$('#row-' + rowId).append(itemHtml);
+				//var rowId = i - (i % 3);
+				//$('#row-' + rowId).append(itemHtml);
 			}
 			
+			
 		}
+		$('#posts').append("<div style='clear:both'></div>");
 	});
 	
 	setTimeout(drunkspotting.load_images, 5000);
