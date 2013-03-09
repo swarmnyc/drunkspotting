@@ -175,15 +175,16 @@ NSString *const kPhotoCellIdentifier = @"photo";
 		if ( pickedImage )
 		{
             // TEST CODE ONLY
-            Template *testTemplate = [[Template alloc] init];
-            testTemplate.longitude = 40.732766;
-            testTemplate.latitude = -73.988252;
-            testTemplate.description = @"Yo yo yo day 2";
-            testTemplate.title = @"Hello World! day 2";
+            Picture *picture = [[Picture alloc] init];
+            picture.longitude = 40.732766;
+            picture.latitude = -73.988252;
+            picture.description = @"";
+            picture.title = @"";
+            picture.template_id = 0;
 
-			[PictureService postImage:pickedImage type:@"template" success:^(NSString *urlString) {
-                testTemplate.url = urlString;
-                [PictureService postMetadata:testTemplate type:@"template"];
+			[PictureService postImage:pickedImage type:@"picture" success:^(NSString *urlString) {
+                picture.url = urlString;
+				[PictureService postMetadata:picture type:@"picture"];
             } failure:^(NSError *error) {
                 // ERROR HANDLING
                 NSLog(@"Error = %@",error.description);
