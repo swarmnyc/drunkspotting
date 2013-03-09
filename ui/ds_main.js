@@ -43,5 +43,37 @@ drunkspotting.load_images = function(){
 	
 	setTimeout(drunkspotting.load_images, 5000);
 	
-}
+};
+
+drunkspotting.upload_ajax = function(){
+	var data = new FormData();
+	
+	data.append('file', $('#data')[0].files[0]);
+	$.ajax({
+		url : 'http://api.drunkspotting.com/upload_template',
+		type : "POST",
+		data : data,
+		processData : false,
+		contentType : false,
+		success : function(data){
+			$('#tools_sketch').attr('style', "background: url("+data.url+");");
+			$('#upload-panel').hide();
+			$('#edit-panel').show();
+		},
+		error : function (){}
+	});
+	
+	// On upload image, hide most shit on the page until they save the drawing
+	$('.page-heading img').hide();
+	$('.page-heading').css({
+		height : '60px',
+		padding : '15px',
+	});
+	$('.marketing-desc').hide();
+	$('.upload-btn-container').hide();
+	$('#lushes-box').hide();
+	$('#footer-marketing').hide();
+	
+};
+
 

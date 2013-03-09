@@ -32,7 +32,7 @@
 		
 		<div id="fb-root"></div>
 		<script>
-			(function(d, s, id) {
+			(function(d, s, id){
 				var js, fjs = d.getElementsByTagName(s)[0];
 				if (d.getElementById(id)) return;
 				js = d.createElement(s); js.id = id;
@@ -54,9 +54,9 @@
 					</div>
 				</div>
 				<!-- end heading -->
-
-				<!-- description -->
-				<div style="text-align: center; padding: 10px 15px 5px 15px;">
+				
+				<!-- start marketing description -->
+				<div style="text-align: center; padding: 10px 15px 5px 15px;" class='marketing-desc'>
 					<div style="margin-bottom:5px;">
 						Upload and draw images of inebriated friends, smashed strangers or crunked cats.
 					</div>
@@ -66,38 +66,65 @@
 					<span class='st_twitter_large' displayText='Tweet' st_title="Drunkspotting: Draw on photos of drunk friends! #wasteTheRainbow"></span>
 					<span class='st_facebook_large' displayText='Facebook' st_title="Drunkspotting: Draw on photos of drunk friends! #wasteTheRainbow"></span>
 					<span class='st_tumblr_large' displayText='Tumblr' st_title="Drunkspotting: Draw on photos of drunk friends! #wasteTheRainbow"></span>
-					<span class='st_email_large' displayText='Email' st_title="Drunkspotting: Draw on photos of drunk friends! #wasteTheRainbow"></span>         
+					<span class='st_email_large' displayText='Email' st_title="Drunkspotting: Draw on photos of drunk friends! #wasteTheRainbow"></span>
 					
 					<!-- <a href="https://twitter.com/drunkspotting" class="twitter-follow-button" data-show-count="false">Follow @drunkspotting</a> -->
 					<!-- <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script> -->
 				</div>
-				<!-- end description -->				
+				<!-- end marketing description -->
+				
+				<!-- Start Upload Btn -->
 
-				<!-- large circle button -->
-				<!--
-				 <div class="widget"> 
+				<div class='widget-content upload-btn-container'>
+					<div class="btn-circle-panel large">
+						<ul class="btn-circle">
+							<li class="pushStart">
+								<div style='height: 0px;width: 0px; overflow:hidden;'><input type="file" name="file" id="file"></div>
+								<form method="POST" id="uploader" enctype="multipart/form-data">
+									<a href="#" id="upload" class="bottom_tooltip" title="Upload your drunk" onClick="$('#data').click();">
+										<i class="icon-upload-alt text-info" style="text-shadow:none;"></i>
+									</a>
+									<input id="data" type="file" name="data" onChange="drunkspotting.upload_ajax();" style="visibility:hidden;" />
+								</form>
+							</li>
+						</ul>
+					</div>
+				</div>
+				<!-- End Upload Btn -->
+				
 					
-					 <div class="widget-content"> 
-						 <div class="btn-circle-panel large"> 
-							 <ul class="btn-circle"> 
-								 <li class="pushStart"> 
-									 <a href="#" class="bottom_tooltip" title="Upload your drunk"> 
-										 <i class="icon-upload-alt text-info" style="text-shadow:none;"></i> 
-									 </a> 
-								 </li> 
-							 </ul> 
-						 </div> 
-					 </div> 
-				 </div> 
+				<!-- Start Edit Panel -->
+				<div id="edit-panel" style="display:none;">
+					<div class="tools">
+						<a href="#tools_sketch" data-tool="marker">Marker</a>
+						<a href="#tools_sketch" data-tool="eraser">Eraser</a>
+						
+						<!-- Color options -->
+						<a href='#tools_sketch' data-color='#f00' style='width: 10px; background: #f00; padding:10px; border: 3px solid black; color; black;'>#f00</a>
+						<a href='#tools_sketch' data-color='#ff0' style='width: 10px; background: #ff0; padding:10px; border: 3px solid black; color; black;'>#ff0</a>
+						<a href='#tools_sketch' data-color='#0f0' style='width: 10px; background: #0f0; padding:10px; border: 3px solid black; color; black;'>#0f0</a>
+						<a href='#tools_sketch' data-color='#00f' style='width: 10px; background: #00f; padding:10px; border: 3px solid black; color; black;'>#00f</a>
+						<a href='#tools_sketch' data-color='#f0f' style='width: 10px; background: #f0f; padding:10px; border: 3px solid black; color; black;'>#f0f</a>
+						<a href='#tools_sketch' data-color='#000' style='width: 10px; background: #000; padding:10px; border: 3px solid black; color; black;'>#000</a>
+						<a href='#tools_sketch' data-color='#fff' style='width: 10px; background: #fff; padding:10px; border: 3px solid black; color; black;'>#fff</a>
+						
+						<!-- size options -->
+						<a href='#tools_sketch' data-size='3' style='background: #ccc padding:10px; border: 3px solid black; color; black;'>3</a>
+						<a href='#tools_sketch' data-size='5' style='background: #ccc padding:10px; border: 3px solid black; color; black;'>5</a>
+						<a href='#tools_sketch' data-size='10' style='background: #ccc padding:10px; border: 3px solid black; color; black;'>10</a>
+						<a href='#tools_sketch' data-size='15' style='background: #ccc padding:10px; border: 3px solid black; color; black;'>15</a>
+						
+					</div>
+					<canvas id="tools_sketch" width="640px" height="640px" style="background: url(http://farm1.static.flickr.com/91/239595759_3c3626b24a_b.jpg);"></canvas>
+
+					<!-- Add an edit button, passing the HTML id of the image and the public URL of the image -->
+					<br>
+					
+				</div>
+				<!-- End Edit Panel -->
 				
-				 <div style="text-align:center; margin-bottom:30px;"> 
-					 <a href="draw.html">Or draw on a random drunk</a> 
-				 </div> 
-				
-				-->
-				<!-- end large circle button -->
-				
-				<div class="well widget" style="background:#acf5d7;padding-bottom:0px">
+				<!-- Start lushes box -->
+				<div class="well widget" style="background:#acf5d7;padding-bottom:0px" id='lushes-box'>
 					<!-- body header -->
 					
 					<div class="widget-header">
@@ -128,7 +155,7 @@
 					
 				</div>
 				
-				<div style="text-align:center">
+				<div style="text-align:center" id='footer-marketing'>
 					<div style="vertical-align:bottom;margin-right:10px">
 						<a href="https://twitter.com/drunkspotting">Follow us on Twitter</a><br/>
 						<a href="https://www.facebook.com/drunkspotting">Like us on Facebook</a><br/><br/>
@@ -146,14 +173,22 @@
 		
 		<!-- base -->
 		<script src="library/assets/js/jquery.js"></script>
+		<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.1/jquery-ui.min.js"></script>
+		<script src="library/plugins/jquery-ui-slider.js"></script>
 		<script src="library/assets/js/bootstrap.min.js"></script>
+		<script src="library/js/sketch.js"></script>
 		
 		<!-- Custom JS -->
 		<script src='ds_main.js'></script>
 		
 		<script type='text/javascript'>
+			
 			// Load the images every 5 seconds
 			drunkspotting.load_images();
+			
+			// Init sketch
+			$('#tools_sketch').sketch();
+			
 		</script>
 		
 		<!-- Templates -->
