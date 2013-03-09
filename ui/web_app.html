@@ -81,7 +81,6 @@
 					<div class="tools">
 						<a href="#tools_sketch" data-tool="marker">Marker</a>
 						<a href="#tools_sketch" data-tool="eraser">Eraser</a>
-					  <a href="#tools_sketch" data-download="png" style="float: right; width: 100px;">Download</a>
 					</div>
 					<center><canvas id="tools_sketch" width="500" height="400" style="background: url(http://farm1.static.flickr.com/91/239595759_3c3626b24a_b.jpg);"></canvas>
 
@@ -226,10 +225,10 @@ Made with love by Buspreneurs at SXSW '13</span>
 
 		$(function() {
 		    $.each(['#f00', '#ff0', '#0f0', '#0ff', '#00f', '#f0f', '#000', '#fff'], function() {
-		      $('.tools').append("<a href='#tools_sketch' data-color='" + this + "' style='width: 10px; background: " + this + ";'></a> ");
+		      $('.tools').append("<a href='#tools_sketch' data-color='" + this + "' style='width: 10px; background: " + this + "; padding:10px; border: 3px solid black; color; black;'>"+this+"</a> ");
 		    });
 		    $.each([3, 5, 10, 15], function() {
-		      $('.tools').append("<a href='#tools_sketch' data-size='" + this + "' style='background: #ccc'>" + this + "</a> ");
+		      $('.tools').append("<a href='#tools_sketch' data-size='" + this + "' style='background: #ccc padding:10px; border: 3px solid black; color; black;'>" + this + "</a> ");
 		    });
 		    $('#tools_sketch').sketch();
 		  });
