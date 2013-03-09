@@ -18,61 +18,26 @@
 		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
 		<![endif]-->
 		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-		
 		<script>
-		$(document).ready(function(){
+      function uploadAjax() {
+        var data = new FormData();
 
-			$("#upload").click(function(){
-				getFile();
-			});
-			
-			document.getElementById('file').addEventListener('change', handleFileSelect, false);
-		});
-		function handleFileSelect(evt) {
-			var files = evt.target.files; // FileList object
-			for (var i = 0, f; f = files[i]; i++) {
-		 		if (!f.type.match('image.*')) {
-			        	return;
-			     }
-			var reader = new FileReader();
-			
-			reader.onload = (function(theFile) {
-			        return function(e) {
-			          // Render thumbnail.
-			          var imageHTML = ['<img class="thumb" src="', e.target.result,
-			                            '" title="', escape(theFile.name), '"/>'].join('');
-			          document.getElementById('tester').innerHTML = imageHTML;
-				};
-			})(f);
-			
-			reader.onloadend = function(evt) {
-				console.log("IM IN onloadend");
-				if (evt.target.readyState == FileReader.DONE) { // DONE == 2
-					console.log(evt);
-					// $.ajax({
-					// 				  		type: "POST",
-					// 				  		url: "http://api.drunkspotting.com/upload_template",
-					// 				  		data: {data: evt},
-					// 						processData: false,
-					// 					}).done(function(msg) {
-					// 				  		console.log(msg);
-					// 					});
-				}
-			};
-			
-			reader.readAsDataURL(f);
-		 }
-		}
+        data.append('file', $('#data')[0].files[0]);
 
-		function getFile(){
-			// Check for the various File API support.
-			if (window.File && window.FileReader && window.FileList && window.Blob) {
-				 document.getElementById("file").click();
-			  // Great success! All the File APIs are supported.
-			} else {
-			  alert('The File APIs are not fully supported in this browser.');
-			}
-		    }
+        $.ajax({
+          url: 'http://api.drunkspotting.com/upload_template',
+          type: "POST",
+          data: data,
+          processData: false,
+          contentType: false,
+          success: function (data) {
+            console.log(data);
+          },
+          error: function () {
+            
+          }
+        });
+      }
 		</script>
 	</head>
 	<body>
@@ -115,9 +80,12 @@
 								<li class="pushStart">
 									<div style='height: 0px;width: 0px; overflow:hidden;'><input type="file" name="file" id="file"></div>
 									
-									<a href="#" id="upload" class="bottom_tooltip" title="Upload your drunk">
+                  <form method="POST" id="uploader" enctype="multipart/form-data">
+									<a href="#" id="upload" class="bottom_tooltip" title="Upload your drunk" onClick="$('#data').click();">
 										<i class="icon-upload-alt text-info" style="text-shadow:none;"></i>
 									</a>
+                    <input id="data" type="file" name="data" onChange="uploadAjax();" style="visibility:hidden;" />
+                  </form>
 								</li>
 							</ul>
 						</div>
@@ -129,19 +97,6 @@
 				<div style="text-align:center; margin-bottom:30px;">
 					<a href="draw.html">Or draw on a random drunk</a>
 				</div>
-
-				<!-- AddThis Button BEGIN -->
-				<div style="text-align:center;margin:0 auto;width:162px;padding-left:45px">
-				<div class="addthis_toolbox addthis_default_style addthis_32x32_style" style="text-align:center">
-					<a class="addthis_button_preferred_2"></a>
-					<a class="addthis_button_preferred_3"></a>
-					<a class="addthis_button_preferred_4"></a>
-					<a class="addthis_button_compact.color:#fff"></a>
-				</div>
-			</div>
-				<script type="text/javascript">var addthis_config = {"data_track_addressbar":true};</script>
-				<script type="text/javascript" src="https://s7.addthis.com/js/300/addthis_widget.js#pubid=ra-51391e626b44ecb6"></script>
-				<!-- AddThis Button END -->
 
 				<!-- widget -->
 				<div class="well widget" style="background:#acf5d7;padding-bottom:0px">
