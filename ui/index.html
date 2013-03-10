@@ -115,8 +115,11 @@
 						<a href='#tools_sketch' data-size='15' style='background: #ccc padding:10px; border: 3px solid black; color; black;'>15</a>
 						
 					</div>
-					<canvas id="tools_sketch" width="640px" height="640px" style="background: url(http://farm1.static.flickr.com/91/239595759_3c3626b24a_b.jpg);"></canvas>
-
+					<canvas id="tools_sketch" width="640px" height="640px"></canvas>
+					
+					HERE
+					<div id='img-loader'></div>
+					
 					<!-- Add an edit button, passing the HTML id of the image and the public URL of the image -->
 					<br>
 					
@@ -177,6 +180,7 @@
 		<script src="library/plugins/jquery-ui-slider.js"></script>
 		<script src="library/assets/js/bootstrap.min.js"></script>
 		<script src="library/js/sketch.js"></script>
+		<script src="http://www.nihilogic.dk/labs/canvas2image/canvas2image.js"></script>
 		
 		<!-- Custom JS -->
 		<script src='ds_main.js'></script>
@@ -185,9 +189,6 @@
 			
 			// Load the images every 5 seconds
 			drunkspotting.load_images();
-			
-			// Init sketch
-			$('#tools_sketch').sketch();
 			
 		</script>
 		

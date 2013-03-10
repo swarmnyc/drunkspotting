@@ -41,14 +41,19 @@ drunkspotting.load_images = function(){
 		$('#posts').append("<div style='clear:both'></div>");
 	});
 	
-	setTimeout(drunkspotting.load_images, 5000);
+	window.ds_reloader = setTimeout(drunkspotting.load_images, 5000);
 	
 };
 
 drunkspotting.upload_ajax = function(){
+	
+	// Kill image reloading timeout
+	clearTimeout(window.ds_reloader);
+	
 	var data = new FormData();
 	
 	data.append('file', $('#data')[0].files[0]);
+	
 	$.ajax({
 		url : 'http://api.drunkspotting.com/upload_template',
 		type : "POST",
@@ -56,7 +61,13 @@ drunkspotting.upload_ajax = function(){
 		processData : false,
 		contentType : false,
 		success : function(data){
-			$('#tools_sketch').attr('style', "background: url("+data.url+");");
+			
+			// Temp
+			//data.url = '/library/foo.jpg';
+			
+			// Init canvas
+			drunkspotting.init_drawing(data.url);
+			
 			$('#upload-panel').hide();
 			$('#edit-panel').show();
 		},
@@ -76,4 +87,49 @@ drunkspotting.upload_ajax = function(){
 	
 };
 
+drunkspotting.init_drawing = function(image_url){
+	// set up the drawing canvas
+	
+	// init canvas sketch
+	$('#tools_sketch').sketch();
+	
+	// Insert hidden image
+	$('#img-loader').append( $('<img>').attr('src', image_url) );
+	
+	// insert background
+	var context = $('#tools_sketch')[0].getContext('2d');
+	window.ctx = context;
+	console.log(context);
+	
+	setTimeout(function(){
+		var loaded_image = $('#img-loader img')[0];
+		window.thing = loaded_image;
+		context.drawImage(loaded_image, 10, 10);
+	}, 250);
+	
+	
+	
+	$('#img-loader').hide();
+	
+};
+
+drunkspotting.save_drawing = function(){
+	// save
+	
+	var img_data = $('#tools_sketch')[0].toDataURL();
+	
+	$.ajax({
+		url : 'http://api.drunkspotting.com/upload_picture',
+		type : "POST",
+		data : img_data,
+		processData : false,
+		contentType : false,
+		success : function(data){
+			console.log(data)
+			window.response_data = data;
+			
+		},
+		error : function (){}
+	});
+};
 
