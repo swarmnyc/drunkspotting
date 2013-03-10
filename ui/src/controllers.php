@@ -8,9 +8,12 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 $app->get('/', function () use ($app) {
     return $app['twig']->render('index.html', array());
-})
-->bind('homepage')
-;
+})->bind('homepage');
+
+
+$app->get('/about', function () use ($app) {
+    return $app['twig']->render('about.html', array());
+})->bind('about');
 
 $app->error(function (\Exception $e, $code) use ($app) {
     if ($app['debug']) {
