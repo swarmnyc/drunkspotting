@@ -98,16 +98,12 @@ drunkspotting.init_drawing = function(image_url){
 	
 	// insert background
 	var context = $('#tools_sketch')[0].getContext('2d');
-	window.ctx = context;
-	console.log(context);
+	var bg_context = $('#background_canvas')[0].getContext('2d');
 	
 	setTimeout(function(){
 		var loaded_image = $('#img-loader img')[0];
-		window.thing = loaded_image;
-		context.drawImage(loaded_image, 10, 10);
+		bg_context.drawImage(loaded_image, 0, 0);
 	}, 250);
-	
-	
 	
 	$('#img-loader').hide();
 	
@@ -116,12 +112,30 @@ drunkspotting.init_drawing = function(image_url){
 drunkspotting.save_drawing = function(){
 	// save
 	
-	var img_data = $('#tools_sketch')[0].toDataURL();
+	var export_canvas_ctx = $('#export_canvas')[0].getContext('2d');
+	var drawing_canvas_ctx = $('#tools_sketch')[0].getContext('2d');
+	var bg_canvas_ctx = $('#background_canvas')[0].getContext('2d');
+	
+	// bg_canvas to export_canvas
+	export_canvas_ctx.drawImage(bg_canvas_ctx.canvas, 0, 0);
+	
+	// drawing_canvas to export_canvas
+	export_canvas_ctx.drawImage(drawing_canvas_ctx.canvas, 0, 0);
+	
+	// export export_canvas
+	
+	var img_data = $('#export_canvas')[0].toDataURL();
+	
+	window.export_img_data = img_data;
+	
+	var data = new FormData();
+	
+	data.append('file', img_data);
 	
 	$.ajax({
 		url : 'http://api.drunkspotting.com/upload_picture',
 		type : "POST",
-		data : img_data,
+		data : data,
 		processData : false,
 		contentType : false,
 		success : function(data){
