@@ -95,7 +95,7 @@
 					
 				<!-- Start Edit Panel -->
 				<div id="edit-panel" style="display:none;">
-					<div class="tools">
+					<div class="tools" style='margin-bottom:20px'>
 						<a href="#tools_sketch" data-tool="marker">Marker</a>
 						<a href="#tools_sketch" data-tool="eraser">Eraser</a>
 						
@@ -115,6 +115,7 @@
 						<a href='#tools_sketch' data-size='15' style='background: #ccc padding:10px; border: 3px solid black; color; black;'>15</a>
 						
 					</div>
+					
 					<canvas id="background_canvas" width="640px" height="640px"style='float:left; position:absolute;'></canvas>
 					<canvas id="tools_sketch" width="640px" height="640px" style='float:left; position:absolute;'></canvas>
 					
@@ -123,7 +124,7 @@
 					
 					<a href='#' class='btn' onclick='drunkspotting.save_drawing()'>Post Image</a>
 					
-					<canvas id="export_canvas" width="640px" height="640px" style='margin-top: 660px;'></canvas>
+					<canvas id="export_canvas" width="640px" height="640px" style='display:none></canvas>
 
 					
 					<!-- Add an edit button, passing the HTML id of the image and the public URL of the image -->
