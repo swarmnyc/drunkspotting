@@ -81,18 +81,19 @@ drunkspotting.init_drawing = function(image_url){
 
   // set up the drawing canvas
   window.image = $('<img />').attr('src', image_url);
+  window.image.on('onload', function () {
+    $('#tools_sketch')[0].height = window.image[0].height;
+    $('#tools_sketch')[0].width = window.image[0].width;
+  });
 
-  $('#tools_sketch').css('background-image', 'url(' + image_url + ')');
+  $('#tools_sketch').css('background', 'url(' + image_url + ') no-repeat');
 
   $.each(['#f00', '#ff0', '#0f0', '#0ff', '#00f', '#f0f', '#000', '#fff'], function() {
-      $('#edit-panel .tools').append("<a href='#tools_sketch' data-color='" + this + "' style='width: 10px; background: " + this + ";'>" + this + "</a>");
-    });
-    $.each([3, 5, 10, 15], function() {
-      $('#edit-panel .tools').append("<a href='#tools_sketch' data-size='" + this + "' style='background: #ccc'>" + this + "</a> ");
-    });
-
-  $('#tools_sketch')[0].height = window.image[0].height;
-  $('#tools_sketch')[0].width = window.image[0].width;
+    $('#edit-panel .tools').append("<a href='#tools_sketch' data-color='" + this + "' style='width: 10px; background: " + this + ";'>" + this + "</a>");
+  });
+  $.each([3, 5, 10, 15], function() {
+    $('#edit-panel .tools').append("<a href='#tools_sketch' data-size='" + this + "' style='background: #ccc'>" + this + "</a> ");
+  });
 
   $('#tools_sketch').sketch();
 };
@@ -104,9 +105,10 @@ drunkspotting.save_drawing = function(){
   $.ajax({
     url : '/upload',
     type : "POST",
-    data : {canvas: imageData, imageUrl: window.image[0].src},
-    processData : true,
-    contentType : true,
+    // data : {canvas: imageData, imageUrl: window.image[0].src},
+    data : window.image[0].src + ':endurl:' + imageData,
+    processData : false,
+    contentType : false,
     success : function(data) {
       console.log(data);
       window.response_data = data;

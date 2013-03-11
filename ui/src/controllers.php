@@ -15,14 +15,26 @@ $app->get('/about', function () use ($app) {
     return $app['twig']->render('about.html', array());
 })->bind('about');
 
-$app->get('/upload', function () use ($app) {
-    $request = $app->getRequest();
+$app->post('/upload', function () use ($app) {
+    $request = $app['request'];
 
-    $post = $request->request;
+    $postContent = $request->getContent();
 
-    die(var_dump($post));
+    list($imageUrl, $canvasData) = explode(':endurl:', $postContent);
+    
+    list(, $canvasBase64) = explode('base64,', $canvasData);
 
-    return new RedirectResponse('/');
+    $canvasImageTemp = tempnam(sys_get_temp_dir(), 'Canvas');
+    file_put_contents($canvasImageTemp, base64_decode($canvasBase64));
+
+    $backgroundImage = new Imagick($imageUrl);
+    $canvasImage     = new Imagick($canvasImageTemp);
+
+    $backgroundImage->compositeImage($canvasImage, Imagick::COMPOSITE_DEFAULT, 0, 0);
+
+    $backgroundImage->getImageBlob();
+
+    return new JsonResponse(array('success' => true));
 })->bind('upload');
 
 $app->error(function (\Exception $e, $code) use ($app) {
