@@ -15,6 +15,16 @@ $app->get('/about', function () use ($app) {
     return $app['twig']->render('about.html', array());
 })->bind('about');
 
+$app->get('/upload', function () use ($app) {
+    $request = $app->getRequest();
+
+    $post = $request->request;
+
+    die(var_dump($post));
+
+    return new RedirectResponse('/');
+})->bind('upload');
+
 $app->error(function (\Exception $e, $code) use ($app) {
     if ($app['debug']) {
         return;
