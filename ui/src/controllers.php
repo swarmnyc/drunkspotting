@@ -21,18 +21,28 @@ $app->post('/upload', function () use ($app) {
     $postContent = $request->getContent();
 
     list($imageUrl, $canvasData) = explode(':endurl:', $postContent);
-    
+
     list(, $canvasBase64) = explode('base64,', $canvasData);
 
     $canvasImageTemp = tempnam(sys_get_temp_dir(), 'Canvas');
     file_put_contents($canvasImageTemp, base64_decode($canvasBase64));
 
-    $backgroundImage = new Imagick($imageUrl);
+    $image = file_get_contents($imageUrl);
+
+    $backgroundImage = new Imagick($image);
     $canvasImage     = new Imagick($canvasImageTemp);
 
     $backgroundImage->compositeImage($canvasImage, Imagick::COMPOSITE_DEFAULT, 0, 0);
 
-    $backgroundImage->getImageBlob();
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_URL, "http://api.drunkspotting.com/upload_picture");
+    curl_setopt($ch, CURLOPT_POST, true);
+    curl_setopt($ch, CURLOPT_POSTFIELDS, $backgroundImage->getImageBlob());
+    curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: text/plain'));
+
+    $result = curl_exec($ch);
+
+    die($result);
 
     return new JsonResponse(array('success' => true));
 })->bind('upload');
