@@ -1,9 +1,8 @@
 var drunkspotting = {};
 
 drunkspotting.load_images = function(){
-  
   var ds = {};
-  
+
   $.get('http://api.drunkspotting.com/pictures/latest/12', function(data){
 
     ds.template = $('#template-listing').html();
@@ -73,18 +72,14 @@ drunkspotting.upload_ajax = function(){
 };
 
 drunkspotting.init_drawing = function(image_url){
-  $('#buton_save').click(function (e) {
-    drunkspotting.save_drawing();
-
-    return false;
-  });
 
   // set up the drawing canvas
-  window.image = $('<img />').attr('src', image_url);
+  window.image = $('<img />');
   window.image.on('onload', function () {
     $('#tools_sketch')[0].height = window.image[0].height;
     $('#tools_sketch')[0].width = window.image[0].width;
   });
+  window.image.attr('src', image_url);
 
   $('#tools_sketch').css('background', 'url(' + image_url + ') no-repeat');
 
@@ -105,7 +100,6 @@ drunkspotting.save_drawing = function(){
   $.ajax({
     url : '/upload',
     type : "POST",
-    // data : {canvas: imageData, imageUrl: window.image[0].src},
     data : window.image[0].src + ':endurl:' + imageData,
     processData : false,
     contentType : false,
