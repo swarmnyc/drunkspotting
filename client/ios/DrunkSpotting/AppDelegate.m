@@ -63,10 +63,16 @@
     UIColor *magenta = UIColorFromRGB(0xd35be5);
     
     UINavigationBar *navbarSkin = [UINavigationBar appearance];
-    navbarSkin.tintColor = teal;
+    [navbarSkin setBackgroundImage:[UIImage imageNamed:@"navbar"] forBarMetrics:UIBarMetricsDefault];
+    
+    UIToolbar *toolBarSkin = [UIToolbar appearance];
+    toolBarSkin.tintColor = teal;
     
     UIButton *navButtonSkin = [UIButton appearanceWhenContainedIn:[UINavigationBar class], nil];
     navButtonSkin.tintColor = magenta;
+    
+    UIBarButtonItem *toolButtonSkin = [UIBarButtonItem appearanceWhenContainedIn:[UIToolbar class], nil];
+    toolButtonSkin.tintColor = magenta;
     
     UIView *cellSkin = [UIView appearanceWhenContainedIn:[PhotoCollectionViewCell class], nil];
     cellSkin.backgroundColor = teal;

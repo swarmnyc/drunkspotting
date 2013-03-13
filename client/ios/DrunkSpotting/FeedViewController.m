@@ -29,7 +29,8 @@ NSString *const kPhotoCellIdentifier = @"photo";
 
 - (void)viewDidLoad
 {
-    self.navigationItem.titleView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"titleTreatment"]];
+    self.feedView.backgroundView.backgroundColor = [UIColor blueColor];
+    self.navigationItem.titleView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"titleTextTreatment"]];
 
 	[self refreshList:nil];
 }
@@ -46,6 +47,9 @@ NSString *const kPhotoCellIdentifier = @"photo";
 	[feedView setDataSource:self];
 	[self.view addSubview:feedView];
 	[feedView reloadData];
+
+	self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]
+                                              initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addItem:)];
 
 	UIBarButtonItem *addButton = [[UIBarButtonItem alloc]
 		initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addItem:)];
@@ -113,7 +117,7 @@ NSString *const kPhotoCellIdentifier = @"photo";
 
     UIImagePickerController *imgpic = [[UIImagePickerController alloc] init];
 	imgpic.delegate = self;
-	imgpic.allowsEditing = YES;
+//	imgpic.allowsEditing = YES;
 
     if ([[actionSheet buttonTitleAtIndex:buttonIndex] isEqualToString:@"Camera"]) {
         imgpic.sourceType = UIImagePickerControllerSourceTypeCamera;
@@ -183,12 +187,10 @@ NSString *const kPhotoCellIdentifier = @"photo";
 {
 	[self dismissViewControllerAnimated:YES completion:^
 	{
-		UIImage *pickedImage = [info objectForKey:UIImagePickerControllerEditedImage];
+		UIImage *pickedImage = [info objectForKey:UIImagePickerControllerOriginalImage];
 
 		if ( pickedImage )
 		{
-
-
 			DrawingViewController *dvc = [[DrawingViewController alloc] initWithImage:pickedImage];
 			[self.navigationController pushViewController:dvc animated:YES];
 		}
@@ -198,6 +200,7 @@ NSString *const kPhotoCellIdentifier = @"photo";
 //Tells the delegate that the user cancelled the pick operation.
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
 {
+    [self.navigationController popToRootViewControllerAnimated:YES];
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 

@@ -41,36 +41,41 @@
 
 - (void)viewDidLoad
 {
-	[super viewDidLoad];
+    [super viewDidLoad];
+    
+    self.navigationItem.titleView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"titleTextTreatment"]];
 
-	self.navigationItem.titleView =
-		[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"titleTreatment"]];
+    self.uploadingOverlay.hidden = YES;
+    
+    UIBarButtonItem *saveButton = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Save", @"Save")
+                                                                   style:UIBarButtonItemStyleDone
+                                                                  target:self
+                                                                  action:@selector(done:)];
+    self.navigationItem.rightBarButtonItems = @[saveButton];
+    
+    UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Cancel", @"Cancel")
+                                                                   style:UIBarButtonItemStyleDone
+                                                                  target:self
+                                                                  action:@selector(cancel:)];
+    self.navigationItem.leftBarButtonItems = @[cancelButton];
+    
+    UIImageView *iv = [[UIImageView alloc] initWithImage:self.originalImage];
+    
+    CGFloat smallestEdge = MIN(CGRectGetWidth(self.view.bounds), MIN(self.originalImage.size.width, self.originalImage.size.height));
 
-	self.title = @"Drunk Spotting";
+    iv.frame = CGRectMake(0, 0, smallestEdge, smallestEdge);
+    iv.contentMode = UIViewContentModeScaleAspectFill;
+    iv.backgroundColor = [UIColor redColor];
+    [self.compositView insertSubview:iv belowSubview:self.drawingLayer];
+    
+    self.photoLayer = iv;
+    
+    self.slider.value = self.drawingLayer.lineWidth;
+}
 
-	self.uploadingOverlay.hidden = YES;
-
-	UIBarButtonItem *doneButton = [[UIBarButtonItem alloc]
-		initWithTitle:NSLocalizedString(@"Save", @"Save") style:UIBarButtonItemStyleDone target:self
-		action:@selector(done:)];
-	UIBarButtonItem *clearButton = [[UIBarButtonItem alloc]
-		initWithTitle:NSLocalizedString(@"Clear", @"Clear") style:UIBarButtonItemStyleDone
-		target:self action:@selector(clear:)];
-	self.navigationItem.rightBarButtonItems = @[doneButton, clearButton];
-
-	UIImageView *iv = [[UIImageView alloc] initWithImage:self.originalImage];
-	CGFloat smallestEdge =
-		MIN(CGRectGetWidth( self.view.bounds ), MIN( self.originalImage.size.width,
-			self.originalImage.size.height ));
-
-	iv.frame = CGRectMake( 0, 0, smallestEdge, smallestEdge );
-	iv.contentMode = UIViewContentModeScaleAspectFill;
-	iv.backgroundColor = [UIColor redColor];
-	[self.compositView insertSubview:iv belowSubview:self.drawingLayer];
-
-	self.photoLayer = iv;
-
-	self.slider.value = self.drawingLayer.lineWidth;
+- (void) viewDidLayoutSubviews
+{
+    [self.compositView setFrame:CGRectMake(0, 0, [[UIScreen mainScreen] bounds].size.width, [[UIScreen mainScreen] bounds].size.width)];
 }
 
 - (void)didReceiveMemoryWarning
@@ -79,57 +84,69 @@
 	// Dispose of any resources that can be recreated.
 }
 
-- (void)done:(id)send
-{
+- (void) done:(id)send {
+    
+    self.navigationItem.leftBarButtonItem.enabled = NO;
+    
+    self.uploadingOverlay.hidden = NO;
+    [self.activityIndicator startAnimating];
+    
+    UIImage *renderedImage = [self renderImage];
+    NSData *jpegData = UIImageJPEGRepresentation(renderedImage, 1);
 
-	self.uploadingOverlay.hidden = NO;
-	[self.activityIndicator startAnimating];
-
-	UIImage *renderedImage = [self renderImage];
-	NSData *jpegData = UIImageJPEGRepresentation( renderedImage, 1 );
-
-//    int64_t delayInSeconds = 2.0;
-//    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
-//    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-//
-//        self.uploadingOverlay.hidden = YES;
-//        [self.activityIndicator stopAnimating];
-//
-//        [self.navigationController popToRootViewControllerAnimated:YES];
-//    });
-
-	// TEST CODE ONLY
 	Picture *picture = [[Picture alloc] init];
-//	            picture.longitude = 40.732766;
-//	            picture.latitude = -73.988252;
+    //	            picture.longitude = 40.732766;
+    //	            picture.latitude = -73.988252;
 	picture.description = @"";
 	picture.title = @"";
 	picture.template_id = 0;
-
+    
 	[PictureService postImage:renderedImage type:@"picture" success:^( NSString *urlString )
-	{
-		picture.url = urlString;
-		[PictureService postMetadata:picture type:@"picture"];
-		self.uploadingOverlay.hidden = YES;
-		[self.activityIndicator stopAnimating];
-
-		[self.navigationController popToRootViewControllerAnimated:YES];
-	} failure:^( NSError *error )
-	{
-		// ERROR HANDLING
-		NSLog( @"Error = %@", error.description );
-	}];
+     {
+         picture.url = urlString;
+         [PictureService postMetadata:picture type:@"picture"];
+         self.uploadingOverlay.hidden = YES;
+         [self.activityIndicator stopAnimating];
+         
+         [self.navigationController popToRootViewControllerAnimated:YES];
+     } failure:^( NSError *error )
+     {
+         // ERROR HANDLING
+         NSLog( @"Error = %@", error.description );
+     }];
 }
 
-- (void)clear:(id)sender
-{
+- (void) cancel:(id)send {
+    
+    [self.navigationController popToRootViewControllerAnimated:YES];
+    return;
+}
 
-	[self.drawingLayer clear];
+- (IBAction) undo:(id)sender {
+    
+    [self.drawingLayer undoLatestStep];
+}
+
+- (IBAction) redo:(id)sender {
+    
+    [self.drawingLayer redoLatestStep];
+}
+
+- (IBAction)showBrushSlider:(id)sender {
+ 
+    self.burshSlider.hidden = !self.burshSlider.hidden;
+    self.colorPicker.hidden = YES;
+}
+
+- (IBAction)showColorPicker:(id)sender {
+    
+    self.colorPicker.hidden = !self.colorPicker.hidden;
+    self.burshSlider.hidden = YES;
+  
 }
 
 - (UIImage *)renderImage
 {
-
 	UIGraphicsBeginImageContextWithOptions( self.compositView.bounds.size, self.compositView.opaque,
 		[[UIScreen mainScreen] scale] );
 	[self.compositView.layer renderInContext:UIGraphicsGetCurrentContext()];
@@ -138,70 +155,81 @@
 	return img;
 }
 
-- (IBAction)setWhiteColor:(id)sender
-{
 
-	self.drawingLayer.lineColor = [UIColor whiteColor];
+- (IBAction)setWhiteColor:(id)sender {
+    
+    self.drawingLayer.lineColor = [UIColor whiteColor];
+    self.colorPicker.hidden = YES;
 }
 
-- (IBAction)setBlueColor:(id)sender
-{
-
-	self.drawingLayer.lineColor = [UIColor blueColor];
+- (IBAction)setBlueColor:(id)sender {
+    
+    self.drawingLayer.lineColor = [UIColor blueColor];
+    self.colorPicker.hidden = YES;
 }
 
-- (IBAction)setCyanColor:(id)sender
-{
-
-	self.drawingLayer.lineColor = [UIColor cyanColor];
+- (IBAction)setCyanColor:(id)sender {
+    
+    self.drawingLayer.lineColor = [UIColor cyanColor];
+    self.colorPicker.hidden = YES;
 }
 
-- (IBAction)setMagentaColor:(id)sender
-{
-
-	self.drawingLayer.lineColor = [UIColor magentaColor];
+- (IBAction)setMagentaColor:(id)sender {
+    
+    self.drawingLayer.lineColor = [UIColor magentaColor];
+    self.colorPicker.hidden = YES;
 }
 
-- (IBAction)setOrangeColor:(id)sender
-{
-
-	self.drawingLayer.lineColor = [UIColor orangeColor];
+- (IBAction)setOrangeColor:(id)sender {
+    
+    self.drawingLayer.lineColor = [UIColor orangeColor];
+    self.colorPicker.hidden = YES;
 }
 
-- (IBAction)setPurpleColor:(id)sender
-{
-
-	self.drawingLayer.lineColor = [UIColor purpleColor];
+- (IBAction)setPurpleColor:(id)sender {
+    
+    self.drawingLayer.lineColor = [UIColor purpleColor];
+    self.colorPicker.hidden = YES;
 }
 
-- (IBAction)setRedColor:(id)sender
-{
-
-	self.drawingLayer.lineColor = [UIColor redColor];
+- (IBAction)setRedColor:(id)sender {
+    
+    self.drawingLayer.lineColor = [UIColor redColor];
+    self.colorPicker.hidden = YES;
 }
 
-- (IBAction)setYellowColor:(id)sender
-{
-
-	self.drawingLayer.lineColor = [UIColor yellowColor];
+- (IBAction)setYellowColor:(id)sender {
+    
+    self.drawingLayer.lineColor = [UIColor yellowColor];
+    self.colorPicker.hidden = YES;
 }
 
-- (IBAction)setGreenColor:(id)sender
-{
-
-	self.drawingLayer.lineColor = [UIColor greenColor];
+- (IBAction)setGreenColor:(id)sender {
+    
+    self.drawingLayer.lineColor = [UIColor greenColor];
+    self.colorPicker.hidden = YES;
 }
 
-- (IBAction)setBlackColor:(id)sender
-{
+- (IBAction)setBlackColor:(id)sender {
+    
+    self.drawingLayer.lineColor = [UIColor blackColor];
+    self.colorPicker.hidden = YES;
 
-	self.drawingLayer.lineColor = [UIColor blackColor];
 }
 
+- (IBAction) dismissBrushSlider:(id)sender {
+    
+    self.burshSlider.hidden = YES;
+}
+    
 - (IBAction)changeLineWidth:(UISlider *)sender
 {
 
 	self.drawingLayer.lineWidth = sender.value;
+}
+
+- (IBAction) tap:(id)sender {
+    
 }
 
 
