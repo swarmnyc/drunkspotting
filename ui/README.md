@@ -3,6 +3,8 @@ DrunkSpotting Web App
 
 Please reference this guide for setting up, using, and working on the web app project.
 
+As always, please contact James Solomon (solomonjames@gmail.com / 813-767-8117) if there are any questions.
+
 Installation
 ------------
 
@@ -69,4 +71,33 @@ Directory structure
 - ./ui/config : Setting up environment specific settings, dev inherits from prod
 - ./ui/cache : Is a folder Symfony will write to to cache certain things for performance gains.  Caching is mainly performed in production mode.
 
-As always, please contact James Solomon (solomonjames@gmail.com / 813-767-8117) if there are any questions.
+Current Issues
+--------------
+
+We are still connecting to the production backend service, which isn't good for testing, but more of an issue, causes a cross server error with the cavnas element.  So you can just edit your /etc/hosts file to allow your local server to work as something like "local.drunkspotting.com" and that will work.
+
+    $ sudo vim /etc/hosts
+    
+And then add a line like this to the end (with the proper IP address): 127.0.0.1 local.drunkspotting.com
+
+Tricks
+------
+
+You can skip the upload process and load a local image by running the following command in the web console:
+
+    $('#edit-panel').show(); drunkspotting.init_drawing('/assets/img/[image_here]');
+
+
+Development Process
+-------------------
+
+1. Find an issue on Github (or create one if its not there).
+2. Assign it to yourself
+3. Update master branch, then do `$ git checkout -b issue-xx` with your issue #.
+4. When you make commits (ideally just one large one) make sure to tag it with your issue number like this `git com -m "[Issue #1] : Message"` this way the ticket gets linked to the commit.
+5. Push the branch to origin
+6. Once you are done, issue a pull requst for master from your branch.
+
+Eventually staging.drunkspotting will auto update from master, and we will do manual updates to production.
+
+If there are any thoughts/questions on this, please contact me.  So far it seems like it will be the best to keep us from stepping on each other and still get shit done.
