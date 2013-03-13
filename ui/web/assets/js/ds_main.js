@@ -93,6 +93,14 @@ drunkspotting.init_drawing = function(image_url){
   $('#tools_sketch').sketch();
 };
 
+drunkspotting.loading_start = function () {
+  
+};
+
+drunkspotting.loading_stop = function () {
+  
+};
+
 drunkspotting.save_drawing = function(){
   // save
   var imageData = $('#tools_sketch')[0].toDataURL();
@@ -103,9 +111,13 @@ drunkspotting.save_drawing = function(){
     data : window.image[0].src + ':endurl:' + imageData,
     processData : false,
     contentType : false,
+    beforeSend : function () {
+      $('#button_save').attr('disabled','disabled');
+    },
     success : function(data) {
-      console.log(data);
-      window.response_data = data;
+      if (data.id) {
+        $('#edit-panel').html('<a href="/">Click here to refresh and see your image</a>');
+      }
     },
     error : function (){}
   });
