@@ -6,6 +6,27 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
+function sendPost($url, $data)
+{
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_URL, $url);
+    curl_setopt($ch, CURLOPT_POST, true);
+    curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+    curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
+
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+    $response = curl_exec($ch);
+    $code     = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+
+    curl_close($ch);
+
+    return array(
+        'response' => $response,
+        'code'     => $code
+    );
+}
+
 $app->get('/', function () use ($app) {
     return $app['twig']->render('index.html', array());
 })->bind('homepage');
@@ -27,9 +48,7 @@ $app->post('/upload', function () use ($app) {
     $canvasImageTemp = tempnam(sys_get_temp_dir(), 'Canvas');
     file_put_contents($canvasImageTemp, base64_decode($canvasBase64));
 
-    $image = file_get_contents($imageUrl);
-
-    $backgroundImage = new Imagick($image);
+    $backgroundImage = new Imagick($imageUrl);
     $canvasImage     = new Imagick($canvasImageTemp);
 
     $backgroundImage->compositeImage($canvasImage, Imagick::COMPOSITE_DEFAULT, 0, 0);
@@ -39,12 +58,33 @@ $app->post('/upload', function () use ($app) {
     curl_setopt($ch, CURLOPT_POST, true);
     curl_setopt($ch, CURLOPT_POSTFIELDS, $backgroundImage->getImageBlob());
     curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: text/plain'));
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 
     $result = curl_exec($ch);
+    $code   = curl_getinfo($ch, CURLINFO_HTTP_CODE);
 
-    die($result);
+    $uploadPictureData = json_decode($result);
 
-    return new JsonResponse(array('success' => true));
+    $data = array(
+        'title' => '',
+        'latitude' => 0,
+        'longitude' => 0,
+        'description' => '',
+        'url' => $uploadPictureData->url
+    );
+
+    $jsonData = json_encode($data);
+
+    $templateResult = sendPost("http://api.drunkspotting.com/templates/", $jsonData);
+    $templateData = json_decode($templateResult['response']);
+
+    $data['template_id'] = $templateData->id;
+
+    $jsonData = json_encode($data);
+
+    $pictureResult = sendPost("http://api.drunkspotting.com/pictures/", $jsonData);
+
+    return new Response($pictureResult['response'], $pictureResult['code'], array('Content-Type' => 'application/json'));
 })->bind('upload');
 
 $app->error(function (\Exception $e, $code) use ($app) {
