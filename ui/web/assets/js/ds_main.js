@@ -46,7 +46,7 @@ drunkspotting.upload_ajax = function(){
   data.append('file', $('#data')[0].files[0]);
   
   $.ajax({
-    url : 'http://api.drunkspotting.com/upload_template',
+    url : 'http://staging.drunkspotting.com/api/upload_template',
     type : "POST",
     data : data,
     dataType: 'JSON',
