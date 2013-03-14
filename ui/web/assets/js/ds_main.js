@@ -1,3 +1,7 @@
+$(document).ready(function(){
+	$.support.cors = true;
+});
+
 var drunkspotting = {};
 
 drunkspotting.load_images = function(){
