@@ -1,82 +1,39 @@
 {% extends "layout.html" %}
 {% block content %}
-    <!-- start marketing description -->
-    <div style="text-align: center; padding: 10px 15px 5px 15px;" class='marketing-desc'>
-        <div style="margin-bottom:5px;">
-            Upload and draw images of inebriated friends, smashed strangers or crunked cats.
-        </div>
-        <a target="_blank" href="https://docs.google.com/forms/d/1hdfyz0WY087RpI6BVCu-qttQFWWzV_fsfhB6Jib1GMA/viewform">Sign up for beta</a><br/>
-        <strong><a href="http://twitter.com/drunkspotting">#wasteTheRainbow</a></strong><br />
-
-        <span class='st_twitter_large' displayText='Tweet' st_title="Drunkspotting: Draw on photos of drunk friends! #wasteTheRainbow"></span>
-        <span class='st_facebook_large' displayText='Facebook' st_title="Drunkspotting: Draw on photos of drunk friends! #wasteTheRainbow"></span>
-        <span class='st_tumblr_large' displayText='Tumblr' st_title="Drunkspotting: Draw on photos of drunk friends! #wasteTheRainbow"></span>
-        <span class='st_email_large' displayText='Email' st_title="Drunkspotting: Draw on photos of drunk friends! #wasteTheRainbow"></span>
-
-        <!-- <a href="https://twitter.com/drunkspotting" class="twitter-follow-button" data-show-count="false">Follow @drunkspotting</a> -->
-        <!-- <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script> -->
-    </div>
-    <!-- end marketing description -->
+		<div id="body">
+			<h3>Upload and draw on images of inebriated friends, smashed strangers or crunked cats.</h3>
+			<div class="content">
+				<a target="_blank" href="https://docs.google.com/forms/d/1hdfyz0WY087RpI6BVCu-qttQFWWzV_fsfhB6Jib1GMA/viewform">Sign up for beta</a><br/>
+				<strong><a href="http://twitter.com/drunkspotting">#wasteTheRainbow</a></strong>
+			</div>
 {#
-    <!-- Start Upload Btn -->
-    <div class='widget-content upload-btn-container'>
-        <div class="btn-circle-panel large">
-            <ul class="btn-circle">
-                <li class="pushStart">
-                    <div style='height: 0px;width: 0px; overflow:hidden;'><input type="file" name="file" id="file"></div>
-                    <form method="POST" id="uploader" enctype="multipart/form-data">
-                        <a href="#" id="upload" class="bottom_tooltip" title="Upload your drunk" onClick="$('#data').click();">
-                            <i class="icon-upload-alt text-info" style="text-shadow:none;"></i>
-                        </a>
-                        <input id="data" type="file" name="data" onChange="drunkspotting.upload_ajax();" style="visibility:hidden;" />
-                    </form>
-                </li>
-            </ul>
-        </div>
-    </div>
-    <!-- End Upload Btn -->
-#}
-{#
-    <!-- Start Edit Panel -->
-    <div id="edit-panel" style="display:none;">
-        <div class="tools">
-          <button id="button_save" class="btn" onClick="drunkspotting.save_drawing();">Save</button>
-        </div>
-        <canvas id="tools_sketch" width="640px" height="640px"></canvas>
-
-        <!-- Add an edit button, passing the HTML id of the image and the public URL of the image -->
-        <br>
-
-    </div>
-    <!-- End Edit Panel -->
-#}
-    <!-- Start lushes box -->
-    <div class="well widget" style="background:#acf5d7;padding-bottom:0px" id='lushes-box'>
-        <!-- body header -->
-
-        <div class="widget-header">
-            <h3 class="title" style="color:#ffffff;text-shadow:none; font-size:28px">Latest Lushes</h3>
-            <div class="widget-nav">
-                <!-- TODO Nav can go here -->
-            </div>
-        </div>
-
-        <!-- end body header -->
-        <div style="margin:20px 0 10px 0;">
-            If you find yourself on drunkspotting,
-            you probably made a mistake you deserve 
-            to pay for.
-        </div>
-
-        <!-- images container -->
-        <div id="posts"></div>
-
-        <!-- put new set of images here first so the screen doesnt flash -->
-        <div id="posts_loading"></div>
-
-        <div class="widget-header load-more">
-            <h3 class="title" style="color:#ffffff;text-shadow:none; font-size:28px;margin-bottom:0px"><!-- <a href="#">LOAD MORE DRUNKS</a> --></h3>
-            <div class="widget-nav"></div>
-        </div>
-    </div>
+			<form method="POST" id="uploader" enctype="multipart/form-data">
+				<a href="#" id="upload" class="bottom_tooltip" title="Upload your drunk" onclick="$('#data').click();"></a>
+				<input id="data" type="file" name="data" onchange="drunkspotting.upload_ajax();" style="visibility:hidden;">
+			</form>
+			
+			<!-- Start Edit Panel -->
+			<div id="edit-panel" style="display:none;">
+			<div class="tools">
+				<button id="button_save" class="btn" onClick="drunkspotting.save_drawing();">Save</button>
+			</div>
+			<canvas id="tools_sketch" width="640px" height="640px"></canvas>
+			
+			<!-- Add an edit button, passing the HTML id of the image and the public URL of the image -->
+			</div>
+			<!-- End Edit Panel -->
+#}			
+			<div id="share">
+				<span class='st_twitter_large' displayText='Tweet' st_title="Drunkspotting: Draw on photos of drunk friends! #wasteTheRainbow"></span>
+		        <span class='st_facebook_large' displayText='Facebook' st_title="Drunkspotting: Draw on photos of drunk friends! #wasteTheRainbow"></span>
+		        <span class='st_tumblr_large' displayText='Tumblr' st_title="Drunkspotting: Draw on photos of drunk friends! #wasteTheRainbow"></span>
+		        <span class='st_email_large' displayText='Email' st_title="Drunkspotting: Draw on photos of drunk friends! #wasteTheRainbow"></span>
+			</div>
+			
+			<!-- Start lushes box -->
+			<h2>latest lushes</h2>
+			<div id="posts">
+			</div>
+			<div id="posts_loading"></div>
+		</div>
 {% endblock %}
