@@ -42,7 +42,7 @@ drunkspotting.upload_ajax = function(){
   data.append('file', $('#data')[0].files[0]);
   
   $.ajax({
-    url : 'http://dev.syphen.org/test.php',
+    url : 'http://api.drunkspotting.com/upload_template',
     type : "POST",
     data : data,
     dataType: 'JSON',
