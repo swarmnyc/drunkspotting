@@ -12,10 +12,11 @@ body, html {
 	margin: 0;
 	padding: 0;
 	font-size: 16px;
+	font-weight: 400;
 	background-color: #f3f3f3;
 }
 a {
-	color: #00b2c9;
+	color: #16536e;
 }
 h1, h2 {
 	font-size: 2em;
@@ -59,7 +60,10 @@ h3 {
 	padding: 10px;
 }
 #uploader {
-	display: inline-block;
+	display:-moz-inline-stack;
+	display:inline-block;
+	zoom:1;
+	*display:inline;
 	margin: auto;
 	text-align: center;
 }
@@ -103,19 +107,25 @@ h3 {
 	padding: 10px;
 	text-align: left;
 }
-#editor .btn {
+.btn {
 	-webkit-border-radius: 4px;
 	-moz-border-radius: 4px;
 	border-radius: 4px;
 	-webkit-box-shadow: inset 0px 0px 1px 0px rgba(255, 255, 255, .5);
 	box-shadow: inset 0px 0px 1px 0px rgba(255, 255, 255, .75);
 	font-size: 18px;
+	font-weight: bold;
 	padding: 0px 20px;
-	line-height: 32px;
+	line-height: 36px;
 	cursor: pointer;
-	text-shadow: 0px -1px 1px rgba(0,0,0,.8);
+	text-shadow: 0px -1px 0px rgba(0,0,0,.8);
+	text-decoration: none;
+	display:-moz-inline-stack;
+	display:inline-block;
+	zoom:1;
+	*display:inline;
 }
-#button_save {
+#button_save, #beta_signup {
 	background: #23a570url("/assets/img/btn_bg.png") repeat-x 0 bottom;
 	color: #fff;
 	border: 1px solid #0a6540;
@@ -123,7 +133,9 @@ h3 {
 
 #footer {
 	padding: 20px;
-	font-size: 12px;
+}
+#footer a {
+	text-decoration: none;
 }
 
 
@@ -182,14 +194,14 @@ h3 {
 	#body .content {
 		line-height: 32px;
 	}
-	#share {
+	/*#share {
 		padding: 5px 0 0 0;
 		position: fixed;
 		bottom: 0;
 		width: 100%;
 		background-color: #fff;
 		border-top: 1px solid #00b2c9;
-	}
+	}*/
 	#posts {
 		padding: 10px 10px 1px 10px;
 	}
@@ -200,7 +212,6 @@ h3 {
 		float: none;
 	}
 	#footer {
-		line-height: 32px;
-		padding-bottom: 60px;
+		line-height: 28px;
 	}
 }
