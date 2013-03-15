@@ -127,6 +127,9 @@ drunkspotting.init_drawing = function(image_url){
 		drunkspotting.cancel_drawing();
 	});
 	
+	// Reset canvas background
+	$('#sketch').css('background-image', 'none');
+	
 	// set up the drawing canvas
 	var myImg = new Image();
 	$(myImg).on('load', function () {
