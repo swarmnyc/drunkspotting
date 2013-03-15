@@ -44,6 +44,7 @@ $(document).ready(function(){
                 abort: function() {if (xdr) xdr.abort();}
             };
         }
+    });
 });
 
 var drunkspotting = {img:new Image()};
