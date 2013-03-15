@@ -10,8 +10,8 @@
 #}
 
 			<form method="POST" id="uploader" enctype="multipart/form-data">
-				<a href="#editor" id="upload" class="bottom_tooltip" title="Upload your drunk" onclick="$('#data').click();"></a>
-				<input id="data" type="file" name="data" onchange="drunkspotting.upload_ajax();" style="visibility:hidden;">
+				<a href="#editor" id="upload" class="bottom_tooltip" title="Upload your drunk"></a>
+				<input id="data" type="file" name="data" style="visibility:hidden;">
 			</form>
 			
 			<div id="share">
@@ -32,7 +32,8 @@
 			<div id="tools">
 				<a href="#colors" id="my_color"><span></span></a>
 				<a href="#size" id="my_size"><span></span></a>
-				<button id="button_save" class="btn" onClick="drunkspotting.save_drawing();">Save</button>
+				<button id="button_save" class="btn">Save</button>
+				<button id="button_cancel" class="btn">Cancel</button>
 				<div class="clear"></div>
 			</div>
 			<canvas id="sketch" width="640" height="640"></canvas>

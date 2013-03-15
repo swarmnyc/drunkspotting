@@ -210,10 +210,17 @@ h3 {
 	*display:inline;
 }
 #button_save, #beta_signup {
-	background: #23a570url("/assets/img/btn_bg.png") repeat-x 0 bottom;
+	background: #23a570 url("/assets/img/btn_bg.png") repeat-x 0 bottom;
 	color: #fff;
 	border: 1px solid #0a6540;
 }
+#button_cancel {
+	background: #dd3e3e url("/assets/img/btn_bg.png") repeat-x 0 bottom;
+	color: #fff;
+	border: 1px solid #671212;
+	float: right;
+}
+
 #button_save {
 	float: right;
 }
