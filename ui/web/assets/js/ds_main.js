@@ -1,3 +1,4 @@
+var myImg;
 $(document).ready(function(){
 	$('#upload').bind('click', function(e){
 		e.preventDefault();
@@ -131,7 +132,7 @@ drunkspotting.init_drawing = function(image_url){
 	$('#sketch').css('background-image', 'none');
 	
 	// set up the drawing canvas
-	var myImg = new Image();
+	myImg = new Image();
 	$(myImg).on('load', function () {
 		$('#sketch').attr('img_width', this.width);
 		$('#sketch').attr('img_height', this.height);
@@ -203,7 +204,7 @@ drunkspotting.save_drawing = function(){
 	$.ajax({
 	url : '/upload',
 	type : "POST",
-	data : window.image[0].src + ':endurl:' + imageData,
+	data : myImg.src + ':endurl:' + imageData,
 	processData : false,
 	contentType : false,
 	beforeSend : function () {
