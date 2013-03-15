@@ -1,11 +1,17 @@
 $(document).ready(function(){
+	jQuery.support.cors = true;
 	$('#upload').bind('click', function(e){
 		e.preventDefault();
 		$('#data').click();
 	});
 	$('#data').bind('change', function(){
 		if($('#data').val() != ''){
-			drunkspotting.upload_ajax();
+			if(typeof $('#data')[0].files[0] == 'object' && $('#data')[0].files[0].size <= 2097152){
+				drunkspotting.upload_ajax();
+			}
+			else {
+				drunkspotting.error_show('Your file is too large! Trying something smaller. (that\'s what she said)');
+			}
 		}
 	});
 	drunkspotting.load_images();
@@ -52,28 +58,38 @@ var drunkspotting = {img:new Image()};
 drunkspotting.load_images = function(){
 	var ds = {};
 	
-	$.get('http://api.drunkspotting.com/pictures/latest/12', function(data){
-		ds.template = $('#template-listing').html();
-		ds.postsHtml = $('#posts');
-		ds.postsLoadingHtml = $('#posts_loading');
-		
-		// Clear list on refresh
-		$('#posts').html('');
-		
-		var temp, itemHtml;
-		window.data = data;
-		
-		// For each ds image, append html
-		for(var i = 0; i < data.length; i++){
-			temp = ds.template;
+	
+	$.ajax({
+		url:'/api/pictures/latest/12',
+		type: "GET",
+		dataType: 'JSON',
+		success: function(data){
+			console.log('success');
+			ds.template = $('#template-listing').html();
+			ds.postsHtml = $('#posts');
+			ds.postsLoadingHtml = $('#posts_loading');
 			
-			//itemHtml = temp.replace('{{title}}', data[i].description);
-			itemHtml = temp.replace('{{src_link}}', data[i].url);
-			itemHtml = itemHtml.replace('{{src}}', data[i].url);
+			// Clear list on refresh
+			$('#posts').html('');
 			
-			$('#posts').append(itemHtml);
+			var temp, itemHtml;
+			window.data = data;
+			
+			// For each ds image, append html
+			for(var i = 0; i < data.length; i++){
+				temp = ds.template;
+				
+				//itemHtml = temp.replace('{{title}}', data[i].description);
+				itemHtml = temp.replace('{{src_link}}', data[i].url);
+				itemHtml = itemHtml.replace('{{src}}', data[i].url);
+				
+				$('#posts').append(itemHtml);
+			}
+			$('#posts').append("<div style='clear:both'></div>");
+		},
+		error: function(obj,stat,err){
+			console.log(stat, err);
 		}
-		$('#posts').append("<div style='clear:both'></div>");
 	});
 	
 	// window.ds_reloader = setTimeout(drunkspotting.load_images, 5000);
@@ -215,14 +231,36 @@ drunkspotting.init_drawing = function(image_url){
 	$('#my_size span').attr('data-size', '6');
 };
 
+drunkspotting.error_show = function(msg){
+	drunkspotting.loading_stop();
+	var cover = $('<div id="cover"/>');
+	cover.appendTo(document.body);
+	cover.fadeIn(250);
+	var error = $('<div class="error">'+msg+'</div>');
+	cover.append(error);
+	error.css({
+		'margin-top':(error.outerHeight()/2)*-1,
+		'margin-left':(error.outerWidth()/2)*-1
+	});
+	cover.on('click', function(){
+		drunkspotting.error_hide();
+	});
+}
+drunkspotting.error_hide = function(){
+	$('#canvas').fadeOut(250, function(){
+		$('#canvas').remove();
+	})
+}
+
 drunkspotting.loading_start = function () {
+	drunkspotting.error_hide();
 	var loading = $('<div id="loading"><img src="/assets/img/loading.gif"/></div>');
 	loading.appendTo(document.body);
 	loading.fadeIn(250);
 };
 
 drunkspotting.loading_stop = function () {
-	$('#loading').fadeOut(500, function(){
+	$('#loading').fadeOut(250, function(){
 		$('#loading').remove();
 	})
 };

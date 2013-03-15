@@ -232,7 +232,7 @@ h3 {
 	text-decoration: none;
 }
 
-#loading {
+#loading, #canvas {
 	position: fixed;
 	top: 0px;
 	left: 0px;
@@ -240,6 +240,20 @@ h3 {
 	width: 100%;
 	background-color: rgba(255,255,255,.9);
 	z-index: 100;
+}
+#canvas .error {
+	display:-moz-inline-stack;
+	display:inline-block;
+	zoom:1;
+	*display:inline;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	box-sizing: border-box;
+	padding: 20px;
+	background-color: #dd3e3e;
+	color: #fff;
+	font-weight: bold;
 }
 #loading img {
 	position: absolute;
