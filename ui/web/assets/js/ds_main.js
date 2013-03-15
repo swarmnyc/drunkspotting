@@ -9,6 +9,41 @@ $(document).ready(function(){
 		}
 	});
 	drunkspotting.load_images();
+	
+	
+	// Fixes for IE Ajax loading
+	if ($.browser.msie && $.browser.version == '7.0') {
+	    $.ajaxSetup({ xhr: function() {
+	        return XMLHttpRequest ? new XMLHttpRequest() : new ActiveXObject("MSXML2.XMLHTTP");
+	    }
+	    });
+	}
+	$.ajaxTransport("+*", function(options, originalOptions, jqXHR) {
+        if ($.browser.msie && window.XDomainRequest) {
+            var xdr;
+            return {
+                send: function(headers, completeCallback) {
+                    // Use Microsoft XDR
+                    xdr = new XDomainRequest();
+                    xdr.open("get", options.url);
+                    xdr.onload = function() {
+                        if (this.contentType.match(/\/xml/)) {
+                            var dom = new ActiveXObject("Microsoft.XMLDOM");
+                            dom.async = false;
+                            dom.loadXML(this.responseText);
+                            completeCallback(200, "success", [dom]);
+                        } else {
+                        	completeCallback(200, "success", [this.responseText]);
+                        }
+                    };
+                    xdr.ontimeout = function() {completeCallback(408, "error", ["The request timed out."]);};
+                    xdr.onerror = function() {completeCallback(404, "error", ["The requested resource could not be found."]);};
+                    xdr.onprogress = function(){};
+                    xdr.send();
+                },
+                abort: function() {if (xdr) xdr.abort();}
+            };
+        }
 });
 
 var drunkspotting = {img:new Image()};
