@@ -51,6 +51,14 @@ $app->post('/upload', function () use ($app) {
     $backgroundImage = new Imagick($imageUrl);
     $canvasImage     = new Imagick($canvasImageTemp);
 
+    $canvasImage->scaleImage(
+        $backgroundImage->getImageWidth(),
+        $backgroundImage->getImageHeight()
+    );
+
+    $canvasImage->stripImage();
+    $backgroundImage->stripImage();
+
     $backgroundImage->compositeImage($canvasImage, Imagick::COMPOSITE_DEFAULT, 0, 0);
 
     $ch = curl_init();
