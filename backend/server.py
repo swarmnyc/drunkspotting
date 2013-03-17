@@ -8,12 +8,12 @@ import binascii
 import psycopg2
 import os
 import datetime
-import cgi
 import azure.storage
 
 import database
 import drunkspotting_exceptions
-import config
+from config import config
+
 
 class Server:
     def __init__(self):
@@ -26,9 +26,9 @@ class Server:
         gevent.monkey.patch_all()
 
         self._conn = psycopg2.connect(
-            database=config.config['database'],
-            user=config.config['database_user'],
-            password=config.config['database_password'])
+            database=config['database'],
+            user=config['database_user'],
+            password=config['database_password'])
 
         logging.info("Server initialized.")
 
@@ -42,16 +42,20 @@ class Server:
         sha1.update(str(datetime.datetime.now()))
         img = sha1.hexdigest() + ".jpg"
 
-        blob_service = azure.storage.BlobService(
-            account_name=config.config['azure_account'],
-            account_key=config.config['azure_key'])
-        blob_service.create_container(folder,
-                                      x_ms_blob_public_access='blob')
-        blob_service.put_blob(folder, img,
-                              data, x_ms_blob_type='BlockBlob',
-                              x_ms_blob_content_type='image/jpeg')
+        if 'azure_account' in config and config['azure_account']:
+            blob_service = azure.storage.BlobService(
+                account_name=config['azure_account'],
+                account_key=config['azure_key'])
+            blob_service.create_container(folder,
+                                          x_ms_blob_public_access='blob')
+            blob_service.put_blob(folder, img,
+                                  data, x_ms_blob_type='BlockBlob',
+                                  x_ms_blob_content_type='image/jpeg')
+        elif 'upload_folder' in config and config['upload_folder']:
+            with open(os.path.join(config['upload_folder'], img), 'wb') as f:
+                f.write(data)
 
-        url = config.config['upload_url'] + folder + '/' + img
+        url = config['upload_url'] + folder + '/' + img
         print url
         return json.dumps({'url': url})
 
@@ -291,8 +295,8 @@ class Server:
         return json.dumps({'id': id})
 
     def nuke_it_all(self, env):
-        if 'allow-nuking-database' in config.config:
-            if config.config['allow-nuking-database'] == 'yes-be-careful':
+        if 'allow-nuking-database' in config:
+            if config['allow-nuking-database'] == 'yes-be-careful':
                 database.execute_non_query(
                     self._conn, 'truncate table comments')
                 database.execute_non_query(
