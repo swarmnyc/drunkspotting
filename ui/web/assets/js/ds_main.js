@@ -54,7 +54,7 @@ drunkspotting.upload_ajax = function(){
 	data.append('file', $('#data')[0].files[0]);
 	
 	$.ajax({
-	url : '/api/upload_template',
+	url : '/upload/template',
 	type : "POST",
 	data : data,
 	dataType: 'JSON',
@@ -91,7 +91,7 @@ drunkspotting.fix_canvas = function(){
 	if(imgWidth/imgHeight >= maxWidth/maxHeight){
 		if((maxWidth/imgWidth) * imgHeight >= maxHeight){
 			canvasHeight = maxHeight;
-			canvasWidth = (maxHeight/imgHeight) * imgHeight
+			canvasWidth = (maxHeight/imgHeight) * imgHeight;
 		}
 		else {
 			canvasHeight = (maxWidth/imgWidth) * imgHeight;
@@ -114,7 +114,7 @@ drunkspotting.fix_canvas = function(){
 	$('#sketch')[0].width = Math.floor(canvasWidth);
 	$('#sketch')[0].height = Math.floor(canvasHeight);
 	drunkspotting.loading_stop();
-}
+};
 
 drunkspotting.init_drawing = function(image_url){
 
@@ -189,12 +189,12 @@ drunkspotting.loading_start = function () {
 drunkspotting.loading_stop = function () {
 	$('#loading').fadeOut(500, function(){
 		$('#loading').remove();
-	})
+	});
 };
 
 drunkspotting.cancel_drawing = function(){
 	$(document.body).removeClass('edit');
-}
+};
 
 drunkspotting.save_drawing = function(){
 	// save
@@ -202,13 +202,13 @@ drunkspotting.save_drawing = function(){
 	var imageData = $('#sketch')[0].toDataURL();
 	
 	$.ajax({
-	url : '/upload',
+	url : '/upload/picture',
 	type : "POST",
 	data : myImg.src + ':endurl:' + imageData,
 	processData : false,
 	contentType : false,
 	beforeSend : function () {
-	  $('#button_save').attr('disabled','disabled');
+    $('#button_save').attr('disabled','disabled');
 	},
 	success : function(data) {
 		if (data.id) {
