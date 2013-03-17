@@ -6,6 +6,8 @@ use Silex\Provider\UrlGeneratorServiceProvider;
 use Silex\Provider\ValidatorServiceProvider;
 use Silex\Provider\ServiceControllerServiceProvider;
 
+use DS\Api\Drunkspotting;
+
 $app = new Application();
 $app->register(new UrlGeneratorServiceProvider());
 $app->register(new ValidatorServiceProvider());
@@ -19,5 +21,9 @@ $app['twig'] = $app->share($app->extend('twig', function($twig, $app) {
 
     return $twig;
 }));
+
+$app['drunkspotting_api'] = $app->share(function ($app) {
+    return new Drunkspotting($app['drunkspotting_api.endpoint']);
+});
 
 return $app;

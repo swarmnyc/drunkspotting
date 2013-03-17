@@ -6,37 +6,63 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
-function sendPost($url, $data)
-{
-    $ch = curl_init();
-    curl_setopt($ch, CURLOPT_URL, $url);
-    curl_setopt($ch, CURLOPT_POST, true);
-    curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
-    curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
-
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-
-    $response = curl_exec($ch);
-    $code     = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-
-    curl_close($ch);
-
-    return array(
-        'response' => $response,
-        'code'     => $code
-    );
-}
-
+/**
+ * Home Page
+ *
+ * Route: /
+ * Name: homepage
+ */
 $app->get('/', function () use ($app) {
     return $app['twig']->render('index.html', array());
 })->bind('homepage');
 
-
+/**
+ * About
+ *
+ * Route: /about
+ * Name: about
+ */
 $app->get('/about', function () use ($app) {
     return $app['twig']->render('about.html', array());
 })->bind('about');
 
-$app->post('/upload', function () use ($app) {
+
+/**
+ * Upload Template
+ *
+ * Route: /upload/template
+ * Name: upload_template
+ */
+$app->post('/upload/template', function () use ($app) {
+    $dsApi   = $app['drunkspotting_api'];
+    $request = $app['request'];
+
+    if (!$request->files->has('file')) {
+        throw new \Exception('Missing required "file" input value.');
+    }
+
+    $templateImage = new Imagick($request->files->get('file')->getPathname());
+
+    $templateImage->stripImage();
+
+    $templateImage->setImageCompressionQuality(50);
+
+    $uploadTemplateResult = $dsApi->executeUploadTemplate($templateImage->getImageBlob());
+
+    unlink($request->files->get('file')->getPathname());
+
+    return new Response($uploadTemplateResult->rawResponse, $uploadTemplateResult->code, array('Content-Type' => 'application/json'));
+})->bind('upload_template');
+
+
+/**
+ * Upload Picture
+ *
+ * Route: /upload/picture
+ * Name: upload_picture
+ */
+$app->post('/upload/picture', function () use ($app) {
+    $dsApi   = $app['drunkspotting_api'];
     $request = $app['request'];
 
     $postContent = $request->getContent();
@@ -61,39 +87,23 @@ $app->post('/upload', function () use ($app) {
 
     $backgroundImage->compositeImage($canvasImage, Imagick::COMPOSITE_DEFAULT, 0, 0);
 
-    $ch = curl_init();
-    curl_setopt($ch, CURLOPT_URL, "http://api.drunkspotting.com/upload_picture");
-    curl_setopt($ch, CURLOPT_POST, true);
-    curl_setopt($ch, CURLOPT_POSTFIELDS, $backgroundImage->getImageBlob());
-    curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: text/plain'));
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-
-    $result = curl_exec($ch);
-    $code   = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-
-    $uploadPictureData = json_decode($result);
+    $uploadPictureData = $dsApi->executeUploadPicture($backgroundImage->getImageBlob());
 
     $data = array(
+        'template_id' => 0,
         'title' => '',
         'latitude' => 0,
         'longitude' => 0,
         'description' => '',
-        'url' => $uploadPictureData->url
+        'url' => $uploadPictureData->data->url
     );
 
-    $jsonData = json_encode($data);
+    $pictureResult = $dsApi->executePictures($data);
 
-    $templateResult = sendPost("http://api.drunkspotting.com/templates/", $jsonData);
-    $templateData = json_decode($templateResult['response']);
+    unlink($canvasImageTemp);
 
-    $data['template_id'] = $templateData->id;
-
-    $jsonData = json_encode($data);
-
-    $pictureResult = sendPost("http://api.drunkspotting.com/pictures/", $jsonData);
-
-    return new Response($pictureResult['response'], $pictureResult['code'], array('Content-Type' => 'application/json'));
-})->bind('upload');
+    return new Response($pictureResult->rawResponse, $pictureResult->code, array('Content-Type' => 'application/json'));
+})->bind('upload_picture');
 
 $app->error(function (\Exception $e, $code) use ($app) {
     if ($app['debug']) {

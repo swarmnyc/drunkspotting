@@ -1,0 +1,54 @@
+server {
+    set $website_host "<%= @name %>";
+    set $website_root "<%= @website_root %>";
+    set $default_controller "<%= @default_controller %>";
+    set $php_pool_addr "<%= @php_pool_addr %>";
+
+    listen 80;
+    server_name <%= @name %>;
+
+    # Gzip
+    gzip on;
+    gzip_min_length 1000;
+    gzip_types text/plain text/css application/x-javascript text/xml application/xml application/xml+rss text/javascript;
+    gzip_disable "MSIE [1-6]\.";
+
+    access_log /var/log/nginx/$website_host.access.log;
+
+    root <%= @website_root %>;
+
+    charset utf-8;
+
+    # strip index.php/ prefix if it is present
+    rewrite ^/(index\.php|index_dev\.php)/?(.*)$ /$2 permanent;
+    # rewrite ^/$default_controller/?(.*)$ /$1 permanent;
+  
+    location /pictures {
+        proxy_pass http://drunkspotting.blob.core.windows.net;
+    }
+    location /templates  {
+        proxy_pass http://drunkspotting.blob.core.windows.net;
+    }
+
+    location /api {
+      rewrite /api/(.*) /$1 break;
+      proxy_pass http://127.0.0.1:8200;
+    }
+
+    location / {
+      index <%= @default_controller %>;
+      try_files $uri @rewriteapp;
+    }
+
+    location @rewriteapp {
+      rewrite ^(.*)$ /<%= @default_controller %>/$1 last;
+    }
+
+    location ~ ^/(index|index_dev|config)\.php(/|$) {
+        fastcgi_pass <%= @php_pool_addr %>;
+        fastcgi_split_path_info ^(.+\.php)(/.*)$;
+        include fastcgi_params;
+        fastcgi_param  SCRIPT_FILENAME $document_root$fastcgi_script_name;
+        fastcgi_param  HTTPS off;
+    }
+}

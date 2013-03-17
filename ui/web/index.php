@@ -5,7 +5,9 @@ use Symfony\Component\ClassLoader\DebugClassLoader;
 use Symfony\Component\HttpKernel\Debug\ErrorHandler;
 use Symfony\Component\HttpKernel\Debug\ExceptionHandler;
 
-require_once __DIR__.'/../vendor/autoload.php';
+$loader = require_once __DIR__.'/../vendor/autoload.php';
+
+$loader->add('DS', __DIR__.'/../src');
 
 // Get the current environment and debug mode from server headers
 $env = isset($_SERVER['SYMFONY_ENV']) ? $_SERVER['SYMFONY_ENV'] : 'prod';

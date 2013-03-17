@@ -13,44 +13,70 @@ Silex is actually a project based off of [Symfony2](http://symfony.com/doc/maste
 
 Also, with Symfony/Silex there is a great templating language called [Twig](twig.sensiolabs.org/) that is being used.  Docs are great, and it makes things very easy.
 
-Requirements:
+__Requirements:__
 
 - PHP 5.3+
 - cURL (including the PHP5 cURL module)
 - ImageMagick (including the PHP5 Imagick module)
 
-Step One:
+__Step One:__
 
     $ git clone https://github.com/drunkspotting/drunkspotting.git
 
-Step Two:
+__Step Two:__
 
     $ cd drunkspotting/ui
 
-Step Three:
+__Step Three:__
 
 This step will install all dependencies.  This is identical to "bundle install" in the Ruby world.
 Therefore, this step will require PHP to be installed.
 
-    $ ./composer.phar install
+    $ ./composer.phar install && cd ../
 
-Step Five:
+__Step Five:__
 
 I know its not the best practice to 777 anything, but in production, these folders and not in the web directory, so its safe.
 
     $ chmod -R 777 ui/cache ui/logs
     
-Step Six:
+__Step Six:__
 
 Verify you have a default timezone set in your php.ini file, or you will get an exception thrown.
 
     date.timezone = America/New_York
 
-Step Seven:
+__Step Seven:__
 
-Setup some kind of local server, and make "./ui/web" the server root.
+You will need to install Vagrant
 
-I believe that is the end.  You can hit "index_dev.php" for seeing development settings, and "index.php" for seeing production settings.  So "index_dev.php/about" would get you to the about page.  If you setup an Apache/Nginx server, then you can add rewrite rules, like the ones we have in production, so you do not have to type the index file name, but its not required.
+    $ brew install vagrant
+
+Or
+    
+    $ port install vagrant
+    
+Or
+
+    $ gem install vagrant
+    
+Or visit this page and download the verions you need: [http://downloads.vagrantup.com/tags/v1.0.3]()
+
+__Step Eight:__
+
+    $ vagrant up
+    
+This should download the VM box, import it, and then provision it with Puppet, all in one step.
+
+__Step Nine:__
+
+    $ sudo vim /etc/hosts
+    
+And add this line to the end:
+
+    192.168.33.98 local.drunkspotting.com
+    
+And boom you should be able to hit: [http://local.drunkspotting.com]() and it load right up.  This will mimic production with an nginx server proxying to php5-fpm.
 
 Folder Explanation
 ------------------
