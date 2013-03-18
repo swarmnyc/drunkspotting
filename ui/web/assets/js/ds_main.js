@@ -64,28 +64,12 @@ drunkspotting.load_images = function(){
 		type: "GET",
 		dataType: 'JSON',
 		success: function(data){
-			console.log('success');
-			ds.template = $('#template-listing').html();
-			ds.postsHtml = $('#posts');
-			ds.postsLoadingHtml = $('#posts_loading');
-			
-			// Clear list on refresh
-			$('#posts').html('');
-			
-			var temp, itemHtml;
-			window.data = data;
-			
+			jQuery('#posts').empty();
 			// For each ds image, append html
 			for(var i = 0; i < data.length; i++){
-				temp = ds.template;
-				
-				//itemHtml = temp.replace('{{title}}', data[i].description);
-				itemHtml = temp.replace('{{src_link}}', data[i].url);
-				itemHtml = itemHtml.replace('{{src}}', data[i].url);
-				
-				$('#posts').append(itemHtml);
+				jQuery('#posts').append('<div class="item"><a href="'+data[i].url+'" target="_blank"><img src="'+data[i].url+'"/></a></div>');
 			}
-			$('#posts').append("<div style='clear:both'></div>");
+			jQuery('#posts').append('<div style="clear:both"></div>');
 		},
 		error: function(obj,stat,err){
 			console.log(stat, err);
@@ -115,7 +99,7 @@ drunkspotting.upload_ajax = function(){
 		// Init canvas
 		var newUrl = data.url.replace('http://drunkspotting.blob.core.windows.net/', 'http://drunkspotting.com/');
 		drunkspotting.init_drawing(newUrl);
-		$(document.body).addClass('edit');
+		jQuery(document.body).addClass('edit');
 	},
 	error : function (){}
 	});
