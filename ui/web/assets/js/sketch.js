@@ -97,8 +97,8 @@ var __slice = Array.prototype.slice;
     };
     Sketch.prototype.onEvent = function(e) {
       if (e.originalEvent && e.originalEvent.targetTouches) {
-        e.pageX = e.originalEvent.targetTouches[0].pageX;
-        e.pageY = e.originalEvent.targetTouches[0].pageY;
+        e.pageX = Math.round(e.originalEvent.targetTouches[0].pageX);
+        e.pageY = Math.round(e.originalEvent.targetTouches[0].pageY);
       }
       $.sketch.tools[$(this).data('sketch').tool].onEvent.call($(this).data('sketch'), e);
       e.preventDefault();
@@ -142,8 +142,8 @@ var __slice = Array.prototype.slice;
       }
       if (this.painting) {
         this.action.events.push({
-          x: e.pageX - this.canvas.offset().left,
-          y: e.pageY - this.canvas.offset().top,
+          x: Math.round(e.pageX - this.canvas.offset().left),
+          y: Math.round(e.pageY - this.canvas.offset().top),
           event: e.type
         });
         return this.redraw();
@@ -158,7 +158,7 @@ var __slice = Array.prototype.slice;
       _ref = action.events;
       for (_i = 0, _len = _ref.length; _i < _len; _i++) {
         event = _ref[_i];
-        this.context.lineTo(event.x, event.y);
+        this.context.lineTo(Math.round(event.x), Math.round(event.y));
         previous = event;
       }
       this.context.strokeStyle = action.color;
