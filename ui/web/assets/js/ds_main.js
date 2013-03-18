@@ -1,12 +1,12 @@
-$(document).ready(function(){
+jQuery(document).ready(function(){
 	jQuery.support.cors = true;
-	$('#upload').bind('click', function(e){
+	jQuery('#upload').bind('click', function(e){
 		e.preventDefault();
-		$('#data').click();
+		jQuery('#data').click();
 	});
-	$('#data').bind('change', function(){
-		if($('#data').val() != ''){
-			if(typeof $('#data')[0].files[0] == 'object' && $('#data')[0].files[0].size <= 2097152){
+	jQuery('#data').bind('change', function(){
+		if(jQuery('#data').val() != ''){
+			if(typeof jQuery('#data')[0].files[0] == 'object' && jQuery('#data')[0].files[0].size <= 2097152){
 				drunkspotting.upload_ajax();
 			}
 			else {
@@ -18,14 +18,14 @@ $(document).ready(function(){
 	
 	
 	// Fixes for IE Ajax loading
-	if ($.browser.msie && $.browser.version == '7.0') {
-	    $.ajaxSetup({ xhr: function() {
+	if (jQuery.browser.msie && jQuery.browser.version == '7.0') {
+	    jQuery.ajaxSetup({ xhr: function() {
 	        return XMLHttpRequest ? new XMLHttpRequest() : new ActiveXObject("MSXML2.XMLHTTP");
 	    }
 	    });
 	}
-	$.ajaxTransport("+*", function(options, originalOptions, jqXHR) {
-        if ($.browser.msie && window.XDomainRequest) {
+	jQuery.ajaxTransport("+*", function(options, originalOptions, jqXHR) {
+        if (jQuery.browser.msie && window.XDomainRequest) {
             var xdr;
             return {
                 send: function(headers, completeCallback) {
@@ -59,7 +59,7 @@ drunkspotting.load_images = function(){
 	var ds = {};
 	
 	
-	$.ajax({
+	jQuery.ajax({
 		url:'/api/pictures/latest/12',
 		type: "GET",
 		dataType: 'JSON',
@@ -86,9 +86,9 @@ drunkspotting.upload_ajax = function(){
 	
 	var data = new FormData();
 	
-	data.append('file', $('#data')[0].files[0]);
+	data.append('file', jQuery('#data')[0].files[0]);
 	
-	$.ajax({
+	jQuery.ajax({
 	url : '/api/upload_template',
 	type : "POST",
 	data : data,
@@ -105,7 +105,7 @@ drunkspotting.upload_ajax = function(){
 	});
 };
 
-$(window).resize(function(){
+jQuery(window).resize(function(){
 	//Resize canvas when window is resized
 	drunkspotting.fix_canvas();
 });
@@ -115,12 +115,12 @@ drunkspotting.fix_canvas = function(){
 	
 	//Get widths and heights for processing
 	var canvasWidth, canvasHeight;
-	$('#sketch').css('width', '100%');
-	var maxWidth = $('#sketch').width()-22;
-	$('#sketch').css('width', 'auto');
-	var maxHeight = $(document.body).height() - $('#tools').outerHeight()-12;
-	var imgWidth = parseInt($('#sketch').attr('img_width'));
-	var imgHeight = parseInt($('#sketch').attr('img_height'));
+	jQuery('#sketch').css('width', '100%');
+	var maxWidth = jQuery('#sketch').width()-22;
+	jQuery('#sketch').css('width', 'auto');
+	var maxHeight = jQuery(document.body).height() - jQuery('#tools').outerHeight()-12;
+	var imgWidth = parseInt(jQuery('#sketch').attr('img_width'));
+	var imgHeight = parseInt(jQuery('#sketch').attr('img_height'));
 	
 	//Use width as base
 	if(imgWidth/imgHeight >= maxWidth/maxHeight){
@@ -146,81 +146,81 @@ drunkspotting.fix_canvas = function(){
 	}
 	
 	//Set canvas size
-	$('#sketch')[0].width = Math.floor(canvasWidth);
-	$('#sketch')[0].height = Math.floor(canvasHeight);
+	jQuery('#sketch')[0].width = Math.floor(canvasWidth);
+	jQuery('#sketch')[0].height = Math.floor(canvasHeight);
 	drunkspotting.loading_stop();
 }
 
 drunkspotting.init_drawing = function(image_url){
 
 	// Set up buttons
-	$('#button_save').unbind('click').bind('click', function(e){
+	jQuery('#button_save').unbind('click').bind('click', function(e){
 		e.preventDefault();
 		drunkspotting.save_drawing();
 	});
-	$('#button_cancel').unbind('click').bind('click', function(e){
+	jQuery('#button_cancel').unbind('click').bind('click', function(e){
 		e.preventDefault();
 		drunkspotting.cancel_drawing();
 	});
 	
 	// Reset canvas background
-	$('#sketch').css('background-image', 'none');
+	jQuery('#sketch').css('background-image', 'none');
 	
 	// set up the drawing canvas
 	drunkspotting.img = new Image();
-	$(drunkspotting.img).on('load', function () {
-		$('#sketch').attr('img_width', this.width);
-		$('#sketch').attr('img_height', this.height);
-		$('#sketch').css('background-image', 'url(' + this.src + ')');
+	jQuery(drunkspotting.img).on('load', function () {
+		jQuery('#sketch').attr('img_width', this.width);
+		jQuery('#sketch').attr('img_height', this.height);
+		jQuery('#sketch').css('background-image', 'url(' + this.src + ')');
 		drunkspotting.fix_canvas();
 	});
 	drunkspotting.img.src = image_url;
-	$('#sketch').sketch();
-	$('#sketch').sketch().actions = new Array();
-	$('#sketch').sketch().redraw();
+	jQuery('#sketch').sketch();
+	jQuery('#sketch').sketch().actions = new Array();
+	jQuery('#sketch').sketch().redraw();
 	
 	
 	// Set up color selector
-	var colorpopup = $('<div id="color_popup"/>');
+	var colorpopup = jQuery('<div id="color_popup"/>');
 	colorpopup.appendTo('#tools').hide();
-	$.each(['#ff0000', '#ff8000', '#ffff00', '#80ff00', '#00ff00', '#00ff80', '#00ffff', '#0080ff', '#0000ff', '#8000ff', '#ff00ff', '#ff0080', '#000000', '#808080', '#ffffff'], function() {
-		var link = $('<a href="#sketch" data-color="' + this + '"><span style="background: ' + this + ';"></span></a>');
+	jQuery.each(['#ff0000', '#ff8000', '#ffff00', '#80ff00', '#00ff00', '#00ff80', '#00ffff', '#0080ff', '#0000ff', '#8000ff', '#ff00ff', '#ff0080', '#000000', '#808080', '#ffffff'], function() {
+		var link = jQuery('<a href="#sketch" data-color="' + this + '"><span style="background: ' + this + ';"></span></a>');
 		link.unbind('click').bind('click', function(){
-			$('#my_color span').css('background-color',$(this).find('span').css('background-color'));
-			$('#color_popup').fadeOut(250);
+			jQuery('#my_color span').css('background-color',jQuery(this).find('span').css('background-color'));
+			jQuery('#color_popup').fadeOut(250);
 		});
 		colorpopup.append(link);
 	});
-	$('#my_color').unbind('click').bind('click', function(){
-		$('#size_popup').fadeOut(250);
-		$('#color_popup').fadeIn(500);
+	jQuery('#my_color').unbind('click').bind('click', function(){
+		jQuery('#size_popup').fadeOut(250);
+		jQuery('#color_popup').fadeIn(500);
 	});
-	$('#my_color span').css('background-color','#000000');
+	jQuery('#my_color span').css('background-color','#000000');
 	
 	//Set up size selector
-	var sizepopup = $('<div id="size_popup"/>');
+	var sizepopup = jQuery('<div id="size_popup"/>');
 	sizepopup.appendTo('#tools').hide();
-	$.each([2, 6, 10, 16, 20], function() {
-		var link = $('<a href="#sketch" data-size="' + this + '" class="size_'+this+'"><span></span></a>');
+	jQuery.each([2, 6, 10, 16, 20], function() {
+		var link = jQuery('<a href="#sketch" data-size="' + this + '" class="size_'+this+'"><span></span></a>');
 		link.unbind('click').bind('click', function(){
-			$('#my_size').attr('data-size', $(this).attr('data-size'));
-			$('#size_popup').fadeOut(250);
+			jQuery('#my_size').attr('data-size', jQuery(this).attr('data-size'));
+			jQuery('#size_popup').fadeOut(250);
 		});
 		sizepopup.append(link);
 	});
-    $('#my_size').unbind('click').bind('click', function(){
-		$('#color_popup').fadeOut(250);
-		$('#size_popup').fadeIn(500);
+    jQuery('#my_size').unbind('click').bind('click', function(){
+		jQuery('#color_popup').fadeOut(250);
+		jQuery('#size_popup').fadeIn(500);
 	});
-	$('#my_size span').attr('data-size', '6');
+	jQuery('#my_size span').attr('data-size', '6');
 };
 
 drunkspotting.error_show = function(msg){
 	drunkspotting.loading_stop();
-	var cover = $('<div id="cover"/>');
+	var cover = jQuery('<div id="cover"/>');
 	cover.appendTo(document.body);
 	cover.fadeIn(250);
-	var error = $('<div class="error">'+msg+'</div>');
+	var error = jQuery('<div class="error">'+msg+'</div>');
 	cover.append(error);
 	error.css({
 		'margin-top':(error.outerHeight()/2)*-1,
@@ -231,45 +231,45 @@ drunkspotting.error_show = function(msg){
 	});
 }
 drunkspotting.error_hide = function(){
-	$('#canvas').fadeOut(250, function(){
-		$('#canvas').remove();
+	jQuery('#canvas').fadeOut(250, function(){
+		jQuery('#canvas').remove();
 	})
 }
 
 drunkspotting.loading_start = function () {
 	drunkspotting.error_hide();
-	var loading = $('<div id="loading"><img src="/assets/img/loading.gif"/></div>');
+	var loading = jQuery('<div id="loading"><img src="/assets/img/loading.gif"/></div>');
 	loading.appendTo(document.body);
 	loading.fadeIn(250);
 };
 
 drunkspotting.loading_stop = function () {
-	$('#loading').fadeOut(250, function(){
-		$('#loading').remove();
+	jQuery('#loading').fadeOut(250, function(){
+		jQuery('#loading').remove();
 	})
 };
 
 drunkspotting.cancel_drawing = function(){
-	$(document.body).removeClass('edit');
+	jQuery(document.body).removeClass('edit');
 }
 
 drunkspotting.save_drawing = function(){
 	// save
 	drunkspotting.loading_start();
-	var imageData = $('#sketch')[0].toDataURL();
+	var imageData = jQuery('#sketch')[0].toDataURL();
 	
-	$.ajax({
+	jQuery.ajax({
 	url : '/upload',
 	type : "POST",
 	data : drunkspotting.img.src + ':endurl:' + imageData,
 	processData : false,
 	contentType : false,
 	beforeSend : function () {
-	  $('#button_save').attr('disabled','disabled');
+	  jQuery('#button_save').attr('disabled','disabled');
 	},
 	success : function(data) {
 		if (data.id) {
-			$(document.body).removeClass('edit');
+			jQuery(document.body).removeClass('edit');
 			drunkspotting.load_images();
 			drunkspotting.loading_stop();
 		}
