@@ -232,7 +232,7 @@ h3 {
 	text-decoration: none;
 }
 
-#loading, #canvas {
+#loading, #cover {
 	position: fixed;
 	top: 0px;
 	left: 0px;
@@ -241,7 +241,7 @@ h3 {
 	background-color: rgba(255,255,255,.9);
 	z-index: 100;
 }
-#canvas .error {
+#cover .error {
 	display:-moz-inline-stack;
 	display:inline-block;
 	zoom:1;
@@ -295,6 +295,9 @@ h3 {
 	-webkit-border-radius: 6px;
 	-moz-border-radius: 6px;
 	border-radius: 6px;
+	-webkit-transform: translate3d(0,0,0);
+	transform: translate3d(0,0,0);
+	-moz-transform: translate3d(0,0,0);
 }
 
 /* Media Query */

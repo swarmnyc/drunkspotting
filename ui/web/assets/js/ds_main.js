@@ -58,9 +58,8 @@ var drunkspotting = {img:new Image()};
 drunkspotting.load_images = function(){
 	var ds = {};
 	
-	
 	jQuery.ajax({
-		url:'/api/pictures/latest/12',
+		url:'http://drunkspotting.com/api/pictures/latest/12',
 		type: "GET",
 		dataType: 'JSON',
 		success: function(data){
@@ -99,7 +98,6 @@ drunkspotting.upload_ajax = function(){
 		// Init canvas
 		var newUrl = data.url.replace('http://drunkspotting.blob.core.windows.net/', 'http://drunkspotting.com/');
 		drunkspotting.init_drawing(newUrl);
-		jQuery(document.body).addClass('edit');
 	},
 	error : function (){}
 	});
@@ -152,7 +150,7 @@ drunkspotting.fix_canvas = function(){
 };
 
 drunkspotting.init_drawing = function(image_url){
-
+	jQuery(document.body).addClass('edit');
 	// Set up buttons
 	jQuery('#button_save').unbind('click').bind('click', function(e){
 		e.preventDefault();
@@ -231,8 +229,8 @@ drunkspotting.error_show = function(msg){
 	});
 }
 drunkspotting.error_hide = function(){
-	jQuery('#canvas').fadeOut(250, function(){
-		jQuery('#canvas').remove();
+	jQuery('#cover').fadeOut(250, function(){
+		jQuery('#cover').remove();
 	})
 }
 
