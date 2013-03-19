@@ -1,3 +1,6 @@
+
+var drunkspotting = {img:new Image()};
+
 jQuery(document).ready(function(){
 	jQuery.support.cors = true;
 	jQuery('#upload').bind('click', function(e){
@@ -5,7 +8,7 @@ jQuery(document).ready(function(){
 		jQuery('#data').click();
 	});
 	jQuery('#data').bind('change', function(){
-		if(jQuery('#data').val() != ''){
+		if(jQuery('#data').val() !== ''){
 			if(typeof jQuery('#data')[0].files[0] == 'object' && jQuery('#data')[0].files[0].size <= 2097152){
 				drunkspotting.upload_ajax();
 			}
@@ -15,7 +18,6 @@ jQuery(document).ready(function(){
 		}
 	});
 	drunkspotting.load_images();
-	
 	
 	// Fixes for IE Ajax loading
 	if (jQuery.browser.msie && jQuery.browser.version == '7.0') {
@@ -53,8 +55,6 @@ jQuery(document).ready(function(){
     });
 });
 
-var drunkspotting = {img:new Image()};
-
 drunkspotting.load_images = function(){
 	var ds = {};
 	
@@ -67,8 +67,14 @@ drunkspotting.load_images = function(){
 			// For each ds image, append html
 			for(var i = 0; i < data.length; i++){
 				jQuery('#posts').append('<div class="item"><a href="'+data[i].url+'" target="_blank"><img src="'+data[i].url+'"/></a></div>');
+				jQuery('#posts img').last().load(function(){
+					drunkspotting.resizeImg($(this));
+				});
 			}
 			jQuery('#posts').append('<div style="clear:both"></div>');
+			jQuery('#posts img').last().load(function(){
+				jQuery(window).trigger('resize');
+			});
 		},
 		error: function(obj,stat,err){
 			console.log(stat, err);
@@ -103,9 +109,26 @@ drunkspotting.upload_ajax = function(){
 	});
 };
 
+drunkspotting.resizeImg = function(obj){
+	if(obj.width() > obj.height()){
+		obj.css({
+			'width':'auto',
+			'height':'100%',
+			'position':'absolute',
+			'top':'0'
+		});
+		obj.css({'left':(obj.width()-obj.height())/-2});
+	}
+};
+
 jQuery(window).resize(function(){
 	//Resize canvas when window is resized
 	drunkspotting.fix_canvas();
+	var newHeight = Math.floor($($('.item')[1]).width());
+	$('.item').each(function(index, el){
+		$(el).css('height', newHeight);
+		drunkspotting.resizeImg($(el).find('img'));
+	});
 });
 
 drunkspotting.fix_canvas = function(){
@@ -227,12 +250,13 @@ drunkspotting.error_show = function(msg){
 	cover.on('click', function(){
 		drunkspotting.error_hide();
 	});
-}
+};
+
 drunkspotting.error_hide = function(){
 	jQuery('#cover').fadeOut(250, function(){
 		jQuery('#cover').remove();
-	})
-}
+	});
+};
 
 drunkspotting.loading_start = function () {
 	drunkspotting.error_hide();
@@ -244,12 +268,12 @@ drunkspotting.loading_start = function () {
 drunkspotting.loading_stop = function () {
 	jQuery('#loading').fadeOut(250, function(){
 		jQuery('#loading').remove();
-	})
+	});
 };
 
 drunkspotting.cancel_drawing = function(){
 	jQuery(document.body).removeClass('edit');
-}
+};
 
 drunkspotting.save_drawing = function(){
 	// save
