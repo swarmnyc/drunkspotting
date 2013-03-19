@@ -30,8 +30,12 @@ var __slice = Array.prototype.slice;
   Sketch = (function() {
     function Sketch(el, opts) {
       this.el = el;
-      this.canvas = $(el);
-      this.context = el.getContext('2d');
+      this.canvas = el;
+      if(typeof G_vmlCanvasManager != 'undefined') {
+	    this.canvas = G_vmlCanvasManager.initElement(el);
+	  }
+      this.context = this.canvas.getContext('2d');
+      this.canvas = $(this.canvas);
       this.options = $.extend({
         toolLinks: true,
         defaultTool: 'marker',
@@ -96,7 +100,7 @@ var __slice = Array.prototype.slice;
       return this.redraw();
     };
     Sketch.prototype.onEvent = function(e) {
-      if (e.originalEvent && e.originalEvent.targetTouches) {
+      if (e.originalEvent && e.originalEvent.targetTouches && e.originalEvent.targetTouches.length > 0) {
         e.pageX = Math.round(e.originalEvent.targetTouches[0].pageX);
         e.pageY = Math.round(e.originalEvent.targetTouches[0].pageY);
       }
@@ -132,6 +136,13 @@ var __slice = Array.prototype.slice;
             this.stopPainting();
           }
           this.startPainting();
+          break;
+        case 'mousemove':
+        case 'touchmove':
+          if(this.painting){
+          	e.preventDefault();
+          	e.stopPropagation();
+          }
           break;
         case 'mouseup':
         case 'mouseout':
