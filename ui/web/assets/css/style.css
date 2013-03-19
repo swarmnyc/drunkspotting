@@ -118,6 +118,9 @@ h3 {
 	padding: 10px;
 	text-align: left;
 }
+#color_popup, #size_popup {
+	z-index: 100;
+}
 #my_color, #my_size, #color_popup a, #size_popup a {
 	display:-moz-inline-stack;
 	display:inline-block;
@@ -298,6 +301,7 @@ h3 {
 	-webkit-transform: translate3d(0,0,0);
 	transform: translate3d(0,0,0);
 	-moz-transform: translate3d(0,0,0);
+	z-index: 10;
 }
 
 /* Media Query */
