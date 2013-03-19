@@ -2,26 +2,25 @@
 -- PostgreSQL database dump
 --
 
--- Dumped from database version 9.0.7
--- Dumped by pg_dump version 9.0.7
--- Started on 2013-03-08 17:53:26 EST
-
 SET statement_timeout = 0;
 SET client_encoding = 'UTF8';
-SET standard_conforming_strings = off;
+SET standard_conforming_strings = on;
 SET check_function_bodies = false;
 SET client_min_messages = warning;
-SET escape_string_warning = off;
 
 --
--- TOC entry 469 (class 2612 OID 11574)
--- Name: plpgsql; Type: PROCEDURAL LANGUAGE; Schema: -; Owner: postgres
+-- Name: plpgsql; Type: EXTENSION; Schema: -; Owner: 
 --
 
-CREATE OR REPLACE PROCEDURAL LANGUAGE plpgsql;
+CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
 
 
-ALTER PROCEDURAL LANGUAGE plpgsql OWNER TO postgres;
+--
+-- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner: 
+--
+
+COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
+
 
 SET search_path = public, pg_catalog;
 
@@ -30,17 +29,14 @@ SET default_tablespace = '';
 SET default_with_oids = false;
 
 --
--- TOC entry 148 (class 1259 OID 26020)
--- Dependencies: 5
 -- Name: comments; Type: TABLE; Schema: public; Owner: drunkspotting; Tablespace: 
 --
 
 CREATE TABLE comments (
     id integer NOT NULL,
-    template_id bigint,
-    picture_id bigint,
+    picture_id bigint NOT NULL,
     ip character varying(32) NOT NULL,
-    nick character varying(255) NOT NULL,
+    nick character varying(32) NOT NULL,
     title character varying(255) NOT NULL,
     description character varying NOT NULL,
     up_votes integer NOT NULL,
@@ -52,8 +48,6 @@ CREATE TABLE comments (
 ALTER TABLE public.comments OWNER TO drunkspotting;
 
 --
--- TOC entry 147 (class 1259 OID 26018)
--- Dependencies: 148 5
 -- Name: comments_id_seq; Type: SEQUENCE; Schema: public; Owner: drunkspotting
 --
 
@@ -68,8 +62,6 @@ CREATE SEQUENCE comments_id_seq
 ALTER TABLE public.comments_id_seq OWNER TO drunkspotting;
 
 --
--- TOC entry 1822 (class 0 OID 0)
--- Dependencies: 147
 -- Name: comments_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: drunkspotting
 --
 
@@ -77,17 +69,18 @@ ALTER SEQUENCE comments_id_seq OWNED BY comments.id;
 
 
 --
--- TOC entry 145 (class 1259 OID 25030)
--- Dependencies: 5
 -- Name: pictures; Type: TABLE; Schema: public; Owner: drunkspotting; Tablespace: 
 --
 
 CREATE TABLE pictures (
     id integer NOT NULL,
-    template_id bigint NOT NULL,
+    template_id bigint,
+    is_template boolean NOT NULL,
     title character varying(255) NOT NULL,
     ip character varying(32) NOT NULL,
     description character varying(255) NOT NULL,
+    latitude double precision,
+    longitude double precision,
     rating double precision NOT NULL,
     rating_count integer NOT NULL,
     url character varying(255) NOT NULL,
@@ -98,8 +91,6 @@ CREATE TABLE pictures (
 ALTER TABLE public.pictures OWNER TO drunkspotting;
 
 --
--- TOC entry 144 (class 1259 OID 25028)
--- Dependencies: 5 145
 -- Name: picture_id_seq; Type: SEQUENCE; Schema: public; Owner: drunkspotting
 --
 
@@ -114,8 +105,6 @@ CREATE SEQUENCE picture_id_seq
 ALTER TABLE public.picture_id_seq OWNER TO drunkspotting;
 
 --
--- TOC entry 1823 (class 0 OID 0)
--- Dependencies: 144
 -- Name: picture_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: drunkspotting
 --
 
@@ -123,70 +112,18 @@ ALTER SEQUENCE picture_id_seq OWNED BY pictures.id;
 
 
 --
--- TOC entry 146 (class 1259 OID 25050)
--- Dependencies: 5
 -- Name: tags; Type: TABLE; Schema: public; Owner: drunkspotting; Tablespace: 
 --
 
 CREATE TABLE tags (
     tag character varying(32) NOT NULL,
-    template_id bigint,
-    picture_id bigint
+    picture_id bigint NOT NULL
 );
 
 
 ALTER TABLE public.tags OWNER TO drunkspotting;
 
 --
--- TOC entry 143 (class 1259 OID 25010)
--- Dependencies: 5
--- Name: templates; Type: TABLE; Schema: public; Owner: drunkspotting; Tablespace: 
---
-
-CREATE TABLE templates (
-    id integer NOT NULL,
-    title character varying(255) NOT NULL,
-    ip character varying(32) NOT NULL,
-    latitude double precision NOT NULL,
-    longitude double precision NOT NULL,
-    description character varying(255) NOT NULL,
-    rating double precision NOT NULL,
-    rating_count integer NOT NULL,
-    url character varying(255) NOT NULL,
-    time_posted timestamp with time zone NOT NULL
-);
-
-
-ALTER TABLE public.templates OWNER TO drunkspotting;
-
---
--- TOC entry 142 (class 1259 OID 25008)
--- Dependencies: 5 143
--- Name: template_id_seq; Type: SEQUENCE; Schema: public; Owner: drunkspotting
---
-
-CREATE SEQUENCE template_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
-ALTER TABLE public.template_id_seq OWNER TO drunkspotting;
-
---
--- TOC entry 1824 (class 0 OID 0)
--- Dependencies: 142
--- Name: template_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: drunkspotting
---
-
-ALTER SEQUENCE template_id_seq OWNED BY templates.id;
-
-
---
--- TOC entry 149 (class 1259 OID 27435)
--- Dependencies: 5
 -- Name: uploads; Type: TABLE; Schema: public; Owner: drunkspotting; Tablespace: 
 --
 
@@ -200,8 +137,6 @@ CREATE TABLE uploads (
 ALTER TABLE public.uploads OWNER TO drunkspotting;
 
 --
--- TOC entry 1805 (class 2604 OID 26023)
--- Dependencies: 148 147 148
 -- Name: id; Type: DEFAULT; Schema: public; Owner: drunkspotting
 --
 
@@ -209,8 +144,6 @@ ALTER TABLE ONLY comments ALTER COLUMN id SET DEFAULT nextval('comments_id_seq':
 
 
 --
--- TOC entry 1804 (class 2604 OID 25033)
--- Dependencies: 145 144 145
 -- Name: id; Type: DEFAULT; Schema: public; Owner: drunkspotting
 --
 
@@ -218,17 +151,6 @@ ALTER TABLE ONLY pictures ALTER COLUMN id SET DEFAULT nextval('picture_id_seq'::
 
 
 --
--- TOC entry 1803 (class 2604 OID 25013)
--- Dependencies: 143 142 143
--- Name: id; Type: DEFAULT; Schema: public; Owner: drunkspotting
---
-
-ALTER TABLE ONLY templates ALTER COLUMN id SET DEFAULT nextval('template_id_seq'::regclass);
-
-
---
--- TOC entry 1813 (class 2606 OID 26028)
--- Dependencies: 148 148
 -- Name: comments_pkey; Type: CONSTRAINT; Schema: public; Owner: drunkspotting; Tablespace: 
 --
 
@@ -237,8 +159,6 @@ ALTER TABLE ONLY comments
 
 
 --
--- TOC entry 1809 (class 2606 OID 25038)
--- Dependencies: 145 145
 -- Name: picture_pkey; Type: CONSTRAINT; Schema: public; Owner: drunkspotting; Tablespace: 
 --
 
@@ -247,28 +167,14 @@ ALTER TABLE ONLY pictures
 
 
 --
--- TOC entry 1811 (class 2606 OID 25054)
--- Dependencies: 146 146
 -- Name: tags_pkey; Type: CONSTRAINT; Schema: public; Owner: drunkspotting; Tablespace: 
 --
 
 ALTER TABLE ONLY tags
-    ADD CONSTRAINT tags_pkey PRIMARY KEY (tag);
+    ADD CONSTRAINT tags_pkey PRIMARY KEY (tag, picture_id);
 
 
 --
--- TOC entry 1807 (class 2606 OID 25018)
--- Dependencies: 143 143
--- Name: template_pkey; Type: CONSTRAINT; Schema: public; Owner: drunkspotting; Tablespace: 
---
-
-ALTER TABLE ONLY templates
-    ADD CONSTRAINT template_pkey PRIMARY KEY (id);
-
-
---
--- TOC entry 1815 (class 2606 OID 27439)
--- Dependencies: 149 149
 -- Name: uploads_pkey; Type: CONSTRAINT; Schema: public; Owner: drunkspotting; Tablespace: 
 --
 
@@ -277,8 +183,62 @@ ALTER TABLE ONLY uploads
 
 
 --
--- TOC entry 1816 (class 1259 OID 27440)
--- Dependencies: 149
+-- Name: comments_down_votes_idx; Type: INDEX; Schema: public; Owner: drunkspotting; Tablespace: 
+--
+
+CREATE INDEX comments_down_votes_idx ON comments USING btree (down_votes);
+
+
+--
+-- Name: comments_picture_id_idx; Type: INDEX; Schema: public; Owner: drunkspotting; Tablespace: 
+--
+
+CREATE INDEX comments_picture_id_idx ON comments USING btree (picture_id);
+
+
+--
+-- Name: comments_time_posted_idx; Type: INDEX; Schema: public; Owner: drunkspotting; Tablespace: 
+--
+
+CREATE INDEX comments_time_posted_idx ON comments USING btree (time_posted);
+
+
+--
+-- Name: comments_up_votes_idx; Type: INDEX; Schema: public; Owner: drunkspotting; Tablespace: 
+--
+
+CREATE INDEX comments_up_votes_idx ON comments USING btree (up_votes);
+
+
+--
+-- Name: pictures_is_template_idx; Type: INDEX; Schema: public; Owner: drunkspotting; Tablespace: 
+--
+
+CREATE INDEX pictures_is_template_idx ON pictures USING btree (is_template);
+
+
+--
+-- Name: pictures_rating_count_idx; Type: INDEX; Schema: public; Owner: drunkspotting; Tablespace: 
+--
+
+CREATE INDEX pictures_rating_count_idx ON pictures USING btree (rating_count);
+
+
+--
+-- Name: pictures_rating_idx; Type: INDEX; Schema: public; Owner: drunkspotting; Tablespace: 
+--
+
+CREATE INDEX pictures_rating_idx ON pictures USING btree (rating);
+
+
+--
+-- Name: pictures_time_posted_idx; Type: INDEX; Schema: public; Owner: drunkspotting; Tablespace: 
+--
+
+CREATE INDEX pictures_time_posted_idx ON pictures USING btree (time_posted);
+
+
+--
 -- Name: uploads_time_uploaded_idx; Type: INDEX; Schema: public; Owner: drunkspotting; Tablespace: 
 --
 
@@ -286,18 +246,15 @@ CREATE INDEX uploads_time_uploaded_idx ON uploads USING btree (time_uploaded);
 
 
 --
--- TOC entry 1821 (class 0 OID 0)
--- Dependencies: 5
--- Name: public; Type: ACL; Schema: -; Owner: postgres
+-- Name: public; Type: ACL; Schema: -; Owner: drunkspotting
 --
 
 REVOKE ALL ON SCHEMA public FROM PUBLIC;
-REVOKE ALL ON SCHEMA public FROM postgres;
+REVOKE ALL ON SCHEMA public FROM drunkspotting;
+GRANT ALL ON SCHEMA public TO drunkspotting;
 GRANT ALL ON SCHEMA public TO postgres;
 GRANT ALL ON SCHEMA public TO PUBLIC;
 
-
--- Completed on 2013-03-08 17:53:26 EST
 
 --
 -- PostgreSQL database dump complete
