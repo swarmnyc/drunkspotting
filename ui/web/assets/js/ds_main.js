@@ -66,7 +66,9 @@ drunkspotting.load_images = function(){
 			jQuery('#posts').empty();
 			// For each ds image, append html
 			for(var i = 0; i < data.length; i++){
-				jQuery('#posts').append('<div class="item"><a href="'+data[i].url+'" target="_blank"><img src="'+data[i].url+'"/></a></div>');
+				var imgHash = data[i].url.split('.'); imgHash.pop();
+				imgHash = imgHash.pop().split('/').pop();
+				jQuery('#posts').append('<div class="item"><a href="/spot/'+imgHash+'" target="_blank"><img src="http://drunkspotting.com/pictures/'+imgHash+'.jpg"/></a></div>');
 				jQuery('#posts img').last().load(function(){
 					drunkspotting.resizeImg($(this));
 				});

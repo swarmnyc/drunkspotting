@@ -26,6 +26,15 @@ $app->get('/about', function () use ($app) {
     return $app['twig']->render('about.html', array());
 })->bind('about');
 
+/**
+ * About
+ *
+ * Route: /about
+ * Name: about
+ */
+$app->get('/spot/{img}', function ($img) use ($app) {
+    return $app['twig']->render('spot.html', array('img'=>$img));
+})->bind('spot');
 
 /**
  * Upload Template
