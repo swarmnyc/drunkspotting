@@ -92,7 +92,7 @@
     [self.activityIndicator startAnimating];
     
     UIImage *renderedImage = [self renderImage];
-    NSData *jpegData = UIImageJPEGRepresentation(renderedImage, 1);
+//    NSData *jpegData = UIImageJPEGRepresentation(renderedImage, 1);
 
 	Picture *picture = [[Picture alloc] init];
     //	            picture.longitude = 40.732766;

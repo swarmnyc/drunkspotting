@@ -57,7 +57,7 @@
 			id JSON )
 		{
 
-			NSLog( error );
+			NSLog(@"%@", error );
 			failure(error);
 		}];
 
