@@ -55,8 +55,7 @@ class TestSimpleNetworked(unittest.TestCase):
             "latitude": 12.34,
             "longitude": 23.34,
             "description": "template 1 desc",
-            "url": "http://www.google.com"
-            }
+            "url": "http://www.google.com"}
 
         (status, reason, data) = httpcall.call(
             "POST", self.url + '/templates/', json.dumps(req))
@@ -69,8 +68,7 @@ class TestSimpleNetworked(unittest.TestCase):
             "latitude": 32.34,
             "longitude": 33.34,
             "description": "template 2 desc",
-            "url": "http://www.yahoo.com"
-            }
+            "url": "http://www.yahoo.com"}
 
         (status, reason, data) = httpcall.call(
             "POST", self.url + '/templates/', json.dumps(req))
@@ -97,14 +95,15 @@ class TestSimpleNetworked(unittest.TestCase):
         self.assertEqual((status, reason), (200, 'OK'))
         data = json.loads(data)
         self.assertEqual(data['title'], 'template 2')
+        self.assertEqual(data['latitude'], 32.34)
+        self.assertEqual(data['longitude'], 33.34)
 
         # Add two pictures for the first template
         req = {
             "template_id": template1_id,
             "title": "picture 1.1",
             "description": "pic 1 desc",
-            "url": "http://www.google.com"
-            }
+            "url": "http://www.google.com"}
 
         (status, reason, data) = httpcall.call(
             "POST", self.url + '/pictures/', json.dumps(req))
@@ -115,8 +114,7 @@ class TestSimpleNetworked(unittest.TestCase):
             "template_id": template1_id,
             "title": "picture 1.2",
             "description": "pic 2 desc",
-            "url": "http://www.google.com"
-            }
+            "url": "http://www.google.com"}
 
         (status, reason, data) = httpcall.call(
             "POST", self.url + '/pictures/', json.dumps(req))
@@ -128,8 +126,7 @@ class TestSimpleNetworked(unittest.TestCase):
             "template_id": template2_id,
             "title": "picture 2.2",
             "description": "pic 3 desc",
-            "url": "http://www.amazon.com"
-            }
+            "url": "http://www.amazon.com"}
 
         (status, reason, data) = httpcall.call(
             "POST", self.url + '/pictures/', json.dumps(req))
@@ -150,18 +147,15 @@ class TestSimpleNetworked(unittest.TestCase):
         self.assertEqual((status, reason), (200, 'OK'))
         data = json.loads(data)
         self.assertEqual(data['title'], 'picture 1.2')
-        self.assertEqual(data['latitude'], 12.34)
-        self.assertEqual(data['longitude'], 23.34)
 
         # Add a comment to one of the template
         req = {
             "nick": "gandalf",
             "title": "template 1 comment title",
-            "description": "template 1 comment description"
-            }
+            "description": "template 1 comment description"}
 
         (status, reason, data) = httpcall.call(
-            "POST", self.url + '/templates/%d/comments' % (template1_id, ),
+            "POST", self.url + '/pictures/%d/comments' % (template1_id, ),
             json.dumps(req))
         comment1_id = json.loads(data)['id']
         self.assertEqual((status, reason), (200, 'OK'))
@@ -170,8 +164,7 @@ class TestSimpleNetworked(unittest.TestCase):
         req = {
             "nick": "drunkspotting",
             "title": "picture 3 comment title",
-            "description": "picture 3 comment description"
-            }
+            "description": "picture 3 comment description"}
 
         (status, reason, data) = httpcall.call(
             "POST", self.url + '/pictures/%d/comments' % (picture3_id, ),
@@ -181,7 +174,7 @@ class TestSimpleNetworked(unittest.TestCase):
 
         # Read back the template comments
         (status, reason, data) = httpcall.call(
-            "GET", self.url + '/templates/%d/comments/latest/10' %
+            "GET", self.url + '/pictures/%d/comments/latest/10' %
             (template1_id, ),
             json.dumps(req))
         self.assertEqual((status, reason), (200, 'OK'))

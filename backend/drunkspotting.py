@@ -25,27 +25,26 @@ class Gateway:
         self._CONTENT_TYPE = "application/json"
         self._server = server
         self._gets = [
-            [re.compile("/templates/(\w+)/*$"), self._server.get_template],
-            [re.compile("/pictures/(\w+)/*$"), self._server.get_picture],
-            [re.compile("/templates/(\w+)/comments/latest/(\w+)/*$"), self._server.get_latest_template_comments],
-            [re.compile("/pictures/(\w+)/comments/latest/(\w+)/*$"), self._server.get_latest_picture_comments],
-
+            [re.compile("/ping/*$"), self._server.ping],
             [re.compile("/nuke_it_all/*$"), self._server.nuke_it_all],
 
-            [re.compile("/ping/*$"), self._server.ping],
+            [re.compile("/templates/(\w+)/*$"), self._server.get_picture],
+            [re.compile("/pictures/(\w+)/*$"), self._server.get_picture],
+            [re.compile("/templates/(\w+)/comments/latest/(\w+)/*$"), self._server.get_latest_comments],
+            [re.compile("/pictures/(\w+)/comments/latest/(\w+)/*$"), self._server.get_latest_comments],
             [re.compile("/templates/latest/(\w+)$"), self._server.get_latest_templates],
             [re.compile("/pictures/latest/(\w+)$"), self._server.get_latest_pictures],
             [re.compile("/tags/*$"), self._server.get_tags],
             [re.compile("/find_by_tags/*$"), self._server.find_by_tags]]
 
         self._posts = [
-            [re.compile("/upload_template/*$"), self._server.upload_template],
-            [re.compile("/upload_picture/*$"), self._server.upload_picture],
+            [re.compile("/upload_template/*$"), self._server.upload],
+            [re.compile("/upload_picture/*$"), self._server.upload],
+            [re.compile("/upload/*$"), self._server.upload],
             [re.compile("/templates/*$"), self._server.post_template],
+            [re.compile("/pictures/*$"), self._server.post_picture],
             [re.compile("/tags/(\w+)/*$"), self._server.post_tag],
-            [re.compile("/templates/(\w+)/comments/*$"), self._server.post_template_comment],
-            [re.compile("/pictures/(\w+)/comments/*$"), self._server.post_picture_comment],
-            [re.compile("/pictures/*$"), self._server.post_picture]]
+            [re.compile("/pictures/(\w+)/comments/*$"), self._server.post_comment]]
 
     def process_without_data(self, env, calls):
         """Process http requests that do not have data (GET/HEAD/DELETE)
