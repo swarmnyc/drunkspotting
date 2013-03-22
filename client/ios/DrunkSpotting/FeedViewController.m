@@ -33,7 +33,7 @@ NSString *const kPhotoCellIdentifier = @"photo";
     self.feedView.backgroundView.backgroundColor = [UIColor blueColor];
     self.navigationItem.titleView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"titleTextTreatment"]];
 
-    self.photoBar.backgroundColor = UIColorFromRGB(0x00b2c9);
+    self.photoBar.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"barGradient"]];
     self.photoBar.clipsToBounds = NO;
     self.photoBar.layer.shadowColor = [[UIColor blackColor] CGColor];
     self.photoBar.layer.shadowOffset = CGSizeMake(0,-2);

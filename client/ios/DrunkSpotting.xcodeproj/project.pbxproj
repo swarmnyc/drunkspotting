@@ -63,6 +63,8 @@
 		D6BA6A7416FB7064002D92EF /* reloadButton.png in Resources */ = {isa = PBXBuildFile; fileRef = D6BA6A6816FB7064002D92EF /* reloadButton.png */; };
 		D6BA6A7516FB7064002D92EF /* undoButton.png in Resources */ = {isa = PBXBuildFile; fileRef = D6BA6A6916FB7064002D92EF /* undoButton.png */; };
 		D6BA6A7616FB7064002D92EF /* undoButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D6BA6A6A16FB7064002D92EF /* undoButton@2x.png */; };
+		D6BA6A7916FC88B4002D92EF /* barGradient.png in Resources */ = {isa = PBXBuildFile; fileRef = D6BA6A7716FC88B3002D92EF /* barGradient.png */; };
+		D6BA6A7A16FC88B4002D92EF /* barGradient@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D6BA6A7816FC88B4002D92EF /* barGradient@2x.png */; };
 		D6D7876B16E93CFE00E1F86B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6D7876A16E93CFE00E1F86B /* UIKit.framework */; };
 		D6D7876D16E93CFE00E1F86B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6D7876C16E93CFE00E1F86B /* Foundation.framework */; };
 		D6D7877516E93CFE00E1F86B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = D6D7877316E93CFE00E1F86B /* InfoPlist.strings */; };
@@ -179,6 +181,8 @@
 		D6BA6A6816FB7064002D92EF /* reloadButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = reloadButton.png; sourceTree = SOURCE_ROOT; };
 		D6BA6A6916FB7064002D92EF /* undoButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = undoButton.png; sourceTree = SOURCE_ROOT; };
 		D6BA6A6A16FB7064002D92EF /* undoButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "undoButton@2x.png"; sourceTree = SOURCE_ROOT; };
+		D6BA6A7716FC88B3002D92EF /* barGradient.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = barGradient.png; sourceTree = SOURCE_ROOT; };
+		D6BA6A7816FC88B4002D92EF /* barGradient@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "barGradient@2x.png"; sourceTree = SOURCE_ROOT; };
 		D6D7876616E93CFE00E1F86B /* DrunkSpotting.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DrunkSpotting.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D6D7876A16E93CFE00E1F86B /* UIKit.framework */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		D6D7876C16E93CFE00E1F86B /* Foundation.framework */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -338,6 +342,8 @@
 		D6D7877016E93CFE00E1F86B /* DrunkSpotting */ = {
 			isa = PBXGroup;
 			children = (
+				D6BA6A7716FC88B3002D92EF /* barGradient.png */,
+				D6BA6A7816FC88B4002D92EF /* barGradient@2x.png */,
 				D6BA6A5F16FB7064002D92EF /* palleteButton.png */,
 				D6BA6A6016FB7064002D92EF /* palletteButton.png */,
 				D6BA6A6116FB7064002D92EF /* palletteButton@2x.png */,
@@ -518,6 +524,8 @@
 				D6BA6A7416FB7064002D92EF /* reloadButton.png in Resources */,
 				D6BA6A7516FB7064002D92EF /* undoButton.png in Resources */,
 				D6BA6A7616FB7064002D92EF /* undoButton@2x.png in Resources */,
+				D6BA6A7916FC88B4002D92EF /* barGradient.png in Resources */,
+				D6BA6A7A16FC88B4002D92EF /* barGradient@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
