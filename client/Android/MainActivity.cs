@@ -41,7 +41,6 @@ namespace DrunkSpotting
 			photoListAdatper = new PhotoAdapter (this);
 			photoList.Adapter = photoListAdatper;
 			photoList.SetBackgroundColor (Color.Black);
-			photoList.DividerHeight = 0;
 
 		}
 
@@ -74,7 +73,7 @@ namespace DrunkSpotting
 		public void Refresh ()
 		{
 			// Pull Data from website. 
-			_pictureService.GetLatestPictures (10, result => 
+			_pictureService.GetLatestPictures (20, result => 
 			{
 				// check latest ID 
 				if (null != _latest && null != result && result.Count > 0 && _latest.Id == result [0].Id) {
@@ -111,6 +110,10 @@ namespace DrunkSpotting
 			if (view == null) { // otherwise create a new one
 				view = new PictureListViewItem (Context);
 				view.LayoutParameters = new AbsListView.LayoutParams (ViewGroup.LayoutParams.FillParent, ViewGroup.LayoutParams.WrapContent);
+			}
+			else
+			{
+				((PictureListViewItem)view).CleanUp();
 			}
 
 			// set view properties to reflect data for the given row

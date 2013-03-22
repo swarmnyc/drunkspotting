@@ -12,6 +12,7 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:adjustViewBounds="true"
+        android:layout_margin="3dp"
         android:background="@android:color/black"
         android:id="@+id/pictureImageView" />
 </merge>
