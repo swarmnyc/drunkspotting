@@ -30,13 +30,17 @@ var __slice = Array.prototype.slice;
   Sketch = (function() {
     function Sketch(el, opts) {
       this.el = el;
-      this.canvas = $(el);
-      this.context = el.getContext('2d');
+      this.canvas = el;
+      if(typeof G_vmlCanvasManager != 'undefined') {
+	    this.canvas = G_vmlCanvasManager.initElement(el);
+	  }
+      this.context = this.canvas.getContext('2d');
+      this.canvas = $(this.canvas);
       this.options = $.extend({
         toolLinks: true,
         defaultTool: 'marker',
         defaultColor: '#000000',
-        defaultSize: 5
+        defaultSize: 6
       }, opts);
       this.painting = false;
       this.color = this.options.defaultColor;
@@ -96,9 +100,9 @@ var __slice = Array.prototype.slice;
       return this.redraw();
     };
     Sketch.prototype.onEvent = function(e) {
-      if (e.originalEvent && e.originalEvent.targetTouches) {
-        e.pageX = e.originalEvent.targetTouches[0].pageX;
-        e.pageY = e.originalEvent.targetTouches[0].pageY;
+      if (e.originalEvent && e.originalEvent.targetTouches && e.originalEvent.targetTouches.length > 0) {
+        e.pageX = Math.round(e.originalEvent.targetTouches[0].pageX);
+        e.pageY = Math.round(e.originalEvent.targetTouches[0].pageY);
       }
       $.sketch.tools[$(this).data('sketch').tool].onEvent.call($(this).data('sketch'), e);
       e.preventDefault();
@@ -133,6 +137,13 @@ var __slice = Array.prototype.slice;
           }
           this.startPainting();
           break;
+        case 'mousemove':
+        case 'touchmove':
+          if(this.painting){
+          	e.preventDefault();
+          	e.stopPropagation();
+          }
+          break;
         case 'mouseup':
         case 'mouseout':
         case 'mouseleave':
@@ -142,8 +153,8 @@ var __slice = Array.prototype.slice;
       }
       if (this.painting) {
         this.action.events.push({
-          x: e.pageX - this.canvas.offset().left,
-          y: e.pageY - this.canvas.offset().top,
+          x: Math.round(e.pageX - this.canvas.offset().left),
+          y: Math.round(e.pageY - this.canvas.offset().top),
           event: e.type
         });
         return this.redraw();
@@ -158,7 +169,7 @@ var __slice = Array.prototype.slice;
       _ref = action.events;
       for (_i = 0, _len = _ref.length; _i < _len; _i++) {
         event = _ref[_i];
-        this.context.lineTo(event.x, event.y);
+        this.context.lineTo(Math.round(event.x), Math.round(event.y));
         previous = event;
       }
       this.context.strokeStyle = action.color;

@@ -51,6 +51,7 @@
                                                                    style:UIBarButtonItemStyleDone
                                                                   target:self
                                                                   action:@selector(done:)];
+    saveButton.tintColor = UIColorFromRGB(0x2fcd83);
     self.navigationItem.rightBarButtonItems = @[saveButton];
     
     UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Cancel", @"Cancel")
@@ -92,7 +93,7 @@
     [self.activityIndicator startAnimating];
     
     UIImage *renderedImage = [self renderImage];
-    NSData *jpegData = UIImageJPEGRepresentation(renderedImage, 1);
+//    NSData *jpegData = UIImageJPEGRepresentation(renderedImage, 1);
 
 	Picture *picture = [[Picture alloc] init];
     //	            picture.longitude = 40.732766;

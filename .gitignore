@@ -20,8 +20,6 @@ DerivedData
 *.pyc
 
 backend/config.py
-Vagrantfile
-puppet
 .vagrant
 
 

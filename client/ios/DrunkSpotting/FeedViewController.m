@@ -11,6 +11,7 @@
 #import "DrawingViewController.h"
 #import "TemplateService.h"
 #import "PictureService.h"
+#import "AppDelegate.h"
 
 #import "Template.h"
 
@@ -32,34 +33,37 @@ NSString *const kPhotoCellIdentifier = @"photo";
     self.feedView.backgroundView.backgroundColor = [UIColor blueColor];
     self.navigationItem.titleView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"titleTextTreatment"]];
 
+    self.photoBar.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"barGradient"]];
+    self.photoBar.clipsToBounds = NO;
+    self.photoBar.layer.shadowColor = [[UIColor blackColor] CGColor];
+    self.photoBar.layer.shadowOffset = CGSizeMake(0,-2);
+    self.photoBar.layer.shadowOpacity = 0.3;
+    self.photoBar.clipsToBounds = NO;
+    
 	[self refreshList:nil];
 }
 
 - (void)viewDidLayoutSubviews
 {
 	feedView = [[UICollectionView alloc]
-		initWithFrame:self.view.bounds
+		initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.bounds), CGRectGetMinY(self.photoBar.frame))
 		collectionViewLayout:[[UICollectionViewFlowLayout alloc] init]];
 	[feedView registerClass:[PhotoCollectionViewCell class]
 		forCellWithReuseIdentifier:kPhotoCellIdentifier];
 	[feedView setBackgroundColor:[UIColor whiteColor]];
 	[feedView setDelegate:self];
 	[feedView setDataSource:self];
-	[self.view addSubview:feedView];
-	[feedView reloadData];
+	[self.view insertSubview:feedView belowSubview:self.photoBar];
+    [feedView reloadData];
 
 	self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]
                                               initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addItem:)];
-
-	UIBarButtonItem *addButton = [[UIBarButtonItem alloc]
-		initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addItem:)];
 
 	UIBarButtonItem *refreshButton = [[UIBarButtonItem alloc]
 		initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(refreshList:)];
 
 	NSMutableArray * buttons = [[NSMutableArray alloc] init];
 	[buttons addObject:refreshButton];
-	[buttons addObject:addButton];
 	self.navigationItem.rightBarButtonItems = buttons;
 }
 
@@ -99,7 +103,7 @@ NSString *const kPhotoCellIdentifier = @"photo";
     [self addItem:self.navigationItem.rightBarButtonItem];
 }
 
-- (void)addItem:(id)sender
+- (IBAction)addItem:(id)sender
 {
     UIActionSheet *addItemAction = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Camera", @"Photo Library", nil];
 

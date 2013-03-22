@@ -29,6 +29,8 @@
 		D639E8A216EAB8AD006A97E4 /* navbar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D639E8A016EAB8AD006A97E4 /* navbar@2x.png */; };
 		D639E8A516EABB0E006A97E4 /* titleTextTreatment.png in Resources */ = {isa = PBXBuildFile; fileRef = D639E8A316EABB0E006A97E4 /* titleTextTreatment.png */; };
 		D639E8A616EABB0E006A97E4 /* titleTextTreatment@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D639E8A416EABB0E006A97E4 /* titleTextTreatment@2x.png */; };
+		D639E8AA16EBE6CF006A97E4 /* SocialViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D639E8A816EBE6CF006A97E4 /* SocialViewController.m */; };
+		D639E8AB16EBE6CF006A97E4 /* SocialViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D639E8A916EBE6CF006A97E4 /* SocialViewController.xib */; };
 		D65C90C816E9523E00AF1002 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6D7876E16E93CFE00E1F86B /* CoreGraphics.framework */; };
 		D65C90D116E9581500AF1002 /* DrawingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D65C90CF16E9581500AF1002 /* DrawingViewController.m */; };
 		D65C90EC16E95C7800AF1002 /* AFHTTPClient.m in Sources */ = {isa = PBXBuildFile; fileRef = D65C90DA16E95C7800AF1002 /* AFHTTPClient.m */; };
@@ -49,6 +51,20 @@
 		D65C911F16E9B98400AF1002 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6D7876C16E93CFE00E1F86B /* Foundation.framework */; };
 		D65C912516E9B98400AF1002 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = D65C912316E9B98400AF1002 /* InfoPlist.strings */; };
 		D65C912816E9B98400AF1002 /* TemplateServiceTest.m in Sources */ = {isa = PBXBuildFile; fileRef = D65C912716E9B98400AF1002 /* TemplateServiceTest.m */; };
+		D6BA6A6B16FB7064002D92EF /* palleteButton.png in Resources */ = {isa = PBXBuildFile; fileRef = D6BA6A5F16FB7064002D92EF /* palleteButton.png */; };
+		D6BA6A6C16FB7064002D92EF /* palletteButton.png in Resources */ = {isa = PBXBuildFile; fileRef = D6BA6A6016FB7064002D92EF /* palletteButton.png */; };
+		D6BA6A6D16FB7064002D92EF /* palletteButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D6BA6A6116FB7064002D92EF /* palletteButton@2x.png */; };
+		D6BA6A6E16FB7064002D92EF /* penButton.png in Resources */ = {isa = PBXBuildFile; fileRef = D6BA6A6216FB7064002D92EF /* penButton.png */; };
+		D6BA6A6F16FB7064002D92EF /* penButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D6BA6A6316FB7064002D92EF /* penButton@2x.png */; };
+		D6BA6A7016FB7064002D92EF /* photoButton.png in Resources */ = {isa = PBXBuildFile; fileRef = D6BA6A6416FB7064002D92EF /* photoButton.png */; };
+		D6BA6A7116FB7064002D92EF /* photoButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D6BA6A6516FB7064002D92EF /* photoButton@2x.png */; };
+		D6BA6A7216FB7064002D92EF /* redoButton.png in Resources */ = {isa = PBXBuildFile; fileRef = D6BA6A6616FB7064002D92EF /* redoButton.png */; };
+		D6BA6A7316FB7064002D92EF /* redoButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D6BA6A6716FB7064002D92EF /* redoButton@2x.png */; };
+		D6BA6A7416FB7064002D92EF /* reloadButton.png in Resources */ = {isa = PBXBuildFile; fileRef = D6BA6A6816FB7064002D92EF /* reloadButton.png */; };
+		D6BA6A7516FB7064002D92EF /* undoButton.png in Resources */ = {isa = PBXBuildFile; fileRef = D6BA6A6916FB7064002D92EF /* undoButton.png */; };
+		D6BA6A7616FB7064002D92EF /* undoButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D6BA6A6A16FB7064002D92EF /* undoButton@2x.png */; };
+		D6BA6A7916FC88B4002D92EF /* barGradient.png in Resources */ = {isa = PBXBuildFile; fileRef = D6BA6A7716FC88B3002D92EF /* barGradient.png */; };
+		D6BA6A7A16FC88B4002D92EF /* barGradient@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D6BA6A7816FC88B4002D92EF /* barGradient@2x.png */; };
 		D6D7876B16E93CFE00E1F86B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6D7876A16E93CFE00E1F86B /* UIKit.framework */; };
 		D6D7876D16E93CFE00E1F86B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6D7876C16E93CFE00E1F86B /* Foundation.framework */; };
 		D6D7877516E93CFE00E1F86B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = D6D7877316E93CFE00E1F86B /* InfoPlist.strings */; };
@@ -115,6 +131,9 @@
 		D639E8A016EAB8AD006A97E4 /* navbar@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "navbar@2x.png"; sourceTree = SOURCE_ROOT; };
 		D639E8A316EABB0E006A97E4 /* titleTextTreatment.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = titleTextTreatment.png; sourceTree = SOURCE_ROOT; };
 		D639E8A416EABB0E006A97E4 /* titleTextTreatment@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "titleTextTreatment@2x.png"; sourceTree = SOURCE_ROOT; };
+		D639E8A716EBE6CE006A97E4 /* SocialViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SocialViewController.h; sourceTree = "<group>"; };
+		D639E8A816EBE6CF006A97E4 /* SocialViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SocialViewController.m; sourceTree = "<group>"; };
+		D639E8A916EBE6CF006A97E4 /* SocialViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SocialViewController.xib; sourceTree = "<group>"; };
 		D65C90C316E951B300AF1002 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		D65C90CE16E9581500AF1002 /* DrawingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DrawingViewController.h; sourceTree = "<group>"; };
 		D65C90CF16E9581500AF1002 /* DrawingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DrawingViewController.m; sourceTree = "<group>"; };
@@ -150,6 +169,20 @@
 		D65C912616E9B98400AF1002 /* TemplateServiceTest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TemplateServiceTest.h; sourceTree = "<group>"; };
 		D65C912716E9B98400AF1002 /* TemplateServiceTest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TemplateServiceTest.m; sourceTree = "<group>"; };
 		D65C912916E9B98400AF1002 /* DrunkSpottingTest-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "DrunkSpottingTest-Prefix.pch"; sourceTree = "<group>"; };
+		D6BA6A5F16FB7064002D92EF /* palleteButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = palleteButton.png; sourceTree = SOURCE_ROOT; };
+		D6BA6A6016FB7064002D92EF /* palletteButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = palletteButton.png; sourceTree = SOURCE_ROOT; };
+		D6BA6A6116FB7064002D92EF /* palletteButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "palletteButton@2x.png"; sourceTree = SOURCE_ROOT; };
+		D6BA6A6216FB7064002D92EF /* penButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = penButton.png; sourceTree = SOURCE_ROOT; };
+		D6BA6A6316FB7064002D92EF /* penButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "penButton@2x.png"; sourceTree = SOURCE_ROOT; };
+		D6BA6A6416FB7064002D92EF /* photoButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = photoButton.png; sourceTree = SOURCE_ROOT; };
+		D6BA6A6516FB7064002D92EF /* photoButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "photoButton@2x.png"; sourceTree = SOURCE_ROOT; };
+		D6BA6A6616FB7064002D92EF /* redoButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = redoButton.png; sourceTree = SOURCE_ROOT; };
+		D6BA6A6716FB7064002D92EF /* redoButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "redoButton@2x.png"; sourceTree = SOURCE_ROOT; };
+		D6BA6A6816FB7064002D92EF /* reloadButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = reloadButton.png; sourceTree = SOURCE_ROOT; };
+		D6BA6A6916FB7064002D92EF /* undoButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = undoButton.png; sourceTree = SOURCE_ROOT; };
+		D6BA6A6A16FB7064002D92EF /* undoButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "undoButton@2x.png"; sourceTree = SOURCE_ROOT; };
+		D6BA6A7716FC88B3002D92EF /* barGradient.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = barGradient.png; sourceTree = SOURCE_ROOT; };
+		D6BA6A7816FC88B4002D92EF /* barGradient@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "barGradient@2x.png"; sourceTree = SOURCE_ROOT; };
 		D6D7876616E93CFE00E1F86B /* DrunkSpotting.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DrunkSpotting.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D6D7876A16E93CFE00E1F86B /* UIKit.framework */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		D6D7876C16E93CFE00E1F86B /* Foundation.framework */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -309,6 +342,20 @@
 		D6D7877016E93CFE00E1F86B /* DrunkSpotting */ = {
 			isa = PBXGroup;
 			children = (
+				D6BA6A7716FC88B3002D92EF /* barGradient.png */,
+				D6BA6A7816FC88B4002D92EF /* barGradient@2x.png */,
+				D6BA6A5F16FB7064002D92EF /* palleteButton.png */,
+				D6BA6A6016FB7064002D92EF /* palletteButton.png */,
+				D6BA6A6116FB7064002D92EF /* palletteButton@2x.png */,
+				D6BA6A6216FB7064002D92EF /* penButton.png */,
+				D6BA6A6316FB7064002D92EF /* penButton@2x.png */,
+				D6BA6A6416FB7064002D92EF /* photoButton.png */,
+				D6BA6A6516FB7064002D92EF /* photoButton@2x.png */,
+				D6BA6A6616FB7064002D92EF /* redoButton.png */,
+				D6BA6A6716FB7064002D92EF /* redoButton@2x.png */,
+				D6BA6A6816FB7064002D92EF /* reloadButton.png */,
+				D6BA6A6916FB7064002D92EF /* undoButton.png */,
+				D6BA6A6A16FB7064002D92EF /* undoButton@2x.png */,
 				D639E8A316EABB0E006A97E4 /* titleTextTreatment.png */,
 				D639E8A416EABB0E006A97E4 /* titleTextTreatment@2x.png */,
 				D639E89F16EAB8AD006A97E4 /* navbar.png */,
@@ -337,6 +384,9 @@
 				688AC78FCC941A6904FBACCC /* UIImage+Alpha.m */,
 				688ACB8216906B090E53FD66 /* UIImage+RoundedCorner.h */,
 				688AC25A41524D69F2660951 /* UIImage+RoundedCorner.m */,
+				D639E8A716EBE6CE006A97E4 /* SocialViewController.h */,
+				D639E8A816EBE6CF006A97E4 /* SocialViewController.m */,
+				D639E8A916EBE6CF006A97E4 /* SocialViewController.xib */,
 			);
 			path = DrunkSpotting;
 			sourceTree = "<group>";
@@ -461,6 +511,21 @@
 				D639E8A216EAB8AD006A97E4 /* navbar@2x.png in Resources */,
 				D639E8A516EABB0E006A97E4 /* titleTextTreatment.png in Resources */,
 				D639E8A616EABB0E006A97E4 /* titleTextTreatment@2x.png in Resources */,
+				D639E8AB16EBE6CF006A97E4 /* SocialViewController.xib in Resources */,
+				D6BA6A6B16FB7064002D92EF /* palleteButton.png in Resources */,
+				D6BA6A6C16FB7064002D92EF /* palletteButton.png in Resources */,
+				D6BA6A6D16FB7064002D92EF /* palletteButton@2x.png in Resources */,
+				D6BA6A6E16FB7064002D92EF /* penButton.png in Resources */,
+				D6BA6A6F16FB7064002D92EF /* penButton@2x.png in Resources */,
+				D6BA6A7016FB7064002D92EF /* photoButton.png in Resources */,
+				D6BA6A7116FB7064002D92EF /* photoButton@2x.png in Resources */,
+				D6BA6A7216FB7064002D92EF /* redoButton.png in Resources */,
+				D6BA6A7316FB7064002D92EF /* redoButton@2x.png in Resources */,
+				D6BA6A7416FB7064002D92EF /* reloadButton.png in Resources */,
+				D6BA6A7516FB7064002D92EF /* undoButton.png in Resources */,
+				D6BA6A7616FB7064002D92EF /* undoButton@2x.png in Resources */,
+				D6BA6A7916FC88B4002D92EF /* barGradient.png in Resources */,
+				D6BA6A7A16FC88B4002D92EF /* barGradient@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -536,6 +601,7 @@
 				688ACC871890FDDB6777E5F4 /* UIImage+Resize.m in Sources */,
 				688AC27C2C72F84E0EAD9A8C /* UIImage+Alpha.m in Sources */,
 				688ACE489AB6AD3C82F6F576 /* UIImage+RoundedCorner.m in Sources */,
+				D639E8AA16EBE6CF006A97E4 /* SocialViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -608,7 +674,7 @@
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Adam Ritenauer (MLZ8T67ER8)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: drunkspotting llc";
 				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -623,7 +689,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				ONLY_ACTIVE_ARCH = YES;
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "AB03171B-1657-4D1D-BE45-738562E25559";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "85D03425-38E6-410E-ACEC-4FFABA1C69FE";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -637,7 +703,7 @@
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Adam Ritenauer (MLZ8T67ER8)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: drunkspotting llc";
 				COPY_PHASE_STRIP = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
@@ -645,7 +711,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "AB03171B-1657-4D1D-BE45-738562E25559";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "85D03425-38E6-410E-ACEC-4FFABA1C69FE";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
