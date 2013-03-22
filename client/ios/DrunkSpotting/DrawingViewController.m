@@ -51,6 +51,7 @@
                                                                    style:UIBarButtonItemStyleDone
                                                                   target:self
                                                                   action:@selector(done:)];
+    saveButton.tintColor = UIColorFromRGB(0x2fcd83);
     self.navigationItem.rightBarButtonItems = @[saveButton];
     
     UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Cancel", @"Cancel")
