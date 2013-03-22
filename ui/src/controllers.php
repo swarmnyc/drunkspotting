@@ -27,13 +27,20 @@ $app->get('/about', function () use ($app) {
 })->bind('about');
 
 /**
- * About
+ * Spot
  *
- * Route: /about
- * Name: about
+ * Route: /spot/{id}
+ * Name: spot
  */
-$app->get('/spot/{img}', function ($img) use ($app) {
-    return $app['twig']->render('spot.html', array('img'=>$img));
+$app->get('/spot/{id}', function ($id) use ($app) {
+    $dsApi = $app['drunkspotting_api'];
+    $spot = $dsApi->executeGetPicture($id);
+
+    if (!$spot->isSuccessful()) {
+        throw new NotFoundHttpException('That drunkspot was not found.', null, 404);
+    }
+
+    return $app['twig']->render('spot.html', array('spot' => $spot));
 })->bind('spot');
 
 /**
