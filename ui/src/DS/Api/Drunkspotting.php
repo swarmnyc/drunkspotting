@@ -47,4 +47,13 @@ class Drunkspotting extends ApiAbstract
 
         return $request;
     }
+
+    protected function getPicture($id)
+    {
+        return $this->setupRequest(
+            'pictures/' . $id,
+            'GET',
+            array()
+        );
+    }
 }
