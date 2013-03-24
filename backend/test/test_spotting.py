@@ -75,6 +75,20 @@ class TestSimpleNetworked(unittest.TestCase):
         template2_id = json.loads(data)['id']
         self.assertEqual((status, reason), (200, 'OK'))
 
+        # Add a template with bad data, want to make sure
+        # this doesn't hose the database connection since
+        # the transaction failed.
+        req = {
+            "title": "template 2",
+            "latitude": '',
+            "longitude": '',
+            "description": "template 2 desc",
+            "url": "http://www.yahoo.com"}
+
+        (status, reason, data) = httpcall.call(
+            "POST", self.url + '/templates/', json.dumps(req))
+        self.assertEqual(status, 500)
+
         # Get a list of the templates
         (status, reason, data) = httpcall.call(
             "GET", self.url + '/templates/latest/10', json.dumps(req))
