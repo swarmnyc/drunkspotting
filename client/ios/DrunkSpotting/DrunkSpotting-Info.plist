@@ -16,6 +16,7 @@
 			<array>
 				<string>drunkspotting@2x.png</string>
 				<string>drunkspotting 02-42-15-252.png</string>
+				<string>drunkspotting@1x.png</string>
 			</array>
 			<key>UIPrerenderedIcon</key>
 			<true/>
@@ -47,6 +48,17 @@
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
 		<string>UIInterfaceOrientationPortraitUpsideDown</string>
+	</array>
+	<key>FacebookAppID</key>
+	<string>173758002777072</string>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>fb173758002777072</string>
+			</array>
+		</dict>
 	</array>
 </dict>
 </plist>
