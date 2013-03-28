@@ -6,6 +6,7 @@ def execute_non_query(conn, sql, data=None):
     try:
         cur.execute(sql, data)
     except:
+        conn.rollback()
         cur.close()
         raise
     conn.commit()
@@ -17,6 +18,7 @@ def execute_non_query_returning_id(conn, sql, data=None):
     try:
         cur.execute(sql, data)
     except:
+        conn.rollback()
         cur.close()
         raise
     val = cur.fetchone()[0]

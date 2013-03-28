@@ -60,19 +60,28 @@ namespace DrunkSpotting
 		{
 			
 			// aapt resource value: 0x7f060000
-			public const int linearLayout1 = 2131099648;
-			
-			// aapt resource value: 0x7f060002
-			public const int photoList = 2131099650;
-			
-			// aapt resource value: 0x7f060004
-			public const int pictureImageView = 2131099652;
-			
-			// aapt resource value: 0x7f060003
-			public const int progressBar = 2131099651;
+			public const int ChoosePictureButton = 2131099648;
 			
 			// aapt resource value: 0x7f060001
-			public const int refresh = 2131099649;
+			public const int ChoosenImageView = 2131099649;
+			
+			// aapt resource value: 0x7f060002
+			public const int SavePictureButton = 2131099650;
+			
+			// aapt resource value: 0x7f060003
+			public const int linearLayout1 = 2131099651;
+			
+			// aapt resource value: 0x7f060005
+			public const int photoList = 2131099653;
+			
+			// aapt resource value: 0x7f060007
+			public const int pictureImageView = 2131099655;
+			
+			// aapt resource value: 0x7f060006
+			public const int progressBar = 2131099654;
+			
+			// aapt resource value: 0x7f060004
+			public const int refresh = 2131099652;
 			
 			private Id()
 			{
@@ -83,10 +92,13 @@ namespace DrunkSpotting
 		{
 			
 			// aapt resource value: 0x7f030000
-			public const int Main = 2130903040;
+			public const int EditPhoto = 2130903040;
 			
 			// aapt resource value: 0x7f030001
-			public const int PictureListViewItem = 2130903041;
+			public const int Main = 2130903041;
+			
+			// aapt resource value: 0x7f030002
+			public const int PictureListViewItem = 2130903042;
 			
 			private Layout()
 			{

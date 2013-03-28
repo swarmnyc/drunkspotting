@@ -23,7 +23,7 @@ namespace DrunkSpotting
 			base.OnCreate (bundle);
 			
 			// Start our real activity
-			StartActivity (typeof (MainActivity));
+			StartActivity (typeof (EditPhotoActivity));
 		}
 	}
 }

@@ -12,14 +12,16 @@ namespace DrunkSpotting
 	public class ImageService
 	{
 		public Context Context { get; set; }
+		private const string TAG = "DrunkSpotting.IamgeService";
 
 		public ImageService (Context context)
 		{
 			this.Context = context;
 		}
 
-		void DownloadImage2 (string url, Action<Bitmap> onComplete, Action<Exception> onError)
+		public void DownloadImage (string url, Action<Bitmap,string> onComplete, Action<Exception,string> onError)
 		{
+			Log.Info (TAG, "**** Loading URL: " + url);
 			Bitmap bitmap = null;
 			//Decode image size
 			BitmapFactory.Options o = new BitmapFactory.Options ();
@@ -30,14 +32,15 @@ namespace DrunkSpotting
 			}
 			catch (Exception e) {
 				Log.Error ("ViewHelper.ViewHelper.setImageFromMedia", String.Format ("Failed to load image from url: {0}", url), e);
-				onError (e);
+				onError (e, url);
 			}
 			var tmp = ((Activity)Context).WindowManager;
 			IWindowManager windowManager = tmp;
 			//	(IWindowManager)Context.GetSystemService (Context.WindowService);
 			DisplayMetrics displayMetrics = new DisplayMetrics ();
 			windowManager.DefaultDisplay.GetMetrics (displayMetrics);
-			int maxSize = Math.Max (displayMetrics.WidthPixels, displayMetrics.HeightPixels);
+			int maxSize = displayMetrics.WidthPixels;
+//			int maxSize = Math.Max (displayMetrics.WidthPixels, displayMetrics.HeightPixels);
 			int scale = 1;
 
 			if (o.OutHeight > maxSize || o.OutWidth > maxSize) {
@@ -67,17 +70,16 @@ namespace DrunkSpotting
 			if (null != bitmap) {
 				Log.Debug ("BitmapPerformanceTest", String.Format ("Bitmap dimensions {0}, {1}, Density = {2}", bitmap.Width, bitmap.Height, bitmap.Density));
 				//				aImageView.setImageBitmap( bitmap );
-				onComplete (bitmap);
+				onComplete (bitmap, url);
 			}
 			else {
-				onError (new ApplicationException ("Failed to load Bitmap from Url: " + url));
+				onError (new ApplicationException ("Failed to load Bitmap."), url);
 			}
 		}
 
-		public void DownloadImage (string url, Action<Bitmap> onComplete, Action<Exception> onError)
+		public void DownloadImageAsync (string url, Action<Bitmap, string> onComplete, Action<Exception,string> onError)
 		{
-
-			ThreadPool.QueueUserWorkItem( (x) => DownloadImage2 (url, onComplete, onError) );
+			ThreadPool.QueueUserWorkItem( (x) => DownloadImage (url, onComplete, onError) );
 
 		}
 

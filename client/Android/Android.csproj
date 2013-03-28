@@ -57,6 +57,10 @@
     <Compile Include="PictureListViewItem.cs" />
     <Compile Include="FadeImageView.cs" />
     <Compile Include="ImageService.cs" />
+    <Compile Include="Utils\BitmapCache.cs" />
+    <Compile Include="Utils\DiskCache.cs" />
+    <Compile Include="Utils\LRUCache.cs" />
+    <Compile Include="EditPhotoActivity.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\AboutAssets.txt" />
@@ -72,9 +76,11 @@
     <AndroidResource Include="Resources\drawable-hdpi\default568h.png" />
     <AndroidResource Include="Resources\drawable\splash.png" />
     <AndroidResource Include="Resources\layout\PictureListViewItem.axml" />
+    <AndroidResource Include="Resources\layout\EditPhoto.axml" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Novell\Novell.MonoDroid.CSharp.targets" />
   <ItemGroup>
     <Folder Include="Resources\drawable-hdpi\" />
+    <Folder Include="Utils\" />
   </ItemGroup>
 </Project>

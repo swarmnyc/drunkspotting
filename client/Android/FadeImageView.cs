@@ -12,183 +12,204 @@ using Android.Views.Animations;
 using Android.Graphics.Drawables;
 using System.Net;
 using DrunkSpotting;
+using System.Threading.Tasks;
+using System.Threading;
 
 namespace DrunkSpotting
 {
-	public class FadeImageView : ImageView
-	{
-		Animation fadeInAnimation;
-		Animation fadeOutAnimation;
+    public class FadeImageView : ImageView
+    {
+        Animation fadeInAnimation;
+        Animation fadeOutAnimation;
 
-		public event EventHandler DownloadingImage ;
-		public event EventHandler DownloadedImage;
+        public event EventHandler DownloadingImage ;
+        public event EventHandler DownloadedImage;
 
+        private static BitmapCache _cache;
+
+        BitmapCache Cache 
+        {
+            get
+            {
+                return _cache ?? (_cache = BitmapCache.CreateCache(this.Context, "DrunkSpotting"));
+            }
+        }
+
+        CancellationTokenSource tokenSource2;
+        CancellationToken ct ;
+        Task currentTask = null;
+        
 		Bitmap currrentBitmap;
-		object bitmapLock = new object ();
-		ImageService _imageService = null;
-		private const string TAG = "FadeImageView";
+        object bitmapLock = new object();
+        ImageService _imageService = null;
+        private const string TAG = "FadeImageView";
 
-		public FadeImageView (Context ctx) : base (ctx)
-		{
-			Initialize ();
-		}
+        public FadeImageView(Context ctx) : base (ctx)
+        {
+            Initialize();
+        }
 
-		public FadeImageView (Context context, IAttributeSet attrs) :
+        public FadeImageView(Context context, IAttributeSet attrs) :
 			base (context, attrs)
-		{
-			Initialize ();
-		}
+        {
+            Initialize();
+        }
 
-		public FadeImageView (Context context, IAttributeSet attrs, int defStyle) :
+        public FadeImageView(Context context, IAttributeSet attrs, int defStyle) :
 			base (context, attrs, defStyle)
-		{
-			Initialize ();
-		}
+        {
+            Initialize();
+        }
 
-		void Initialize ()
-		{
-			_imageService = new ImageService (this.Context);
+        void Initialize()
+        {
+            tokenSource2 = new CancellationTokenSource();
+            ct = tokenSource2.Token;
 
-			fadeInAnimation = new AlphaAnimation (0, 1) {
+            _imageService = new ImageService(this.Context);
+
+            fadeInAnimation = new AlphaAnimation(0, 1) {
 				Duration = 500
 			};
-			fadeOutAnimation = new AlphaAnimation (1, 0) {
+            fadeOutAnimation = new AlphaAnimation(1, 0) {
 				Duration = 100
 			};
-		}
+        }
 
-		void DoAnimation (bool really, Action changePic)
-		{
-			if (!really)
-				changePic ();
-			else {
-				EventHandler<Animation.AnimationEndEventArgs> callback = (s, e) => {
-					changePic ();
-					StartAnimation (fadeInAnimation);
-					fadeOutAnimation.AnimationEnd -= callback;
-				};
-				fadeOutAnimation.AnimationEnd += callback;
-				StartAnimation (fadeOutAnimation);
-			}
-		}
+        void DoAnimation(bool really, Action changePic)
+        {
+            if (!really)
+                changePic();
+            else
+            {
+                EventHandler<Animation.AnimationEndEventArgs> callback = (s, e) => {
+                    changePic();
+                    StartAnimation(fadeInAnimation);
+                    fadeOutAnimation.AnimationEnd -= callback;
+                };
+                fadeOutAnimation.AnimationEnd += callback;
+                StartAnimation(fadeOutAnimation);
+            }
+        }
 
-		public void SetImageBitmap (Bitmap bm, bool animate)
-		{
-			DoAnimation (animate, () => SetImageBitmap (bm));
-		}
+        public void SetImageBitmap(Bitmap bm, bool animate)
+        {
+            DoAnimation(animate, () => SetImageBitmap(bm));
+        }
 
-		public void SetImageDrawable (Drawable drawable, bool animate)
-		{
-			DoAnimation (animate, () => SetImageDrawable (drawable));
-		}
+        public void SetImageDrawable(Drawable drawable, bool animate)
+        {
+            DoAnimation(animate, () => SetImageDrawable(drawable));
+        }
 
-		public void SetImageResource (int resId, bool animate)
-		{
-			DoAnimation (animate, () => SetImageResource (resId));
-		}
+        public void SetImageResource(int resId, bool animate)
+        {
+            DoAnimation(animate, () => SetImageResource(resId));
+        }
 
-		public void SetImageURI (Android.Net.Uri uri, bool animate)
-		{
-			DoAnimation (animate, () => SetImageURI (uri));
-		}
+        public void SetImageURI(Android.Net.Uri uri, bool animate)
+        {
+            DoAnimation(animate, () => SetImageURI(uri));
+        }
 
-		public void DownloadImage ()
-		{
+        public void CleanUp()
+        {
+//                if (null != currentTask)
+//                {
+//                    tokenSource2.Cancel();
+//                }
+//			
+//			lock (bitmapLock)
+//			{
+                SetImageBitmap(null, false);
+//                if (null != currrentBitmap)
+//                {
+//                    Log.Info("*****", "Recycling image");
+//                    currrentBitmap.Recycle();
+//                }
+//                currrentBitmap = null;
+//            }
 
-			if (null != DownloadingImage) {
-				DownloadingImage (this, null);
-			}
-			SetImageBitmap (null);
-			// Downlaod Image Bitmap
-			var webClient = new WebClient ();
+        }
 
-			webClient.DownloadDataCompleted += (s, e) => {
-				var bytes = e.Result; // get the downloaded data
-//				string documentsPath = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
-//				string localFilename = "downloaded.png";
-//				string localPath = Path.Combine (documentsPath, localFilename);
-//				File.WriteAllBytes (localpath, bytes); // writes to local storage
+       
 
-				// Set bitmap
-				if (null == bytes || bytes.Length == 0) {
-					DownloadedImage (this, null);
-					return;
-				}
-				var bitmap = BitmapFactory.DecodeByteArray (bytes, 0, bytes.Length);
-				((Activity)Context).RunOnUiThread (() => 
-				{
-					// Clear image
-					if (null != currrentBitmap) {
-						lock (bitmapLock) {
-							if (null != currrentBitmap) {
-								Log.Info ("*****", "Recycling image");
-								currrentBitmap.Recycle ();
+        void OnImageUrlChange()
+        {
+            Bitmap cachedImage = null;
+            if (Cache.TryGet(ImageUrl, out cachedImage))
+            {
+                
+            }
 
-							}
+          
+
+            var task = Task.Factory.StartNew(() =>
+            {
+				// Were we already canceled?
+				ct.ThrowIfCancellationRequested();
+
+                if (null != DownloadingImage)
+                {
+                    DownloadingImage(this, null);
+                }
+
+                _imageService.DownloadImage(ImageUrl, (b, url) => {
+                    Log.Info(TAG, "Url = {2}\nSize = {0},{1}", b.Width, b.Height, url);
+
+                    Cache.AddOrUpdate(url, b, TimeSpan.FromDays(7));
+
+                    ((Activity)Context).RunOnUiThread(() => {
+                        
+						if (ct.IsCancellationRequested)
+						{
+							// Clean up here, then...
+							ct.ThrowIfCancellationRequested();
 						}
-					}
-					lock (bitmapLock) {
-						currrentBitmap = bitmap;
-					}
+						else
+						{
 
-					if (null != DownloadedImage) {
-						DownloadedImage (this, null);
-					}
+							lock (bitmapLock)
+							{
+								currrentBitmap = b;
+							}
+							if (ImageUrl == url)
+							{
+								SetImageBitmap(b);
+								if (null != DownloadedImage)
+								{
+									DownloadedImage(this, null);
+								}
+							}
+                           
+						}
+                    });
+                }, (e, url) => {
+                    Log.Error(TAG, e.ToString());
+                });
+            });
 
-					SetImageBitmap (bitmap, true);
-				});
-			};
 
-			webClient.DownloadDataAsync (new Uri (ImageUrl), ImageUrl);
-
-		}
+        }
 
 		private string _imageUrl = null;
 
-		public String ImageUrl {
-			get {
-				return _imageUrl;
-			}
-			set {
-				if (_imageUrl != value) {
-					_imageUrl = value;
-					if (null != DownloadingImage) {
-						DownloadingImage (this, null);
-					}
-					SetImageBitmap (null);
-					_imageService.DownloadImage (ImageUrl, b => {
-						Log.Info (TAG, "Size = {0},{1}", b.Width, b.Height);
-						var bitmap = b;
-						((Activity)Context).RunOnUiThread (() => 
-						{
-							// Clear image
-							if (null != currrentBitmap) {
-								lock (bitmapLock) {
-									if (null != currrentBitmap) {
-										Log.Info ("*****", "Recycling image");
-										currrentBitmap.Recycle ();
-										currrentBitmap = null;
-										
-									}
-								}
-							}
-							lock (bitmapLock) {
-								currrentBitmap = bitmap;
-							}
-							
-							if (null != DownloadedImage) {
-								DownloadedImage (this, null);
-							}
-							
-							SetImageBitmap (bitmap, true);
-						});
+        public String ImageUrl
+        {
+            get
+            {
+                return _imageUrl;
+            }
+            set
+            {
+                if (_imageUrl != value)
+                {
+                    _imageUrl = value;
 
-					}, e => {
-						Log.Error (TAG, e.ToString ());
-					});
-				}
-			}
-		}
-	}
+                    OnImageUrlChange();
+                }				
+            }
+        }
+    }
 }
 
