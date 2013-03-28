@@ -81,9 +81,6 @@ NSString *const FBSessionStateChangedNotification =
     
     UIBarButtonItem *toolButtonSkin = [UIBarButtonItem appearanceWhenContainedIn:[UIToolbar class], nil];
     toolButtonSkin.tintColor = teal;
-    
-    UIView *cellSkin = [UIView appearanceWhenContainedIn:[PhotoCollectionViewCell class], nil];
-    cellSkin.backgroundColor = teal;
 }
 
 #pragma mark - Facebook Integration

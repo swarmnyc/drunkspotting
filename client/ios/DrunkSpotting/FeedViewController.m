@@ -63,7 +63,7 @@ NSString *const kPhotoCellIdentifier = @"photo";
 	self.navigationItem.rightBarButtonItems = @[refreshButton];
     
     UIBarButtonItem *settingsButton = [[UIBarButtonItem alloc]
-                                      initWithBarButtonSystemItem:UIBarButtonSystemItemOrganize target:self action:@selector(openSettings:)];
+                                      initWithTitle:NSLocalizedString(@"Settings",@"Settings") style:UIBarButtonItemStylePlain target:self action:@selector(openSettings:)];
 	self.navigationItem.leftBarButtonItems = @[settingsButton];
 }
 
