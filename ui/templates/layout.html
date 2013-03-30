@@ -51,8 +51,15 @@
         </script>
         
         <div id="top">
-			<a href="/"><img src="/assets/img/logo.png" class="logo"/></a>
-			<h1><a href="/">drunkspotting</a></h1>
+        	<div class="contain">
+				<a href="/" class="logo"><img src="/assets/img/logo.png"/></a>
+				<h1><a href="/">drunkspotting</a></h1>
+				
+				<form method="POST" id="uploader" enctype="multipart/form-data">
+					<a href="#editor" id="upload" class="bottom_tooltip" title="Upload your drunk"></a>
+					<input id="data" type="file" name="data" style="visibility:hidden;">
+				</form>
+        	</div>
 		</div>
         {% block content '' %}
         

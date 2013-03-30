@@ -66,7 +66,7 @@ drunkspotting.load_images = function(){
 			jQuery('#posts').empty();
 			// For each ds image, append html
 			for(var i = 0; i < data.length; i++){
-				jQuery('#posts').append('<div class="item"><a href="/spot/'+data[i].id+'"><img src="'+data[i].url+'"/></a></div>');
+				jQuery('#posts').append('<div class="item"><a href="/spot/'+data[i].id+'" class="spot"><img src="'+data[i].url+'"/></a><div class="bar"><a href="#" class="comments">0<span class="bot"></span></a><div class="social"><a href="#" class="facebook"></a><a href="#" class="twitter"></a><a href="#" class="tumblr"></a></div></div></div>');
 				jQuery('#posts img').last().load(function(){
 					drunkspotting.resizeImg($(this));
 				});
@@ -110,7 +110,7 @@ drunkspotting.upload_ajax = function(){
 };
 
 drunkspotting.resizeImg = function(obj){
-	if(obj.width() > obj.height()){
+	/*if(obj.width() > obj.height()){
 		obj.css({
 			'width':'auto',
 			'height':'100%',
@@ -118,17 +118,12 @@ drunkspotting.resizeImg = function(obj){
 			'top':'0'
 		});
 		obj.css({'left':(obj.width()-obj.height())/-2});
-	}
+	}*/
 };
 
 jQuery(window).resize(function(){
 	//Resize canvas when window is resized
 	drunkspotting.fix_canvas();
-	var newHeight = Math.floor($($('.item')[1]).width());
-	$('.item').each(function(index, el){
-		$(el).css('height', newHeight);
-		drunkspotting.resizeImg($(el).find('img'));
-	});
 });
 
 drunkspotting.fix_canvas = function(){
