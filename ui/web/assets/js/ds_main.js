@@ -110,8 +110,7 @@ drunkspotting.load_images = function(){
 				regex = new RegExp('{comment_count}', 'g');
 				template = template.replace(regex, comment_count);
 				template = jQuery(template);
-				var comment_link = template.find('.comment_count');
-				comment_link.attr('href', comment_link.attr('href')+'#disqus_thread');
+				var comment_link = template.find('.comment_count a');
 				
 				comment_link.on('click', function(e){
 			    	e.preventDefault();
