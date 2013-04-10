@@ -86,13 +86,13 @@
         <div style='display:none'>
             <script type='text/template' id='template-listing'>
             	<div class='item' id='spot_{id}'>
-            		<a href='/spot/{id}' class='spot'><img src='{src}'/></a>
+            		<a href='{{base_uri}}/spot/{id}' class='spot'><img src='{src}'/></a>
             		<div class='bar'>
-            			<span class='comment_count'><a href='/spot/{id}#disqus_thread' data-disqus-identifier='spot_{id}'>{comment_count}</a><span class='bot'></span></span>
+            			<span class='comment_count'><a href='{{base_uri}}/spot/{id}#disqus_thread' data-disqus-identifier='spot_{id}'>{comment_count}</a><span class='bot'></span></span>
             			<div class='social'>
-            				<a href='http://www.facebook.com/sharer/sharer.php?u=http://drunkspotting.com/spot/{id}' target='_blank' class='facebook'></a><!--
-            				--><a href='https://twitter.com/share?url=http://drunkspotting.com/spot/{id}&text=Yup,%20this%20just happened&hashtags=wastetherainbow&via=drunkspotting' target='_blank' class='twitter'></a><!--
-            				--><a href='http://www.tumblr.com/share/link?url=http%3A%2F%2Fdrunkspotting.com%2Fspot%2F{id}&name=Yup,%20this%20just%20happened&description=Waste%20the%20rainbow' target='_blank' class='tumblr'></a>
+            				<a href='http://www.facebook.com/sharer/sharer.php?u={{base_uri}}/spot/{id}' target='_blank' class='facebook'></a><!--
+            				--><a href='https://twitter.com/share?url={{base_uri}}/spot/{id}&text=Yup,%20this%20just happened&hashtags=wastetherainbow&via=drunkspotting' target='_blank' class='twitter'></a><!--
+            				--><a href='http://www.tumblr.com/share/link?url={{base_uri}}%2Fspot%2F{id}&name=Yup,%20this%20just%20happened&description=Waste%20the%20rainbow' target='_blank' class='tumblr'></a>
             			</div>
             		</div>
             		<div class='comments'></div>

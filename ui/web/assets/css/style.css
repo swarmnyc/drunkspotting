@@ -269,6 +269,9 @@ h3 {
 	border: 1px solid #d6d6dc;
 	border-top: 0;
 }
+#disqus_thread {
+	padding: 15px;
+}
 
 /* Edit Panel */
 #editor {
