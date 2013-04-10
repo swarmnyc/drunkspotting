@@ -2,13 +2,18 @@
 {% block content %}
 		<div id="body">
 			<div id="post">
-        <img src="{{ spot.data.url }}"/>
-			</div>
-			<div id="share">
-				<span class='st_twitter_large' displayText='Tweet' st_title="Drunkspotting: Draw on photos of drunk friends! #wasteTheRainbow"></span>
-		        <span class='st_facebook_large' displayText='Facebook' st_title="Drunkspotting: Draw on photos of drunk friends! #wasteTheRainbow"></span>
-		        <span class='st_tumblr_large' displayText='Tumblr' st_title="Drunkspotting: Draw on photos of drunk friends! #wasteTheRainbow"></span>
-		        <span class='st_email_large' displayText='Email' st_title="Drunkspotting: Draw on photos of drunk friends! #wasteTheRainbow"></span>
+				<div class='item' id='spot_{{id}}'>
+	        		<span class='spot'><img src='{{spot.data.url}}'/></span>
+	        		<div class='bar'>
+	        			<div class='social'>
+	        				<a href='http://www.facebook.com/sharer/sharer.php?u=http://drunkspotting.com/spot/{{id}}' target='_blank' class='facebook'></a><!--
+	        				--><a href='https://twitter.com/share?url=http://drunkspotting.com/spot/{id}&text=Yup,%20this%20just happened&hashtags=wastetherainbow&via=drunkspotting' target='_blank' class='twitter'></a><!--
+	        				--><a href='http://www.tumblr.com/share/link?url=http%3A%2F%2Fdrunkspotting.com%2Fspot%2F{{id}}&name=Yup,%20this%20just%20happened&description=Waste%20the%20rainbow' target='_blank' class='tumblr'></a>
+	        			</div>
+	        		</div>
+	        		<div class='comments'></div>
+	        	</div>
+	        	<a href="/spot/{{id}}" id="spot_url"></a>
 			</div>
 		</div>
 {% endblock %}

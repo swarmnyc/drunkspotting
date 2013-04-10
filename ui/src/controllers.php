@@ -40,7 +40,7 @@ $app->get('/spot/{id}', function ($id) use ($app) {
         throw new NotFoundHttpException('That drunkspot was not found.', null, 404);
     }
 
-    return $app['twig']->render('spot.html', array('spot' => $spot));
+    return $app['twig']->render('spot.html', array('spot' => $spot, 'id' =>$id));
 })->bind('spot');
 
 /**

@@ -127,21 +127,18 @@ h3 {
 	width: 520px;
 	margin: auto;
 }
-#post img {
-	width: 100%;
-}
-#posts .item {
+#posts .item, #post .item {
 	width: 520px;
 	margin: 20px auto 50px auto;
 }
-#posts .item .spot {
+#posts .item .spot, #post .item .spot {
 	display: block;
 	width: 480px;
 	height: 480px;
 	position: relative;
 	margin: auto;
 }
-#posts .item img {
+#posts .item .spot img, #post .item .spot img {
 	width: 480px;
 	height: 480px;
 	-webkit-border-top-left-radius: 3px;
@@ -152,6 +149,10 @@ h3 {
 	border-top-right-radius: 3px;
 	-webkit-box-shadow:  0px 0px 20px 0px rgba(0, 0, 0, .3);
 	box-shadow:  0px 0px 20px 0px rgba(0, 0, 0, .3);
+}
+#posts .item .comments img, #post .item .comments img {
+	width: auto !important;
+	height: auto !important;
 }
 .item .bar {
 	background: #ebebf5;
@@ -174,13 +175,12 @@ h3 {
 	position: relative;
 	text-align: left;
 }
-.bar .comments {
+.bar .comment_count {
 	display:-moz-inline-stack;
 	display:inline-block;
 	zoom:1;
 	*display:inline;
 	line-height: 26px;
-	padding: 0 10px;
 	margin: 12px;
 	-webkit-border-radius: 2px;
 	-moz-border-radius: 2px;
@@ -196,7 +196,17 @@ h3 {
 	text-shadow: 0px -1px 0px rgba(0, 0, 0, .6);
 	position: relative;
 }
-.bar .comments .bot {
+.bar .comment_count a {
+	display:-moz-inline-stack;
+	display:inline-block;
+	zoom:1;
+	*display:inline;
+	line-height: 26px;
+	padding: 0 10px;
+	color: #fff;
+	text-decoration: none;
+}
+.bar .comment_count .bot {
 	display:-moz-inline-stack;
 	display:inline-block;
 	zoom:1;
@@ -240,6 +250,24 @@ h3 {
 	-moz-border-radius-bottomright: 5px;
 	border-top-right-radius: 5px;
 	border-bottom-right-radius: 5px;
+}
+#spot_url {
+	display: none;
+}
+
+/* Comments */
+.item .comments {
+	border-bottom-left-radius: 3px;
+	border-bottom-right-radius: 3px;
+	-moz-border-radius-bottomleft: 3px;
+	-moz-border-radius-bottomright: 3px;
+	-webkit-border-bottom-left-radius: 3px;
+	-webkit-border-bottom-right-radius: 3px;
+	background-color: #f5f5fc;
+	width: 480px;
+	margin: auto;
+	border: 1px solid #d6d6dc;
+	border-top: 0;
 }
 
 /* Edit Panel */
