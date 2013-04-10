@@ -66,7 +66,6 @@ jQuery(document).ready(function(){
 drunkspotting.load_comments = function(el, id, url){	
 	jQuery('.comments').hide();
 	el.find('.comments').show();
-	el.find('.comments').empty();
 	if (window.DISQUS) {
 		jQuery('#disqus_thread').appendTo(el.find('.comments'));
 		DISQUS.reset({
