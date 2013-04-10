@@ -13,7 +13,7 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
  * Name: homepage
  */
 $app->get('/', function () use ($app) {
-	$base_uri = '//'.$app['request']->getHttpHost();
+	$base_uri = 'http://'.$app['request']->getHttpHost();
     return $app['twig']->render('index.html', array('base_uri'=>$base_uri));
 })->bind('homepage');
 
@@ -24,7 +24,7 @@ $app->get('/', function () use ($app) {
  * Name: about
  */
 $app->get('/about', function () use ($app) {
-	$base_uri = '//'.$app['request']->getHttpHost();
+	$base_uri = 'http://'.$app['request']->getHttpHost();
     return $app['twig']->render('about.html', array('base_uri'=>$base_uri));
 })->bind('about');
 
@@ -35,7 +35,7 @@ $app->get('/about', function () use ($app) {
  * Name: spot
  */
 $app->get('/spot/{id}', function ($id) use ($app) {
-	$base_uri = '//'.$app['request']->getHttpHost();
+	$base_uri = 'http://'.$app['request']->getHttpHost();
     $dsApi = $app['drunkspotting_api'];
     $spot = $dsApi->executeGetPicture($id);
 
