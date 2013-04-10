@@ -55,16 +55,16 @@ jQuery(document).ready(function(){
             };
         }
     });
-    if($('#post').length > 0){
+    if(jQuery('#post').length > 0){
     	var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
 		dsq.src = 'http://' + disqus_shortname + '.disqus.com/count.js';
 		jQuery('head').append(dsq);
-		drunkspotting.load_comments($('#post .item'), $('#post .item').attr('id'), $('#spot_url').attr('href'));
+		drunkspotting.load_comments(jQuery('#post .item'), jQuery('#post .item').attr('id'), jQuery('#spot_url').attr('href'));
     }
 });
 
 drunkspotting.load_comments = function(el, id, url){	
-	$('.comments').hide();
+	jQuery('.comments').hide();
 	el.find('.comments').show();
 	el.find('.comments').empty();
 	if (window.DISQUS) {
@@ -102,26 +102,26 @@ drunkspotting.load_images = function(){
 			
 			for(var i = 0; i < data.length; i++){
 				var comment_count = 0;
-				var template = $('#template-listing').html();
+				var template = jQuery('#template-listing').html();
 				var regex = new RegExp('{id}', 'g');
 				template = template.replace(regex, data[i].id);
 				regex = new RegExp('{src}', 'g');
 				template = template.replace(regex, data[i].url);
 				regex = new RegExp('{comment_count}', 'g');
 				template = template.replace(regex, comment_count);
-				template = $(template);
+				template = jQuery(template);
 				var comment_link = template.find('.comment_count');
 				comment_link.attr('href', comment_link.attr('href')+'#disqus_thread');
 				
 				comment_link.on('click', function(e){
 			    	e.preventDefault();
-			    	drunkspotting.load_comments($(this).parents('.item'), $(this).parents('.item').attr('id'), $(this).attr('href'));
+			    	drunkspotting.load_comments(jQuery(this).parents('.item'), jQuery(this).parents('.item').attr('id'), jQuery(this).attr('href'));
 			    });
 			    template.find('.comments').hide();
 				jQuery('#posts').append(template);
 				
 				template.find('img').last().load(function(){
-					drunkspotting.resizeImg($(this));
+					drunkspotting.resizeImg(jQuery(this));
 				});
 			}
 			var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
