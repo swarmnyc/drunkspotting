@@ -369,7 +369,7 @@ h3 {
 	border-radius: 4px;
 	-webkit-box-shadow: inset 0px 0px 1px 0px rgba(255, 255, 255, .75);
 	box-shadow: inset 0px 0px 1px 0px rgba(255, 255, 255, .75);
-	font-size: 1.2em;
+	font-size: 1.15em;
 	font-weight: bold;
 	padding: 0px 20px;
 	line-height: 36px;
@@ -393,6 +393,7 @@ h3 {
 	color: #fff;
 	border: 1px solid #671212;
 	float: right;
+	margin-right: 10px;
 }
 
 #button_save {
