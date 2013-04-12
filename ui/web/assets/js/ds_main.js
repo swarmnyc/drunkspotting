@@ -66,6 +66,7 @@ jQuery(document).ready(function(){
 drunkspotting.load_comments = function(el, id, url){	
 	jQuery('.comments').hide();
 	el.find('.comments').show();
+	$('html, body').animate({scrollTop: el.find('.bar').offset().top-parseInt($('#body').css('padding-top'))+10}, 500);
 	if (window.DISQUS) {
 		jQuery('#disqus_thread').appendTo(el.find('.comments'));
 		DISQUS.reset({
@@ -126,9 +127,6 @@ drunkspotting.load_images = function(){
 			dsq.src = 'http://' + disqus_shortname + '.disqus.com/count.js';
 			jQuery('head').append(dsq);
 			jQuery('#posts').append('<div style="clear:both"></div>');
-			jQuery('#posts img').last().load(function(){
-				jQuery(window).trigger('resize');
-			});
 		},
 		error: function(obj,stat,err){
 			console.log(stat, err);
