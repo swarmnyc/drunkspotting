@@ -79,6 +79,7 @@ h3 {
 }
 #top .contain {
 	text-align: left;
+	position: relative;
 }
 
 /* Body Section */
@@ -104,8 +105,9 @@ h3 {
 	display:inline-block;
 	zoom:1;
 	*display:inline;
-	margin: 9px 0;
-	float: right;
+	position: absolute;
+	top: 9px;
+	right: 15px;
 }
 #upload {
 	display: block;
@@ -475,6 +477,9 @@ h3 {
 /* Media Query */
 
 @media only screen and (max-width: 640px) {
+	body, html {
+		font-size: 14px;
+	}
 	h2 {
 		text-align: left;
 	}
