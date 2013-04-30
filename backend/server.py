@@ -8,7 +8,6 @@ import binascii
 import psycopg2
 import os
 import datetime
-import azure.storage
 
 import database
 import drunkspotting_exceptions
@@ -26,6 +25,7 @@ class Server:
         gevent.monkey.patch_all()
 
         self._conn = psycopg2.connect(
+            host=config['database_server'],
             database=config['database'],
             user=config['database_user'],
             password=config['database_password'])
@@ -42,20 +42,10 @@ class Server:
         sha1.update(str(datetime.datetime.now()))
         img = sha1.hexdigest() + ".jpg"
 
-        if 'azure_account' in config and config['azure_account']:
-            blob_service = azure.storage.BlobService(
-                account_name=config['azure_account'],
-                account_key=config['azure_key'])
-            blob_service.create_container('pictures',
-                                          x_ms_blob_public_access='blob')
-            blob_service.put_blob('pictures', img,
-                                  data, x_ms_blob_type='BlockBlob',
-                                  x_ms_blob_content_type='image/jpeg')
-        elif 'upload_folder' in config and config['upload_folder']:
-            with open(os.path.join(config['upload_folder'], img), 'wb') as f:
-                f.write(data)
+        with open(os.path.join(config['upload_folder'], img), 'wb') as f:
+            f.write(data)
 
-        url = config['upload_url'] + 'pictures/ ' + img
+        url = config['upload_url'] + img
         print url
         return json.dumps({'url': url})
 
