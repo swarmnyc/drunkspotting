@@ -16,14 +16,13 @@
         <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
         <![endif]-->
 
-        <!-- share this -->
-        <script type="text/javascript">var switchTo5x=true;</script>
-        <script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script>
-        <script type="text/javascript">stLight.options({publisher: "0cdf314c-022d-481e-beab-5d85436fddbe", doNotHash: false, doNotCopy: false, hashAddressBar: false});</script>
-
         <!-- custom styles -->
         <link href="/assets/css/style.css" rel="stylesheet">
-
+        
+        <!-- tumblr share -->
+        <script type="text/javascript" src="http://platform.tumblr.com/v1/share.js"></script>
+        
+        <!-- google analytics -->
         <script type="text/javascript">
           var _gaq = _gaq || [];
           _gaq.push(['_setAccount', 'UA-39299157-1']);
@@ -51,10 +50,32 @@
         </script>
         
         <div id="top">
-			<a href="/"><img src="/assets/img/logo.png" class="logo"/></a>
-			<h1><a href="/">drunkspotting</a></h1>
+        	<div class="contain">
+				<a href="/" class="logo"><img src="/assets/img/logo.png"/></a>
+				<h1><a href="/">drunkspotting</a></h1>
+				
+				<form method="POST" id="uploader" enctype="multipart/form-data">
+					<a href="#editor" id="upload" class="bottom_tooltip" title="Upload your drunk"></a>
+					<input id="data" type="file" name="data" style="visibility:hidden;">
+				</form>
+        	</div>
 		</div>
         {% block content '' %}
+        
+        <!-- Start Edit Panel -->
+		<div id="editor">
+			<div id="tools">
+				<a href="#colors" id="my_color"><span></span></a>
+				<a href="#size" id="my_size"><span></span></a>
+				<button id="button_save" class="btn">Save</button>
+				<button id="button_cancel" class="btn">Cancel</button>
+				<div class="clear"></div>
+			</div>
+			<canvas id="sketch" width="640" height="640"></canvas>
+			
+			<!-- Add an edit button, passing the HTML id of the image and the public URL of the image -->
+		</div>
+		<!-- End Edit Panel -->
         
         <div id="footer">
 			<div>
@@ -79,10 +100,30 @@
         <!-- Templates -->
         <div style='display:none'>
             <script type='text/template' id='template-listing'>
-                <div class='span4 item img_container'>
-                    <a href='{{ '{{src_link}}' }}' target='_blank'><img src='{{ '{{src}}' }}'></a>
-                </div>
+            	<div class='item' id='spot_{id}'>
+            		<a href='{{base_uri}}/spot/{id}' class='spot'><img src='{src}'/></a>
+            		<div class='bar'>
+            			<span class='comment_count'><a href='{{base_uri}}/spot/{id}#disqus_thread' data-disqus-identifier='spot_{id}'>{comment_count}</a><span class='bot'></span></span>
+            			<div class='social'>
+            				<a href='http://www.facebook.com/sharer/sharer.php?u={{base_uri}}/spot/{id}' target='_blank' class='facebook'></a><!--
+            				--><a href='https://twitter.com/share?url={{base_uri}}/spot/{id}&text=Yup,%20this%20just happened&hashtags=wastetherainbow&via=drunkspotting' target='_blank' class='twitter'></a><!--
+            				--><a href='http://www.tumblr.com/share/link?url={{base_uri}}%2Fspot%2F{id}&name=Yup,%20this%20just%20happened&description=Waste%20the%20rainbow' target='_blank' class='tumblr'></a>
+            			</div>
+            		</div>
+            		<div class='comments'></div>
+            	</div>
             </script>
         </div>
+		<script type="text/javascript">
+		/* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+		
+		/* * * DON'T EDIT BELOW THIS LINE * * */
+		(function () {
+			var s = document.createElement('script'); s.async = true;
+			s.type = 'text/javascript';
+			s.src = 'http://' + disqus_shortname + '.disqus.com/count.js';
+			(document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+		}());
+		</script>
     </body>
 </html>
