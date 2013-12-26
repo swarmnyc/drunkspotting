@@ -31,14 +31,17 @@ namespace DrunkSpotting
 
 			// Get our button from the layout resource,
 			// and attach an event to it
-			Button button = FindViewById<Button> (Resource.Id.refresh);
+            ImageButton button = FindViewById<ImageButton> (Resource.Id.refresh);
+
+            photoListAdatper = new PhotoAdapter (this);
 			
 			button.Click += delegate {
 
+                photoListAdatper.Refresh();
 			};
 
 			photoList = FindViewById<ListView> (Resource.Id.photoList);
-			photoListAdatper = new PhotoAdapter (this);
+			
 			photoList.Adapter = photoListAdatper;
 			photoList.SetBackgroundColor (Color.Black);
 
@@ -70,26 +73,31 @@ namespace DrunkSpotting
 			_pictures = new List<Picture> ();
 		}
 
-		public void Refresh ()
+		public async void Refresh ()
 		{
-			// Pull Data from website. 
-			_pictureService.GetLatestPictures (20, result => 
-			{
-				// check latest ID 
-				if (null != _latest && null != result && result.Count > 0 && _latest.Id == result [0].Id) {
-					return;
-				}
+			
 
-				if (null != result && result.Count > 0) {
-					_pictures = result;
-					_latest = result [0];
-					((Activity)this.Context).RunOnUiThread (() => {
-						this.NotifyDataSetChanged ();
-					});
+            var result = await _pictureService.GetLatestPicturesAsync(20);
 
-				}
+            // Pull Data from website. 
+//            _pictureService.GetLatestPictures (20, result => 
+//                                               {
 
-			});
+                // check latest ID 
+                if (null != _latest && null != result && result.Count > 0 && _latest.Id == result [0].Id) {
+                    return;
+                }
+                
+                if (null != result && result.Count > 0) {
+                    _pictures = result;
+                    _latest = result [0];
+                    ((Activity)this.Context).RunOnUiThread (() => {
+                        this.NotifyDataSetChanged ();
+                    });
+                    
+                }
+                
+//            });
 			
 		}
 

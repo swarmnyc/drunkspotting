@@ -58,7 +58,10 @@ namespace DrunkSpotting
 //          Display display = wm.DefaultDisplay;
 
             Rect frame = new Rect();
+            this.SetBackgroundResource(Android.Resource.Color.White);
+
             GetWindowVisibleDisplayFrame(frame);
+
 
             inflater.Inflate(Resource.Layout.PictureListViewItem, this, true);
 

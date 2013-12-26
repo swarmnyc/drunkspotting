@@ -27,7 +27,7 @@ namespace DrunkSpotting
 
         private static BitmapCache _cache;
 
-        BitmapCache Cache 
+        BitmapCache Cache
         {
             get
             {
@@ -38,8 +38,7 @@ namespace DrunkSpotting
         CancellationTokenSource tokenSource2;
         CancellationToken ct ;
         Task currentTask = null;
-        
-		Bitmap currrentBitmap;
+        Bitmap currrentBitmap;
         object bitmapLock = new object();
         ImageService _imageService = null;
         private const string TAG = "FadeImageView";
@@ -50,13 +49,13 @@ namespace DrunkSpotting
         }
 
         public FadeImageView(Context context, IAttributeSet attrs) :
-			base (context, attrs)
+            base (context, attrs)
         {
             Initialize();
         }
 
         public FadeImageView(Context context, IAttributeSet attrs, int defStyle) :
-			base (context, attrs, defStyle)
+            base (context, attrs, defStyle)
         {
             Initialize();
         }
@@ -69,11 +68,11 @@ namespace DrunkSpotting
             _imageService = new ImageService(this.Context);
 
             fadeInAnimation = new AlphaAnimation(0, 1) {
-				Duration = 500
-			};
+                Duration = 500
+            };
             fadeOutAnimation = new AlphaAnimation(1, 0) {
-				Duration = 100
-			};
+                Duration = 100
+            };
         }
 
         void DoAnimation(bool really, Action changePic)
@@ -118,10 +117,14 @@ namespace DrunkSpotting
 //                {
 //                    tokenSource2.Cancel();
 //                }
-//			
-//			lock (bitmapLock)
-//			{
-                SetImageBitmap(null, false);
+//          
+//          lock (bitmapLock)
+//          {
+            if (null != currrentBitmap && ! currrentBitmap.IsRecycled)
+            {
+            currrentBitmap.Recycle();
+            }
+            SetImageBitmap(null, false);
 //                if (null != currrentBitmap)
 //                {
 //                    Log.Info("*****", "Recycling image");
@@ -132,22 +135,47 @@ namespace DrunkSpotting
 
         }
 
-       
+//       
+//        protected override void OnMeasure(int widthMeasureSpec, int heightMeasureSpec)
+//        {
+//            Drawable drawable = this.Drawable;
+//            if (drawable != null)
+//            {
+//                int width =  MeasureSpec.GetSize(widthMeasureSpec);
+//                int diw = drawable.IntrinsicWidth;
+//                if (diw > 0)
+//                {
+//                    int height = width * drawable.IntrinsicHeight / diw;
+//                    SetMeasuredDimension(width, height);
+//                }
+//                else
+//                    base.OnMeasure(widthMeasureSpec, heightMeasureSpec);
+//            }
+//            else
+//                base.OnMeasure(widthMeasureSpec, heightMeasureSpec);
+//        }
+//    
 
         void OnImageUrlChange()
         {
             Bitmap cachedImage = null;
             if (Cache.TryGet(ImageUrl, out cachedImage))
             {
-                
+                if (!cachedImage.IsRecycled)
+                {
+                    Log.Info(TAG, "*** Cache hit for Url" + ImageUrl);
+                    currrentBitmap = cachedImage;
+                    SetImageBitmap(cachedImage, true);
+                    return;
+                }
             }
 
           
 
             var task = Task.Factory.StartNew(() =>
             {
-				// Were we already canceled?
-				ct.ThrowIfCancellationRequested();
+                // Were we already canceled?
+                ct.ThrowIfCancellationRequested();
 
                 if (null != DownloadingImage)
                 {
@@ -156,33 +184,33 @@ namespace DrunkSpotting
 
                 _imageService.DownloadImage(ImageUrl, (b, url) => {
                     Log.Info(TAG, "Url = {2}\nSize = {0},{1}", b.Width, b.Height, url);
-
-                    Cache.AddOrUpdate(url, b, TimeSpan.FromDays(7));
+                    var croppedBitmap = CropToScreenWidth(b);
+                    Cache.AddOrUpdate(url, croppedBitmap, TimeSpan.FromDays(7));
 
                     ((Activity)Context).RunOnUiThread(() => {
                         
-						if (ct.IsCancellationRequested)
-						{
-							// Clean up here, then...
-							ct.ThrowIfCancellationRequested();
-						}
-						else
-						{
+                        if (ct.IsCancellationRequested)
+                        {
+                            // Clean up here, then...
+                            ct.ThrowIfCancellationRequested();
+                        } else
+                        {
 
-							lock (bitmapLock)
-							{
-								currrentBitmap = b;
-							}
-							if (ImageUrl == url)
-							{
-								SetImageBitmap(b);
-								if (null != DownloadedImage)
-								{
-									DownloadedImage(this, null);
-								}
-							}
+                            lock (bitmapLock)
+                            {
+                                currrentBitmap = croppedBitmap;
+                            }
+                            if (ImageUrl == url)
+                            {
+
+                                SetImageBitmap(croppedBitmap, true);
+                                if (null != DownloadedImage)
+                                {
+                                    DownloadedImage(this, null);
+                                }
+                            }
                            
-						}
+                        }
                     });
                 }, (e, url) => {
                     Log.Error(TAG, e.ToString());
@@ -192,7 +220,61 @@ namespace DrunkSpotting
 
         }
 
-		private string _imageUrl = null;
+        private Bitmap CropToScreenWidth(Bitmap b)
+        {
+            var tmp = ((Activity)Context).WindowManager;
+            IWindowManager windowManager = tmp;
+            DisplayMetrics displayMetrics = new DisplayMetrics();
+            windowManager.DefaultDisplay.GetMetrics(displayMetrics);
+
+
+//            int maxWidth = displayMetrics.WidthPixels;
+            int maxWidth = this.MeasuredWidth;
+
+
+
+            int originalWidth = b.Width;
+            int originalHeight = b.Height;
+
+            if (originalWidth > 0)
+            {
+                float scale = 0f; 
+                int croppedWidth = 0;
+
+                if (originalWidth >= originalHeight)
+                {
+                    int offset = (originalWidth - originalHeight);
+                    croppedWidth = (originalWidth - offset);
+                    scale = (float)maxWidth / (float)croppedWidth;
+                } else
+                {
+                    int offset = (originalHeight - originalWidth);
+                    croppedWidth = originalWidth;
+                    scale = (float)maxWidth / (float)croppedWidth;
+                }
+
+                int length = (int)(croppedWidth * scale);
+
+                Log.Debug(TAG, String.Format("Scaling image by {0} to ({1})", scale, length));
+                    
+                Matrix matrix = new Matrix();
+                matrix.PostScale(scale, scale);
+
+                int x = (int)((b.Width * scale - length) / scale) / 2;
+                int y = (int)((b.Height * scale - length) / scale) / 2;
+
+                x = Math.Max(0, x);
+                y = Math.Max(0, y);
+
+                Log.Debug(TAG, String.Format("Cropping Image {0}, {1}", x, y));
+                return Bitmap.CreateBitmap(b, x, y, croppedWidth, croppedWidth, matrix, true);
+               
+            }
+
+            return b;
+        }
+
+        private string _imageUrl = null;
 
         public String ImageUrl
         {
@@ -207,7 +289,7 @@ namespace DrunkSpotting
                     _imageUrl = value;
 
                     OnImageUrlChange();
-                }				
+                }               
             }
         }
     }

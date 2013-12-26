@@ -12,7 +12,7 @@ namespace DrunkSpotting
         BitmapCache (DiskCache diskCache)
         {
             this.diskCache = diskCache;
-            this.memCache = new LRUCache<string, Bitmap> (10);
+            this.memCache = new LRUCache<string, Bitmap> (5);
         }
         
         public static BitmapCache CreateCache (Android.Content.Context ctx, string cacheName, string version = "1.0")
