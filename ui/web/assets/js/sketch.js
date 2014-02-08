@@ -171,8 +171,8 @@ var __slice = Array.prototype.slice;
       _ref = action.events;
       for (_i = 0, _len = _ref.length; _i < _len; _i++) {
         event = _ref[_i];
-        newX = Math.round(event.x*this.canvas.width())/action.width);
-        newY = Math.round(event.y*this.canvas.height())/action.height);
+        newX = Math.round((event.x*this.canvas.width())/action.width);
+        newY = Math.round((event.y*this.canvas.height())/action.height);
         this.context.lineTo(newX, newY);
         previous = event;
       }
