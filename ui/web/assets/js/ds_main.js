@@ -11,7 +11,7 @@ jQuery(document).ready(function(){
 	});
 	jQuery('#data').bind('change', function(){
 		if(jQuery('#data').val() !== ''){
-			if(typeof jQuery('#data')[0].files[0] == 'object' && jQuery('#data')[0].files[0].size <= 3145728){
+			if(typeof jQuery('#data')[0].files[0] == 'object' && jQuery('#data')[0].files[0].size <= 2097152){
 				drunkspotting.upload_ajax();
 			}
 			else {
@@ -216,6 +216,7 @@ drunkspotting.fix_canvas = function(){
 	//Set canvas size
 	jQuery('#sketch')[0].width = Math.floor(canvasWidth);
 	jQuery('#sketch')[0].height = Math.floor(canvasHeight);
+	jQuery('#sketch').sketch().redraw();
 	drunkspotting.loading_stop();
 };
 

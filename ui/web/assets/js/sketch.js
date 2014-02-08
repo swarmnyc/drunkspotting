@@ -88,6 +88,8 @@ var __slice = Array.prototype.slice;
         tool: this.tool,
         color: this.color,
         size: parseFloat(this.size),
+        width: this.canvas.width(),
+        height: this.canvas.height(),
         events: []
       };
     };
@@ -169,7 +171,9 @@ var __slice = Array.prototype.slice;
       _ref = action.events;
       for (_i = 0, _len = _ref.length; _i < _len; _i++) {
         event = _ref[_i];
-        this.context.lineTo(Math.round(event.x), Math.round(event.y));
+        newX = Math.round(event.x*this.canvas.width())/action.width);
+        newY = Math.round(event.y*this.canvas.height())/action.height);
+        this.context.lineTo(newX, newY);
         previous = event;
       }
       this.context.strokeStyle = action.color;
