@@ -15,7 +15,7 @@ jQuery(document).ready(function(){
 				drunkspotting.upload_ajax();
 			}
 			else {
-				drunkspotting.error_show('Your file is too large! Trying something smaller. (that\'s what she said)');
+				drunkspotting.error_show('Your file is too large! Try something smaller. (that\'s what she said)');
 			}
 		}
 	});
