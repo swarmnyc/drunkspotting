@@ -177,7 +177,8 @@ var __slice = Array.prototype.slice;
         previous = event;
       }
       this.context.strokeStyle = action.color;
-      this.context.lineWidth = action.size;
+      newS = Math.round((action.size*this.canvas.width())/action.width);
+      this.context.lineWidth = newS;
       return this.context.stroke();
     }
   };
