@@ -216,7 +216,9 @@ drunkspotting.fix_canvas = function(){
 	//Set canvas size
 	jQuery('#sketch')[0].width = Math.floor(canvasWidth);
 	jQuery('#sketch')[0].height = Math.floor(canvasHeight);
-	jQuery('#sketch').sketch().redraw();
+	try {
+	    jQuery('#sketch').sketch().redraw();
+    } catch (e){}
 	drunkspotting.loading_stop();
 };
 
