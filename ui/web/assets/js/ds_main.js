@@ -15,7 +15,7 @@ jQuery(document).ready(function(){
 				drunkspotting.upload_ajax();
 			}
 			else {
-				drunkspotting.error_show('Your file is too large! Trying something smaller. (that\'s what she said)');
+				drunkspotting.error_show('Your file is too large! Try something smaller. (that\'s what she said)');
 			}
 		}
 	});
@@ -216,6 +216,9 @@ drunkspotting.fix_canvas = function(){
 	//Set canvas size
 	jQuery('#sketch')[0].width = Math.floor(canvasWidth);
 	jQuery('#sketch')[0].height = Math.floor(canvasHeight);
+	try {
+	    jQuery('#sketch').sketch().redraw();
+    } catch (e){}
 	drunkspotting.loading_stop();
 };
 

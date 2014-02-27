@@ -1,4 +1,7 @@
 {% extends "layout.html" %}
+{% block header %}
+<meta property="og:image" content="{{spot.data.url}}"/>
+{% endblock %}
 {% block content %}
 		<div id="body">
 			<div id="post">
