@@ -10,13 +10,14 @@ using System.Collections.Generic;
 using Android;
 using Android.Graphics;
 using Android.Content.PM;
+using Android.Support.V4.App;
 
 namespace DrunkSpotting
 {
 	[Activity (Label = "Drunk Spotting", 
 	           ConfigurationChanges = ConfigChanges.KeyboardHidden | ConfigChanges.Orientation, ScreenOrientation = ScreenOrientation.Portrait)]
 	//ConfigurationChanges="keyboardHidden|orientation"
-	public class MainActivity : Activity
+	public class MainActivity : FragmentActivity
 	{
 
 		private ListView photoList = null;
@@ -29,6 +30,8 @@ namespace DrunkSpotting
 			// Set our view from the "main" layout resource
 			SetContentView (Resource.Layout.Main);
 
+			var frameLayout = FindViewById<FrameLayout>( Resource.Id.layout_content );
+			frameLayout.Visibility = ViewStates.Gone;
 			// Get our button from the layout resource,
 			// and attach an event to it
 			Button button = FindViewById<Button> (Resource.Id.refresh);
@@ -37,10 +40,29 @@ namespace DrunkSpotting
 
 			};
 
+
+
 			photoList = FindViewById<ListView> (Resource.Id.photoList);
 			photoListAdatper = new PhotoAdapter (this);
 			photoList.Adapter = photoListAdatper;
 			photoList.SetBackgroundColor (Color.Black);
+
+			photoList.ItemClick += (object sender, AdapterView.ItemClickEventArgs e ) =>
+			{
+				Bitmap b = ( (PictureListViewItem) e.View ).ImageView.CurrrentBitmap;
+				if (null != b)
+				{
+					Bundle args = new Bundle();
+					args.PutParcelable ("image", b);
+
+//					DrawOnPhotoFragment drawOnPhotoFragment = new DrawOnPhotoFragment();
+					DrawingFragment drawOnPhotoFragment = new DrawingFragment();
+					drawOnPhotoFragment.Arguments = args;
+					frameLayout.Visibility = ViewStates.Visible;
+					SupportFragmentManager.BeginTransaction ().Replace (Resource.Id.layout_content, drawOnPhotoFragment).Commit();
+				}
+			};
+
 
 		}
 

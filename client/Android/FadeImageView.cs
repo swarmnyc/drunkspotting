@@ -35,6 +35,18 @@ namespace DrunkSpotting
             }
         }
 
+		public Bitmap CurrrentBitmap
+		{
+			get
+			{
+				return currrentBitmap;
+			}
+			set
+			{
+				currrentBitmap = value;
+			}
+		}
+
         CancellationTokenSource tokenSource2;
         CancellationToken ct ;
         Task currentTask = null;

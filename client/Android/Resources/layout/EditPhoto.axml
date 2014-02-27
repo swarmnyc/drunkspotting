@@ -3,15 +3,12 @@
     android:orientation="vertical"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent">
-    <Button
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="Choose Picture"
-        android:id="@+id/ChoosePictureButton" />
     <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/ChoosenImageView" />
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/ChoosenImageView"
+        android:scaleType="centerInside"
+        android:adjustViewBounds="false" />
     <Button
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
