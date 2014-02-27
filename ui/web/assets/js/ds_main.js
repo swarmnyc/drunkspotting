@@ -1,5 +1,7 @@
-
 var drunkspotting = {img:new Image()};
+var disqus_shortname = 'drunkspotting';
+var disqus_identifier;
+var disqus_url;
 
 jQuery(document).ready(function(){
 	jQuery.support.cors = true;
@@ -53,7 +55,39 @@ jQuery(document).ready(function(){
             };
         }
     });
+    if(jQuery('#post').length > 0){
+    	var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+		dsq.src = 'http://' + disqus_shortname + '.disqus.com/count.js';
+		jQuery('head').append(dsq);
+		drunkspotting.load_comments(jQuery('#post .item'), jQuery('#post .item').attr('id'), jQuery('#spot_url').attr('href'));
+    }
 });
+
+drunkspotting.load_comments = function(el, id, url){	
+	jQuery('.comments').hide();
+	el.find('.comments').show();
+	$('html, body').animate({scrollTop: el.find('.bar').offset().top-parseInt($('#body').css('padding-top'))+10}, 500);
+	if (window.DISQUS) {
+		jQuery('#disqus_thread').appendTo(el.find('.comments'));
+		DISQUS.reset({
+			reload: true,
+			config: function () {
+				this.page.identifier = id;
+				this.page.url = url;
+			}
+		});
+		
+	} else {
+		jQuery('<div id="disqus_thread"></div>').appendTo(el.find('.comments'));
+		disqus_identifier = id; //set the identifier argument
+		disqus_url = url; //set the permalink argument
+		
+		//append the Disqus embed script to HTML
+		var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+		dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+		jQuery('head').append(dsq);		
+	}
+};
 
 drunkspotting.load_images = function(){
 	var ds = {};
@@ -65,16 +99,34 @@ drunkspotting.load_images = function(){
 		success: function(data){
 			jQuery('#posts').empty();
 			// For each ds image, append html
+			
 			for(var i = 0; i < data.length; i++){
-				jQuery('#posts').append('<div class="item"><a href="/spot/'+data[i].id+'"><img src="'+data[i].url+'"/></a></div>');
-				jQuery('#posts img').last().load(function(){
-					drunkspotting.resizeImg($(this));
+				var comment_count = 0;
+				var template = jQuery('#template-listing').html();
+				var regex = new RegExp('{id}', 'g');
+				template = template.replace(regex, data[i].id);
+				regex = new RegExp('{src}', 'g');
+				template = template.replace(regex, data[i].url);
+				regex = new RegExp('{comment_count}', 'g');
+				template = template.replace(regex, comment_count);
+				template = jQuery(template);
+				var comment_link = template.find('.comment_count a');
+				
+				comment_link.on('click', function(e){
+			    	e.preventDefault();
+			    	drunkspotting.load_comments(jQuery(this).parents('.item'), jQuery(this).parents('.item').attr('id'), jQuery(this).attr('href'));
+			    });
+			    template.find('.comments').hide();
+				jQuery('#posts').append(template);
+				
+				template.find('img').last().load(function(){
+					drunkspotting.resizeImg(jQuery(this));
 				});
 			}
+			var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+			dsq.src = 'http://' + disqus_shortname + '.disqus.com/count.js';
+			jQuery('head').append(dsq);
 			jQuery('#posts').append('<div style="clear:both"></div>');
-			jQuery('#posts img').last().load(function(){
-				jQuery(window).trigger('resize');
-			});
 		},
 		error: function(obj,stat,err){
 			console.log(stat, err);
@@ -110,7 +162,7 @@ drunkspotting.upload_ajax = function(){
 };
 
 drunkspotting.resizeImg = function(obj){
-	if(obj.width() > obj.height()){
+	/*if(obj.width() > obj.height()){
 		obj.css({
 			'width':'auto',
 			'height':'100%',
@@ -118,17 +170,12 @@ drunkspotting.resizeImg = function(obj){
 			'top':'0'
 		});
 		obj.css({'left':(obj.width()-obj.height())/-2});
-	}
+	}*/
 };
 
 jQuery(window).resize(function(){
 	//Resize canvas when window is resized
 	drunkspotting.fix_canvas();
-	var newHeight = Math.floor($($('.item')[1]).width());
-	$('.item').each(function(index, el){
-		$(el).css('height', newHeight);
-		drunkspotting.resizeImg($(el).find('img'));
-	});
 });
 
 drunkspotting.fix_canvas = function(){

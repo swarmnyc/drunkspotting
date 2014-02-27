@@ -13,7 +13,8 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
  * Name: homepage
  */
 $app->get('/', function () use ($app) {
-    return $app['twig']->render('index.html', array());
+	$base_uri = 'http://'.$app['request']->getHttpHost();
+    return $app['twig']->render('index.html', array('base_uri'=>$base_uri));
 })->bind('homepage');
 
 /**
@@ -23,7 +24,8 @@ $app->get('/', function () use ($app) {
  * Name: about
  */
 $app->get('/about', function () use ($app) {
-    return $app['twig']->render('about.html', array());
+	$base_uri = 'http://'.$app['request']->getHttpHost();
+    return $app['twig']->render('about.html', array('base_uri'=>$base_uri));
 })->bind('about');
 
 /**
@@ -33,6 +35,7 @@ $app->get('/about', function () use ($app) {
  * Name: spot
  */
 $app->get('/spot/{id}', function ($id) use ($app) {
+	$base_uri = 'http://'.$app['request']->getHttpHost();
     $dsApi = $app['drunkspotting_api'];
     $spot = $dsApi->executeGetPicture($id);
 
@@ -40,7 +43,7 @@ $app->get('/spot/{id}', function ($id) use ($app) {
         throw new NotFoundHttpException('That drunkspot was not found.', null, 404);
     }
 
-    return $app['twig']->render('spot.html', array('spot' => $spot));
+    return $app['twig']->render('spot.html', array('spot' => $spot, 'id' =>$id, 'base_uri'=>$base_uri));
 })->bind('spot');
 
 /**

@@ -12,6 +12,7 @@
 #import "TemplateService.h"
 #import "PictureService.h"
 #import "AppDelegate.h"
+#import "SettingsViewController.h"
 
 #import "Template.h"
 
@@ -56,15 +57,14 @@ NSString *const kPhotoCellIdentifier = @"photo";
 	[self.view insertSubview:feedView belowSubview:self.photoBar];
     [feedView reloadData];
 
-	self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]
-                                              initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addItem:)];
 
 	UIBarButtonItem *refreshButton = [[UIBarButtonItem alloc]
 		initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(refreshList:)];
-
-	NSMutableArray * buttons = [[NSMutableArray alloc] init];
-	[buttons addObject:refreshButton];
-	self.navigationItem.rightBarButtonItems = buttons;
+	self.navigationItem.rightBarButtonItems = @[refreshButton];
+    
+    UIBarButtonItem *settingsButton = [[UIBarButtonItem alloc]
+                                      initWithTitle:NSLocalizedString(@"Settings",@"Settings") style:UIBarButtonItemStylePlain target:self action:@selector(openSettings:)];
+	self.navigationItem.leftBarButtonItems = @[settingsButton];
 }
 
 - (void)refreshList:(id)refreshList
@@ -78,6 +78,12 @@ NSString *const kPhotoCellIdentifier = @"photo";
 		{
 			NSLog(@"%@", error );
 		}];
+}
+
+- (void)openSettings:(id)refreshList {
+    
+    SettingsViewController *svc = [[SettingsViewController alloc] init];
+    [self.navigationController pushViewController:svc animated:YES];
 }
 
 - (void) viewDidAppear:(BOOL)animated
@@ -98,17 +104,12 @@ NSString *const kPhotoCellIdentifier = @"photo";
 	}];
 }
 
-- (void) testPostImage
-{
-    [self addItem:self.navigationItem.rightBarButtonItem];
-}
-
-- (IBAction)addItem:(id)sender
+- (IBAction)addItem:(UIButton *)sender
 {
     UIActionSheet *addItemAction = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Camera", @"Photo Library", nil];
 
     if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
-        [addItemAction showFromBarButtonItem:sender animated:YES];
+        [addItemAction showFromRect:sender.frame inView:self.view animated:YES];
 	} else {
         // Go straight to the Photo Library
         [self actionSheet:addItemAction clickedButtonAtIndex:1];

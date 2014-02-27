@@ -4,13 +4,14 @@ Configure service
 Create a file called config.py that contains:
 
     config = {
+        'database_server': '127.0.0.1',
         'database': 'XXX',
         'database_user': 'XXX',
         'database_password': 'XXX',
         'server_port': 8200,
         'azure_account': 'XXX',
         'azure_key': 'XXX',
-        'upload_url': 'http://drunkspotting.blob.core.windows.net/'
+        'upload_url': 'http://uploads.drunkspotting.com/'
     }
 
 API Overview
