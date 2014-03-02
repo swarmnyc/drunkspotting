@@ -20,7 +20,8 @@
 	self = [super init];
 	if ( self )
 	{
-		self.baseUrl = @"http://api.drunkspotting.com";
+//		self.baseUrl = @"http://api.drunkspotting.com";
+        self.baseUrl = @"http://162.209.4.59";
 	}
 
 	return self;
@@ -28,7 +29,7 @@
 
 + (void)postMetadata:(id)metadata type:(NSString*)type
 {
-	NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"http://api.drunkspotting.com/%@s",type]];
+	NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"http://162.209.4.59/%@s",type]];
 	NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:url];
 	NSData *requestData = [[metadata dictionary] JSONFromDictionary];
 
@@ -56,7 +57,7 @@
 + (void)postImage:(UIImage *)image type:(NSString*)type success:(void (^)(NSString*))success failure:(void (^)(NSError *))failure
 {
 	NSURL *url =
-		[NSURL URLWithString:[NSString stringWithFormat:@"http://api.drunkspotting.com/"]];
+		[NSURL URLWithString:[NSString stringWithFormat:@"http://162.209.4.59/"]];
 
 	AFHTTPClient *httpClient = [[AFHTTPClient alloc] initWithBaseURL:url];
 
@@ -147,8 +148,8 @@
 		picture.id = [value integerValue];
 	}
 	picture.description = [JSON valueForKeyPath:@"description"];
-	picture.latitude = [[JSON valueForKeyPath:@"latitude"] doubleValue];
-	picture.longitude = [[JSON valueForKeyPath:@"longitude"] doubleValue];
+//	picture.latitude = [[JSON valueForKeyPath:@"latitude"] doubleValue];
+//	picture.longitude = [[JSON valueForKeyPath:@"longitude"] doubleValue];
 	picture.rating = [[JSON valueForKeyPath:@"rating"] integerValue];
 	picture.rating_count = [[JSON valueForKeyPath:@"rating_count"] integerValue];
 //				picture.time_posted =  [JSON valueForKeyPath:@"time_posted"] d;

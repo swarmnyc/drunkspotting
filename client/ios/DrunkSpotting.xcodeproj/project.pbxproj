@@ -51,8 +51,6 @@
 		D65C911F16E9B98400AF1002 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6D7876C16E93CFE00E1F86B /* Foundation.framework */; };
 		D65C912516E9B98400AF1002 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = D65C912316E9B98400AF1002 /* InfoPlist.strings */; };
 		D65C912816E9B98400AF1002 /* TemplateServiceTest.m in Sources */ = {isa = PBXBuildFile; fileRef = D65C912716E9B98400AF1002 /* TemplateServiceTest.m */; };
-		D6883A6A1704793E00AF93DB /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6883A691704793E00AF93DB /* FacebookSDK.framework */; };
-		D6883A6C1704797C00AF93DB /* FacebookSDKResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = D6883A6B1704797C00AF93DB /* FacebookSDKResources.bundle */; };
 		D6883A70170479E000AF93DB /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6883A6D170479E000AF93DB /* Accounts.framework */; };
 		D6883A71170479E000AF93DB /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6883A6E170479E000AF93DB /* AdSupport.framework */; };
 		D6883A72170479E000AF93DB /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6883A6F170479E000AF93DB /* Social.framework */; };
@@ -96,6 +94,7 @@
 		EF5F895316E9C1FD0070FAA4 /* AFXMLRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = D65C90E916E95C7800AF1002 /* AFXMLRequestOperation.m */; };
 		EF5F895416E9C1FD0070FAA4 /* UIImageView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = D65C90EB16E95C7800AF1002 /* UIImageView+AFNetworking.m */; };
 		EF5F895516E9C2130070FAA4 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D6D7877616E93CFE00E1F86B /* main.m */; };
+		EFEA489518BFB2A5002B38B2 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EFEA489418BFB2A5002B38B2 /* FacebookSDK.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -174,8 +173,6 @@
 		D65C912616E9B98400AF1002 /* TemplateServiceTest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TemplateServiceTest.h; sourceTree = "<group>"; };
 		D65C912716E9B98400AF1002 /* TemplateServiceTest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TemplateServiceTest.m; sourceTree = "<group>"; };
 		D65C912916E9B98400AF1002 /* DrunkSpottingTest-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "DrunkSpottingTest-Prefix.pch"; sourceTree = "<group>"; };
-		D6883A691704793E00AF93DB /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FacebookSDK.framework; path = ../../../FacebookSDK/build/FacebookSDK.framework; sourceTree = "<group>"; };
-		D6883A6B1704797C00AF93DB /* FacebookSDKResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = FacebookSDKResources.bundle; path = ../../../FacebookSDK/build/FacebookSDK.framework/Versions/A/Resources/FacebookSDKResources.bundle; sourceTree = "<group>"; };
 		D6883A6D170479E000AF93DB /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
 		D6883A6E170479E000AF93DB /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
 		D6883A6F170479E000AF93DB /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
@@ -217,6 +214,7 @@
 		D6DCD13316E9CDFB00125B69 /* drunkspotting@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "drunkspotting@2x.png"; sourceTree = "<group>"; };
 		EF2A83A616E980C9003E17ED /* Picture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Picture.h; path = Model/Picture.h; sourceTree = "<group>"; };
 		EF2A83A716E980C9003E17ED /* Picture.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Picture.m; path = Model/Picture.m; sourceTree = "<group>"; };
+		EFEA489418BFB2A5002B38B2 /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FacebookSDK.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -235,6 +233,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D6883A70170479E000AF93DB /* Accounts.framework in Frameworks */,
+				EFEA489518BFB2A5002B38B2 /* FacebookSDK.framework in Frameworks */,
 				D6883A71170479E000AF93DB /* AdSupport.framework in Frameworks */,
 				D6883A72170479E000AF93DB /* Social.framework in Frameworks */,
 				D65C90FF16E95EA600AF1002 /* MobileCoreServices.framework in Frameworks */,
@@ -242,7 +241,6 @@
 				D65C90C816E9523E00AF1002 /* CoreGraphics.framework in Frameworks */,
 				D6D7876B16E93CFE00E1F86B /* UIKit.framework in Frameworks */,
 				D6D7876D16E93CFE00E1F86B /* Foundation.framework in Frameworks */,
-				D6883A6A1704793E00AF93DB /* FacebookSDK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -321,18 +319,12 @@
 		D6D7875B16E93CFE00E1F86B = {
 			isa = PBXGroup;
 			children = (
-				D6883A6D170479E000AF93DB /* Accounts.framework */,
-				D6883A6E170479E000AF93DB /* AdSupport.framework */,
-				D6883A6F170479E000AF93DB /* Social.framework */,
 				D6BA6A8617011F0A002D92EF /* drunkspotting@1x.png */,
 				D6BA6A8417011E10002D92EF /* Default@2x.png */,
 				D6BA6A8117011D21002D92EF /* Default@2x.png */,
 				D6BA6A7F17011D0B002D92EF /* Default-568h@2x.png */,
 				D6BA6A7D17011D00002D92EF /* Default.png */,
 				D6DCD13316E9CDFB00125B69 /* drunkspotting@2x.png */,
-				D65C90FE16E95EA600AF1002 /* MobileCoreServices.framework */,
-				D65C90FC16E95EA000AF1002 /* SystemConfiguration.framework */,
-				D65C90C316E951B300AF1002 /* QuartzCore.framework */,
 				D6D7877016E93CFE00E1F86B /* DrunkSpotting */,
 				7E06597D16E9764800FE6432 /* test images */,
 				D65C912016E9B98400AF1002 /* DrunkSpottingTest */,
@@ -353,8 +345,13 @@
 		D6D7876916E93CFE00E1F86B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				D6883A6B1704797C00AF93DB /* FacebookSDKResources.bundle */,
-				D6883A691704793E00AF93DB /* FacebookSDK.framework */,
+				D6883A6D170479E000AF93DB /* Accounts.framework */,
+				D6883A6E170479E000AF93DB /* AdSupport.framework */,
+				D6883A6F170479E000AF93DB /* Social.framework */,
+				D65C90FE16E95EA600AF1002 /* MobileCoreServices.framework */,
+				D65C90FC16E95EA000AF1002 /* SystemConfiguration.framework */,
+				D65C90C316E951B300AF1002 /* QuartzCore.framework */,
+				EFEA489418BFB2A5002B38B2 /* FacebookSDK.framework */,
 				D65C90F516E95C8E00AF1002 /* ACEDrawingView */,
 				D65C90D816E95C7800AF1002 /* AFNetworking */,
 				D6D7876A16E93CFE00E1F86B /* UIKit.framework */,
@@ -491,6 +488,11 @@
 			isa = PBXProject;
 			attributes = {
 				LastUpgradeCheck = 0450;
+				TargetAttributes = {
+					D6D7876516E93CFE00E1F86B = {
+						DevelopmentTeam = 6YVD427S43;
+					};
+				};
 			};
 			buildConfigurationList = D6D7876016E93CFE00E1F86B /* Build configuration list for PBXProject "DrunkSpotting" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -553,7 +555,6 @@
 				D6BA6A8017011D0B002D92EF /* Default-568h@2x.png in Resources */,
 				D6BA6A8517011E10002D92EF /* Default@2x.png in Resources */,
 				D6BA6A8717011F0A002D92EF /* drunkspotting@1x.png in Resources */,
-				D6883A6C1704797C00AF93DB /* FacebookSDKResources.bundle in Resources */,
 				D6883A771704822F00AF93DB /* SettingsViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -704,7 +705,8 @@
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Adam Ritenauer (MLZ8T67ER8)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Somya Jain (DETAFXA32K)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Somya Jain (DETAFXA32K)";
 				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -717,9 +719,10 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				ONLY_ACTIVE_ARCH = YES;
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "24D81F3F-05C2-43D0-8D89-36B7955EB613";
+				PROVISIONING_PROFILE = "3669F92B-D530-4D55-8B41-ECE90D8B6672";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "3669F92B-D530-4D55-8B41-ECE90D8B6672";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -733,15 +736,18 @@
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Adam Ritenauer (MLZ8T67ER8)";
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				COPY_PHASE_STRIP = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				ONLY_ACTIVE_ARCH = YES;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "24D81F3F-05C2-43D0-8D89-36B7955EB613";
+				PROVISIONING_PROFILE = "3669F92B-D530-4D55-8B41-ECE90D8B6672";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "3669F92B-D530-4D55-8B41-ECE90D8B6672";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -750,21 +756,26 @@
 		D6D7878516E93CFE00E1F86B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: drunkspotting llc";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SRCROOT)/../../../FacebookSDK/build\"",
+					"\\\"$(SRCROOT)/../../../FacebookSDK/build\\\"",
+					/Users/somya/Documents/FacebookSDK,
+					/Users/somya/Projects/drunkspotting/client/ios,
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "DrunkSpotting/DrunkSpotting-Prefix.pch";
 				INFOPLIST_FILE = "DrunkSpotting/DrunkSpotting-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				"OTHER_LDFLAGS[arch=*]" = (
 					"-lsqlite3.0",
 					"-ObjC",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "85D03425-38E6-410E-ACEC-4FFABA1C69FE";
+				PROVISIONING_PROFILE = "";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "CD5FC2C4-1DF8-4526-8685-A7A93B9F8741";
+				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -772,21 +783,26 @@
 		D6D7878616E93CFE00E1F86B /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: drunkspotting llc";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SRCROOT)/../../../FacebookSDK/build\"",
+					"\\\"$(SRCROOT)/../../../FacebookSDK/build\\\"",
+					/Users/somya/Documents/FacebookSDK,
+					/Users/somya/Projects/drunkspotting/client/ios,
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "DrunkSpotting/DrunkSpotting-Prefix.pch";
 				INFOPLIST_FILE = "DrunkSpotting/DrunkSpotting-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				"OTHER_LDFLAGS[arch=*]" = (
 					"-lsqlite3.0",
 					"-ObjC",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "85D03425-38E6-410E-ACEC-4FFABA1C69FE";
+				PROVISIONING_PROFILE = "";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "CD5FC2C4-1DF8-4526-8685-A7A93B9F8741";
+				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
