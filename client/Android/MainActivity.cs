@@ -11,10 +11,11 @@ using Android;
 using Android.Graphics;
 using Android.Content.PM;
 using Android.Support.V4.App;
+using Android.Content.Res;
 
 namespace DrunkSpotting
 {
-	[Activity (Label = "Drunk Spotting", 
+	[Activity (Label = "Drunk Spotting", Theme = "@android:style/Theme.NoTitleBar",
 	           ConfigurationChanges = ConfigChanges.KeyboardHidden | ConfigChanges.Orientation, ScreenOrientation = ScreenOrientation.Portrait)]
 	//ConfigurationChanges="keyboardHidden|orientation"
 	public class MainActivity : FragmentActivity
@@ -30,43 +31,24 @@ namespace DrunkSpotting
 			// Set our view from the "main" layout resource
 			SetContentView (Resource.Layout.Main);
 
-			var frameLayout = FindViewById<FrameLayout>( Resource.Id.layout_content );
-			frameLayout.Visibility = ViewStates.Gone;
-			// Get our button from the layout resource,
-			// and attach an event to it
-            ImageButton button = FindViewById<ImageButton> (Resource.Id.refresh);
+			photoList = FindViewById<ListView> (Resource.Id.photoList);
+			ImageButton refreshButton = FindViewById<ImageButton> (Resource.Id.btn_refresh);
+			ImageButton takePhotoButton = FindViewById<ImageButton> (Resource.Id.btn_photo);
 
-            photoListAdatper = new PhotoAdapter (this);
-			
-			button.Click += delegate {
+            photoListAdatper = new PhotoAdapter (this);			
+			refreshButton.Click += delegate {
 
                 photoListAdatper.Refresh();
 			};
 
 
-
-			photoList = FindViewById<ListView> (Resource.Id.photoList);
 			
 			photoList.Adapter = photoListAdatper;
-			photoList.SetBackgroundColor (Color.Black);
 
-			photoList.ItemClick += (object sender, AdapterView.ItemClickEventArgs e ) =>
-			{
-				Bitmap b = ( (PictureListViewItem) e.View ).ImageView.CurrrentBitmap;
-				if (null != b)
-				{
-					Bundle args = new Bundle();
-					args.PutParcelable ("image", b);
+			takePhotoButton.Click += (object sender, EventArgs e) => {
+				StartActivity( typeof(EditPhotoActivity));
 
-//					DrawOnPhotoFragment drawOnPhotoFragment = new DrawOnPhotoFragment();
-					DrawingFragment drawOnPhotoFragment = new DrawingFragment();
-					drawOnPhotoFragment.Arguments = args;
-					frameLayout.Visibility = ViewStates.Visible;
-					SupportFragmentManager.BeginTransaction ().Replace (Resource.Id.layout_content, drawOnPhotoFragment).Commit();
-				}
 			};
-
-
 		}
 
 		protected override void OnResume ()
@@ -84,8 +66,8 @@ namespace DrunkSpotting
 	{
 
 		private PictureService _pictureService = new PictureService ();
+
 		private List<Picture> _pictures = null;
-		public Picture _latest = null;
 
 		public Context Context { get; set; }
 
@@ -101,18 +83,9 @@ namespace DrunkSpotting
 
             var result = await _pictureService.GetLatestPicturesAsync(20);
 
-            // Pull Data from website. 
-//            _pictureService.GetLatestPictures (20, result => 
-//                                               {
 
-                // check latest ID 
-                if (null != _latest && null != result && result.Count > 0 && _latest.Id == result [0].Id) {
-                    return;
-                }
-                
                 if (null != result && result.Count > 0) {
                     _pictures = result;
-                    _latest = result [0];
                     ((Activity)this.Context).RunOnUiThread (() => {
                         this.NotifyDataSetChanged ();
                     });
@@ -137,7 +110,8 @@ namespace DrunkSpotting
 		public override View GetView (int position, View convertView, ViewGroup parent)
 		{
 			View view = convertView; // re-use an existing view, if one is supplied
-			if (view == null) { // otherwise create a new one
+			if (view == null) 
+			{ // otherwise create a new one
 				view = new PictureListViewItem (Context);
 				view.LayoutParameters = new AbsListView.LayoutParams (ViewGroup.LayoutParams.FillParent, ViewGroup.LayoutParams.WrapContent);
 			}
@@ -152,8 +126,10 @@ namespace DrunkSpotting
 			return view;
 		}
 
-		public override int ViewTypeCount {
-			get {
+		public override int ViewTypeCount 
+		{
+			get 
+			{
 				return 1;
 			}
 		}
@@ -163,9 +139,6 @@ namespace DrunkSpotting
 				return _pictures.Count;
 			}
 		}
-
-
 	}
 }
-
 

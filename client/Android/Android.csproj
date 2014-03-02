@@ -15,7 +15,7 @@
     <AndroidApplication>True</AndroidApplication>
     <AndroidResgenFile>Resources\Resource.designer.cs</AndroidResgenFile>
     <AssemblyName>Android</AssemblyName>
-    <TargetFrameworkVersion>v4.3</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.4</TargetFrameworkVersion>
     <AndroidManifest>Properties\AndroidManifest.xml</AndroidManifest>
     <AndroidUseLatestPlatformSdk>True</AndroidUseLatestPlatformSdk>
   </PropertyGroup>
@@ -73,23 +73,11 @@
   <ItemGroup>
     <AndroidResource Include="Resources\layout\Main.axml" />
     <AndroidResource Include="Resources\values\Strings.xml" />
-    <AndroidResource Include="Resources\drawable\drunkspotting.png" />
     <AndroidResource Include="Resources\drawable-hdpi\drunkspotting.png" />
     <AndroidResource Include="Resources\values\Styles.xml" />
-    <AndroidResource Include="Resources\drawable\title_treatment.png" />
     <AndroidResource Include="Resources\drawable-hdpi\default568h.png" />
-    <AndroidResource Include="Resources\drawable\splash.png" />
     <AndroidResource Include="Resources\layout\PictureListViewItem.axml" />
     <AndroidResource Include="Resources\layout\EditPhoto.axml" />
-    <AndroidResource Include="Resources\drawable\photoButton.png" />
-    <AndroidResource Include="Resources\drawable\barGradient.png" />
-    <AndroidResource Include="Resources\drawable\navbar.png" />
-    <AndroidResource Include="Resources\drawable\palletteButton.png" />
-    <AndroidResource Include="Resources\drawable\penButton.png" />
-    <AndroidResource Include="Resources\drawable\redoButton.png" />
-    <AndroidResource Include="Resources\drawable\reloadButton.png" />
-    <AndroidResource Include="Resources\drawable\titleTextTreatment.png" />
-    <AndroidResource Include="Resources\drawable\undoButton.png" />
     <AndroidResource Include="Resources\drawable-hdpi\barGradient.png" />
     <AndroidResource Include="Resources\drawable-hdpi\facebook.png" />
     <AndroidResource Include="Resources\drawable-hdpi\indiegogo.png" />
@@ -103,10 +91,23 @@
     <AndroidResource Include="Resources\drawable-hdpi\undoButton.png" />
     <AndroidResource Include="Resources\drawable-hdpi\splash.png" />
     <AndroidResource Include="Resources\values\Colors.xml" />
+    <AndroidResource Include="Resources\drawable-mdpi\drunkspotting.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\splash.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\photoButton.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\barGradient.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\navbar.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\palletteButton.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\penButton.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\redoButton.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\reloadButton.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\titleTextTreatment.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\undoButton.png" />
+    <AndroidResource Include="Resources\drawable\bar_gradient_repeat.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Novell\Novell.MonoDroid.CSharp.targets" />
   <ItemGroup>
     <Folder Include="Resources\drawable-hdpi\" />
     <Folder Include="Utils\" />
+    <Folder Include="Resources\drawable\" />
   </ItemGroup>
 </Project>

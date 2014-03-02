@@ -54,14 +54,11 @@ namespace DrunkSpotting
         void Initialize()
         {
             LayoutInflater inflater = (LayoutInflater)Context.GetSystemService(Context.LayoutInflaterService);
-//          var wm =  (LocalWindowManager)Context.GetSystemService(Context.WindowService);
-//          Display display = wm.DefaultDisplay;
 
             Rect frame = new Rect();
             this.SetBackgroundResource(Android.Resource.Color.White);
 
             GetWindowVisibleDisplayFrame(frame);
-
 
             inflater.Inflate(Resource.Layout.PictureListViewItem, this, true);
 

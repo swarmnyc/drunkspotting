@@ -125,48 +125,15 @@ namespace DrunkSpotting
 
         public void CleanUp()
         {
-//                if (null != currentTask)
-//                {
-//                    tokenSource2.Cancel();
-//                }
-//          
-//          lock (bitmapLock)
-//          {
             if (null != currrentBitmap && ! currrentBitmap.IsRecycled)
             {
             currrentBitmap.Recycle();
             }
             SetImageBitmap(null, false);
-//                if (null != currrentBitmap)
-//                {
-//                    Log.Info("*****", "Recycling image");
-//                    currrentBitmap.Recycle();
-//                }
-//                currrentBitmap = null;
-//            }
-
         }
 
 //       
-//        protected override void OnMeasure(int widthMeasureSpec, int heightMeasureSpec)
-//        {
-//            Drawable drawable = this.Drawable;
-//            if (drawable != null)
-//            {
-//                int width =  MeasureSpec.GetSize(widthMeasureSpec);
-//                int diw = drawable.IntrinsicWidth;
-//                if (diw > 0)
-//                {
-//                    int height = width * drawable.IntrinsicHeight / diw;
-//                    SetMeasuredDimension(width, height);
-//                }
-//                else
-//                    base.OnMeasure(widthMeasureSpec, heightMeasureSpec);
-//            }
-//            else
-//                base.OnMeasure(widthMeasureSpec, heightMeasureSpec);
-//        }
-//    
+//       
 
         void OnImageUrlChange()
         {
