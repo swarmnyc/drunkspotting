@@ -121,35 +121,38 @@ namespace DrunkSpotting
 		public partial class Id
 		{
 			
-			// aapt resource value: 0x7f070000
-			public const int ChoosenImageView = 2131165184;
-			
-			// aapt resource value: 0x7f070001
-			public const int SavePictureButton = 2131165185;
-			
-			// aapt resource value: 0x7f070007
-			public const int btn_photo = 2131165191;
-			
-			// aapt resource value: 0x7f070004
-			public const int btn_refresh = 2131165188;
-			
-			// aapt resource value: 0x7f070003
-			public const int img_title = 2131165187;
-			
 			// aapt resource value: 0x7f070002
-			public const int layout_actionbar = 2131165186;
-			
-			// aapt resource value: 0x7f070005
-			public const int layout_bottom = 2131165189;
-			
-			// aapt resource value: 0x7f070006
-			public const int photoList = 2131165190;
-			
-			// aapt resource value: 0x7f070009
-			public const int pictureImageView = 2131165193;
+			public const int btn_cancel = 2131165186;
 			
 			// aapt resource value: 0x7f070008
-			public const int progressBar = 2131165192;
+			public const int btn_photo = 2131165192;
+			
+			// aapt resource value: 0x7f070005
+			public const int btn_refresh = 2131165189;
+			
+			// aapt resource value: 0x7f070003
+			public const int btn_save = 2131165187;
+			
+			// aapt resource value: 0x7f070001
+			public const int img_title = 2131165185;
+			
+			// aapt resource value: 0x7f070000
+			public const int layout_actionbar = 2131165184;
+			
+			// aapt resource value: 0x7f070006
+			public const int layout_bottom = 2131165190;
+			
+			// aapt resource value: 0x7f070004
+			public const int layout_content = 2131165188;
+			
+			// aapt resource value: 0x7f070007
+			public const int photoList = 2131165191;
+			
+			// aapt resource value: 0x7f07000a
+			public const int pictureImageView = 2131165194;
+			
+			// aapt resource value: 0x7f070009
+			public const int progressBar = 2131165193;
 			
 			static Id()
 			{

@@ -49,6 +49,7 @@ namespace DrunkSpotting
 
         CancellationTokenSource tokenSource2;
         CancellationToken ct ;
+
         Task currentTask = null;
         Bitmap currrentBitmap;
         object bitmapLock = new object();
@@ -123,18 +124,15 @@ namespace DrunkSpotting
             DoAnimation(animate, () => SetImageURI(uri));
         }
 
-        public void CleanUp()
-        {
-            if (null != currrentBitmap && ! currrentBitmap.IsRecycled)
-            {
-            currrentBitmap.Recycle();
-            }
-            SetImageBitmap(null, false);
-        }
-
-//       
-//       
-
+		public void CleanUp()
+		{
+			if ( null != currrentBitmap && !currrentBitmap.IsRecycled )
+			{
+//				currrentBitmap.Recycle();
+			}
+			SetImageBitmap( null, false );
+		}
+			
         void OnImageUrlChange()
         {
             Bitmap cachedImage = null;
@@ -153,50 +151,43 @@ namespace DrunkSpotting
 
             var task = Task.Factory.StartNew(() =>
             {
-                // Were we already canceled?
-                ct.ThrowIfCancellationRequested();
-
                 if (null != DownloadingImage)
                 {
                     DownloadingImage(this, null);
                 }
 
                 _imageService.DownloadImage(ImageUrl, (b, url) => {
-                    Log.Info(TAG, "Url = {2}\nSize = {0},{1}", b.Width, b.Height, url);
-                    var croppedBitmap = CropToScreenWidth(b);
-                    Cache.AddOrUpdate(url, croppedBitmap, TimeSpan.FromDays(7));
+                    
+					Log.Info( TAG, "Downloaded image for url = {0}", url );
 
-                    ((Activity)Context).RunOnUiThread(() => {
-                        
-                        if (ct.IsCancellationRequested)
-                        {
-                            // Clean up here, then...
-                            ct.ThrowIfCancellationRequested();
-                        } else
-                        {
+					var croppedBitmap = CropToScreenWidth( b );
+					Cache.AddOrUpdate( url, croppedBitmap, TimeSpan.FromDays( 7 ) );
 
-                            lock (bitmapLock)
-                            {
-                                currrentBitmap = croppedBitmap;
-                            }
-                            if (ImageUrl == url)
-                            {
-
-                                SetImageBitmap(croppedBitmap, true);
-                                if (null != DownloadedImage)
-                                {
-                                    DownloadedImage(this, null);
-                                }
-                            }
-                           
-                        }
-                    });
-                }, (e, url) => {
-                    Log.Error(TAG, e.ToString());
-                });
-            });
-
-
+					( (Activity) Context ).RunOnUiThread( () =>
+					{
+						lock( bitmapLock )
+						{
+							currrentBitmap = croppedBitmap;
+						
+							if ( ImageUrl == url )
+							{
+								SetImageBitmap( croppedBitmap, true );
+							}
+							else
+							{
+								Log.Info(TAG, string.Format("Not Setting image as urls don't match {0} != \n{1}", ImageUrl, url ));
+							}
+						}
+						if ( null != DownloadedImage )
+						{
+							DownloadedImage( this, null );
+						}
+					} );
+				}, (e, url ) =>
+				{
+					Log.Error( TAG, e.ToString() );
+				} );
+			} );
         }
 
         private Bitmap CropToScreenWidth(Bitmap b)

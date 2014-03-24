@@ -3,7 +3,7 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:background="@android:color/white">
-<!-- Tool bar-->
+	<!-- Tool bar-->
     <RelativeLayout
         android:orientation="horizontal"
         android:layout_width="fill_parent"

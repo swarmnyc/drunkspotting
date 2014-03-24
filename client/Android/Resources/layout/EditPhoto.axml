@@ -1,17 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent">
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/ChoosenImageView"
-        android:scaleType="centerInside"
-        android:adjustViewBounds="false" />
-    <Button
+    android:layout_height="fill_parent"
+    android:background="@android:color/white">
+<!-- Tool bar-->
+    <RelativeLayout
+        android:orientation="horizontal"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="Save Picture"
-        android:id="@+id/SavePictureButton" />
-</LinearLayout>
+        android:id="@+id/layout_actionbar"
+        android:background="@drawable/navbar"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp">
+        <ImageView
+            android:id="@+id/img_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/titleTextTreatment"
+            android:layout_centerInParent="true" />
+        <Button
+            android:id="@+id/btn_cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Cancel"
+            android:layout_centerVertical="true"
+            android:background="@android:color/transparent"
+            android:layout_alignParentLeft="true" />
+        <Button
+            android:id="@+id/btn_save"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Save"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:background="@android:color/transparent" />
+    </RelativeLayout>
+<!--    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/layout_content"
+        android:scaleType="centerInside"
+        android:adjustViewBounds="false"
+        android:layout_below="@id/layout_actionbar" />-->
+    <DrunkSpotting.DrawingView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/layout_content"
+        android:scaleType="centerInside"
+        android:adjustViewBounds="false"
+        android:layout_below="@id/layout_actionbar" />
+</RelativeLayout>

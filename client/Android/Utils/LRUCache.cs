@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Android.Util;
 
 namespace DrunkSpotting
 {
@@ -34,6 +35,7 @@ namespace DrunkSpotting
                         
                     // remove from list & dictionary
                     this.list.RemoveLast();
+					Log.Debug("LRUCache", "removing "+ this.openNode.Value.ItemKey);
                     this.lookup.Remove(this.openNode.Value.ItemKey);
                     ClearValue(this.openNode.Value.ItemValue);
                 } else
@@ -49,6 +51,7 @@ namespace DrunkSpotting
             var bmp = value as Android.Graphics.Bitmap;
             if (bmp != null)
             {
+				Log.Debug("LRUCache", "recycling ");
                 bmp.Recycle();
                 return;
             }

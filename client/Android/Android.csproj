@@ -65,6 +65,7 @@
     <Compile Include="DrawOnPhotoFragment.cs" />
     <Compile Include="DrawingCanvasView.cs" />
     <Compile Include="DrawingFragment.cs" />
+    <Compile Include="DrawingView.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\AboutAssets.txt" />

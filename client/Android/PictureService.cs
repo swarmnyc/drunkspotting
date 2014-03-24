@@ -13,8 +13,7 @@ namespace DrunkSpotting
         {
         }
 
-		//        public const string BASE_URL = "http://api.drunkspotting.com";
-		public const string BASE_URL = "http://162.209.4.59";
+		        public const string BASE_URL = "http://api.drunkspotting.com";
         public const string LATEST_PICTURES_PATH = "pictures/latest";
 
 		public void GetLatestPictures(int count, Action<List<Picture>> onSuccess)
