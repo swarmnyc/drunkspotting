@@ -12,6 +12,8 @@
 #import "NSDictionary+JSONCategories.h"
 #import "AFHTTPClient.h"
 
+const NSString *BASE_URL = @"http://api.drunkspotting.com";
+
 @implementation PictureService
 @synthesize baseUrl = m_baseUrl;
 
@@ -20,8 +22,10 @@
 	self = [super init];
 	if ( self )
 	{
-//		self.baseUrl = @"http://api.drunkspotting.com";
-        self.baseUrl = @"http://162.209.4.59";
+		self.baseUrl = BASE_URL;
+
+        //		self.baseUrl = @"http://api.drunkspotting.com";
+//        self.baseUrl = @"http://162.209.4.59";
 	}
 
 	return self;
@@ -29,7 +33,7 @@
 
 + (void)postMetadata:(id)metadata type:(NSString*)type
 {
-	NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"http://162.209.4.59/%@s",type]];
+	NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"http://api.drunkspotting.com/%@s",type]];
 	NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:url];
 	NSData *requestData = [[metadata dictionary] JSONFromDictionary];
 
@@ -57,7 +61,7 @@
 + (void)postImage:(UIImage *)image type:(NSString*)type success:(void (^)(NSString*))success failure:(void (^)(NSError *))failure
 {
 	NSURL *url =
-		[NSURL URLWithString:[NSString stringWithFormat:@"http://162.209.4.59/"]];
+		[NSURL URLWithString:BASE_URL];
 
 	AFHTTPClient *httpClient = [[AFHTTPClient alloc] initWithBaseURL:url];
 
