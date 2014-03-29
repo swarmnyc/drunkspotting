@@ -95,6 +95,7 @@
 		EF5F895416E9C1FD0070FAA4 /* UIImageView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = D65C90EB16E95C7800AF1002 /* UIImageView+AFNetworking.m */; };
 		EF5F895516E9C2130070FAA4 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D6D7877616E93CFE00E1F86B /* main.m */; };
 		EFEA489518BFB2A5002B38B2 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EFEA489418BFB2A5002B38B2 /* FacebookSDK.framework */; };
+		EFEAF0F118E7565C00F4AE02 /* camera@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = EFEAF0F018E7565C00F4AE02 /* camera@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -215,6 +216,7 @@
 		EF2A83A616E980C9003E17ED /* Picture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Picture.h; path = Model/Picture.h; sourceTree = "<group>"; };
 		EF2A83A716E980C9003E17ED /* Picture.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Picture.m; path = Model/Picture.m; sourceTree = "<group>"; };
 		EFEA489418BFB2A5002B38B2 /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FacebookSDK.framework; sourceTree = "<group>"; };
+		EFEAF0F018E7565C00F4AE02 /* camera@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "camera@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -365,6 +367,7 @@
 		D6D7877016E93CFE00E1F86B /* DrunkSpotting */ = {
 			isa = PBXGroup;
 			children = (
+				EFEAF0F018E7565C00F4AE02 /* camera@2x.png */,
 				D6BA6A7716FC88B3002D92EF /* barGradient.png */,
 				D6BA6A7816FC88B4002D92EF /* barGradient@2x.png */,
 				D6BA6A5F16FB7064002D92EF /* palleteButton.png */,
@@ -544,6 +547,7 @@
 				D6BA6A6F16FB7064002D92EF /* penButton@2x.png in Resources */,
 				D6BA6A7016FB7064002D92EF /* photoButton.png in Resources */,
 				D6BA6A7116FB7064002D92EF /* photoButton@2x.png in Resources */,
+				EFEAF0F118E7565C00F4AE02 /* camera@2x.png in Resources */,
 				D6BA6A7216FB7064002D92EF /* redoButton.png in Resources */,
 				D6BA6A7316FB7064002D92EF /* redoButton@2x.png in Resources */,
 				D6BA6A7416FB7064002D92EF /* reloadButton.png in Resources */,

@@ -71,7 +71,8 @@ NSString *const FBSessionStateChangedNotification =
     UIColor *teal = UIColorFromRGB(0x00b2c9);
     
     UINavigationBar *navbarSkin = [UINavigationBar appearance];
-    [navbarSkin setBackgroundImage:[UIImage imageNamed:@"navbar"] forBarMetrics:UIBarMetricsDefault];
+    [navbarSkin setTitleTextAttributes:@{NSForegroundColorAttributeName : teal}];
+//    [navbarSkin setBackgroundImage:[UIImage imageNamed:@"navbar"] forBarMetrics:UIBarMetricsDefault];
     
     UIToolbar *toolBarSkin = [UIToolbar appearance];
     toolBarSkin.tintColor = teal;

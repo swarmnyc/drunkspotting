@@ -13,7 +13,6 @@
 	NSArray * m_pictures;
 }
 @property (nonatomic, strong) NSArray *pictures;
-@property (nonatomic, strong) IBOutlet UIView *photoBar;
 
 
 @end

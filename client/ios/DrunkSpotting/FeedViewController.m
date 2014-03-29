@@ -35,15 +35,9 @@ NSString *const kPhotoCellIdentifier = @"photo";
 
 - (void)viewDidLoad
 {
-    self.feedView.backgroundView.backgroundColor = [UIColor blueColor];
-    self.navigationItem.titleView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"titleTextTreatment"]];
-
-    self.photoBar.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"barGradient"]];
-    self.photoBar.clipsToBounds = NO;
-    self.photoBar.layer.shadowColor = [[UIColor blackColor] CGColor];
-    self.photoBar.layer.shadowOffset = CGSizeMake(0,-2);
-    self.photoBar.layer.shadowOpacity = 0.3;
-    self.photoBar.clipsToBounds = NO;
+    UIColor *teal = UIColorFromRGB(0x00b2c9);
+    self.navigationController.navigationBar.tintColor=teal;
+    self.navigationItem.title = @"drunkspotting";
     
 	[self refreshList];
 }
@@ -52,14 +46,15 @@ NSString *const kPhotoCellIdentifier = @"photo";
 {
     
 	feedView = [[UICollectionView alloc]
-		initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.bounds), CGRectGetMinY(self.photoBar.frame))
+		initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.bounds), CGRectGetHeight(self.view.bounds))
 		collectionViewLayout:[[UICollectionViewFlowLayout alloc] init]];
+    
 	[feedView registerClass:[PhotoCollectionViewCell class]
 		forCellWithReuseIdentifier:kPhotoCellIdentifier];
 	[feedView setBackgroundColor:[UIColor whiteColor]];
 	[feedView setDelegate:self];
 	[feedView setDataSource:self];
-	[self.view insertSubview:feedView belowSubview:self.photoBar];
+    [self.view addSubview:feedView ];
    
     
     UIRefreshControl *refresh = [[UIRefreshControl alloc] init];
@@ -75,9 +70,11 @@ NSString *const kPhotoCellIdentifier = @"photo";
 //		initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(refreshList:)];
 //	self.navigationItem.rightBarButtonItems = @[refreshButton];
     
-    UIBarButtonItem *settingsButton = [[UIBarButtonItem alloc]
-                                      initWithTitle:NSLocalizedString(@"Settings",@"Settings") style:UIBarButtonItemStylePlain target:self action:@selector(openSettings:)];
-	self.navigationItem.leftBarButtonItems = @[settingsButton];
+//    UIBarButtonItem *settingsButton = [[UIBarButtonItem alloc]
+//                                      initWithTitle:NSLocalizedString(@"Settings",@"Settings") style:UIBarButtonItemStylePlain target:self action:@selector(openSettings:)];
+//	self.navigationItem.leftBarButtonItems = @[settingsButton];
+    
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"camera.png"] style:UIBarButtonItemStylePlain target:self action:@selector(onCamera)];
 }
 
 - (void)stopRefresh { [self.refreshControl endRefreshing]; }
@@ -120,12 +117,12 @@ NSString *const kPhotoCellIdentifier = @"photo";
 	}];
 }
 
-- (IBAction)addItem:(UIButton *)sender
+- (void)onCamera
 {
     UIActionSheet *addItemAction = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Camera", @"Photo Library", nil];
 
     if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
-        [addItemAction showFromRect:sender.frame inView:self.view animated:YES];
+        [addItemAction showInView:self.view  ];
 	} else {
         // Go straight to the Photo Library
         [self actionSheet:addItemAction clickedButtonAtIndex:1];
