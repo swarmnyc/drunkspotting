@@ -21,12 +21,16 @@ NSString *const kPhotoCellIdentifier = @"photo";
 @interface FeedViewController () <UICollectionViewDataSource, UICollectionViewDelegate, UIActionSheetDelegate>
 
 @property( strong, nonatomic ) UICollectionView *feedView;
+@property( strong, nonatomic ) UIRefreshControl *refreshControl;
+
 
 @end
 
 @implementation FeedViewController
 
 @synthesize feedView;
+@synthesize refreshControl;
+
 @synthesize pictures = m_pictures;
 
 - (void)viewDidLoad
@@ -41,11 +45,12 @@ NSString *const kPhotoCellIdentifier = @"photo";
     self.photoBar.layer.shadowOpacity = 0.3;
     self.photoBar.clipsToBounds = NO;
     
-	[self refreshList:nil];
+	[self refreshList];
 }
 
 - (void)viewDidLayoutSubviews
 {
+    
 	feedView = [[UICollectionView alloc]
 		initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.bounds), CGRectGetMinY(self.photoBar.frame))
 		collectionViewLayout:[[UICollectionViewFlowLayout alloc] init]];
@@ -55,26 +60,37 @@ NSString *const kPhotoCellIdentifier = @"photo";
 	[feedView setDelegate:self];
 	[feedView setDataSource:self];
 	[self.view insertSubview:feedView belowSubview:self.photoBar];
+   
+    
+    UIRefreshControl *refresh = [[UIRefreshControl alloc] init];
+    refresh.attributedTitle = [[NSAttributedString alloc] initWithString:@"Pull to Refresh"];
+    [refresh addTarget:self action:@selector(refreshList) forControlEvents:UIControlEventValueChanged];
+    self.refreshControl = refresh;
+    
+    [feedView addSubview:self.refreshControl];
     [feedView reloadData];
 
-
-	UIBarButtonItem *refreshButton = [[UIBarButtonItem alloc]
-		initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(refreshList:)];
-	self.navigationItem.rightBarButtonItems = @[refreshButton];
+//
+//	UIBarButtonItem *refreshButton = [[UIBarButtonItem alloc]
+//		initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(refreshList:)];
+//	self.navigationItem.rightBarButtonItems = @[refreshButton];
     
     UIBarButtonItem *settingsButton = [[UIBarButtonItem alloc]
                                       initWithTitle:NSLocalizedString(@"Settings",@"Settings") style:UIBarButtonItemStylePlain target:self action:@selector(openSettings:)];
 	self.navigationItem.leftBarButtonItems = @[settingsButton];
 }
 
-- (void)refreshList:(id)refreshList
+- (void)stopRefresh { [self.refreshControl endRefreshing]; }
+
+- (void)refreshList
 {
 	PictureService *pictureService = [[PictureService alloc] init];
 		[pictureService getPictures:20 success:^( NSArray *array )
 		{
 			self.pictures = array;
 			[self.feedView reloadData];
-		} failure:^( NSError *error )
+            [self performSelector:@selector(stopRefresh) withObject:self afterDelay:2.5];
+        } failure:^( NSError *error )
 		{
 			NSLog(@"%@", error );
 		}];

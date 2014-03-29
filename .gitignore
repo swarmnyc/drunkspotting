@@ -40,6 +40,8 @@ x64/
 build/
 [Bb]in/
 [Oo]bj/
+upload/
+local/
 
 # MSTest test Results
 [Tt]est[Rr]esult*/
