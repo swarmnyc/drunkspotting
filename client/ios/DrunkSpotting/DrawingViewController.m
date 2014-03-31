@@ -15,6 +15,7 @@
 
 @end
 
+
 @implementation DrawingViewController
 
 - (id)initWithImage:(UIImage *)image {
@@ -35,11 +36,14 @@
     return self;
 }
 
+
+
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    self.navigationItem.titleView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"titleTextTreatment"]];
 
+    [self setEdgesForExtendedLayout:UIRectEdgeNone];
+    
     self.uploadingOverlay.hidden = YES;
 
     UIBarButtonItem *saveButton = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Save", @"Save")
@@ -57,12 +61,41 @@
 
     UIImageView *iv = [[UIImageView alloc] initWithImage:self.originalImage];
 
-    CGFloat smallestEdge = MIN(CGRectGetWidth(self.view.bounds), MIN(self.originalImage.size.width, self.originalImage.size.height));
+    CGFloat smallestEdge = 320;
+    
+    
+//    CGFloat smallestEdge = MIN(CGRectGetWidth(self.view.bounds), MIN(self.originalImage.size.width, self.originalImage.size.height));
+
 
     iv.frame = CGRectMake(0, 0, smallestEdge, smallestEdge);
-    iv.contentMode = UIViewContentModeScaleAspectFill;
+    iv.contentMode =  UIViewContentModeScaleAspectFill;
     iv.backgroundColor = [UIColor redColor];
     [self.compositView insertSubview:iv belowSubview:self.drawingLayer];
+    self.compositView.clipsToBounds = YES;
+
+
+
+    int  colors [] =    {
+        0xc60000,
+        0xe87b18,
+        0xffcc00,
+        0x16b228,
+        0x0c7cc1,
+        0x00b2c9,
+        0x000000,
+        0xffffff,
+        0x3a290c,
+        0xe2b574,
+        0xfc00c7,
+        0x8a37e2};
+    
+    for (int i = 0; i< 12; i++) {
+        UIColor *color = UIColorFromRGB(colors[i]);
+        UIButton * button = [self.colorPicker.subviews objectAtIndex:i];
+        [button setBackgroundColor:color];
+        [button setTag:colors[i]];
+    }
+    
 
     self.photoLayer = iv;
 
@@ -70,7 +103,7 @@
 }
 
 - (void)viewDidLayoutSubviews {
-    [self.compositView setFrame:CGRectMake(0, 0, [[UIScreen mainScreen] bounds].size.width, [[UIScreen mainScreen] bounds].size.width)];
+//    [self.compositView setFrame:CGRectMake(0, 0, [[UIScreen mainScreen] bounds].size.width, [[UIScreen mainScreen] bounds].size.width)];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -156,67 +189,12 @@
 }
 
 
-- (IBAction)setWhiteColor:(id)sender {
+- (IBAction)setColor:(id)sender {
 
-    self.drawingLayer.lineColor = [UIColor whiteColor];
+    UIButton *button = sender;
+    self.drawingLayer.lineColor = UIColorFromRGB([button tag]);
     self.colorPicker.hidden = YES;
 }
-
-- (IBAction)setBlueColor:(id)sender {
-
-    self.drawingLayer.lineColor = [UIColor blueColor];
-    self.colorPicker.hidden = YES;
-}
-
-- (IBAction)setCyanColor:(id)sender {
-
-    self.drawingLayer.lineColor = [UIColor cyanColor];
-    self.colorPicker.hidden = YES;
-}
-
-- (IBAction)setMagentaColor:(id)sender {
-
-    self.drawingLayer.lineColor = [UIColor magentaColor];
-    self.colorPicker.hidden = YES;
-}
-
-- (IBAction)setOrangeColor:(id)sender {
-
-    self.drawingLayer.lineColor = [UIColor orangeColor];
-    self.colorPicker.hidden = YES;
-}
-
-- (IBAction)setPurpleColor:(id)sender {
-
-    self.drawingLayer.lineColor = [UIColor purpleColor];
-    self.colorPicker.hidden = YES;
-}
-
-- (IBAction)setRedColor:(id)sender {
-
-    self.drawingLayer.lineColor = [UIColor redColor];
-    self.colorPicker.hidden = YES;
-}
-
-- (IBAction)setYellowColor:(id)sender {
-
-    self.drawingLayer.lineColor = [UIColor yellowColor];
-    self.colorPicker.hidden = YES;
-}
-
-- (IBAction)setGreenColor:(id)sender {
-
-    self.drawingLayer.lineColor = [UIColor greenColor];
-    self.colorPicker.hidden = YES;
-}
-
-- (IBAction)setBlackColor:(id)sender {
-
-    self.drawingLayer.lineColor = [UIColor blackColor];
-    self.colorPicker.hidden = YES;
-
-}
-
 - (IBAction)dismissBrushSlider:(id)sender {
 
     self.burshSlider.hidden = YES;
