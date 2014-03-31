@@ -35,6 +35,8 @@ NSString *const kPhotoCellIdentifier = @"photo";
 
 - (void)viewDidLoad
 {
+    [self setEdgesForExtendedLayout:UIRectEdgeNone];
+    
     UIColor *teal = UIColorFromRGB(0x00b2c9);
     self.navigationController.navigationBar.tintColor=teal;
     self.navigationItem.title = @"drunkspotting";
